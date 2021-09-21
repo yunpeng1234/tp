@@ -128,7 +128,7 @@ public class AddCommandParserTest {
 
         // missing grade prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB
-                + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + VALID_GRADE_BOB  + INSTITUTION_DESC_BOB, expectedMessage);
+                + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + VALID_GRADE_BOB + INSTITUTION_DESC_BOB, expectedMessage);
 
         // missing institution prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB
@@ -143,27 +143,33 @@ public class AddCommandParserTest {
     public void parse_invalidValue_failure() {
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + GRADE_DESC_BOB + INSTITUTION_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS);
+                + GRADE_DESC_BOB + INSTITUTION_DESC_BOB + TAG_DESC_HUSBAND
+                + TAG_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS);
 
         // invalid phone
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + GRADE_DESC_BOB + INSTITUTION_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Phone.MESSAGE_CONSTRAINTS);
+                + GRADE_DESC_BOB + INSTITUTION_DESC_BOB + TAG_DESC_HUSBAND
+                + TAG_DESC_FRIEND, Phone.MESSAGE_CONSTRAINTS);
 
         // invalid email
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + ADDRESS_DESC_BOB
-                + GRADE_DESC_BOB + GRADE_DESC_BOB + INSTITUTION_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Email.MESSAGE_CONSTRAINTS);
+                + GRADE_DESC_BOB + GRADE_DESC_BOB + INSTITUTION_DESC_BOB
+                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Email.MESSAGE_CONSTRAINTS);
 
         // invalid address
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
-                + GRADE_DESC_BOB + INSTITUTION_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Address.MESSAGE_CONSTRAINTS);
+                + GRADE_DESC_BOB + INSTITUTION_DESC_BOB + TAG_DESC_HUSBAND
+                + TAG_DESC_FRIEND, Address.MESSAGE_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + GRADE_DESC_BOB + INSTITUTION_DESC_BOB + INVALID_TAG_DESC + VALID_TAG_FRIEND, Tag.MESSAGE_CONSTRAINTS);
+                + GRADE_DESC_BOB + INSTITUTION_DESC_BOB + INVALID_TAG_DESC
+                + VALID_TAG_FRIEND, Tag.MESSAGE_CONSTRAINTS);
 
         // invalid grade
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + INVALID_GRADE_DESC + INSTITUTION_DESC_BOB + TAG_DESC_HUSBAND + VALID_TAG_FRIEND, Grade.MESSAGE_CONSTRAINTS);
+                + INVALID_GRADE_DESC + INSTITUTION_DESC_BOB + TAG_DESC_HUSBAND
+                + VALID_TAG_FRIEND, Grade.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
