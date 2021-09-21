@@ -350,3 +350,8 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+.tab-pane {
+    -fx-tab-min-width: 54;
+    -fx-text-fill: white;
+}
