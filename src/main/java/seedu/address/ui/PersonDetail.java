@@ -1,17 +1,25 @@
 package seedu.address.ui;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
-
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 
 public class PersonDetail extends UiPart<Region> {
-    @FXML
-    Tab skill,academic,interview,statement;
-
     private static final String FXML = "PersonDetail.fxml";
+
+    @FXML
+    private Tab skill;
+
+    @FXML
+    private Tab academic;
+
+    @FXML
+    private Tab interview;
+
+    @FXML
+    private Tab statement;
+
+
 
     public PersonDetail() {
         super(FXML);
