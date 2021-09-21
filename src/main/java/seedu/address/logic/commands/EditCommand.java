@@ -107,7 +107,8 @@ public class EditCommand extends Command {
         Institution updatedInstitution = editPersonDescriptor.getInstitution().orElse(personToEdit.getInstitution());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedGrade, updatedInstitution, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail,
+                updatedAddress, updatedGrade, updatedInstitution, updatedTags);
     }
 
     @Override
@@ -259,15 +260,14 @@ public class EditCommand extends Command {
 
         @Override
         public String toString() {
-            return "EditPersonDescriptor{" +
-                    "name=" + name +
-                    ", phone=" + phone +
-                    ", email=" + email +
-                    ", address=" + address +
-                    ", grade=" + grade +
-                    ", institution=" + institution +
-                    ", tags=" + tags +
-                    '}';
+            return "EditPersonDescriptor{"
+                    + "name=" + name
+                    + ", phone=" + phone
+                    + ", email=" + email
+                    + ", address=" + address
+                    + ", grade=" + grade
+                    + ", institution=" + institution
+                    + ", tags=" + tags + '}';
         }
     }
 }

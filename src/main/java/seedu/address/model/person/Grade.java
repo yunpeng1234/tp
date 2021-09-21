@@ -4,8 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's institution in the Intern Watcher.
- * Guarantees: immutable; is valid as declared in {@link # isGrade(String)}
+ * Represents a Person's grade in the Intern Watcher.
+ * Guarantees: immutable; is valid as declared in {@link #isValidGrade(String)}
  */
 public class Grade {
 
