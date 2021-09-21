@@ -21,6 +21,7 @@ public class Person {
     private final Email email;
 
     // Data fields
+    private final Grade grade;
     private final Institution institution;
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
@@ -28,18 +29,24 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Institution institution, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, institution, tags);
+    public Person(Name name, Phone phone, Email email, Address address,
+                  Grade grade, Institution institution, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, grade, institution, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.grade = grade;
         this.institution = institution;
         this.tags.addAll(tags);
     }
 
     public Name getName() {
         return name;
+    }
+
+    public Grade getGrade() {
+        return grade;
     }
 
     public Institution getInstitution() {
@@ -98,6 +105,7 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
+                && otherPerson.getGrade().equals(getGrade())
                 && otherPerson.getInstitution().equals(getInstitution())
                 && otherPerson.getTags().equals(getTags());
     }
@@ -105,7 +113,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, institution, tags);
+        return Objects.hash(name, phone, email, address, grade, institution, tags);
     }
 
     @Override
@@ -118,6 +126,8 @@ public class Person {
                 .append(getEmail())
                 .append("; Address: ")
                 .append(getAddress())
+                .append("; Grade: ")
+                .append(getGrade())
                 .append("; Institution: ")
                 .append(getInstitution());
 
