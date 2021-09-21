@@ -54,5 +54,4 @@ public class Grade {
     public int hashCode() {
         return value.hashCode();
     }
-
 }
