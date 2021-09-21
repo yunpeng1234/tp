@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INSTITUTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -21,6 +22,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.ApplicationStatus;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Institution;
 import seedu.address.model.person.Name;
@@ -43,6 +45,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_STATUS + "STATUS] "
             + "[" + PREFIX_INSTITUTION + "INSTITUTION] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
@@ -101,9 +104,12 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Institution updatedInstitution = editPersonDescriptor.getInstitution().orElse(personToEdit.getInstitution());
+        ApplicationStatus updatedStatus = editPersonDescriptor.getApplicationStatus()
+                .orElse(personToEdit.getApplicationStatus());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedInstitution, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedInstitution,
+                updatedStatus, updatedTags);
     }
 
     @Override
@@ -134,6 +140,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Institution institution;
+        private ApplicationStatus status;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -148,6 +155,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setInstitution(toCopy.institution);
+            setApplicationStatus(toCopy.status);
             setTags(toCopy.tags);
         }
 
@@ -155,7 +163,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, institution, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, institution, status, tags);
         }
 
         public void setName(Name name) {
@@ -198,6 +206,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(institution);
         }
 
+        public void setApplicationStatus(ApplicationStatus status) {
+            this.status = status;
+        }
+
+        public Optional<ApplicationStatus> getApplicationStatus() {
+            return Optional.ofNullable(status);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -235,6 +251,7 @@ public class EditCommand extends Command {
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
                     && getInstitution().equals(e.getInstitution())
+                    && getApplicationStatus().equals(e.getApplicationStatus())
                     && getTags().equals(e.getTags());
         }
     }

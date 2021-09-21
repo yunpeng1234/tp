@@ -24,17 +24,28 @@ public class Person {
     private final Institution institution;
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final ApplicationStatus status;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Institution institution, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, institution, tags);
+        this(name, phone, email, address, institution,
+                new ApplicationStatus(ApplicationStatus.DEFAULT_STATUS), tags);
+    }
+
+    /**
+     * Overloaded constructor for creating candidates with default status
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Institution institution,
+                  ApplicationStatus status, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, institution, status, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.institution = institution;
+        this.status = status;
         this.tags.addAll(tags);
     }
 
@@ -56,6 +67,10 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public ApplicationStatus getApplicationStatus() {
+        return status;
     }
 
     /**
@@ -99,19 +114,22 @@ public class Person {
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getInstitution().equals(getInstitution())
+                && otherPerson.getApplicationStatus().equals(getApplicationStatus())
                 && otherPerson.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, institution, tags);
+        return Objects.hash(name, phone, email, address, institution, status, tags);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
+                .append("; Status: ")
+                .append(getApplicationStatus())
                 .append("; Phone: ")
                 .append(getPhone())
                 .append("; Email: ")
