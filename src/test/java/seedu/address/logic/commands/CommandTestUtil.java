@@ -64,6 +64,7 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_GRADE_DESC = " " + PREFIX_GRADE + "5.000"; //3dp not allowed for grades
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_INSTITUTION_DESC = " " + PREFIX_INSTITUTION + "NU$"; // '$' not allowed
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
