@@ -21,9 +21,9 @@ public class Grade {
     public final String value;
 
     /**
-     * Constructs a {@code Institute}.
+     * Constructs a {@code Grade}.
      *
-     * @param grade A valid institution name.
+     * @param grade A valid grade.
      */
     public Grade(String grade) {
         requireNonNull(grade);
@@ -32,7 +32,7 @@ public class Grade {
     }
 
     /**
-     * Returns true if a given string is a valid institution name.
+     * Returns true if a given string is a valid grade name.
      */
     public static boolean isValidGrade(String test) {
         return test.matches(VALIDATION_REGEX);

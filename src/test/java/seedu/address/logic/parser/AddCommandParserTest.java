@@ -80,7 +80,7 @@ public class AddCommandParserTest {
                 + ADDRESS_DESC_BOB + GRADE_DESC_BOB + INSTITUTION_DESC_BOB + TAG_DESC_FRIEND,
                 new AddCommand(expectedPerson));
 
-        // multiple grade - last address accepted
+        // multiple grade - last grade accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_AMY
                         + ADDRESS_DESC_BOB + GRADE_DESC_AMY + GRADE_DESC_BOB + INSTITUTION_DESC_BOB + TAG_DESC_FRIEND,
                 new AddCommand(expectedPerson));
