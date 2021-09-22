@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INSTITUTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
@@ -15,6 +16,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.ApplicationStatus;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Grade;
 import seedu.address.model.person.Institution;
@@ -42,7 +44,8 @@ public class AddCommandParser implements Parser<AddCommand> {
                         PREFIX_ADDRESS,
                         PREFIX_TAG,
                         PREFIX_GRADE,
-                        PREFIX_INSTITUTION);
+                        PREFIX_INSTITUTION,
+                        PREFIX_STATUS);
 
         if (!arePrefixesPresent(argMultimap,
                 PREFIX_NAME,
@@ -63,7 +66,13 @@ public class AddCommandParser implements Parser<AddCommand> {
         Institution institution = ParserUtil.parseInstitution(argMultimap.getValue(PREFIX_INSTITUTION).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, address, grade, institution, tagList);
+        Person person;
+        if (argMultimap.getValue(PREFIX_STATUS).isEmpty()) {
+            person = new Person(name, phone, email, address, grade, institution, tagList);
+        } else {
+            ApplicationStatus status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
+            person = new Person(name, phone, email, address, grade, institution, status, tagList);
+        }
 
         return new AddCommand(person);
     }
