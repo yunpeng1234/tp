@@ -165,7 +165,7 @@ public class AddCommandParserTest {
 
         // invalid institution
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + INVALID_INSTITUTION_DESC + TAG_DESC_FRIEND, Institution.MESSAGE_CONSTRAINTS);
+                + GRADE_DESC_BOB + INVALID_INSTITUTION_DESC + TAG_DESC_FRIEND, Institution.MESSAGE_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
