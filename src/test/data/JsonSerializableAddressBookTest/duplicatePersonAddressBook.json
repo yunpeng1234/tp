@@ -6,6 +6,7 @@
     "address": "123, Jurong West Ave 6, #08-111",
     "grade": "4.50",
     "institution": "NUS",
+    "course": "Computer Science",
     "tagged": [ "friends" ]
   }, {
     "name": "Alice Pauline",

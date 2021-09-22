@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Course;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Grade;
 import seedu.address.model.person.Institution;
@@ -24,6 +25,7 @@ public class PersonBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_GRADE = "4.50";
     public static final String DEFAULT_INSTITUTION = "NTU";
+    public static final String DEFAULT_COURSE = "Computer Science";
 
     private Name name;
     private Phone phone;
@@ -31,6 +33,7 @@ public class PersonBuilder {
     private Address address;
     private Grade grade;
     private Institution institution;
+    private Course course;
     private Set<Tag> tags;
 
     /**
@@ -43,6 +46,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         grade = new Grade(DEFAULT_GRADE);
         institution = new Institution(DEFAULT_INSTITUTION);
+        course = new Course(DEFAULT_COURSE);
         tags = new HashSet<>();
     }
 
@@ -56,6 +60,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         grade = personToCopy.getGrade();
         institution = personToCopy.getInstitution();
+        course = personToCopy.getCourse();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -106,6 +111,7 @@ public class PersonBuilder {
         this.grade = new Grade(grade);
         return this;
     }
+
     /**
      * Sets the {@code Institution} of the {@code Person} that we are building.
      */
@@ -114,8 +120,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Course} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withCourse(String course) {
+        this.course = new Course(course);
+        return this;
+    }
+
 
     public Person build() {
-        return new Person(name, phone, email, address, grade, institution, tags);
+        return new Person(name, phone, email, address, grade, institution, course, tags);
     }
 }

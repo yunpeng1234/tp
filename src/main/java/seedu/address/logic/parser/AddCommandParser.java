@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INSTITUTION;
@@ -17,6 +18,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.ApplicationStatus;
+import seedu.address.model.person.Course;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Grade;
 import seedu.address.model.person.Institution;
@@ -45,6 +47,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                         PREFIX_TAG,
                         PREFIX_GRADE,
                         PREFIX_INSTITUTION,
+                        PREFIX_COURSE,
                         PREFIX_STATUS);
 
         if (!arePrefixesPresent(argMultimap,
@@ -53,7 +56,8 @@ public class AddCommandParser implements Parser<AddCommand> {
                 PREFIX_PHONE,
                 PREFIX_EMAIL,
                 PREFIX_GRADE,
-                PREFIX_INSTITUTION)
+                PREFIX_INSTITUTION,
+                PREFIX_COURSE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
@@ -64,14 +68,15 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Grade grade = ParserUtil.parseGrade(argMultimap.getValue(PREFIX_GRADE).get());
         Institution institution = ParserUtil.parseInstitution(argMultimap.getValue(PREFIX_INSTITUTION).get());
+        Course course = ParserUtil.parseCourse(argMultimap.getValue(PREFIX_COURSE).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Person person;
         if (argMultimap.getValue(PREFIX_STATUS).isEmpty()) {
-            person = new Person(name, phone, email, address, grade, institution, tagList);
+            person = new Person(name, phone, email, address, grade, institution, course, tagList);
         } else {
             ApplicationStatus status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
-            person = new Person(name, phone, email, address, grade, institution, status, tagList);
+            person = new Person(name, phone, email, address, grade, institution,  course, status, tagList);
         }
         return new AddCommand(person);
     }
