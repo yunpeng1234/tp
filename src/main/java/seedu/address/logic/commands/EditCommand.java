@@ -113,7 +113,7 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedPhone, updatedEmail,
-                updatedAddress, updatedGrade,  updatedInstitution, updatedStatus, updatedTags);
+                updatedAddress, updatedGrade, updatedInstitution, updatedStatus, updatedTags);
     }
 
     @Override
@@ -173,7 +173,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, grade, institution, status,tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, grade, institution, status, tags);
         }
 
         public void setName(Name name) {

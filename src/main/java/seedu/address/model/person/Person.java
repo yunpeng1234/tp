@@ -30,7 +30,8 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Grade grade, Institution institution, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Grade grade,
+                  Institution institution, Set<Tag> tags) {
         this(name, phone, email, address, grade, institution,
                 new ApplicationStatus(ApplicationStatus.DEFAULT_STATUS), tags);
     }
@@ -38,7 +39,7 @@ public class Person {
     /**
      * Overloaded constructor for creating candidates with default status
      */
-    public Person(Name name, Phone phone, Email email, Address address, Grade grade, 
+    public Person(Name name, Phone phone, Email email, Address address, Grade grade,
                   Institution institution, ApplicationStatus status, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, grade, status, institution, tags);
         this.name = name;

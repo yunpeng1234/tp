@@ -66,6 +66,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Institution institution = ParserUtil.parseInstitution(argMultimap.getValue(PREFIX_INSTITUTION).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
+        Person person;
         if (argMultimap.getValue(PREFIX_STATUS).isEmpty()) {
             person = new Person(name, phone, email, address, grade, institution, tagList);
         } else {
