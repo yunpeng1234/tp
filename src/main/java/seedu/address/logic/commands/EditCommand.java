@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INSTITUTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -24,6 +25,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.ApplicationStatus;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Grade;
 import seedu.address.model.person.Institution;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -45,8 +47,9 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_STATUS + "STATUS] "
+            + "[" + PREFIX_GRADE + "GRADE] "
             + "[" + PREFIX_INSTITUTION + "INSTITUTION] "
+            + "[" + PREFIX_STATUS + "STATUS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -102,14 +105,15 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
+        Grade updatedGrade = editPersonDescriptor.getGrade().orElse(personToEdit.getGrade());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Institution updatedInstitution = editPersonDescriptor.getInstitution().orElse(personToEdit.getInstitution());
         ApplicationStatus updatedStatus = editPersonDescriptor.getApplicationStatus()
                 .orElse(personToEdit.getApplicationStatus());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedInstitution,
-                updatedStatus, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail,
+                updatedAddress, updatedGrade,  updatedInstitution, updatedStatus, updatedTags);
     }
 
     @Override
@@ -130,6 +134,10 @@ public class EditCommand extends Command {
                 && editPersonDescriptor.equals(e.editPersonDescriptor);
     }
 
+    public String toString() {
+        return editPersonDescriptor.toString();
+    }
+
     /**
      * Stores the details to edit the person with. Each non-empty field value will replace the
      * corresponding field value of the person.
@@ -139,6 +147,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
+        private Grade grade;
         private Institution institution;
         private ApplicationStatus status;
         private Set<Tag> tags;
@@ -154,6 +163,7 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
+            setGrade(toCopy.grade);
             setInstitution(toCopy.institution);
             setApplicationStatus(toCopy.status);
             setTags(toCopy.tags);
@@ -163,7 +173,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, institution, status, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, grade, institution, status,tags);
         }
 
         public void setName(Name name) {
@@ -196,6 +206,14 @@ public class EditCommand extends Command {
 
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
+        }
+
+        public void setGrade(Grade grade) {
+            this.grade = grade;
+        }
+
+        public Optional<Grade> getGrade() {
+            return Optional.ofNullable(grade);
         }
 
         public void setInstitution(Institution institution) {
@@ -250,9 +268,22 @@ public class EditCommand extends Command {
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
+                    && getGrade().equals(e.getGrade())
                     && getInstitution().equals(e.getInstitution())
                     && getApplicationStatus().equals(e.getApplicationStatus())
                     && getTags().equals(e.getTags());
+        }
+
+        @Override
+        public String toString() {
+            return "EditPersonDescriptor{"
+                    + "name=" + name
+                    + ", phone=" + phone
+                    + ", email=" + email
+                    + ", address=" + address
+                    + ", grade=" + grade
+                    + ", institution=" + institution
+                    + ", tags=" + tags + '}';
         }
     }
 }
