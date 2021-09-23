@@ -130,10 +130,10 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String course} into an {@code Institution}.
+     * Parses a {@code String course} into a {@code Course}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code institution} is invalid.
+     * @throws ParseException if the given {@code course} is invalid.
      */
     public static Course parseCourse(String course) throws ParseException {
         requireNonNull(course);
