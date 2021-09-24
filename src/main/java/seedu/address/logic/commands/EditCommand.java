@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADUATIONYEARMONTH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INSTITUTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -26,6 +27,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.ApplicationStatus;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Grade;
+import seedu.address.model.person.GraduationYearMonth;
 import seedu.address.model.person.Institution;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -49,6 +51,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_GRADE + "GRADE] "
             + "[" + PREFIX_INSTITUTION + "INSTITUTION] "
+            + "[" + PREFIX_GRADUATIONYEARMONTH + "GRADUATION_YEAR_MONTH] "
             + "[" + PREFIX_STATUS + "STATUS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
@@ -108,12 +111,14 @@ public class EditCommand extends Command {
         Grade updatedGrade = editPersonDescriptor.getGrade().orElse(personToEdit.getGrade());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Institution updatedInstitution = editPersonDescriptor.getInstitution().orElse(personToEdit.getInstitution());
+        GraduationYearMonth updatedGraduationYearMonth = editPersonDescriptor.getGraduationYearMonth()
+                .orElse(personToEdit.getGraduationYearMonth());
         ApplicationStatus updatedStatus = editPersonDescriptor.getApplicationStatus()
                 .orElse(personToEdit.getApplicationStatus());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail,
-                updatedAddress, updatedGrade, updatedInstitution, updatedStatus, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
+                updatedGrade, updatedInstitution, updatedGraduationYearMonth, updatedStatus, updatedTags);
     }
 
     @Override
@@ -149,6 +154,7 @@ public class EditCommand extends Command {
         private Address address;
         private Grade grade;
         private Institution institution;
+        private GraduationYearMonth graduationYearMonth;
         private ApplicationStatus status;
         private Set<Tag> tags;
 
@@ -165,6 +171,7 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setGrade(toCopy.grade);
             setInstitution(toCopy.institution);
+            setGraduationYearMonth(toCopy.graduationYearMonth);
             setApplicationStatus(toCopy.status);
             setTags(toCopy.tags);
         }
@@ -214,6 +221,14 @@ public class EditCommand extends Command {
 
         public Optional<Grade> getGrade() {
             return Optional.ofNullable(grade);
+        }
+
+        public void setGraduationYearMonth(GraduationYearMonth graduationYearMonth) {
+            this.graduationYearMonth = graduationYearMonth;
+        }
+
+        public Optional<GraduationYearMonth> getGraduationYearMonth() {
+            return Optional.ofNullable(graduationYearMonth);
         }
 
         public void setInstitution(Institution institution) {
@@ -270,6 +285,7 @@ public class EditCommand extends Command {
                     && getAddress().equals(e.getAddress())
                     && getGrade().equals(e.getGrade())
                     && getInstitution().equals(e.getInstitution())
+                    && getGraduationYearMonth().equals(e.getGraduationYearMonth())
                     && getApplicationStatus().equals(e.getApplicationStatus())
                     && getTags().equals(e.getTags());
         }
@@ -283,6 +299,7 @@ public class EditCommand extends Command {
                     + ", address=" + address
                     + ", grade=" + grade
                     + ", institution=" + institution
+                    + ", graduation year month=" + graduationYearMonth
                     + ", tags=" + tags + '}';
         }
     }

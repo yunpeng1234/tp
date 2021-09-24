@@ -6,6 +6,7 @@ import java.util.Set;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Grade;
+import seedu.address.model.person.GraduationYearMonth;
 import seedu.address.model.person.Institution;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -24,6 +25,8 @@ public class PersonBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_GRADE = "4.50";
     public static final String DEFAULT_INSTITUTION = "NTU";
+    @SuppressWarnings("SpellCheckingInspection")
+    public static final String DEFAULT_GRADUATIONYEARMONTH = "06/2024";
 
     private Name name;
     private Phone phone;
@@ -31,6 +34,7 @@ public class PersonBuilder {
     private Address address;
     private Grade grade;
     private Institution institution;
+    private GraduationYearMonth graduationYearMonth;
     private Set<Tag> tags;
 
     /**
@@ -43,6 +47,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         grade = new Grade(DEFAULT_GRADE);
         institution = new Institution(DEFAULT_INSTITUTION);
+        graduationYearMonth = new GraduationYearMonth(DEFAULT_GRADUATIONYEARMONTH);
         tags = new HashSet<>();
     }
 
@@ -56,6 +61,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         grade = personToCopy.getGrade();
         institution = personToCopy.getInstitution();
+        graduationYearMonth = personToCopy.getGraduationYearMonth();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -113,9 +119,16 @@ public class PersonBuilder {
         this.institution = new Institution(institution);
         return this;
     }
+    /**
+     * Sets the {@code GraduationYearMonth} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withGraduationYearMonth(String graduationYearMonth) {
+        this.graduationYearMonth = new GraduationYearMonth(graduationYearMonth);
+        return this;
+    }
 
 
     public Person build() {
-        return new Person(name, phone, email, address, grade, institution, tags);
+        return new Person(name, phone, email, address, grade, institution, graduationYearMonth, tags);
     }
 }

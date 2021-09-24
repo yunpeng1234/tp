@@ -13,6 +13,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.ApplicationStatus;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Grade;
+import seedu.address.model.person.GraduationYearMonth;
 import seedu.address.model.person.Institution;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -126,6 +127,21 @@ public class ParserUtil {
             throw new ParseException(Institution.MESSAGE_CONSTRAINTS);
         }
         return new Institution(trimmedInstitution);
+    }
+
+    /**
+     * Parses a {@code String graduationYearMonth} into an {@code GraduationYearMonth}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code graduationYearMonth} is invalid.
+     */
+    public static GraduationYearMonth parseGraduationYearMonth(String graduationYearMonth) throws ParseException {
+        requireNonNull(graduationYearMonth);
+        String trimmedYearMonth = graduationYearMonth.trim();
+        if (!GraduationYearMonth.isValidGraduationYearMonth(trimmedYearMonth)) {
+            throw new ParseException(GraduationYearMonth.MESSAGE_CONSTRAINTS);
+        }
+        return new GraduationYearMonth(trimmedYearMonth);
     }
 
     /**

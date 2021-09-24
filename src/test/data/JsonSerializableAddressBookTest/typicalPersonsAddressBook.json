@@ -7,6 +7,7 @@
     "address" : "123, Jurong West Ave 6, #08-111",
     "grade": "4.50",
     "institution": "NUS",
+    "graduationYearMonth" : "12/2020",
     "tagged" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
@@ -15,6 +16,7 @@
     "address" : "311, Clementi Ave 2, #02-25",
     "grade": "4.60",
     "institution": "NTU",
+    "graduationYearMonth" : "06/2025",
     "tagged" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
@@ -23,6 +25,7 @@
     "address" : "wall street",
     "grade": "4.70",
     "institution": "NTU",
+    "graduationYearMonth" : "12/2023",
     "tagged" : [ ]
   }, {
     "name" : "Daniel Meier",
@@ -31,6 +34,7 @@
     "address" : "10th street",
     "grade": "4.80",
     "institution": "SMU",
+    "graduationYearMonth" : "01/2027",
     "tagged" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
@@ -39,6 +43,7 @@
     "address" : "michegan ave",
     "grade": "4.90",
     "institution": "SUTD",
+    "graduationYearMonth" : "12/2024",
     "tagged" : [ ]
   }, {
     "name" : "Fiona Kunz",
@@ -47,6 +52,7 @@
     "address" : "little tokyo",
     "grade": "5.00",
     "institution": "PATHLIGHT",
+    "graduationYearMonth" : "12/2021",
     "tagged" : [ ]
   }, {
     "name" : "George Best",
@@ -55,6 +61,7 @@
     "address" : "4th street",
     "grade": "4.40",
     "institution": "SUSS",
+    "graduationYearMonth" : "03/2023",
     "tagged" : [ ]
   } ]
 }

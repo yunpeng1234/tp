@@ -14,6 +14,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.ApplicationStatus;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Grade;
+import seedu.address.model.person.GraduationYearMonth;
 import seedu.address.model.person.Institution;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -33,6 +34,7 @@ class JsonAdaptedPerson {
     private final String address;
     private final String grade;
     private final String institution;
+    private final String graduationYearMonth;
     private final String status;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
@@ -43,13 +45,15 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("grade") String grade, @JsonProperty("institution") String institution,
-             @JsonProperty("status") String status, @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+            @JsonProperty("graduationYearMonth") String graduationYearMonth,
+            @JsonProperty("status") String status, @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.grade = grade;
         this.institution = institution;
+        this.graduationYearMonth = graduationYearMonth;
         this.status = status;
         if (tagged != null) {
             this.tagged.addAll(tagged);
@@ -66,6 +70,7 @@ class JsonAdaptedPerson {
         address = source.getAddress().value;
         grade = source.getGrade().value;
         institution = source.getInstitution().value;
+        graduationYearMonth = source.getGraduationYearMonth().value;
         status = source.getApplicationStatus().value.toString();
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -132,6 +137,17 @@ class JsonAdaptedPerson {
         }
         final Institution modelInstitution = new Institution(institution);
 
+        if (graduationYearMonth == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    GraduationYearMonth.class.getSimpleName()));
+        }
+        if (!GraduationYearMonth.isValidGraduationYearMonth(graduationYearMonth)) {
+            throw new IllegalValueException(GraduationYearMonth.MESSAGE_CONSTRAINTS);
+        }
+        final GraduationYearMonth modelGraduationYearMonth = new GraduationYearMonth(graduationYearMonth);
+
+        final GraduationYearMonth modelYearMonth = new GraduationYearMonth(graduationYearMonth);
+
         final ApplicationStatus modelStatus;
 
         if (status == null) {
@@ -144,8 +160,8 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress,
-                          modelGrade, modelInstitution, modelStatus, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelGrade,
+                modelInstitution, modelYearMonth , modelStatus, modelTags);
     }
 
 }

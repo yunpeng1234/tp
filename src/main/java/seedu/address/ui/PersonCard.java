@@ -43,6 +43,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label institution;
     @FXML
+    private Label graduationYearMonth;
+    @FXML
     private Label status;
     @FXML
     private FlowPane tags;
@@ -61,6 +63,8 @@ public class PersonCard extends UiPart<Region> {
         status.setText(person.getApplicationStatus().value.toString());
         grade.setText(person.getGrade().value);
         institution.setText(person.getInstitution().value);
+        graduationYearMonth.setText(person.getGraduationYearMonth().value);
+
 
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
