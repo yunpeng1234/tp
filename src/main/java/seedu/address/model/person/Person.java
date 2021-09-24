@@ -21,18 +21,20 @@ public class Person {
     private final Email email;
 
     // Data fields
+    private final Address address;
     private final Grade grade;
     private final Institution institution;
-    private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Course course;
     private final ApplicationStatus status;
+    private final Set<Tag> tags = new HashSet<>();
+
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Grade grade,
-                  Institution institution, Set<Tag> tags) {
-        this(name, phone, email, address, grade, institution,
+                  Institution institution, Course course, Set<Tag> tags) {
+        this(name, phone, email, address, grade, institution, course,
                 new ApplicationStatus(ApplicationStatus.DEFAULT_STATUS), tags);
     }
 
@@ -40,14 +42,15 @@ public class Person {
      * Overloaded constructor for creating candidates with default status
      */
     public Person(Name name, Phone phone, Email email, Address address, Grade grade,
-                  Institution institution, ApplicationStatus status, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, grade, status, institution, tags);
+                  Institution institution, Course course, ApplicationStatus status, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, grade, status, institution, course, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.grade = grade;
         this.institution = institution;
+        this.course = course;
         this.status = status;
         this.tags.addAll(tags);
     }
@@ -62,6 +65,10 @@ public class Person {
 
     public Institution getInstitution() {
         return institution;
+    }
+
+    public Course getCourse() {
+        return course;
     }
 
     public Phone getPhone() {
@@ -122,6 +129,7 @@ public class Person {
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getGrade().equals(getGrade())
                 && otherPerson.getInstitution().equals(getInstitution())
+                && otherPerson.getCourse().equals(getCourse())
                 && otherPerson.getApplicationStatus().equals(getApplicationStatus())
                 && otherPerson.getTags().equals(getTags());
     }
@@ -129,7 +137,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, grade, institution, status, tags);
+        return Objects.hash(name, phone, email, address, grade, institution, course, status, tags);
     }
 
     @Override
@@ -147,7 +155,9 @@ public class Person {
                 .append("; Grade: ")
                 .append(getGrade())
                 .append("; Institution: ")
-                .append(getInstitution());
+                .append(getInstitution())
+                .append("; Course: ")
+                .append(getCourse());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
