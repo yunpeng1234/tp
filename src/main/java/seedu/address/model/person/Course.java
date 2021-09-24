@@ -10,13 +10,13 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Course {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Course Names should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Course Names should only contain alphabet characters and spaces, and it should not be blank";
 
     /*
      * The first character of the course must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "[a-zA-Z ]*";
 
     public final String value;
 
