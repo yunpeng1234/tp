@@ -11,6 +11,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.ApplicationStatus;
+import seedu.address.model.person.Course;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Grade;
 import seedu.address.model.person.GraduationYearMonth;
@@ -142,6 +143,21 @@ public class ParserUtil {
             throw new ParseException(GraduationYearMonth.MESSAGE_CONSTRAINTS);
         }
         return new GraduationYearMonth(trimmedYearMonth);
+    }
+
+    /**
+     * Parses a {@code String course} into a {@code Course}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code course} is invalid.
+     */
+    public static Course parseCourse(String course) throws ParseException {
+        requireNonNull(course);
+        String trimmedCourse = course.trim();
+        if (!Course.isValidCourse(trimmedCourse)) {
+            throw new ParseException(Course.MESSAGE_CONSTRAINTS);
+        }
+        return new Course(trimmedCourse);
     }
 
     /**

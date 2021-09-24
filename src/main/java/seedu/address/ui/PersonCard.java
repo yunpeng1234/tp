@@ -43,6 +43,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label institution;
     @FXML
+    private Label course;
+    @FXML
     private Label graduationYearMonth;
     @FXML
     private Label status;
@@ -64,7 +66,7 @@ public class PersonCard extends UiPart<Region> {
         grade.setText(person.getGrade().value);
         institution.setText(person.getInstitution().value);
         graduationYearMonth.setText(person.getGraduationYearMonth().value);
-
+        course.setText(person.getCourse().value);
 
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))

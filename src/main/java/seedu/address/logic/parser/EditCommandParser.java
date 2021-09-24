@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADUATIONYEARMONTH;
@@ -37,7 +38,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_GRADE,
-                        PREFIX_STATUS, PREFIX_TAG, PREFIX_INSTITUTION, PREFIX_GRADUATIONYEARMONTH);
+                        PREFIX_STATUS, PREFIX_TAG, PREFIX_INSTITUTION, PREFIX_COURSE, PREFIX_GRADUATIONYEARMONTH);
         ArgumentTokenizer.tokenize(args,
                 PREFIX_NAME,
                 PREFIX_PHONE,
@@ -46,6 +47,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                 PREFIX_TAG,
                 PREFIX_GRADE,
                 PREFIX_INSTITUTION,
+                PREFIX_COURSE,
                 PREFIX_GRADUATIONYEARMONTH,
                 PREFIX_STATUS);
 
@@ -82,6 +84,10 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor
                     .setGraduationYearMonth(ParserUtil.parseGraduationYearMonth(
                             argMultimap.getValue(PREFIX_GRADUATIONYEARMONTH).get()));
+        }
+        if (argMultimap.getValue(PREFIX_COURSE).isPresent()) {
+            editPersonDescriptor
+                    .setCourse(ParserUtil.parseCourse(argMultimap.getValue(PREFIX_COURSE).get()));
         }
         if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
             editPersonDescriptor

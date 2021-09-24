@@ -14,6 +14,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_INSTITUTION = new Prefix("i/");
     @SuppressWarnings("SpellCheckingInspection")
     public static final Prefix PREFIX_GRADUATIONYEARMONTH = new Prefix("y/");
+    public static final Prefix PREFIX_COURSE = new Prefix("c/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_STATUS = new Prefix("a/");
 

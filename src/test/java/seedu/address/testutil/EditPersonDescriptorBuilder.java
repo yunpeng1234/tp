@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Course;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Grade;
 import seedu.address.model.person.GraduationYearMonth;
@@ -42,6 +43,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setGrade(person.getGrade());
         descriptor.setInstitution(person.getInstitution());
         descriptor.setGraduationYearMonth(person.getGraduationYearMonth());
+        descriptor.setCourse(person.getCourse());
         descriptor.setTags(person.getTags());
     }
 
@@ -98,6 +100,13 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withGraduationYearMonth(String graduationYearMonth) {
         descriptor.setGraduationYearMonth(new GraduationYearMonth(graduationYearMonth));
+        return this;
+    }
+    /**
+     * Sets the {@code Course} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withCourse(String course) {
+        descriptor.setCourse(new Course(course));
         return this;
     }
 

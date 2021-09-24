@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADUATIONYEARMONTH;
@@ -30,6 +31,7 @@ public class AddCommand extends Command {
             + PREFIX_ADDRESS + "ADDRESS "
             + PREFIX_GRADE + "GRADE "
             + PREFIX_INSTITUTION + "INSTITUTION "
+            + PREFIX_COURSE + "COURSE "
             + PREFIX_GRADUATIONYEARMONTH + "GRADUATION YEAR MONTH "
             + "[" + PREFIX_STATUS + "STATUS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
@@ -40,6 +42,7 @@ public class AddCommand extends Command {
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_GRADE + "4.50 "
             + PREFIX_INSTITUTION + "NTU "
+            + PREFIX_COURSE + "Computer Science "
             + PREFIX_GRADUATIONYEARMONTH + "06/2025 "
             + PREFIX_STATUS + "INTERVIEWED "
             + PREFIX_TAG + "friends "

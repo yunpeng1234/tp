@@ -7,6 +7,7 @@
     "address" : "123, Jurong West Ave 6, #08-111",
     "grade": "4.50",
     "institution": "NUS",
+    "course": "Computer Science",
     "graduationYearMonth" : "12/2020",
     "tagged" : [ "friends" ]
   }, {
@@ -16,6 +17,7 @@
     "address" : "311, Clementi Ave 2, #02-25",
     "grade": "4.60",
     "institution": "NTU",
+    "course": "Computer Engineering",
     "graduationYearMonth" : "06/2025",
     "tagged" : [ "owesMoney", "friends" ]
   }, {
@@ -25,6 +27,7 @@
     "address" : "wall street",
     "grade": "4.70",
     "institution": "NTU",
+    "course": "Business and Accounting",
     "graduationYearMonth" : "12/2023",
     "tagged" : [ ]
   }, {
@@ -34,6 +37,7 @@
     "address" : "10th street",
     "grade": "4.80",
     "institution": "SMU",
+    "course": "Accountancy",
     "graduationYearMonth" : "01/2027",
     "tagged" : [ "friends" ]
   }, {
@@ -43,6 +47,7 @@
     "address" : "michegan ave",
     "grade": "4.90",
     "institution": "SUTD",
+    "course": "Philosophy",
     "graduationYearMonth" : "12/2024",
     "tagged" : [ ]
   }, {
@@ -52,6 +57,7 @@
     "address" : "little tokyo",
     "grade": "5.00",
     "institution": "PATHLIGHT",
+    "course": "Life Science",
     "graduationYearMonth" : "12/2021",
     "tagged" : [ ]
   }, {
@@ -61,6 +67,7 @@
     "address" : "4th street",
     "grade": "4.40",
     "institution": "SUSS",
+    "course": "Social Work",
     "graduationYearMonth" : "03/2023",
     "tagged" : [ ]
   } ]

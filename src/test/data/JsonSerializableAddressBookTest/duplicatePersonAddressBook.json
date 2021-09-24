@@ -6,6 +6,7 @@
     "address": "123, Jurong West Ave 6, #08-111",
     "grade": "4.50",
     "institution": "NUS",
+    "course": "Computer Science",
     "graduationYearMonth" : "12/2021",
     "tagged": [ "friends" ]
   }, {
@@ -14,7 +15,8 @@
     "email": "pauline@example.com",
     "address": "4th street",
     "grade": "4.40",
-    "graduationYearMonth" : "12/2021",
-    "institution": "NUSS"
+    "institution": "NUSS",
+    "course": "Computer Engineering",
+    "graduationYearMonth" : "12/2021"
   } ]
 }
