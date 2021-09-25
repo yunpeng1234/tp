@@ -43,8 +43,8 @@ public class JsonAdaptedPersonTest {
     private static final String VALID_GRADUATION_YEAR_MONTH = BENSON.getGraduationYearMonth().toString();
     private static final String VALID_COURSE = BENSON.getCourse().toString();
     private static final String VALID_STATUS = BENSON.getApplicationStatus().toString();
-    private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
-            .map(JsonAdaptedTag::new)
+    private static final List<JsonAdaptedSkill> VALID_TAGS = BENSON.getTags().stream()
+            .map(JsonAdaptedSkill::new)
             .collect(Collectors.toList());
 
     @Test
@@ -217,8 +217,8 @@ public class JsonAdaptedPersonTest {
 
     @Test
     public void toModelType_invalidTags_throwsIllegalValueException() {
-        List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
-        invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
+        List<JsonAdaptedSkill> invalidTags = new ArrayList<>(VALID_TAGS);
+        invalidTags.add(new JsonAdaptedSkill(INVALID_TAG));
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                 VALID_GRADE, VALID_INSTITUTION, VALID_COURSE, VALID_GRADUATION_YEAR_MONTH, VALID_STATUS, invalidTags);
 

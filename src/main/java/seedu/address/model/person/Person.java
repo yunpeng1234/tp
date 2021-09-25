@@ -7,11 +7,12 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.model.tag.Tag;
+import seedu.address.model.skills.Skill;
 
 /**
  * Represents a Person in the address book.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Guarantees: details are present and not null,
+ * field values are validated, immutable.
  */
 public class Person {
 
@@ -27,16 +28,16 @@ public class Person {
     private final GraduationYearMonth graduationYearMonth;
     private final Course course;
     private final ApplicationStatus status;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Set<Skill> skills = new HashSet<>();
 
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Grade grade,
-                  Institution institution, Course course, GraduationYearMonth graduationYearMonth, Set<Tag> tags) {
+                  Institution institution, Course course, GraduationYearMonth graduationYearMonth, Set<Skill> skills) {
         this(name, phone, email, address, grade, institution, course, graduationYearMonth,
-                new ApplicationStatus(ApplicationStatus.DEFAULT_STATUS), tags);
+                new ApplicationStatus(ApplicationStatus.DEFAULT_STATUS), skills);
     }
 
     /**
@@ -44,8 +45,8 @@ public class Person {
      */
     public Person(Name name, Phone phone, Email email, Address address, Grade grade,
                   Institution institution, Course course, GraduationYearMonth graduationYearMonth,
-                  ApplicationStatus status, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, grade, status, institution, course, graduationYearMonth, tags);
+                  ApplicationStatus status, Set<Skill> skills) {
+        requireAllNonNull(name, phone, email, address, grade, status, institution, course, graduationYearMonth, skills);
 
         this.name = name;
         this.phone = phone;
@@ -56,7 +57,7 @@ public class Person {
         this.graduationYearMonth = graduationYearMonth;
         this.course = course;
         this.status = status;
-        this.tags.addAll(tags);
+        this.skills.addAll(skills);
     }
 
     public Name getName() {
@@ -99,8 +100,8 @@ public class Person {
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Set<Skill> getTags() {
+        return Collections.unmodifiableSet(skills);
     }
 
     /**
@@ -146,7 +147,8 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, grade, institution, course, graduationYearMonth, status, tags);
+        return Objects.hash(name, phone, email, address, grade, institution, course,
+                graduationYearMonth, status, skills);
     }
 
     @Override
@@ -170,10 +172,10 @@ public class Person {
                 .append("; Graduation Year Month: ")
                 .append((getGraduationYearMonth()));
 
-        Set<Tag> tags = getTags();
-        if (!tags.isEmpty()) {
+        Set<Skill> skills = getTags();
+        if (!skills.isEmpty()) {
             builder.append("; Tags: ");
-            tags.forEach(builder::append);
+            skills.forEach(builder::append);
         }
         return builder.toString();
     }

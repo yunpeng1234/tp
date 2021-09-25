@@ -20,7 +20,7 @@ import seedu.address.model.person.Institution;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.skills.Skill;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -38,7 +38,7 @@ class JsonAdaptedPerson {
     private final String graduationYearMonth;
     private final String course;
     private final String status;
-    private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final List<JsonAdaptedSkill> skilled = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -48,7 +48,7 @@ class JsonAdaptedPerson {
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("grade") String grade, @JsonProperty("institution") String institution,
             @JsonProperty("course") String course, @JsonProperty("graduationYearMonth") String graduationYearMonth,
-            @JsonProperty("status") String status, @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+            @JsonProperty("status") String status, @JsonProperty("tagged") List<JsonAdaptedSkill> skilled) {
 
         this.name = name;
         this.phone = phone;
@@ -59,8 +59,8 @@ class JsonAdaptedPerson {
         this.course = course;
         this.graduationYearMonth = graduationYearMonth;
         this.status = status;
-        if (tagged != null) {
-            this.tagged.addAll(tagged);
+        if (skilled != null) {
+            this.skilled.addAll(skilled);
         }
     }
 
@@ -77,8 +77,8 @@ class JsonAdaptedPerson {
         course = source.getCourse().value;
         graduationYearMonth = source.getGraduationYearMonth().value;
         status = source.getApplicationStatus().value.toString();
-        tagged.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
+        skilled.addAll(source.getTags().stream()
+                .map(JsonAdaptedSkill::new)
                 .collect(Collectors.toList()));
     }
 
@@ -88,9 +88,9 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
+        final List<Skill> personSkills = new ArrayList<>();
+        for (JsonAdaptedSkill tag : skilled) {
+            personSkills.add(tag.toModelType());
         }
 
         if (name == null) {
@@ -171,10 +171,10 @@ class JsonAdaptedPerson {
             modelStatus = new ApplicationStatus(status);
         }
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
+        final Set<Skill> modelSkills = new HashSet<>(personSkills);
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelGrade,
-                modelInstitution, modelCourse, modelYearMonth , modelStatus, modelTags);
+                modelInstitution, modelCourse, modelYearMonth , modelStatus, modelSkills);
 
     }
 
