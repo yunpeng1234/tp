@@ -14,7 +14,7 @@ import static seedu.address.logic.commands.CommandTestUtil.GRADUATION_YEARMONTH_
 import static seedu.address.logic.commands.CommandTestUtil.INSTITUTION_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.INSTITUTION_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_COURSE;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_COURSE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_GRADE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_GRADUATION_YEARMONTH_DESC;
@@ -52,6 +52,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Course;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Grade;
+import seedu.address.model.person.GraduationYearMonth;
 import seedu.address.model.person.Institution;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -227,8 +228,13 @@ public class AddCommandParserTest {
 
         // invalid course
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + GRADE_DESC_BOB + INSTITUTION_DESC_BOB + INVALID_COURSE + GRADUATION_YEARMONTH_DESC_BOB
+                + GRADE_DESC_BOB + INSTITUTION_DESC_BOB + INVALID_COURSE_DESC + GRADUATION_YEARMONTH_DESC_BOB
                 + TAG_DESC_FRIEND, Course.MESSAGE_CONSTRAINTS);
+
+        // invalid graduation year month
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + GRADE_DESC_BOB + INSTITUTION_DESC_BOB + COURSE_DESC_BOB + INVALID_GRADUATION_YEARMONTH_DESC
+                + TAG_DESC_FRIEND, GraduationYearMonth.MESSAGE_CONSTRAINTS);
 
         // invalid grade
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB

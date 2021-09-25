@@ -67,6 +67,7 @@ dependencies {
 
 shadowJar {
     archiveName = 'addressbook.jar'
+    archiveVersion = 'v1.1'
 }
 
 defaultTasks 'clean', 'test'

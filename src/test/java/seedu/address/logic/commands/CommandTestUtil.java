@@ -82,9 +82,10 @@ public class CommandTestUtil {
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_INSTITUTION_DESC = " " + PREFIX_INSTITUTION + "NU$"; // '$' not allowed
     @SuppressWarnings("SpellCheckingInspection")
-    public static final String INVALID_GRADUATION_YEARMONTH_DESC = " " +
-            PREFIX_GRADUATIONYEARMONTH + "13/2021"; // invalid month not allowed
-    public static final String INVALID_COURSE = " " + PREFIX_COURSE + "Computer $cience"; // '$' not allowed
+    public static final String INVALID_GRADUATION_YEARMONTH_DESC = " " + PREFIX_GRADUATIONYEARMONTH
+            + "13/2021"; // invalid month not allowed
+
+    public static final String INVALID_COURSE_DESC = " " + PREFIX_COURSE + "Computer $cience"; // '$' not allowed
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -100,7 +101,8 @@ public class CommandTestUtil {
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withGrade(VALID_GRADE_BOB).withInstitution(VALID_INSTITUTION_BOB).withCourse(VALID_COURSE_BOB)
-                .withGraduationYearMonth(VALID_GRADUATION_YEARMONTH_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withGraduationYearMonth(VALID_GRADUATION_YEARMONTH_BOB)
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 
     /**
