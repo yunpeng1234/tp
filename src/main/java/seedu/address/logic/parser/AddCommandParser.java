@@ -79,7 +79,7 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         Person person;
         if (argMultimap.getValue(PREFIX_STATUS).isEmpty()) {
-            person = new Person(name, phone, email, address, grade, institution, course, 
+            person = new Person(name, phone, email, address, grade, institution, course,
                     graduationYearMonth, skillList);
         } else {
             ApplicationStatus status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
