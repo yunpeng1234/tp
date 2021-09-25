@@ -8,14 +8,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADUATIONYEARMONTH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INSTITUTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 
 import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Person;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.skills.Skill;
 
 /**
  * A utility class for Person.
@@ -43,7 +43,7 @@ public class PersonUtil {
         sb.append(PREFIX_COURSE + person.getCourse().value + " ");
         sb.append(PREFIX_GRADUATIONYEARMONTH + person.getGraduationYearMonth().value + " ");
         person.getTags().stream().forEach(
-            s -> sb.append(PREFIX_TAG + s.tagName + " ")
+            s -> sb.append(PREFIX_SKILL + s.tagName + " ")
         );
         return sb.toString();
     }
@@ -64,11 +64,11 @@ public class PersonUtil {
         descriptor.getGraduationYearMonth().ifPresent(graduationYearMonth ->
                 sb.append(PREFIX_GRADUATIONYEARMONTH).append(graduationYearMonth.value).append(" "));
         if (descriptor.getTags().isPresent()) {
-            Set<Tag> tags = descriptor.getTags().get();
-            if (tags.isEmpty()) {
-                sb.append(PREFIX_TAG);
+            Set<Skill> skills = descriptor.getTags().get();
+            if (skills.isEmpty()) {
+                sb.append(PREFIX_SKILL);
             } else {
-                tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
+                skills.forEach(s -> sb.append(PREFIX_SKILL).append(s.tagName).append(" "));
             }
         }
         return sb.toString();
