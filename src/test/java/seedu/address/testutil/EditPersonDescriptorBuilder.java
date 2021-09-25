@@ -9,6 +9,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Course;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Grade;
+import seedu.address.model.person.GraduationYearMonth;
 import seedu.address.model.person.Institution;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -41,6 +42,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setAddress(person.getAddress());
         descriptor.setGrade(person.getGrade());
         descriptor.setInstitution(person.getInstitution());
+        descriptor.setGraduationYearMonth(person.getGraduationYearMonth());
         descriptor.setCourse(person.getCourse());
         descriptor.setTags(person.getTags());
     }
@@ -93,6 +95,13 @@ public class EditPersonDescriptorBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code GraduationYearMonth} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withGraduationYearMonth(String graduationYearMonth) {
+        descriptor.setGraduationYearMonth(new GraduationYearMonth(graduationYearMonth));
+        return this;
+    }
     /**
      * Sets the {@code Course} of the {@code EditPersonDescriptor} that we are building.
      */

@@ -24,6 +24,7 @@ public class Person {
     private final Address address;
     private final Grade grade;
     private final Institution institution;
+    private final GraduationYearMonth graduationYearMonth;
     private final Course course;
     private final ApplicationStatus status;
     private final Set<Tag> tags = new HashSet<>();
@@ -33,8 +34,8 @@ public class Person {
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Grade grade,
-                  Institution institution, Course course, Set<Tag> tags) {
-        this(name, phone, email, address, grade, institution, course,
+                  Institution institution, Course course, GraduationYearMonth graduationYearMonth, Set<Tag> tags) {
+        this(name, phone, email, address, grade, institution, course, graduationYearMonth,
                 new ApplicationStatus(ApplicationStatus.DEFAULT_STATUS), tags);
     }
 
@@ -42,14 +43,17 @@ public class Person {
      * Overloaded constructor for creating candidates with default status
      */
     public Person(Name name, Phone phone, Email email, Address address, Grade grade,
-                  Institution institution, Course course, ApplicationStatus status, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, grade, status, institution, course, tags);
+                  Institution institution, Course course, GraduationYearMonth graduationYearMonth,
+                  ApplicationStatus status, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, grade, status, institution, course, graduationYearMonth, tags);
+
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.grade = grade;
         this.institution = institution;
+        this.graduationYearMonth = graduationYearMonth;
         this.course = course;
         this.status = status;
         this.tags.addAll(tags);
@@ -85,6 +89,10 @@ public class Person {
 
     public ApplicationStatus getApplicationStatus() {
         return status;
+    }
+
+    public GraduationYearMonth getGraduationYearMonth() {
+        return graduationYearMonth;
     }
 
     /**
@@ -129,6 +137,7 @@ public class Person {
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getGrade().equals(getGrade())
                 && otherPerson.getInstitution().equals(getInstitution())
+                && otherPerson.getGraduationYearMonth().equals(getGraduationYearMonth())
                 && otherPerson.getCourse().equals(getCourse())
                 && otherPerson.getApplicationStatus().equals(getApplicationStatus())
                 && otherPerson.getTags().equals(getTags());
@@ -137,7 +146,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, grade, institution, course, status, tags);
+        return Objects.hash(name, phone, email, address, grade, institution, course, graduationYearMonth, status, tags);
     }
 
     @Override
@@ -157,7 +166,9 @@ public class Person {
                 .append("; Institution: ")
                 .append(getInstitution())
                 .append("; Course: ")
-                .append(getCourse());
+                .append(getCourse())
+                .append("; Graduation Year Month: ")
+                .append((getGraduationYearMonth()));
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
