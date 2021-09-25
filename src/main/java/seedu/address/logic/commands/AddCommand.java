@@ -9,8 +9,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADUATIONYEARMONTH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INSTITUTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
+
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -34,7 +35,7 @@ public class AddCommand extends Command {
             + PREFIX_COURSE + "COURSE "
             + PREFIX_GRADUATIONYEARMONTH + "GRADUATION YEAR MONTH "
             + "[" + PREFIX_STATUS + "STATUS] "
-            + "[" + PREFIX_SKILL + "TAG]...\n"
+            + "[" + PREFIX_SKILL + "SKILL]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "

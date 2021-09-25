@@ -9,8 +9,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADUATIONYEARMONTH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INSTITUTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 
 import java.util.Set;
 import java.util.stream.Stream;
@@ -79,7 +79,8 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         Person person;
         if (argMultimap.getValue(PREFIX_STATUS).isEmpty()) {
-            person = new Person(name, phone, email, address, grade, institution, course, graduationYearMonth, skillList);
+            person = new Person(name, phone, email, address, grade, institution, course, 
+                    graduationYearMonth, skillList);
         } else {
             ApplicationStatus status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
             person = new Person(name, phone, email, address, grade, institution,
