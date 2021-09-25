@@ -10,7 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_INSTITUTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 
 import java.util.Set;
 import java.util.stream.Stream;
@@ -27,7 +27,7 @@ import seedu.address.model.person.Institution;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.skills.Skill;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -46,7 +46,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                         PREFIX_PHONE,
                         PREFIX_EMAIL,
                         PREFIX_ADDRESS,
-                        PREFIX_TAG,
+                        PREFIX_SKILL,
                         PREFIX_GRADE,
                         PREFIX_INSTITUTION,
                         PREFIX_COURSE,
@@ -75,15 +75,15 @@ public class AddCommandParser implements Parser<AddCommand> {
         GraduationYearMonth graduationYearMonth = ParserUtil.parseGraduationYearMonth(
                 argMultimap.getValue(PREFIX_GRADUATIONYEARMONTH).get());
         Course course = ParserUtil.parseCourse(argMultimap.getValue(PREFIX_COURSE).get());
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Set<Skill> skillList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_SKILL));
 
         Person person;
         if (argMultimap.getValue(PREFIX_STATUS).isEmpty()) {
-            person = new Person(name, phone, email, address, grade, institution, course, graduationYearMonth, tagList);
+            person = new Person(name, phone, email, address, grade, institution, course, graduationYearMonth, skillList);
         } else {
             ApplicationStatus status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
             person = new Person(name, phone, email, address, grade, institution,
-                    course, graduationYearMonth, status, tagList);
+                    course, graduationYearMonth, status, skillList);
         }
         return new AddCommand(person);
     }
