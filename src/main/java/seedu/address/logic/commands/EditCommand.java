@@ -5,11 +5,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADUATIONYEARMONTH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INSTITUTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -28,11 +29,12 @@ import seedu.address.model.person.ApplicationStatus;
 import seedu.address.model.person.Course;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Grade;
+import seedu.address.model.person.GraduationYearMonth;
 import seedu.address.model.person.Institution;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.skills.Skill;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -52,8 +54,9 @@ public class EditCommand extends Command {
             + "[" + PREFIX_GRADE + "GRADE] "
             + "[" + PREFIX_INSTITUTION + "INSTITUTION] "
             + "[" + PREFIX_COURSE + "COURSE] "
+            + "[" + PREFIX_GRADUATIONYEARMONTH + "GRADUATION_YEAR_MONTH] "
             + "[" + PREFIX_STATUS + "STATUS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_SKILL + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -111,13 +114,17 @@ public class EditCommand extends Command {
         Grade updatedGrade = editPersonDescriptor.getGrade().orElse(personToEdit.getGrade());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Institution updatedInstitution = editPersonDescriptor.getInstitution().orElse(personToEdit.getInstitution());
+        GraduationYearMonth updatedGraduationYearMonth = editPersonDescriptor.getGraduationYearMonth()
+                .orElse(personToEdit.getGraduationYearMonth());
         Course updatedCourse = editPersonDescriptor.getCourse().orElse(personToEdit.getCourse());
         ApplicationStatus updatedStatus = editPersonDescriptor.getApplicationStatus()
                 .orElse(personToEdit.getApplicationStatus());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Set<Skill> updatedSkills = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail,
-                updatedAddress, updatedGrade, updatedInstitution, updatedCourse, updatedStatus, updatedTags);
+
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
+                updatedGrade, updatedInstitution, updatedCourse,
+                updatedGraduationYearMonth, updatedStatus, updatedSkills);
     }
 
     @Override
@@ -153,9 +160,10 @@ public class EditCommand extends Command {
         private Address address;
         private Grade grade;
         private Institution institution;
+        private GraduationYearMonth graduationYearMonth;
         private Course course;
         private ApplicationStatus status;
-        private Set<Tag> tags;
+        private Set<Skill> skills;
 
         public EditPersonDescriptor() {}
 
@@ -170,16 +178,17 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setGrade(toCopy.grade);
             setInstitution(toCopy.institution);
+            setGraduationYearMonth(toCopy.graduationYearMonth);
             setCourse(toCopy.course);
             setApplicationStatus(toCopy.status);
-            setTags(toCopy.tags);
+            setTags(toCopy.skills);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, grade, institution, status, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, grade, institution, status, skills);
         }
 
         public void setName(Name name) {
@@ -222,6 +231,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(grade);
         }
 
+        public void setGraduationYearMonth(GraduationYearMonth graduationYearMonth) {
+            this.graduationYearMonth = graduationYearMonth;
+        }
+
+        public Optional<GraduationYearMonth> getGraduationYearMonth() {
+            return Optional.ofNullable(graduationYearMonth);
+        }
+
         public void setInstitution(Institution institution) {
             this.institution = institution;
         }
@@ -250,8 +267,8 @@ public class EditCommand extends Command {
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
          */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        public void setTags(Set<Skill> skills) {
+            this.skills = (skills != null) ? new HashSet<>(skills) : null;
         }
 
         /**
@@ -259,8 +276,8 @@ public class EditCommand extends Command {
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code tags} is null.
          */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        public Optional<Set<Skill>> getTags() {
+            return (skills != null) ? Optional.of(Collections.unmodifiableSet(skills)) : Optional.empty();
         }
 
         @Override
@@ -284,6 +301,7 @@ public class EditCommand extends Command {
                     && getAddress().equals(e.getAddress())
                     && getGrade().equals(e.getGrade())
                     && getInstitution().equals(e.getInstitution())
+                    && getGraduationYearMonth().equals(e.getGraduationYearMonth())
                     && getCourse().equals(e.getCourse())
                     && getApplicationStatus().equals(e.getApplicationStatus())
                     && getTags().equals(e.getTags());
@@ -298,8 +316,9 @@ public class EditCommand extends Command {
                     + ", address=" + address
                     + ", grade=" + grade
                     + ", institution=" + institution
+                    + ", graduation year month=" + graduationYearMonth
                     + ", course=" + course
-                    + ", tags=" + tags + '}';
+                    + ", tags=" + skills + '}';
         }
     }
 }

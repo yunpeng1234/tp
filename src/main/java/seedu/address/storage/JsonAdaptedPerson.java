@@ -15,11 +15,12 @@ import seedu.address.model.person.ApplicationStatus;
 import seedu.address.model.person.Course;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Grade;
+import seedu.address.model.person.GraduationYearMonth;
 import seedu.address.model.person.Institution;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.skills.Skill;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -34,9 +35,10 @@ class JsonAdaptedPerson {
     private final String address;
     private final String grade;
     private final String institution;
+    private final String graduationYearMonth;
     private final String course;
     private final String status;
-    private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final List<JsonAdaptedSkill> skilled = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -45,8 +47,9 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("grade") String grade, @JsonProperty("institution") String institution,
-             @JsonProperty("course") String course, @JsonProperty("status") String status,
-                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+            @JsonProperty("course") String course, @JsonProperty("graduationYearMonth") String graduationYearMonth,
+            @JsonProperty("status") String status, @JsonProperty("tagged") List<JsonAdaptedSkill> skilled) {
+
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -54,9 +57,10 @@ class JsonAdaptedPerson {
         this.grade = grade;
         this.institution = institution;
         this.course = course;
+        this.graduationYearMonth = graduationYearMonth;
         this.status = status;
-        if (tagged != null) {
-            this.tagged.addAll(tagged);
+        if (skilled != null) {
+            this.skilled.addAll(skilled);
         }
     }
 
@@ -71,9 +75,10 @@ class JsonAdaptedPerson {
         grade = source.getGrade().value;
         institution = source.getInstitution().value;
         course = source.getCourse().value;
+        graduationYearMonth = source.getGraduationYearMonth().value;
         status = source.getApplicationStatus().value.toString();
-        tagged.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
+        skilled.addAll(source.getTags().stream()
+                .map(JsonAdaptedSkill::new)
                 .collect(Collectors.toList()));
     }
 
@@ -83,9 +88,9 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
+        final List<Skill> personSkills = new ArrayList<>();
+        for (JsonAdaptedSkill tag : skilled) {
+            personSkills.add(tag.toModelType());
         }
 
         if (name == null) {
@@ -138,6 +143,15 @@ class JsonAdaptedPerson {
         }
         final Institution modelInstitution = new Institution(institution);
 
+        if (graduationYearMonth == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    GraduationYearMonth.class.getSimpleName()));
+        }
+        if (!GraduationYearMonth.isValidGraduationYearMonth(graduationYearMonth)) {
+            throw new IllegalValueException(GraduationYearMonth.MESSAGE_CONSTRAINTS);
+        }
+        final GraduationYearMonth modelYearMonth = new GraduationYearMonth(graduationYearMonth);
+
         if (course == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Course.class.getSimpleName()));
@@ -157,10 +171,11 @@ class JsonAdaptedPerson {
             modelStatus = new ApplicationStatus(status);
         }
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
+        final Set<Skill> modelSkills = new HashSet<>(personSkills);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress,
-                          modelGrade, modelInstitution, modelCourse, modelStatus, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelGrade,
+                modelInstitution, modelCourse, modelYearMonth , modelStatus, modelSkills);
+
     }
 
 }

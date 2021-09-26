@@ -5,11 +5,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADUATIONYEARMONTH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INSTITUTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
 import java.util.stream.Stream;
@@ -21,11 +22,12 @@ import seedu.address.model.person.ApplicationStatus;
 import seedu.address.model.person.Course;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Grade;
+import seedu.address.model.person.GraduationYearMonth;
 import seedu.address.model.person.Institution;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.skills.Skill;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -44,10 +46,11 @@ public class AddCommandParser implements Parser<AddCommand> {
                         PREFIX_PHONE,
                         PREFIX_EMAIL,
                         PREFIX_ADDRESS,
-                        PREFIX_TAG,
+                        PREFIX_SKILL,
                         PREFIX_GRADE,
                         PREFIX_INSTITUTION,
                         PREFIX_COURSE,
+                        PREFIX_GRADUATIONYEARMONTH,
                         PREFIX_STATUS);
 
         if (!arePrefixesPresent(argMultimap,
@@ -57,7 +60,8 @@ public class AddCommandParser implements Parser<AddCommand> {
                 PREFIX_EMAIL,
                 PREFIX_GRADE,
                 PREFIX_INSTITUTION,
-                PREFIX_COURSE)
+                PREFIX_COURSE,
+                PREFIX_GRADUATIONYEARMONTH)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
@@ -68,15 +72,19 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Grade grade = ParserUtil.parseGrade(argMultimap.getValue(PREFIX_GRADE).get());
         Institution institution = ParserUtil.parseInstitution(argMultimap.getValue(PREFIX_INSTITUTION).get());
+        GraduationYearMonth graduationYearMonth = ParserUtil.parseGraduationYearMonth(
+                argMultimap.getValue(PREFIX_GRADUATIONYEARMONTH).get());
         Course course = ParserUtil.parseCourse(argMultimap.getValue(PREFIX_COURSE).get());
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Set<Skill> skillList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_SKILL));
 
         Person person;
         if (argMultimap.getValue(PREFIX_STATUS).isEmpty()) {
-            person = new Person(name, phone, email, address, grade, institution, course, tagList);
+            person = new Person(name, phone, email, address, grade, institution, course,
+                    graduationYearMonth, skillList);
         } else {
             ApplicationStatus status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
-            person = new Person(name, phone, email, address, grade, institution, course, status, tagList);
+            person = new Person(name, phone, email, address, grade, institution,
+                    course, graduationYearMonth, status, skillList);
         }
         return new AddCommand(person);
     }

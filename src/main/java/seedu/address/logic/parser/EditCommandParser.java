@@ -6,11 +6,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADUATIONYEARMONTH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INSTITUTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -21,7 +22,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.skills.Skill;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -37,16 +38,17 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_GRADE,
-                        PREFIX_STATUS, PREFIX_TAG, PREFIX_INSTITUTION, PREFIX_COURSE);
+                        PREFIX_STATUS, PREFIX_SKILL, PREFIX_INSTITUTION, PREFIX_COURSE, PREFIX_GRADUATIONYEARMONTH);
         ArgumentTokenizer.tokenize(args,
                 PREFIX_NAME,
                 PREFIX_PHONE,
                 PREFIX_EMAIL,
                 PREFIX_ADDRESS,
-                PREFIX_TAG,
+                PREFIX_SKILL,
                 PREFIX_GRADE,
                 PREFIX_INSTITUTION,
                 PREFIX_COURSE,
+                PREFIX_GRADUATIONYEARMONTH,
                 PREFIX_STATUS);
 
 
@@ -78,6 +80,11 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor
                     .setInstitution(ParserUtil.parseInstitution(argMultimap.getValue(PREFIX_INSTITUTION).get()));
         }
+        if (argMultimap.getValue(PREFIX_GRADUATIONYEARMONTH).isPresent()) {
+            editPersonDescriptor
+                    .setGraduationYearMonth(ParserUtil.parseGraduationYearMonth(
+                            argMultimap.getValue(PREFIX_GRADUATIONYEARMONTH).get()));
+        }
         if (argMultimap.getValue(PREFIX_COURSE).isPresent()) {
             editPersonDescriptor
                     .setCourse(ParserUtil.parseCourse(argMultimap.getValue(PREFIX_COURSE).get()));
@@ -86,7 +93,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor
                     .setApplicationStatus(ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get()));
         }
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
+        parseTagsForEdit(argMultimap.getAllValues(PREFIX_SKILL)).ifPresent(editPersonDescriptor::setTags);
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
@@ -100,7 +107,7 @@ public class EditCommandParser implements Parser<EditCommand> {
      * If {@code tags} contain only one element which is an empty string, it will be parsed into a
      * {@code Set<Tag>} containing zero tags.
      */
-    private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
+    private Optional<Set<Skill>> parseTagsForEdit(Collection<String> tags) throws ParseException {
         assert tags != null;
 
         if (tags.isEmpty()) {

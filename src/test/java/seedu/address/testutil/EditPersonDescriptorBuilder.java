@@ -9,11 +9,12 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Course;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Grade;
+import seedu.address.model.person.GraduationYearMonth;
 import seedu.address.model.person.Institution;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.skills.Skill;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.
@@ -41,6 +42,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setAddress(person.getAddress());
         descriptor.setGrade(person.getGrade());
         descriptor.setInstitution(person.getInstitution());
+        descriptor.setGraduationYearMonth(person.getGraduationYearMonth());
         descriptor.setCourse(person.getCourse());
         descriptor.setTags(person.getTags());
     }
@@ -94,6 +96,13 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
+     * Sets the {@code GraduationYearMonth} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withGraduationYearMonth(String graduationYearMonth) {
+        descriptor.setGraduationYearMonth(new GraduationYearMonth(graduationYearMonth));
+        return this;
+    }
+    /**
      * Sets the {@code Course} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withCourse(String course) {
@@ -106,8 +115,8 @@ public class EditPersonDescriptorBuilder {
      * that we are building.
      */
     public EditPersonDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
-        descriptor.setTags(tagSet);
+        Set<Skill> skillSet = Stream.of(tags).map(Skill::new).collect(Collectors.toSet());
+        descriptor.setTags(skillSet);
         return this;
     }
 

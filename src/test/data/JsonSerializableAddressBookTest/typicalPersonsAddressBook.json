@@ -8,6 +8,7 @@
     "grade": "4.50",
     "institution": "NUS",
     "course": "Computer Science",
+    "graduationYearMonth" : "12/2020",
     "tagged" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
@@ -17,6 +18,7 @@
     "grade": "4.60",
     "institution": "NTU",
     "course": "Computer Engineering",
+    "graduationYearMonth" : "06/2025",
     "tagged" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
@@ -26,6 +28,7 @@
     "grade": "4.70",
     "institution": "NTU",
     "course": "Business and Accounting",
+    "graduationYearMonth" : "12/2023",
     "tagged" : [ ]
   }, {
     "name" : "Daniel Meier",
@@ -35,6 +38,7 @@
     "grade": "4.80",
     "institution": "SMU",
     "course": "Accountancy",
+    "graduationYearMonth" : "01/2027",
     "tagged" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
@@ -44,6 +48,7 @@
     "grade": "4.90",
     "institution": "SUTD",
     "course": "Philosophy",
+    "graduationYearMonth" : "12/2024",
     "tagged" : [ ]
   }, {
     "name" : "Fiona Kunz",
@@ -53,6 +58,7 @@
     "grade": "5.00",
     "institution": "PATHLIGHT",
     "course": "Life Science",
+    "graduationYearMonth" : "12/2021",
     "tagged" : [ ]
   }, {
     "name" : "George Best",
@@ -62,6 +68,7 @@
     "grade": "4.40",
     "institution": "SUSS",
     "course": "Social Work",
+    "graduationYearMonth" : "03/2023",
     "tagged" : [ ]
   } ]
 }
