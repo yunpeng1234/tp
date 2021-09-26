@@ -96,6 +96,10 @@ public class Person {
         return graduationYearMonth;
     }
 
+    public String[] getAcademics() {
+        return new String[]{institution.toString(), course.toString(), graduationYearMonth.toString(), grade.toString()};
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.

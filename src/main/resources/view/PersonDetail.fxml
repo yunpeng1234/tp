@@ -6,20 +6,23 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 
-<StackPane  xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="200" minWidth="200" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" styleClass="tab-pane">
+      <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="200" minWidth="200" prefHeight="300.0" prefWidth="300.0" styleClass="tab-pane" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Academic" fx:id="academic">
+          <Tab fx:id="academic" text="Academic">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Label layoutX="238.0" layoutY="150.0" prefHeight="69.0" prefWidth="124.0" text="Label" />
+                        <Label fx:id="institution" layoutY="5.0" text="Label" />
+                        <Label fx:id="course" layoutY="76.0" text="Label" />
+                        <Label fx:id="yearOfGrad" layoutY="231.0" text="Label" />
+                        <Label fx:id="grade" layoutY="154.0" text="Label" />
                      </children>
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab text="Statement" fx:id="statement">
+          <Tab fx:id="statement" text="Statement">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -28,7 +31,7 @@
                   </AnchorPane>
             </content>
           </Tab>
-            <Tab text="Skill" fx:id="skill">
+            <Tab fx:id="skill" text="Skill">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -37,7 +40,7 @@
                   </AnchorPane>
               </content>
             </Tab>
-            <Tab text="Interview" fx:id="interview">
+            <Tab fx:id="interview" text="Interview">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
