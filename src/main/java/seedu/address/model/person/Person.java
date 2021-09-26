@@ -16,6 +16,8 @@ import seedu.address.model.skills.Skill;
  */
 public class Person {
 
+    private static final String[] DEFAULT_ACADEMICS = { "INSTITUTION", "COURSE", "YEAR", "GRADE" };
+
     // Identity fields
     private final Name name;
     private final Phone phone;
@@ -94,6 +96,15 @@ public class Person {
 
     public GraduationYearMonth getGraduationYearMonth() {
         return graduationYearMonth;
+    }
+
+    public String[] getAcademics() {
+        return new String[]{institution.toString(), course.toString(), graduationYearMonth.toString(),
+                grade.toString()};
+    }
+
+    public static String[] getDefaultAcademics() {
+        return DEFAULT_ACADEMICS;
     }
 
     /**
