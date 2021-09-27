@@ -3,7 +3,7 @@
 ![Ui](docs/images/Ui.png)
 
 
-#Introduction
+# Introduction
 `Intern Watcher` is a program to help company's HRs to manage internship applications from applications
 
 **Target audience:** HRs in-charge of selecting interns from campus recruitment, whom receive large volume of applications.
