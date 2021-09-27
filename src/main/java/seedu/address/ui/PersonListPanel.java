@@ -26,7 +26,7 @@ public class PersonListPanel extends UiPart<Region> {
     public PersonListPanel(ObservableList<Person> personList) {
         super(FXML);
         personListView.setItems(personList);
-        personListView.setCellFactory(listView -> new PersonListViewCell());
+        personListView.setCellFactory((listView) -> new PersonListViewCell());
     }
 
     /**
@@ -36,7 +36,6 @@ public class PersonListPanel extends UiPart<Region> {
         @Override
         protected void updateItem(Person person, boolean empty) {
             super.updateItem(person, empty);
-
             if (empty || person == null) {
                 setGraphic(null);
                 setText(null);

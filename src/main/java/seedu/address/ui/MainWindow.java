@@ -34,7 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
-    private PersonDetail personDetail;
+    private PersonDetailPanel personDetail;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -123,13 +123,11 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        personDetail = new PersonDetail();
+        personDetail = new PersonDetailPanel(logic.getFilteredPersonList());
         personDetailPlaceholder.getChildren().add(personDetail.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
-
-
     }
 
     /**
