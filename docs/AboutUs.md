@@ -9,21 +9,22 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Chang Chuan Hao
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/chang-ch.png" width="200px">
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
+[[github](https://github.com/Chang-CH)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities: TBD
 
-### Jane Doe
+### Gu Geng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/gugeng.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](https://github.com/jackgugz]
 [[portfolio](team/johndoe.md)]
 
 * Role: Team Lead

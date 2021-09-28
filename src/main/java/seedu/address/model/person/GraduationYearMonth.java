@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class GraduationYearMonth {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Graduation Year Month should be of format MM/yyyy";
+            "Expected Graduation should be of format MM/yyyy";
 
     public static final String VALIDATION_REGEX = "[0-9]{2}/[0-9]{4}";
 
