@@ -21,9 +21,9 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Gu Geng
 
-<img src="images/gugeng.png" width="200px">
+<img src="images/jackgugz.png" width="200px">
 
-[[github](https://github.com/jackgugz]
+[[github](https://github.com/jackgugz)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Team Lead
