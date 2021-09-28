@@ -32,7 +32,7 @@ public class AddCommand extends Command {
             + PREFIX_GRADE + "GRADE "
             + PREFIX_INSTITUTION + "INSTITUTION "
             + PREFIX_COURSE + "COURSE "
-            + PREFIX_GRADUATIONYEARMONTH + "GRADUATION YEAR MONTH "
+            + PREFIX_GRADUATIONYEARMONTH + "GRADUATION_YEAR_MONTH "
             + "[" + PREFIX_STATUS + "STATUS] "
             + "[" + PREFIX_SKILL + "SKILL]...\n"
             + "Example: " + COMMAND_WORD + " "
