@@ -32,7 +32,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Jerome Soh
 
-<img src="images/jerome-soh.png" width="200px">
+<img src="images/Jeromesyl.png" width="200px">
 
 [[github](http://github.com/Jeromesyl)] 
 [[portfolio](team/johndoe.md)]
