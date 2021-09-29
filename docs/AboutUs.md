@@ -49,11 +49,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: TBD
 
-### James Doe
+### Xiao Yunpeng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/yunpeng1234.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/yunpeng1234)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
