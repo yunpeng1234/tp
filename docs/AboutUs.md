@@ -13,7 +13,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/chang-ch.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/Chang-CH)]
 [[portfolio](team/johndoe.md)]
 
@@ -22,38 +21,39 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Gu Geng
 
-<img src="images/gugeng.png" width="200px">
+<img src="images/jackgugz.png" width="200px">
 
-[[github](https://github.com/jackgugz]
+[[github](https://github.com/jackgugz)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Jerome Soh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/Jeromesyl.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/Jeromesyl)] 
+[[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Nicole Joseph
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/nicolej2122.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/nicolej2122)]
+[[portfolio](team/nicolej2122.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: TBD
 
-### James Doe
+### Xiao Yunpeng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/yunpeng1234.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/yunpeng1234)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer

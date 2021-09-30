@@ -257,13 +257,14 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* has a need to manage a significant number of internship applications from campus recruitment
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Manage applications faster and more efficiently with the functions the app provides
+
 
 
 ### User stories
@@ -271,13 +272,14 @@ _{Explain here how the data archiving feature will be implemented}_
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| -------- | ------------------------------------------ | -------------------------------------- | ---------------------------------------------------------------------- |
+| `* * *`  | new user                                   | see usage instructions                 | refer to instructions when I forget how to use the App                 |
+| `* * *`  | user                                       | add a new person                       |                                                                        |
+| `* * *`  | user                                       | delete a person                        | remove entries that I no longer need                                   |
+| `* * *`  | user                                       | update a candidate application         | change entries accordingly                                             |
+| `* * *`  | user                                       | view an organised list of applicants   | see suitable applicants at a glance                                    |
+| `* * *`  | user                                       | save candidate profiles to a file      | refer to them later                                                    |
+| `* * *`  | user                                       | read candidate profiles from a file    | refer to them                                                          |
 
 *{More to be added}*
 
@@ -285,7 +287,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+
+**Use case: Add a candidate application**
+
+**MSS**
+
+1.  User requests to list persons
+2.  AddressBook shows a list of persons
+3.  User requests to add a specific person in the list
+4.  AddressBook adds the person
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The given details are invalid.
+
+    * 3a1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+
+
+**Use case: Delete a candidate application**
 
 **MSS**
 
@@ -307,6 +330,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. AddressBook shows an error message.
 
       Use case resumes at step 2.
+
+
+**Use case: Update a candidate application**
+
+**MSS**
+
+1.  User requests to list persons
+2.  AddressBook shows a list of persons
+3.  User requests to update a specific person in the list
+4.  AddressBook updates the person
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The given index is invalid.
+
+    * 3a1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+* 3b. The given details are invalid.
+    * 3b1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+    
 
 *{More to be added}*
 
