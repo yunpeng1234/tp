@@ -363,6 +363,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  Project should deliver new updates every two weeks
+5.  Data should be saved upon exit into a JSON format file
+6.  Data should be read from a JSON at a fixed file location
+7.  The final product should not have to use a mouse
+8.  The final product should be contained in a single window
+9.  The system should provide sufficient hints to be usable by a novice.
 
 *{More to be added}*
 
