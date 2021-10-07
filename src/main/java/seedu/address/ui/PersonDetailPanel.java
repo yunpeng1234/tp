@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.util.Comparator;
+import java.util.Set;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,8 +12,7 @@ import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
 import seedu.address.model.skills.Skill;
 
-import java.util.Comparator;
-import java.util.Set;
+
 
 /**
  * Panel containing the details of a Person
