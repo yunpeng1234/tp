@@ -10,7 +10,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.ApplicationStatus;
 import seedu.address.model.person.Course;
 import seedu.address.model.person.Email;
@@ -32,7 +31,6 @@ class JsonAdaptedPerson {
     private final String name;
     private final String phone;
     private final String email;
-    private final String address;
     private final String grade;
     private final String institution;
     private final String graduationYearMonth;
@@ -45,15 +43,14 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("grade") String grade, @JsonProperty("institution") String institution,
-            @JsonProperty("course") String course, @JsonProperty("graduationYearMonth") String graduationYearMonth,
-            @JsonProperty("status") String status, @JsonProperty("tagged") List<JsonAdaptedSkill> skilled) {
+            @JsonProperty("email") String email, @JsonProperty("grade") String grade,
+            @JsonProperty("institution") String institution, @JsonProperty("course") String course,
+            @JsonProperty("graduationYearMonth") String graduationYearMonth, @JsonProperty("status") String status,
+            @JsonProperty("tagged") List<JsonAdaptedSkill> skilled) {
 
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
         this.grade = grade;
         this.institution = institution;
         this.course = course;
@@ -71,7 +68,6 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
-        address = source.getAddress().value;
         grade = source.getGrade().value;
         institution = source.getInstitution().value;
         course = source.getCourse().value;
@@ -116,15 +112,6 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
         }
         final Email modelEmail = new Email(email);
-
-        if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
-        }
-
-        if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
-        }
-        final Address modelAddress = new Address(address);
 
         if (grade == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Grade.class.getSimpleName()));
@@ -173,7 +160,7 @@ class JsonAdaptedPerson {
 
         final Set<Skill> modelSkills = new HashSet<>(personSkills);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelGrade,
+        return new Person(modelName, modelPhone, modelEmail, modelGrade,
                 modelInstitution, modelCourse, modelYearMonth , modelStatus, modelSkills);
 
     }

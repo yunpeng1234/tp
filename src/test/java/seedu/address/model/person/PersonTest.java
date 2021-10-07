@@ -2,7 +2,6 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GRADE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GRADUATION_YEARMONTH_BOB;
@@ -36,7 +35,7 @@ public class PersonTest {
 
         // same name, all other attributes different -> returns true
         Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // different name, all other attributes same -> returns false
@@ -83,20 +82,16 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different address -> returns false
-        editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
-
         // different grade -> returns false
         editedAlice = new PersonBuilder(ALICE).withGrade(VALID_GRADE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different institution -> returns false
-        editedAlice = new PersonBuilder(ALICE).withAddress(VALID_INSTITUTION_BOB).build();
+        editedAlice = new PersonBuilder(ALICE).withInstitution(VALID_INSTITUTION_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different graduation year month -> returns false
-        editedAlice = new PersonBuilder(ALICE).withAddress(VALID_GRADUATION_YEARMONTH_BOB).build();
+        editedAlice = new PersonBuilder(ALICE).withGraduationYearMonth(VALID_GRADUATION_YEARMONTH_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false
