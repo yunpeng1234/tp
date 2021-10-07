@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
@@ -17,7 +16,6 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.ApplicationStatus;
 import seedu.address.model.person.Course;
 import seedu.address.model.person.Email;
@@ -45,7 +43,6 @@ public class AddCommandParser implements Parser<AddCommand> {
                         PREFIX_NAME,
                         PREFIX_PHONE,
                         PREFIX_EMAIL,
-                        PREFIX_ADDRESS,
                         PREFIX_SKILL,
                         PREFIX_GRADE,
                         PREFIX_INSTITUTION,
@@ -55,7 +52,6 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         if (!arePrefixesPresent(argMultimap,
                 PREFIX_NAME,
-                PREFIX_ADDRESS,
                 PREFIX_PHONE,
                 PREFIX_EMAIL,
                 PREFIX_GRADE,
@@ -69,7 +65,6 @@ public class AddCommandParser implements Parser<AddCommand> {
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Grade grade = ParserUtil.parseGrade(argMultimap.getValue(PREFIX_GRADE).get());
         Institution institution = ParserUtil.parseInstitution(argMultimap.getValue(PREFIX_INSTITUTION).get());
         GraduationYearMonth graduationYearMonth = ParserUtil.parseGraduationYearMonth(
@@ -79,11 +74,11 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         Person person;
         if (argMultimap.getValue(PREFIX_STATUS).isEmpty()) {
-            person = new Person(name, phone, email, address, grade, institution, course,
+            person = new Person(name, phone, email, grade, institution, course,
                     graduationYearMonth, skillList);
         } else {
             ApplicationStatus status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
-            person = new Person(name, phone, email, address, grade, institution,
+            person = new Person(name, phone, email, grade, institution,
                     course, graduationYearMonth, status, skillList);
         }
         return new AddCommand(person);

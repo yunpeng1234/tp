@@ -24,7 +24,6 @@ public class Person {
     private final Email email;
 
     // Data fields
-    private final Address address;
     private final Grade grade;
     private final Institution institution;
     private final GraduationYearMonth graduationYearMonth;
@@ -36,24 +35,23 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Grade grade,
+    public Person(Name name, Phone phone, Email email, Grade grade,
                   Institution institution, Course course, GraduationYearMonth graduationYearMonth, Set<Skill> skills) {
-        this(name, phone, email, address, grade, institution, course, graduationYearMonth,
+        this(name, phone, email, grade, institution, course, graduationYearMonth,
                 new ApplicationStatus(ApplicationStatus.DEFAULT_STATUS), skills);
     }
 
     /**
      * Overloaded constructor for creating candidates with default status
      */
-    public Person(Name name, Phone phone, Email email, Address address, Grade grade,
+    public Person(Name name, Phone phone, Email email, Grade grade,
                   Institution institution, Course course, GraduationYearMonth graduationYearMonth,
                   ApplicationStatus status, Set<Skill> skills) {
-        requireAllNonNull(name, phone, email, address, grade, status, institution, course, graduationYearMonth, skills);
+        requireAllNonNull(name, phone, email, grade, status, institution, course, graduationYearMonth, skills);
 
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
         this.grade = grade;
         this.institution = institution;
         this.graduationYearMonth = graduationYearMonth;
@@ -84,10 +82,6 @@ public class Person {
 
     public Email getEmail() {
         return email;
-    }
-
-    public Address getAddress() {
-        return address;
     }
 
     public ApplicationStatus getApplicationStatus() {
@@ -146,7 +140,6 @@ public class Person {
         return otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getGrade().equals(getGrade())
                 && otherPerson.getInstitution().equals(getInstitution())
                 && otherPerson.getGraduationYearMonth().equals(getGraduationYearMonth())
@@ -158,7 +151,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, grade, institution, course,
+        return Objects.hash(name, phone, email, grade, institution, course,
                 graduationYearMonth, status, skills);
     }
 
@@ -172,8 +165,6 @@ public class Person {
                 .append(getPhone())
                 .append("; Email: ")
                 .append(getEmail())
-                .append("; Address: ")
-                .append(getAddress())
                 .append("; Grade: ")
                 .append(getGrade())
                 .append("; Institution: ")
