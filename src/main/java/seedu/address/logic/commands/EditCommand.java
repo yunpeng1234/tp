@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
@@ -24,7 +23,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.ApplicationStatus;
 import seedu.address.model.person.Course;
 import seedu.address.model.person.Email;
@@ -50,7 +48,6 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_GRADE + "GRADE] "
             + "[" + PREFIX_INSTITUTION + "INSTITUTION] "
             + "[" + PREFIX_COURSE + "COURSE] "
@@ -112,7 +109,6 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Grade updatedGrade = editPersonDescriptor.getGrade().orElse(personToEdit.getGrade());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Institution updatedInstitution = editPersonDescriptor.getInstitution().orElse(personToEdit.getInstitution());
         GraduationYearMonth updatedGraduationYearMonth = editPersonDescriptor.getGraduationYearMonth()
                 .orElse(personToEdit.getGraduationYearMonth());
@@ -122,7 +118,7 @@ public class EditCommand extends Command {
         Set<Skill> updatedSkills = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
+        return new Person(updatedName, updatedPhone, updatedEmail,
                 updatedGrade, updatedInstitution, updatedCourse,
                 updatedGraduationYearMonth, updatedStatus, updatedSkills);
     }
@@ -157,7 +153,6 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
-        private Address address;
         private Grade grade;
         private Institution institution;
         private GraduationYearMonth graduationYearMonth;
@@ -175,7 +170,6 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
-            setAddress(toCopy.address);
             setGrade(toCopy.grade);
             setInstitution(toCopy.institution);
             setGraduationYearMonth(toCopy.graduationYearMonth);
@@ -188,7 +182,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, grade, institution, status, skills);
+            return CollectionUtil.isAnyNonNull(name, phone, email, grade, institution, status, skills);
         }
 
         public void setName(Name name) {
@@ -213,14 +207,6 @@ public class EditCommand extends Command {
 
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
-        }
-
-        public void setAddress(Address address) {
-            this.address = address;
-        }
-
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
         }
 
         public void setGrade(Grade grade) {
@@ -298,7 +284,6 @@ public class EditCommand extends Command {
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
-                    && getAddress().equals(e.getAddress())
                     && getGrade().equals(e.getGrade())
                     && getInstitution().equals(e.getInstitution())
                     && getGraduationYearMonth().equals(e.getGraduationYearMonth())
@@ -313,7 +298,6 @@ public class EditCommand extends Command {
                     + "name=" + name
                     + ", phone=" + phone
                     + ", email=" + email
-                    + ", address=" + address
                     + ", grade=" + grade
                     + ", institution=" + institution
                     + ", graduation year month=" + graduationYearMonth
