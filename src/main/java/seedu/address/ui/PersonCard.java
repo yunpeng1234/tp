@@ -39,17 +39,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private Label grade;
-    @FXML
-    private Label institution;
-    @FXML
-    private Label course;
-    @FXML
-    private Label graduationYearMonth;
-    @FXML
     private Label status;
-    @FXML
-    private FlowPane tags;
+
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -63,14 +54,7 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         status.setText(person.getApplicationStatus().value.toString());
-        grade.setText(person.getGrade().value);
-        institution.setText(person.getInstitution().value);
-        graduationYearMonth.setText(person.getGraduationYearMonth().value);
-        course.setText(person.getCourse().value);
 
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
     @Override

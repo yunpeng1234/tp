@@ -5,8 +5,13 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
+import seedu.address.model.skills.Skill;
+
+import java.util.Comparator;
+import java.util.Set;
 
 /**
  * Panel containing the details of a Person
@@ -20,11 +25,6 @@ public class PersonDetailPanel extends UiPart<Region> {
     @FXML
     private Tab academic;
 
-    @FXML
-    private Tab interview;
-
-    @FXML
-    private Tab statement;
 
     @FXML
     private Label institution;
@@ -38,24 +38,33 @@ public class PersonDetailPanel extends UiPart<Region> {
     @FXML
     private Label grade;
 
+    @FXML
+    private FlowPane skills;
+
     /**
      * Creates a {@code PersonDetailPanel} with the given {@code ObservableList}.
      */
     public PersonDetailPanel(ObservableList<Person> personObservableList) {
         super(FXML);
+
         if (!personObservableList.isEmpty()) {
             // To be changed on mouse click
             setAcademicTab(personObservableList.get(0).getAcademics());
+            setSkillTab(personObservableList.get(0).getTags());
         } else {
             setAcademicTab(Person.getDefaultAcademics());
         }
         // We are not using ListView so we must add our listeners manually
         personObservableList.addListener((ListChangeListener<Person>) c -> {
             if (!personObservableList.isEmpty()) {
+                Person current = personObservableList.get(0);
                 // To be changed on mouse click
-                setAcademicTab(personObservableList.get(0).getAcademics());
+                setAcademicTab(current.getAcademics());
+                setSkillTab(current.getTags());
+
             } else {
                 setAcademicTab(Person.getDefaultAcademics());
+
             }
         });
     }
@@ -79,11 +88,19 @@ public class PersonDetailPanel extends UiPart<Region> {
      *             Thrid Index: Year of Graduation
      *             Fourth index: Grade
      */
-    void setAcademicTab(String[] text) {
+    private void setAcademicTab(String[] text) {
+
         //TODO: Might be better to get the Person and populate dynamically instead of having a string array produced.
         institution.setText(text[0]);
         course.setText(text[1]);
         yearOfGrad.setText(text[2]);
         grade.setText(text[3]);
+    }
+
+    private void setSkillTab(Set<Skill> skillList) {
+        System.out.println(skillList);
+        skillList.stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> skills.getChildren().add(new Label(tag.tagName)));
     }
 }
