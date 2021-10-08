@@ -23,6 +23,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Applicant;
 import seedu.address.model.person.ApplicationStatus;
 import seedu.address.model.person.Course;
 import seedu.address.model.person.Email;
@@ -30,7 +31,6 @@ import seedu.address.model.person.Grade;
 import seedu.address.model.person.GraduationYearMonth;
 import seedu.address.model.person.Institution;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Applicant;
 import seedu.address.model.person.Phone;
 import seedu.address.model.skills.Skill;
 
@@ -102,14 +102,16 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Applicant createEditedPerson(Applicant applicantToEdit, EditApplicantDescriptor editApplicantDescriptor) {
+    private static Applicant createEditedPerson(Applicant applicantToEdit,
+                                                EditApplicantDescriptor editApplicantDescriptor) {
         assert applicantToEdit != null;
 
         Name updatedName = editApplicantDescriptor.getName().orElse(applicantToEdit.getName());
         Phone updatedPhone = editApplicantDescriptor.getPhone().orElse(applicantToEdit.getPhone());
         Email updatedEmail = editApplicantDescriptor.getEmail().orElse(applicantToEdit.getEmail());
         Grade updatedGrade = editApplicantDescriptor.getGrade().orElse(applicantToEdit.getGrade());
-        Institution updatedInstitution = editApplicantDescriptor.getInstitution().orElse(applicantToEdit.getInstitution());
+        Institution updatedInstitution = editApplicantDescriptor.getInstitution()
+                .orElse(applicantToEdit.getInstitution());
         GraduationYearMonth updatedGraduationYearMonth = editApplicantDescriptor.getGraduationYearMonth()
                 .orElse(applicantToEdit.getGraduationYearMonth());
         Course updatedCourse = editApplicantDescriptor.getCourse().orElse(applicantToEdit.getCourse());
