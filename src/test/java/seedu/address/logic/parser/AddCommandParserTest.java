@@ -44,13 +44,13 @@ import static seedu.address.testutil.TypicalApplicants.BOB;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.model.person.Applicant;
 import seedu.address.model.person.Course;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Grade;
 import seedu.address.model.person.GraduationYearMonth;
 import seedu.address.model.person.Institution;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Applicant;
 import seedu.address.model.person.Phone;
 import seedu.address.model.skills.Skill;
 import seedu.address.testutil.ApplicantBuilder;
@@ -117,7 +117,8 @@ public class AddCommandParserTest {
                 new AddCommand(expectedApplicant));
 
         // multiple tags - all accepted
-        Applicant expectedApplicantMultipleTags = new ApplicantBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
+        Applicant expectedApplicantMultipleTags = new ApplicantBuilder(BOB)
+                .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                         + GRADE_DESC_BOB + INSTITUTION_DESC_BOB + COURSE_DESC_BOB

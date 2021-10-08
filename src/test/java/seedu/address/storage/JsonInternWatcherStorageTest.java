@@ -31,7 +31,8 @@ public class JsonInternWatcherStorageTest {
     }
 
     private java.util.Optional<ReadOnlyInternWatcher> readAddressBook(String filePath) throws Exception {
-        return new JsonInternWatcherStorage(Paths.get(filePath)).readInternWatcher(addToTestDataPathIfNotNull(filePath));
+        return new JsonInternWatcherStorage(Paths.get(filePath))
+                .readInternWatcher(addToTestDataPathIfNotNull(filePath));
     }
 
     private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {

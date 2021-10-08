@@ -25,9 +25,9 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Applicant;
-import seedu.address.testutil.EditApplicantDescriptorBuilder;
 import seedu.address.testutil.ApplicantBuilder;
 import seedu.address.testutil.ApplicantUtil;
+import seedu.address.testutil.EditApplicantDescriptorBuilder;
 
 public class InternWatcherParserTest {
 

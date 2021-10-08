@@ -4,6 +4,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import seedu.address.model.person.Applicant;
 import seedu.address.logic.commands.EditCommand.EditApplicantDescriptor;
 import seedu.address.model.person.Course;
 import seedu.address.model.person.Email;
@@ -11,7 +12,6 @@ import seedu.address.model.person.Grade;
 import seedu.address.model.person.GraduationYearMonth;
 import seedu.address.model.person.Institution;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Applicant;
 import seedu.address.model.person.Phone;
 import seedu.address.model.skills.Skill;
 
