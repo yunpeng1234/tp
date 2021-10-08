@@ -60,7 +60,8 @@ public class StorageManager implements Storage {
     }
 
     @Override
-    public Optional<ReadOnlyInternWatcher> readInternWatcher(Path filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlyInternWatcher> readInternWatcher(Path filePath)
+            throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
         return internWatcherStorage.readInternWatcher(filePath);
     }

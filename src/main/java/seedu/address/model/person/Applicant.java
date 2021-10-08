@@ -36,7 +36,8 @@ public class Applicant {
      * Every field must be present and not null.
      */
     public Applicant(Name name, Phone phone, Email email, Grade grade,
-                     Institution institution, Course course, GraduationYearMonth graduationYearMonth, Set<Skill> skills) {
+                     Institution institution, Course course, GraduationYearMonth graduationYearMonth,
+                     Set<Skill> skills) {
         this(name, phone, email, grade, institution, course, graduationYearMonth,
                 new ApplicationStatus(ApplicationStatus.DEFAULT_STATUS), skills);
     }

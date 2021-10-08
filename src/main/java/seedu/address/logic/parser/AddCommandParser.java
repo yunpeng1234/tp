@@ -16,6 +16,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Applicant;
 import seedu.address.model.person.ApplicationStatus;
 import seedu.address.model.person.Course;
 import seedu.address.model.person.Email;
@@ -23,7 +24,6 @@ import seedu.address.model.person.Grade;
 import seedu.address.model.person.GraduationYearMonth;
 import seedu.address.model.person.Institution;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Applicant;
 import seedu.address.model.person.Phone;
 import seedu.address.model.skills.Skill;
 

@@ -6,13 +6,13 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.InternWatcher;
 import seedu.address.model.ReadOnlyInternWatcher;
+import seedu.address.model.person.Applicant;
 import seedu.address.model.person.Course;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Grade;
 import seedu.address.model.person.GraduationYearMonth;
 import seedu.address.model.person.Institution;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Applicant;
 import seedu.address.model.person.Phone;
 import seedu.address.model.skills.Skill;
 
