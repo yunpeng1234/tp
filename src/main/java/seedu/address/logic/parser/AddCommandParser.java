@@ -23,7 +23,7 @@ import seedu.address.model.person.Grade;
 import seedu.address.model.person.GraduationYearMonth;
 import seedu.address.model.person.Institution;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Applicant;
 import seedu.address.model.person.Phone;
 import seedu.address.model.skills.Skill;
 
@@ -72,16 +72,16 @@ public class AddCommandParser implements Parser<AddCommand> {
         Course course = ParserUtil.parseCourse(argMultimap.getValue(PREFIX_COURSE).get());
         Set<Skill> skillList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_SKILL));
 
-        Person person;
+        Applicant applicant;
         if (argMultimap.getValue(PREFIX_STATUS).isEmpty()) {
-            person = new Person(name, phone, email, grade, institution, course,
+            applicant = new Applicant(name, phone, email, grade, institution, course,
                     graduationYearMonth, skillList);
         } else {
             ApplicationStatus status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
-            person = new Person(name, phone, email, grade, institution,
+            applicant = new Applicant(name, phone, email, grade, institution,
                     course, graduationYearMonth, status, skillList);
         }
-        return new AddCommand(person);
+        return new AddCommand(applicant);
     }
 
     /**

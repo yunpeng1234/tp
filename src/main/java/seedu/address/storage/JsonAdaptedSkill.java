@@ -34,9 +34,9 @@ class JsonAdaptedSkill {
     }
 
     /**
-     * Converts this Jackson-friendly adapted tag object into the model's {@code Tag} object.
+     * Converts this Jackson-friendly adapted tag object into the model's {@code Skill} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted skill.
      */
     public Skill toModelType() throws IllegalValueException {
         if (!Skill.isValidTagName(skillName)) {

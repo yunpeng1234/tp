@@ -17,14 +17,14 @@ import seedu.address.model.person.Grade;
 import seedu.address.model.person.GraduationYearMonth;
 import seedu.address.model.person.Institution;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Applicant;
 import seedu.address.model.person.Phone;
 import seedu.address.model.skills.Skill;
 
 /**
- * Jackson-friendly version of {@link Person}.
+ * Jackson-friendly version of {@link Applicant}.
  */
-class JsonAdaptedPerson {
+class JsonAdaptedApplicant {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
@@ -42,11 +42,11 @@ class JsonAdaptedPerson {
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("grade") String grade,
-            @JsonProperty("institution") String institution, @JsonProperty("course") String course,
-            @JsonProperty("graduationYearMonth") String graduationYearMonth, @JsonProperty("status") String status,
-            @JsonProperty("tagged") List<JsonAdaptedSkill> skilled) {
+    public JsonAdaptedApplicant(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
+                                @JsonProperty("email") String email, @JsonProperty("grade") String grade,
+                                @JsonProperty("institution") String institution, @JsonProperty("course") String course,
+                                @JsonProperty("graduationYearMonth") String graduationYearMonth, @JsonProperty("status") String status,
+                                @JsonProperty("tagged") List<JsonAdaptedSkill> skilled) {
 
         this.name = name;
         this.phone = phone;
@@ -64,7 +64,7 @@ class JsonAdaptedPerson {
     /**
      * Converts a given {@code Person} into this class for Jackson use.
      */
-    public JsonAdaptedPerson(Person source) {
+    public JsonAdaptedApplicant(Applicant source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
@@ -83,7 +83,7 @@ class JsonAdaptedPerson {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
-    public Person toModelType() throws IllegalValueException {
+    public Applicant toModelType() throws IllegalValueException {
         final List<Skill> personSkills = new ArrayList<>();
         for (JsonAdaptedSkill tag : skilled) {
             personSkills.add(tag.toModelType());
@@ -160,7 +160,7 @@ class JsonAdaptedPerson {
 
         final Set<Skill> modelSkills = new HashSet<>(personSkills);
 
-        return new Person(modelName, modelPhone, modelEmail, modelGrade,
+        return new Applicant(modelName, modelPhone, modelEmail, modelGrade,
                 modelInstitution, modelCourse, modelYearMonth , modelStatus, modelSkills);
 
     }

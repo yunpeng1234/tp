@@ -38,8 +38,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalPersons.AMY;
-import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalApplicants.AMY;
+import static seedu.address.testutil.TypicalApplicants.BOB;
 
 import org.junit.jupiter.api.Test;
 
@@ -50,88 +50,88 @@ import seedu.address.model.person.Grade;
 import seedu.address.model.person.GraduationYearMonth;
 import seedu.address.model.person.Institution;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Applicant;
 import seedu.address.model.person.Phone;
 import seedu.address.model.skills.Skill;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.ApplicantBuilder;
 
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Person expectedPerson = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
+        Applicant expectedApplicant = new ApplicantBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                         + GRADE_DESC_BOB + INSTITUTION_DESC_BOB + COURSE_DESC_BOB
                         + GRADUATION_YEARMONTH_DESC_BOB + TAG_DESC_FRIEND,
-                new AddCommand(expectedPerson));
+                new AddCommand(expectedApplicant));
 
         // multiple names - last name accepted
         assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                         + GRADE_DESC_BOB + INSTITUTION_DESC_BOB + COURSE_DESC_BOB
                         + GRADUATION_YEARMONTH_DESC_BOB + TAG_DESC_FRIEND,
-                new AddCommand(expectedPerson));
+                new AddCommand(expectedApplicant));
 
         // multiple phones - last phone accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
                         + GRADE_DESC_BOB + INSTITUTION_DESC_BOB + COURSE_DESC_BOB
                         + GRADUATION_YEARMONTH_DESC_BOB + TAG_DESC_FRIEND,
-                new AddCommand(expectedPerson));
+                new AddCommand(expectedApplicant));
 
         // multiple emails - last email accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY + EMAIL_DESC_BOB
                         + GRADE_DESC_BOB + INSTITUTION_DESC_BOB + COURSE_DESC_BOB
                         + GRADUATION_YEARMONTH_DESC_BOB + TAG_DESC_FRIEND,
-                new AddCommand(expectedPerson));
+                new AddCommand(expectedApplicant));
 
         // multiple addresses - last address accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                         + GRADE_DESC_BOB + INSTITUTION_DESC_BOB + COURSE_DESC_BOB
                         + GRADUATION_YEARMONTH_DESC_BOB + TAG_DESC_FRIEND,
-                new AddCommand(expectedPerson));
+                new AddCommand(expectedApplicant));
 
         // multiple grade - last grade accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                         + GRADE_DESC_AMY + GRADE_DESC_BOB + INSTITUTION_DESC_BOB + COURSE_DESC_BOB
                         + GRADUATION_YEARMONTH_DESC_BOB + TAG_DESC_FRIEND,
-                new AddCommand(expectedPerson));
+                new AddCommand(expectedApplicant));
 
         // multiple institutions - last institution accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + GRADE_DESC_BOB + INSTITUTION_DESC_AMY + INSTITUTION_DESC_BOB
                 + COURSE_DESC_BOB + GRADUATION_YEARMONTH_DESC_BOB + TAG_DESC_FRIEND,
-                new AddCommand(expectedPerson));
+                new AddCommand(expectedApplicant));
 
         // multiple graduation_year_month - last graduation_year_month accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                         + GRADE_DESC_BOB + INSTITUTION_DESC_BOB + COURSE_DESC_BOB
                         + GRADUATION_YEARMONTH_DESC_AMY + GRADUATION_YEARMONTH_DESC_BOB + TAG_DESC_FRIEND,
-                new AddCommand(expectedPerson));
+                new AddCommand(expectedApplicant));
 
         // multiple courses - last course accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + GRADE_DESC_BOB + INSTITUTION_DESC_BOB + COURSE_DESC_AMY + COURSE_DESC_BOB
                 + GRADUATION_YEARMONTH_DESC_BOB + TAG_DESC_FRIEND,
-                new AddCommand(expectedPerson));
+                new AddCommand(expectedApplicant));
 
         // multiple tags - all accepted
-        Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
+        Applicant expectedApplicantMultipleTags = new ApplicantBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                         + GRADE_DESC_BOB + INSTITUTION_DESC_BOB + COURSE_DESC_BOB
                         + GRADUATION_YEARMONTH_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                new AddCommand(expectedPersonMultipleTags));
+                new AddCommand(expectedApplicantMultipleTags));
     }
 
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+        Applicant expectedApplicant = new ApplicantBuilder(AMY).withTags().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + GRADE_DESC_AMY + INSTITUTION_DESC_AMY + COURSE_DESC_BOB
-                + GRADUATION_YEARMONTH_DESC_AMY, new AddCommand(expectedPerson));
+                + GRADUATION_YEARMONTH_DESC_AMY, new AddCommand(expectedApplicant));
     }
 
     @Test
