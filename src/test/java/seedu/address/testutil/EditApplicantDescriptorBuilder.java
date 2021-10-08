@@ -4,8 +4,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import seedu.address.model.person.Applicant;
 import seedu.address.logic.commands.EditCommand.EditApplicantDescriptor;
+import seedu.address.model.person.Applicant;
 import seedu.address.model.person.Course;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Grade;
