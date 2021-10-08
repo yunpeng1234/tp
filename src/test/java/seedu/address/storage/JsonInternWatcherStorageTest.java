@@ -1,12 +1,7 @@
 package seedu.address.storage;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalApplicants.ALICE;
-import static seedu.address.testutil.TypicalApplicants.HOON;
-import static seedu.address.testutil.TypicalApplicants.IDA;
-import static seedu.address.testutil.TypicalApplicants.getTypicalInternWatcher;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -61,32 +56,6 @@ public class JsonInternWatcherStorageTest {
         assertThrows(DataConversionException.class, () -> readInternWatcher("invalidAndValidPersonAddressBook.json"));
     }
 
-//    @Test
-//    public void readAndSaveAddressBook_allInOrder_success() throws Exception {
-//        Path filePath = testFolder.resolve("TempAddressBook.json");
-//        InternWatcher original = getTypicalInternWatcher();
-//        JsonInternWatcherStorage jsonInternWatcherStorage = new JsonInternWatcherStorage(filePath);
-//
-//        // Save in new file and read back
-//        jsonInternWatcherStorage.saveInternWatcher(original, filePath);
-//        ReadOnlyInternWatcher readBack = jsonInternWatcherStorage.readInternWatcher(filePath).get();
-//        assertEquals(original, new InternWatcher(readBack));
-//
-//        // Modify data, overwrite exiting file, and read back
-//        original.addPerson(HOON);
-//        original.removePerson(ALICE);
-//        jsonInternWatcherStorage.saveInternWatcher(original, filePath);
-//        readBack = jsonInternWatcherStorage.readInternWatcher(filePath).get();
-//        assertEquals(original, new InternWatcher(readBack));
-//
-//        // Save and read without specifying file path
-//        original.addPerson(IDA);
-//        jsonInternWatcherStorage.saveInternWatcher(original); // file path not specified
-//        readBack = jsonInternWatcherStorage.readInternWatcher().get(); // file path not specified
-//        assertEquals(original, new InternWatcher(readBack));
-//
-//    }
-
     @Test
     public void saveAddressBook_nullAddressBook_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> saveAddressBook(null, "SomeFile.json"));
@@ -94,7 +63,7 @@ public class JsonInternWatcherStorageTest {
 
     /**
      * Saves {@code addressBook} at the specified {@code filePath}.
-     */
+     * */
     private void saveAddressBook(ReadOnlyInternWatcher addressBook, String filePath) {
         try {
             new JsonInternWatcherStorage(Paths.get(filePath))

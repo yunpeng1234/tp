@@ -2,7 +2,6 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static seedu.address.testutil.TypicalApplicants.getTypicalInternWatcher;
 
 import java.nio.file.Path;
 
@@ -11,8 +10,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.InternWatcher;
-import seedu.address.model.ReadOnlyInternWatcher;
 import seedu.address.model.UserPrefs;
 
 public class StorageManagerTest {
@@ -46,19 +43,6 @@ public class StorageManagerTest {
         UserPrefs retrieved = storageManager.readUserPrefs().get();
         assertEquals(original, retrieved);
     }
-
-//    @Test
-//    public void addressBookReadSave() throws Exception {
-//        /*
-//         * Note: This is an integration test that verifies the StorageManager is properly wired to the
-//         * {@link JsonAddressBookStorage} class.
-//         * More extensive testing of UserPref saving/reading is done in {@link JsonAddressBookStorageTest} class.
-//         */
-//        InternWatcher original = getTypicalInternWatcher();
-//        storageManager.saveInternWatcher(original);
-//        ReadOnlyInternWatcher retrieved = storageManager.readInternWatcher().get();
-//        assertEquals(original, new InternWatcher(retrieved));
-//    }
 
     @Test
     public void getAddressBookFilePath() {
