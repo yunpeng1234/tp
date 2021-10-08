@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.Region;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Applicant;
 
 /**
  * Panel containing the details of a Person
@@ -41,21 +41,21 @@ public class PersonDetailPanel extends UiPart<Region> {
     /**
      * Creates a {@code PersonDetailPanel} with the given {@code ObservableList}.
      */
-    public PersonDetailPanel(ObservableList<Person> personObservableList) {
+    public PersonDetailPanel(ObservableList<Applicant> applicantObservableList) {
         super(FXML);
-        if (!personObservableList.isEmpty()) {
+        if (!applicantObservableList.isEmpty()) {
             // To be changed on mouse click
-            setAcademicTab(personObservableList.get(0).getAcademics());
+            setAcademicTab(applicantObservableList.get(0).getAcademics());
         } else {
-            setAcademicTab(Person.getDefaultAcademics());
+            setAcademicTab(Applicant.getDefaultAcademics());
         }
         // We are not using ListView so we must add our listeners manually
-        personObservableList.addListener((ListChangeListener<Person>) c -> {
-            if (!personObservableList.isEmpty()) {
+        applicantObservableList.addListener((ListChangeListener<Applicant>) c -> {
+            if (!applicantObservableList.isEmpty()) {
                 // To be changed on mouse click
-                setAcademicTab(personObservableList.get(0).getAcademics());
+                setAcademicTab(applicantObservableList.get(0).getAcademics());
             } else {
-                setAcademicTab(Person.getDefaultAcademics());
+                setAcademicTab(Applicant.getDefaultAcademics());
             }
         });
     }

@@ -10,11 +10,11 @@ import java.util.Set;
 import seedu.address.model.skills.Skill;
 
 /**
- * Represents a Person in the address book.
+ * Represents an applicant in Intern Watcher.
  * Guarantees: details are present and not null,
  * field values are validated, immutable.
  */
-public class Person {
+public class Applicant {
 
     private static final String[] DEFAULT_ACADEMICS = { "INSTITUTION", "COURSE", "YEAR", "GRADE" };
 
@@ -35,8 +35,9 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Grade grade,
-                  Institution institution, Course course, GraduationYearMonth graduationYearMonth, Set<Skill> skills) {
+    public Applicant(Name name, Phone phone, Email email, Grade grade,
+                     Institution institution, Course course, GraduationYearMonth graduationYearMonth,
+                     Set<Skill> skills) {
         this(name, phone, email, grade, institution, course, graduationYearMonth,
                 new ApplicationStatus(ApplicationStatus.DEFAULT_STATUS), skills);
     }
@@ -44,9 +45,9 @@ public class Person {
     /**
      * Overloaded constructor for creating candidates with default status
      */
-    public Person(Name name, Phone phone, Email email, Grade grade,
-                  Institution institution, Course course, GraduationYearMonth graduationYearMonth,
-                  ApplicationStatus status, Set<Skill> skills) {
+    public Applicant(Name name, Phone phone, Email email, Grade grade,
+                     Institution institution, Course course, GraduationYearMonth graduationYearMonth,
+                     ApplicationStatus status, Set<Skill> skills) {
         requireAllNonNull(name, phone, email, grade, status, institution, course, graduationYearMonth, skills);
 
         this.name = name;
@@ -113,13 +114,13 @@ public class Person {
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
-    public boolean isSamePerson(Person otherPerson) {
-        if (otherPerson == this) {
+    public boolean isSamePerson(Applicant otherApplicant) {
+        if (otherApplicant == this) {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getName().equals(getName());
+        return otherApplicant != null
+                && otherApplicant.getName().equals(getName());
     }
 
     /**
@@ -132,20 +133,20 @@ public class Person {
             return true;
         }
 
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Applicant)) {
             return false;
         }
 
-        Person otherPerson = (Person) other;
-        return otherPerson.getName().equals(getName())
-                && otherPerson.getPhone().equals(getPhone())
-                && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getGrade().equals(getGrade())
-                && otherPerson.getInstitution().equals(getInstitution())
-                && otherPerson.getGraduationYearMonth().equals(getGraduationYearMonth())
-                && otherPerson.getCourse().equals(getCourse())
-                && otherPerson.getApplicationStatus().equals(getApplicationStatus())
-                && otherPerson.getTags().equals(getTags());
+        Applicant otherApplicant = (Applicant) other;
+        return otherApplicant.getName().equals(getName())
+                && otherApplicant.getPhone().equals(getPhone())
+                && otherApplicant.getEmail().equals(getEmail())
+                && otherApplicant.getGrade().equals(getGrade())
+                && otherApplicant.getInstitution().equals(getInstitution())
+                && otherApplicant.getGraduationYearMonth().equals(getGraduationYearMonth())
+                && otherApplicant.getCourse().equals(getCourse())
+                && otherApplicant.getApplicationStatus().equals(getApplicationStatus())
+                && otherApplicant.getTags().equals(getTags());
     }
 
     @Override
