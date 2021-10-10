@@ -6,7 +6,7 @@
 .label {
     -fx-font-size: 11pt;
     -fx-font-family: "Open Sans Semibold";
-    -fx-text-fill: #555555;
+    -fx-text-fill: white;
     -fx-opacity: 0.9;
 }
 
@@ -51,11 +51,11 @@
 }
 
 .tab-pane .tab {
-    -fx-background-color: #282828;
+    -fx-background-color: derive(#383838, 30%);
 }
 
 .tab-pane .tab:selected {
-    -fx-background-color: #484848;
+    -fx-background-color: #424d5f;
     -fx-border-color: transparent;
 }
 
