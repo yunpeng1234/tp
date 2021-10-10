@@ -10,8 +10,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
-import seedu.address.model.skills.Skill;
 import seedu.address.model.person.Applicant;
+import seedu.address.model.skills.Skill;
 
 /**
  * Panel containing the details of a Person
