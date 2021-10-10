@@ -47,10 +47,10 @@ public class PersonCard extends UiPart<Region> {
         super(FXML);
         this.applicant = applicant;
         id.setText(displayedIndex + ". ");
-        name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        email.setText(person.getEmail().value);
-        status.setText(person.getApplicationStatus().value.toString());
+        name.setText(applicant.getName().fullName);
+        phone.setText(applicant.getPhone().value);
+        email.setText(applicant.getEmail().value);
+        status.setText(applicant.getApplicationStatus().value.toString());
     }
 
     @Override
