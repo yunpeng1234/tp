@@ -169,6 +169,10 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 
 _Details coming soon ..._
 
+### Undoing a command `[coming soon]`
+
+_Details coming soon..._
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
