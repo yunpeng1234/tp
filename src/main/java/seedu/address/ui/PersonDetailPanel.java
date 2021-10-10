@@ -10,10 +10,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
-import seedu.address.model.person.Person;
 import seedu.address.model.skills.Skill;
-
-
+import seedu.address.model.person.Applicant;
 
 /**
  * Panel containing the details of a Person
@@ -46,27 +44,25 @@ public class PersonDetailPanel extends UiPart<Region> {
     /**
      * Creates a {@code PersonDetailPanel} with the given {@code ObservableList}.
      */
-    public PersonDetailPanel(ObservableList<Person> personObservableList) {
+    public PersonDetailPanel(ObservableList<Applicant> applicantObservableList) {
         super(FXML);
-
-        if (!personObservableList.isEmpty()) {
+        if (!applicantObservableList.isEmpty()) {
             // To be changed on mouse click
-            setAcademicTab(personObservableList.get(0).getAcademics());
-            setSkillTab(personObservableList.get(0).getTags());
+            setAcademicTab(applicantObservableList.get(0).getAcademics());
+            setSkillTab(applicantObservableList.get(0).getTags());
         } else {
-            setAcademicTab(Person.getDefaultAcademics());
+            setAcademicTab(Applicant.getDefaultAcademics());
         }
         // We are not using ListView so we must add our listeners manually
-        personObservableList.addListener((ListChangeListener<Person>) c -> {
-            if (!personObservableList.isEmpty()) {
-                Person current = personObservableList.get(0);
+        applicantObservableList.addListener((ListChangeListener<Applicant>) c -> {
+            if (!applicantObservableList.isEmpty()) {
+                Applicant current = applicantObservableList.get(0);
                 // To be changed on mouse click
                 setAcademicTab(current.getAcademics());
                 setSkillTab(current.getTags());
 
             } else {
-                setAcademicTab(Person.getDefaultAcademics());
-
+                setAcademicTab(Applicant.getDefaultAcademics());
             }
         });
     }
