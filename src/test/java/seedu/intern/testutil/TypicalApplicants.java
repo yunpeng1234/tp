@@ -15,7 +15,6 @@ import static seedu.intern.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.intern.logic.commands.CommandTestUtil.VALID_SKILL_JAVA;
 import static seedu.intern.logic.commands.CommandTestUtil.VALID_SKILL_PYTHON;
 
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
