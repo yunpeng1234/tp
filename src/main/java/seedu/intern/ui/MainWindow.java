@@ -16,6 +16,7 @@ import seedu.intern.logic.Logic;
 import seedu.intern.logic.commands.CommandResult;
 import seedu.intern.logic.commands.exceptions.CommandException;
 import seedu.intern.logic.parser.exceptions.ParseException;
+import seedu.intern.model.applicant.Applicant;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -123,8 +124,11 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        personDetail = new PersonDetailPanel(logic.getFilteredPersonList());
+        personDetail = new PersonDetailPanel();
         personDetailPlaceholder.getChildren().add(personDetail.getRoot());
+        personListPanel.addSelectedListener((observable, oldValue, newValue) -> {
+            personDetail.showApplicant(newValue);
+        });
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());

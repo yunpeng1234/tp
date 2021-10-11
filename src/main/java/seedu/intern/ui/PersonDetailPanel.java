@@ -42,40 +42,28 @@ public class PersonDetailPanel extends UiPart<Region> {
     private FlowPane skills;
 
     /**
-     * Creates a {@code PersonDetailPanel} with the given {@code ObservableList}.
+     * Creates a {@code PersonDetailPanel}.
      */
-    public PersonDetailPanel(ObservableList<Applicant> applicantObservableList) {
+    public PersonDetailPanel() {
         super(FXML);
-        if (!applicantObservableList.isEmpty()) {
-            // To be changed on mouse click
-            setAcademicTab(applicantObservableList.get(0).getAcademics());
-            setSkillTab(applicantObservableList.get(0).getSkills());
+        setAcademicTab(Applicant.getDefaultAcademics());
+        setSkillTab(null);
+    }
+
+    /**
+     * Sets the detail panel to display the {@code Applicant} specified.
+     *
+     * @param applicant Applicant to be displayed
+     */
+    public void showApplicant(Applicant applicant) {
+        if (applicant != null) {
+            setSkillTab(applicant.getSkills());
+            setAcademicTab(applicant.getAcademics());
         } else {
             setAcademicTab(Applicant.getDefaultAcademics());
+            setSkillTab(null);
         }
-        // We are not using ListView so we must add our listeners manually
-        applicantObservableList.addListener((ListChangeListener<Applicant>) c -> {
-            if (!applicantObservableList.isEmpty()) {
-                Applicant current = applicantObservableList.get(0);
-                // To be changed on mouse click
-                setAcademicTab(current.getAcademics());
-                setSkillTab(current.getSkills());
-
-            } else {
-                setAcademicTab(Applicant.getDefaultAcademics());
-                setSkillTab(null);
-            }
-        });
     }
-
-    // TODO: remove this code if unnecessary.
-    /*
-    void setSkillTab(Set text) {
-        AnchorPane temp = (AnchorPane) skill.getContent();
-        Label temp1 = (Label) temp.getChildren().get(0);
-        temp1.setText(text);
-    }
-    */
 
     /**
      * Sets the Academic Tab as per the String array provided.
@@ -96,11 +84,21 @@ public class PersonDetailPanel extends UiPart<Region> {
         grade.setText(text[3]);
     }
 
-    private void setSkillTab(Set<Skill> skillList) {
-        System.out.println(skillList);
+    /**
+     * Sets the Skills Tab as per the set provided.
+     * The set can contain any number of skills.
+     *
+     * @param skillSet Set of skills to be displayed
+     */
+    private void setSkillTab(Set<Skill> skillSet) {
         skills.getChildren().clear();
-        skillList.stream()
-                .sorted(Comparator.comparing(tag -> tag.skillName))
-                .forEach(tag -> skills.getChildren().add(new Label(tag.skillName)));
+        if (skillSet == null) {
+            return;
+        }
+
+        skillSet.stream()
+                .sorted(Comparator.comparing(skill -> skill.skillName))
+                .forEach(skill -> skills.getChildren().add(new Label(skill.skillName)));
+
     }
 }

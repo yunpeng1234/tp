@@ -2,6 +2,7 @@ package seedu.intern.ui;
 
 import java.util.logging.Logger;
 
+import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
@@ -30,7 +31,7 @@ public class PersonListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Applicant} using a {@code PersonCard}.
      */
     class PersonListViewCell extends ListCell<Applicant> {
         @Override
@@ -45,4 +46,12 @@ public class PersonListPanel extends UiPart<Region> {
         }
     }
 
+    /**
+     * Adds a listener that will be called when a different {@code PersonCard} is selected.
+     *
+     * @param listener
+     */
+    public void addSelectedListener(ChangeListener<Applicant> listener) {
+        personListView.getSelectionModel().selectedItemProperty().addListener(listener);
+    }
 }
