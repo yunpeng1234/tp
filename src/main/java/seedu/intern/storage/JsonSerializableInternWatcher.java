@@ -27,21 +27,21 @@ class JsonSerializableInternWatcher {
      * Constructs a {@code JsonSerializableAddressBook} with the given persons.
      */
     @JsonCreator
-    public JsonSerializableInternWatcher(@JsonProperty("persons") List<JsonAdaptedApplicant> applicant) {
+    public JsonSerializableInternWatcher(@JsonProperty("applicants") List<JsonAdaptedApplicant> applicant) {
         this.applicant.addAll(applicant);
     }
 
     /**
-     * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
+     * Converts a given {@code ReadOnlyInternWatcher} into this class for Jackson use.
      *
-     * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
+     * @param source future changes to this will not affect the created {@code JsonSerializableInternWatcher}.
      */
     public JsonSerializableInternWatcher(ReadOnlyInternWatcher source) {
         applicant.addAll(source.getPersonList().stream().map(JsonAdaptedApplicant::new).collect(Collectors.toList()));
     }
 
     /**
-     * Converts this intern book into the model's {@code AddressBook} object.
+     * Converts this intern watcher into the model's {@code InternWatcher} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
