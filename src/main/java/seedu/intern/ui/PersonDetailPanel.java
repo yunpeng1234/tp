@@ -63,6 +63,7 @@ public class PersonDetailPanel extends UiPart<Region> {
 
             } else {
                 setAcademicTab(Applicant.getDefaultAcademics());
+                setSkillTab(null);
             }
         });
     }
@@ -97,6 +98,7 @@ public class PersonDetailPanel extends UiPart<Region> {
 
     private void setSkillTab(Set<Skill> skillList) {
         System.out.println(skillList);
+        skills.getChildren().clear();
         skillList.stream()
                 .sorted(Comparator.comparing(tag -> tag.skillName))
                 .forEach(tag -> skills.getChildren().add(new Label(tag.skillName)));
