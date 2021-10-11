@@ -17,7 +17,7 @@ import seedu.intern.model.applicant.Phone;
 import seedu.intern.model.skills.Skill;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code InternWatcher} with sample data.
  */
 public class SampleDataUtil {
 
@@ -46,7 +46,7 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyInternWatcher getSampleAddressBook() {
+    public static ReadOnlyInternWatcher getSampleInternWatcher() {
         InternWatcher sampleAb = new InternWatcher();
         for (Applicant sampleApplicant : getSamplePersons()) {
             sampleAb.addPerson(sampleApplicant);

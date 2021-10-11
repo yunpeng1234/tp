@@ -75,7 +75,7 @@ public class TypicalApplicants {
     private TypicalApplicants() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code InternWatcher} with all the typical persons.
      */
     public static InternWatcher getTypicalInternWatcher() {
         InternWatcher ab = new InternWatcher();

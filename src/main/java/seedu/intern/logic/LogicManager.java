@@ -10,7 +10,7 @@ import seedu.intern.commons.core.LogsCenter;
 import seedu.intern.logic.commands.Command;
 import seedu.intern.logic.commands.CommandResult;
 import seedu.intern.logic.commands.exceptions.CommandException;
-import seedu.intern.logic.parser.AddressBookParser;
+import seedu.intern.logic.parser.InternWatcherParser;
 import seedu.intern.logic.parser.exceptions.ParseException;
 import seedu.intern.model.Model;
 import seedu.intern.model.ReadOnlyInternWatcher;
@@ -26,7 +26,7 @@ public class LogicManager implements Logic {
 
     private final Model model;
     private final Storage storage;
-    private final AddressBookParser addressBookParser;
+    private final InternWatcherParser internWatcherParser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -34,7 +34,7 @@ public class LogicManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        addressBookParser = new AddressBookParser();
+        internWatcherParser = new InternWatcherParser();
     }
 
     @Override
@@ -42,7 +42,7 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText);
+        Command command = internWatcherParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
         try {
@@ -55,7 +55,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyInternWatcher getAddressBook() {
+    public ReadOnlyInternWatcher getInternWatcher() {
         return model.getInternWatcher();
     }
 
@@ -65,7 +65,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
+    public Path getInternWatcherFilePath() {
         return model.getInternWatcherFilePath();
     }
 

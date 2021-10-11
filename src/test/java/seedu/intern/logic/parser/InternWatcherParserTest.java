@@ -31,7 +31,7 @@ import seedu.intern.testutil.EditApplicantDescriptorBuilder;
 
 public class InternWatcherParserTest {
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final InternWatcherParser parser = new InternWatcherParser();
 
     @Test
     public void parseCommand_add() throws Exception {

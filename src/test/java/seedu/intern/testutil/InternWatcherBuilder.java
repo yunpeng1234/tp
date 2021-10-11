@@ -4,9 +4,9 @@ import seedu.intern.model.InternWatcher;
 import seedu.intern.model.applicant.Applicant;
 
 /**
- * A utility class to help with building Addressbook objects.
+ * A utility class to help with building InternWatcher objects.
  * Example usage: <br>
- *     {@code AddressBook ab = new AddressBookBuilder().withPerson("John", "Doe").build();}
+ *     {@code InternWatcher ab = new InternWatcherBuilder().withPerson("John", "Doe").build();}
  */
 public class InternWatcherBuilder {
 
@@ -21,7 +21,7 @@ public class InternWatcherBuilder {
     }
 
     /**
-     * Adds a new {@code Person} to the {@code AddressBook} that we are building.
+     * Adds a new {@code Person} to the {@code InternWatcher} that we are building.
      */
     public InternWatcherBuilder withApplicant(Applicant applicant) {
         internWatcher.addPerson(applicant);
