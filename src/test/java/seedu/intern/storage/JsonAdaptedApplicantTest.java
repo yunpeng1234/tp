@@ -40,7 +40,7 @@ public class JsonAdaptedApplicantTest {
     private static final String VALID_GRADUATION_YEAR_MONTH = BENSON.getGraduationYearMonth().toString();
     private static final String VALID_COURSE = BENSON.getCourse().toString();
     private static final String VALID_STATUS = BENSON.getApplicationStatus().toString();
-    private static final List<JsonAdaptedSkill> VALID_TAGS = BENSON.getTags().stream()
+    private static final List<JsonAdaptedSkill> VALID_TAGS = BENSON.getSkills().stream()
             .map(JsonAdaptedSkill::new)
             .collect(Collectors.toList());
 

@@ -21,14 +21,14 @@ class JsonSerializableInternWatcher {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate applicant(s).";
 
-    private final List<JsonAdaptedApplicant> applicant = new ArrayList<>();
+    private final List<JsonAdaptedApplicant> applicants = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons.
+     * Constructs a {@code JsonSerializableInternWatcher} with the given persons.
      */
     @JsonCreator
-    public JsonSerializableInternWatcher(@JsonProperty("applicants") List<JsonAdaptedApplicant> applicant) {
-        this.applicant.addAll(applicant);
+    public JsonSerializableInternWatcher(@JsonProperty("applicants") List<JsonAdaptedApplicant> applicants) {
+        this.applicants.addAll(applicants);
     }
 
     /**
@@ -37,7 +37,7 @@ class JsonSerializableInternWatcher {
      * @param source future changes to this will not affect the created {@code JsonSerializableInternWatcher}.
      */
     public JsonSerializableInternWatcher(ReadOnlyInternWatcher source) {
-        applicant.addAll(source.getPersonList().stream().map(JsonAdaptedApplicant::new).collect(Collectors.toList()));
+        applicants.addAll(source.getPersonList().stream().map(JsonAdaptedApplicant::new).collect(Collectors.toList()));
     }
 
     /**
@@ -47,7 +47,7 @@ class JsonSerializableInternWatcher {
      */
     public InternWatcher toModelType() throws IllegalValueException {
         InternWatcher internWatcher = new InternWatcher();
-        for (JsonAdaptedApplicant jsonAdaptedApplicant : applicant) {
+        for (JsonAdaptedApplicant jsonAdaptedApplicant : applicants) {
             Applicant applicant = jsonAdaptedApplicant.toModelType();
             if (internWatcher.hasPerson(applicant)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);

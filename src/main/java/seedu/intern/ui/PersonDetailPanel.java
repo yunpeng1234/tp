@@ -49,7 +49,7 @@ public class PersonDetailPanel extends UiPart<Region> {
         if (!applicantObservableList.isEmpty()) {
             // To be changed on mouse click
             setAcademicTab(applicantObservableList.get(0).getAcademics());
-            setSkillTab(applicantObservableList.get(0).getTags());
+            setSkillTab(applicantObservableList.get(0).getSkills());
         } else {
             setAcademicTab(Applicant.getDefaultAcademics());
         }
@@ -59,7 +59,7 @@ public class PersonDetailPanel extends UiPart<Region> {
                 Applicant current = applicantObservableList.get(0);
                 // To be changed on mouse click
                 setAcademicTab(current.getAcademics());
-                setSkillTab(current.getTags());
+                setSkillTab(current.getSkills());
 
             } else {
                 setAcademicTab(Applicant.getDefaultAcademics());

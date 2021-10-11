@@ -117,7 +117,7 @@ public class EditCommand extends Command {
         Course updatedCourse = editApplicantDescriptor.getCourse().orElse(applicantToEdit.getCourse());
         ApplicationStatus updatedStatus = editApplicantDescriptor.getApplicationStatus()
                 .orElse(applicantToEdit.getApplicationStatus());
-        Set<Skill> updatedSkills = editApplicantDescriptor.getTags().orElse(applicantToEdit.getTags());
+        Set<Skill> updatedSkills = editApplicantDescriptor.getTags().orElse(applicantToEdit.getSkills());
 
 
         return new Applicant(updatedName, updatedPhone, updatedEmail,

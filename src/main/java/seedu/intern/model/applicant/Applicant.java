@@ -106,7 +106,7 @@ public class Applicant {
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Skill> getTags() {
+    public Set<Skill> getSkills() {
         return Collections.unmodifiableSet(skills);
     }
 
@@ -146,7 +146,7 @@ public class Applicant {
                 && otherApplicant.getGraduationYearMonth().equals(getGraduationYearMonth())
                 && otherApplicant.getCourse().equals(getCourse())
                 && otherApplicant.getApplicationStatus().equals(getApplicationStatus())
-                && otherApplicant.getTags().equals(getTags());
+                && otherApplicant.getSkills().equals(getSkills());
     }
 
     @Override
@@ -175,7 +175,7 @@ public class Applicant {
                 .append("; Graduation Year Month: ")
                 .append((getGraduationYearMonth()));
 
-        Set<Skill> skills = getTags();
+        Set<Skill> skills = getSkills();
         if (!skills.isEmpty()) {
             builder.append("; Tags: ");
             skills.forEach(builder::append);

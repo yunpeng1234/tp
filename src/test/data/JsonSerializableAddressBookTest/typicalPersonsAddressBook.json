@@ -8,7 +8,7 @@
     "institution": "NUS",
     "course": "Computer Science",
     "graduationYearMonth" : "12/2020",
-    "skilled" : [ "friends" ]
+    "skills" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
@@ -17,7 +17,7 @@
     "institution": "NTU",
     "course": "Computer Engineering",
     "graduationYearMonth" : "06/2025",
-    "skilled" : [ "owesMoney", "friends" ]
+    "skills" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
@@ -26,7 +26,7 @@
     "institution": "NTU",
     "course": "Business and Accounting",
     "graduationYearMonth" : "12/2023",
-    "skilled" : [ ]
+    "skills" : [ ]
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
@@ -35,7 +35,7 @@
     "institution": "SMU",
     "course": "Accountancy",
     "graduationYearMonth" : "01/2027",
-    "skilled" : [ "friends" ]
+    "skills" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
@@ -44,7 +44,7 @@
     "institution": "SUTD",
     "course": "Philosophy",
     "graduationYearMonth" : "12/2024",
-    "skilled" : [ ]
+    "skills" : [ ]
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
@@ -53,7 +53,7 @@
     "institution": "PATHLIGHT",
     "course": "Life Science",
     "graduationYearMonth" : "12/2021",
-    "skilled" : [ ]
+    "skills" : [ ]
   }, {
     "name" : "George Best",
     "phone" : "9482442",
@@ -62,6 +62,6 @@
     "institution": "SUSS",
     "course": "Social Work",
     "graduationYearMonth" : "03/2023",
-    "skilled" : [ ]
+    "skills" : [ ]
   } ]
 }

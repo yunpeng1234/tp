@@ -36,7 +36,7 @@ class JsonAdaptedApplicant {
     private final String graduationYearMonth;
     private final String course;
     private final String status;
-    private final List<JsonAdaptedSkill> skilled = new ArrayList<>();
+    private final List<JsonAdaptedSkill> skills = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given applicant details.
@@ -47,7 +47,7 @@ class JsonAdaptedApplicant {
                                 @JsonProperty("institution") String institution, @JsonProperty("course") String course,
                                 @JsonProperty("graduationYearMonth") String graduationYearMonth,
                                 @JsonProperty("status") String status,
-                                @JsonProperty("tagged") List<JsonAdaptedSkill> skilled) {
+                                @JsonProperty("skills") List<JsonAdaptedSkill> skills) {
 
         this.name = name;
         this.phone = phone;
@@ -57,8 +57,8 @@ class JsonAdaptedApplicant {
         this.course = course;
         this.graduationYearMonth = graduationYearMonth;
         this.status = status;
-        if (skilled != null) {
-            this.skilled.addAll(skilled);
+        if (skills != null) {
+            this.skills.addAll(skills);
         }
     }
 
@@ -74,7 +74,7 @@ class JsonAdaptedApplicant {
         course = source.getCourse().value;
         graduationYearMonth = source.getGraduationYearMonth().value;
         status = source.getApplicationStatus().value.toString();
-        skilled.addAll(source.getTags().stream()
+        skills.addAll(source.getSkills().stream()
                 .map(JsonAdaptedSkill::new)
                 .collect(Collectors.toList()));
     }
@@ -86,7 +86,7 @@ class JsonAdaptedApplicant {
      */
     public Applicant toModelType() throws IllegalValueException {
         final List<Skill> personSkills = new ArrayList<>();
-        for (JsonAdaptedSkill tag : skilled) {
+        for (JsonAdaptedSkill tag : skills) {
             personSkills.add(tag.toModelType());
         }
 
