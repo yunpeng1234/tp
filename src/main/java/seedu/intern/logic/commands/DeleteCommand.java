@@ -40,7 +40,7 @@ public class DeleteCommand extends Command {
         }
 
         Applicant applicantToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deletePerson(applicantToDelete);
+        model.deleteApplicant(applicantToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, applicantToDelete));
     }
 

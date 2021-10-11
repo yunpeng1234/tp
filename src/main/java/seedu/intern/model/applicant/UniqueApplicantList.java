@@ -8,15 +8,16 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.intern.model.applicant.exceptions.DuplicatePersonException;
-import seedu.intern.model.applicant.exceptions.PersonNotFoundException;
+import seedu.intern.model.applicant.exceptions.ApplicantNotFoundException;
+import seedu.intern.model.applicant.exceptions.DuplicateApplicantException;
 
 /**
- * A list of persons that enforces uniqueness between its elements and does not allow nulls.
- * A applicant is considered unique by comparing using {@code Person#isSameApplicant(Person)}. As such, adding and updating of
- * persons uses Person#isSameApplicant(Person) for equality so as to ensure that the applicant being added or updated is
- * unique in terms of identity in the UniquePersonList. However, the removal of a applicant uses Person#equals(Object) so
- * as to ensure that the applicant with exactly the same fields will be removed.
+ * A list of applicants that enforces uniqueness between its elements and does not allow nulls.
+ * A applicant is considered unique by comparing using {@code Applicant#isSameApplicant(Applicant)}. As such, adding and
+ * updating of applicants uses Applicant#isSameApplicant(Applicant) for equality so as to ensure that the applicant
+ * being added or updated is unique in terms of identity in the UniqueApplicantList. However, the removal of a
+ * applicant uses Applicant#equals(Object) so as to ensure that the applicant with exactly the same fields will be
+ * removed.
  *
  * Supports a minimal set of list operations.
  *
@@ -43,7 +44,7 @@ public class UniqueApplicantList implements Iterable<Applicant> {
     public void add(Applicant toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateApplicantException();
         }
         internalList.add(toAdd);
     }
@@ -53,16 +54,16 @@ public class UniqueApplicantList implements Iterable<Applicant> {
      * {@code target} must exist in the list.
      * The applicant identity of {@code editedApplicant} must not be the same as another existing applicant in the list.
      */
-    public void setPerson(Applicant target, Applicant editedApplicant) {
+    public void setApplicant(Applicant target, Applicant editedApplicant) {
         requireAllNonNull(target, editedApplicant);
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new PersonNotFoundException();
+            throw new ApplicantNotFoundException();
         }
 
         if (!target.isSameApplicant(editedApplicant) && contains(editedApplicant)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateApplicantException();
         }
 
         internalList.set(index, editedApplicant);
@@ -75,11 +76,11 @@ public class UniqueApplicantList implements Iterable<Applicant> {
     public void remove(Applicant toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
-            throw new PersonNotFoundException();
+            throw new ApplicantNotFoundException();
         }
     }
 
-    public void setPersons(UniqueApplicantList replacement) {
+    public void setApplicants(UniqueApplicantList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
@@ -88,10 +89,10 @@ public class UniqueApplicantList implements Iterable<Applicant> {
      * Replaces the contents of this list with {@code applicants}.
      * {@code applicants} must not contain duplicate applicants.
      */
-    public void setPersons(List<Applicant> applicants) {
+    public void setApplicants(List<Applicant> applicants) {
         requireAllNonNull(applicants);
-        if (!personsAreUnique(applicants)) {
-            throw new DuplicatePersonException();
+        if (!applicantsAreUnique(applicants)) {
+            throw new DuplicateApplicantException();
         }
 
         internalList.setAll(applicants);
@@ -124,7 +125,7 @@ public class UniqueApplicantList implements Iterable<Applicant> {
     /**
      * Returns true if {@code applicants} contains only unique applicants.
      */
-    private boolean personsAreUnique(List<Applicant> applicants) {
+    private boolean applicantsAreUnique(List<Applicant> applicants) {
         for (int i = 0; i < applicants.size() - 1; i++) {
             for (int j = i + 1; j < applicants.size(); j++) {
                 if (applicants.get(i).isSameApplicant(applicants.get(j))) {

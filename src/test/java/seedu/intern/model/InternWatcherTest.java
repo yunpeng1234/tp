@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.intern.model.applicant.Applicant;
-import seedu.intern.model.applicant.exceptions.DuplicatePersonException;
+import seedu.intern.model.applicant.exceptions.DuplicateApplicantException;
 import seedu.intern.testutil.ApplicantBuilder;
 
 public class InternWatcherTest {
@@ -50,7 +50,7 @@ public class InternWatcherTest {
         List<Applicant> newApplicants = Arrays.asList(ALICE, editedAlice);
         InternWatcherStub newData = new InternWatcherStub(newApplicants);
 
-        assertThrows(DuplicatePersonException.class, () -> internWatcher.resetData(newData));
+        assertThrows(DuplicateApplicantException.class, () -> internWatcher.resetData(newData));
     }
 
     @Test

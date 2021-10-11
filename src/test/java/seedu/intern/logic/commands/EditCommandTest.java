@@ -42,8 +42,8 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedApplicant);
 
-        Model expectedModel = new ModelManager(new InternWatcher(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedApplicant);
+        Model expectedModel = new ModelManager(new InternWatcher(model.getInternWatcher()), new UserPrefs());
+        expectedModel.setApplicant(model.getFilteredPersonList().get(0), editedApplicant);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -63,8 +63,8 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedApplicant);
 
-        Model expectedModel = new ModelManager(new InternWatcher(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(lastApplicant, editedApplicant);
+        Model expectedModel = new ModelManager(new InternWatcher(model.getInternWatcher()), new UserPrefs());
+        expectedModel.setApplicant(lastApplicant, editedApplicant);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -76,7 +76,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedApplicant);
 
-        Model expectedModel = new ModelManager(new InternWatcher(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new InternWatcher(model.getInternWatcher()), new UserPrefs());
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -92,8 +92,8 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedApplicant);
 
-        Model expectedModel = new ModelManager(new InternWatcher(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedApplicant);
+        Model expectedModel = new ModelManager(new InternWatcher(model.getInternWatcher()), new UserPrefs());
+        expectedModel.setApplicant(model.getFilteredPersonList().get(0), editedApplicant);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -112,7 +112,7 @@ public class EditCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         // edit applicant in filtered list into a duplicate in intern book
-        Applicant applicantInList = model.getAddressBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        Applicant applicantInList = model.getInternWatcher().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
                 new EditApplicantDescriptorBuilder(applicantInList).build());
 
@@ -137,7 +137,7 @@ public class EditCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of intern book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getInternWatcher().getPersonList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
                 new EditApplicantDescriptorBuilder().withName(VALID_NAME_BOB).build());

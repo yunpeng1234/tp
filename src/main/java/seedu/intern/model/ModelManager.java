@@ -66,12 +66,12 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
+    public Path getInternWatcherFilePath() {
         return userPrefs.getAddressBookFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
+    public void setInternWatcherFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
@@ -79,34 +79,34 @@ public class ModelManager implements Model {
     //=========== AddressBook ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyInternWatcher addressBook) {
+    public void setInternWatcher(ReadOnlyInternWatcher addressBook) {
         this.internWatcher.resetData(addressBook);
     }
 
     @Override
-    public ReadOnlyInternWatcher getAddressBook() {
+    public ReadOnlyInternWatcher getInternWatcher() {
         return internWatcher;
     }
 
     @Override
-    public boolean hasPerson(Applicant applicant) {
+    public boolean hasApplicant(Applicant applicant) {
         requireNonNull(applicant);
         return internWatcher.hasPerson(applicant);
     }
 
     @Override
-    public void deletePerson(Applicant target) {
+    public void deleteApplicant(Applicant target) {
         internWatcher.removePerson(target);
     }
 
     @Override
-    public void addPerson(Applicant applicant) {
+    public void addApplicant(Applicant applicant) {
         internWatcher.addPerson(applicant);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        updateFilteredApplicantList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
-    public void setPerson(Applicant target, Applicant editedApplicant) {
+    public void setApplicant(Applicant target, Applicant editedApplicant) {
         requireAllNonNull(target, editedApplicant);
 
         internWatcher.setPerson(target, editedApplicant);
@@ -124,7 +124,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Applicant> predicate) {
+    public void updateFilteredApplicantList(Predicate<Applicant> predicate) {
         requireNonNull(predicate);
         filteredApplicants.setPredicate(predicate);
     }

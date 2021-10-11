@@ -35,46 +35,48 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' intern book file path.
+     * Returns the user prefs' intern watcher file path.
      */
-    Path getAddressBookFilePath();
+    Path getInternWatcherFilePath();
 
     /**
-     * Sets the user prefs' intern book file path.
+     * Sets the user prefs' intern watcher file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setInternWatcherFilePath(Path internWatcherFilePath);
 
     /**
-     * Replaces intern book data with the data in {@code addressBook}.
+     * Replaces intern watcher data with the data in {@code InternWatcher}.
      */
-    void setAddressBook(ReadOnlyInternWatcher addressBook);
+    void setInternWatcher(ReadOnlyInternWatcher internWatcher);
 
-    /** Returns the AddressBook */
-    ReadOnlyInternWatcher getAddressBook();
+    /** Returns the InternWatcher */
+    ReadOnlyInternWatcher getInternWatcher();
 
     /**
-     * Returns true if a applicant with the same identity as {@code applicant} exists in the intern book.
+     * Returns true if a applicant with the same identity as {@code applicant} exists in the
+     * intern watcher.
      */
-    boolean hasPerson(Applicant applicant);
+    boolean hasApplicant(Applicant applicant);
 
     /**
      * Deletes the given applicant.
-     * The applicant must exist in the intern book.
+     * The applicant must exist in the intern watcher.
      */
-    void deletePerson(Applicant target);
+    void deleteApplicant(Applicant target);
 
     /**
      * Adds the given applicant.
-     * {@code applicant} must not already exist in the intern book.
+     * {@code applicant} must not already exist in the intern watcher.
      */
-    void addPerson(Applicant applicant);
+    void addApplicant(Applicant applicant);
 
     /**
      * Replaces the given applicant {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the intern book.
-     * The applicant identity of {@code editedPerson} must not be the same as another existing applicant in the intern book.
+     * {@code target} must exist in the intern watcher.
+     * The applicant identity of {@code editedPerson} must not be the same as another existing applicant in the
+     * intern watcher.
      */
-    void setPerson(Applicant target, Applicant editedApplicant);
+    void setApplicant(Applicant target, Applicant editedApplicant);
 
     /** Returns an unmodifiable view of the filtered applicant list */
     ObservableList<Applicant> getFilteredPersonList();
@@ -83,5 +85,5 @@ public interface Model {
      * Updates the filter of the filtered applicant list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Applicant> predicate);
+    void updateFilteredApplicantList(Predicate<Applicant> predicate);
 }

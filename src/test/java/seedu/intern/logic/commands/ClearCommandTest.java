@@ -24,7 +24,7 @@ public class ClearCommandTest {
     public void execute_nonEmptyAddressBook_success() {
         Model model = new ModelManager(getTypicalInternWatcher(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalInternWatcher(), new UserPrefs());
-        expectedModel.setAddressBook(new InternWatcher());
+        expectedModel.setInternWatcher(new InternWatcher());
 
         assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
     }

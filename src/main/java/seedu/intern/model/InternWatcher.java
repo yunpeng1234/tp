@@ -9,7 +9,7 @@ import seedu.intern.model.applicant.Applicant;
 import seedu.intern.model.applicant.UniqueApplicantList;
 
 /**
- * Wraps all data at the intern-book level
+ * Wraps all data at the intern-watcher level
  * Duplicates are not allowed (by .isSameApplicant comparison)
  */
 public class InternWatcher implements ReadOnlyInternWatcher {
@@ -30,7 +30,7 @@ public class InternWatcher implements ReadOnlyInternWatcher {
     public InternWatcher() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an InternWatcher using the Persons in the {@code toBeCopied}
      */
     public InternWatcher(ReadOnlyInternWatcher toBeCopied) {
         this();
@@ -44,11 +44,11 @@ public class InternWatcher implements ReadOnlyInternWatcher {
      * {@code persons} must not contain duplicate persons.
      */
     public void setPersons(List<Applicant> applicants) {
-        this.persons.setPersons(applicants);
+        this.persons.setApplicants(applicants);
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code InternWatcher} with {@code newData}.
      */
     public void resetData(ReadOnlyInternWatcher newData) {
         requireNonNull(newData);
@@ -59,7 +59,7 @@ public class InternWatcher implements ReadOnlyInternWatcher {
     //// applicant-level operations
 
     /**
-     * Returns true if a applicant with the same identity as {@code applicant} exists in the intern book.
+     * Returns true if a applicant with the same identity as {@code applicant} exists in the intern watcher.
      */
     public boolean hasPerson(Applicant applicant) {
         requireNonNull(applicant);
@@ -67,8 +67,8 @@ public class InternWatcher implements ReadOnlyInternWatcher {
     }
 
     /**
-     * Adds a applicant to the intern book.
-     * The applicant must not already exist in the intern book.
+     * Adds a applicant to the intern watcher.
+     * The applicant must not already exist in the intern watcher.
      */
     public void addPerson(Applicant p) {
         persons.add(p);
@@ -76,18 +76,19 @@ public class InternWatcher implements ReadOnlyInternWatcher {
 
     /**
      * Replaces the given applicant {@code target} in the list with {@code editedPerson}.
-     * {@code target} must exist in the intern book.
-     * The applicant identity of {@code editedPerson} must not be the same as another existing applicant in the intern book.
+     * {@code target} must exist in the intern watcher.
+     * The applicant identity of {@code editedPerson} must not be the same as another existing applicant in the
+     * intern watcher.
      */
     public void setPerson(Applicant target, Applicant editedApplicant) {
         requireNonNull(editedApplicant);
 
-        persons.setPerson(target, editedApplicant);
+        persons.setApplicant(target, editedApplicant);
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the intern book.
+     * Removes {@code key} from this {@code InternWatcher}.
+     * {@code key} must exist in the intern watcher.
      */
     public void removePerson(Applicant key) {
         persons.remove(key);
