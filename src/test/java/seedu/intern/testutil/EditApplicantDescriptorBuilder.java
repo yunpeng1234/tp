@@ -42,7 +42,7 @@ public class EditApplicantDescriptorBuilder {
         descriptor.setInstitution(applicant.getInstitution());
         descriptor.setGraduationYearMonth(applicant.getGraduationYearMonth());
         descriptor.setCourse(applicant.getCourse());
-        descriptor.setTags(applicant.getTags());
+        descriptor.setTags(applicant.getSkills());
     }
 
     /**

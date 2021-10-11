@@ -22,7 +22,7 @@ public class ApplicantTest {
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Applicant applicant = new ApplicantBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> applicant.getTags().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> applicant.getSkills().remove(0));
     }
 
     @Test

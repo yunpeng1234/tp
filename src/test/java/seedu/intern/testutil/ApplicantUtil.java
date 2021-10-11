@@ -40,7 +40,7 @@ public class ApplicantUtil {
         sb.append(PREFIX_INSTITUTION + applicant.getInstitution().value + " ");
         sb.append(PREFIX_COURSE + applicant.getCourse().value + " ");
         sb.append(PREFIX_GRADUATIONYEARMONTH + applicant.getGraduationYearMonth().value + " ");
-        applicant.getTags().stream().forEach(
+        applicant.getSkills().stream().forEach(
             s -> sb.append(PREFIX_SKILL + s.skillName + " ")
         );
         return sb.toString();

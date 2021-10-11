@@ -62,7 +62,7 @@ public class ApplicantBuilder {
         institution = applicantToCopy.getInstitution();
         graduationYearMonth = applicantToCopy.getGraduationYearMonth();
         course = applicantToCopy.getCourse();
-        skills = new HashSet<>(applicantToCopy.getTags());
+        skills = new HashSet<>(applicantToCopy.getSkills());
     }
 
     /**
