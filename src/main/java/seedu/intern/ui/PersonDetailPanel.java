@@ -3,8 +3,6 @@ package seedu.intern.ui;
 import java.util.Comparator;
 import java.util.Set;
 
-import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;

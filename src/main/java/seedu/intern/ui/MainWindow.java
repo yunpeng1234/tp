@@ -16,7 +16,6 @@ import seedu.intern.logic.Logic;
 import seedu.intern.logic.commands.CommandResult;
 import seedu.intern.logic.commands.exceptions.CommandException;
 import seedu.intern.logic.parser.exceptions.ParseException;
-import seedu.intern.model.applicant.Applicant;
 
 /**
  * The Main Window. Provides the basic application layout containing
