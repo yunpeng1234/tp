@@ -3,7 +3,7 @@ package seedu.intern.model.applicant;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.intern.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.intern.logic.commands.CommandTestUtil.VALID_SKILL_JAVA;
 import static seedu.intern.testutil.Assert.assertThrows;
 import static seedu.intern.testutil.TypicalApplicants.ALICE;
 import static seedu.intern.testutil.TypicalApplicants.BOB;
@@ -41,7 +41,7 @@ public class UniqueApplicantListTest {
     @Test
     public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
         uniqueApplicantList.add(ALICE);
-        Applicant editedAlice = new ApplicantBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
+        Applicant editedAlice = new ApplicantBuilder(ALICE).withSkills(VALID_SKILL_JAVA)
                 .build();
         assertTrue(uniqueApplicantList.contains(editedAlice));
     }
@@ -84,7 +84,7 @@ public class UniqueApplicantListTest {
     @Test
     public void setPerson_editedPersonHasSameIdentity_success() {
         uniqueApplicantList.add(ALICE);
-        Applicant editedAlice = new ApplicantBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
+        Applicant editedAlice = new ApplicantBuilder(ALICE).withSkills(VALID_SKILL_JAVA)
                 .build();
         uniqueApplicantList.setApplicant(ALICE, editedAlice);
         UniqueApplicantList expectedUniqueApplicantList = new UniqueApplicantList();

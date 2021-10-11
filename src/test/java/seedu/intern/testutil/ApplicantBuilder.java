@@ -76,8 +76,8 @@ public class ApplicantBuilder {
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
      */
-    public ApplicantBuilder withTags(String ... tags) {
-        this.skills = SampleDataUtil.getTagSet(tags);
+    public ApplicantBuilder withSkills(String ... skills) {
+        this.skills = SampleDataUtil.getSkillSet(skills);
         return this;
     }
 

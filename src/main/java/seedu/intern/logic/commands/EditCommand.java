@@ -53,7 +53,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_COURSE + "COURSE] "
             + "[" + PREFIX_GRADUATIONYEARMONTH + "GRADUATION_YEAR_MONTH] "
             + "[" + PREFIX_STATUS + "STATUS] "
-            + "[" + PREFIX_SKILL + "TAG]...\n"
+            + "[" + PREFIX_SKILL + "SKILL]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -117,7 +117,7 @@ public class EditCommand extends Command {
         Course updatedCourse = editApplicantDescriptor.getCourse().orElse(applicantToEdit.getCourse());
         ApplicationStatus updatedStatus = editApplicantDescriptor.getApplicationStatus()
                 .orElse(applicantToEdit.getApplicationStatus());
-        Set<Skill> updatedSkills = editApplicantDescriptor.getTags().orElse(applicantToEdit.getSkills());
+        Set<Skill> updatedSkills = editApplicantDescriptor.getSkills().orElse(applicantToEdit.getSkills());
 
 
         return new Applicant(updatedName, updatedPhone, updatedEmail,
@@ -166,7 +166,7 @@ public class EditCommand extends Command {
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * A defensive copy of {@code skill} is used internally.
          */
         public EditApplicantDescriptor(EditApplicantDescriptor toCopy) {
             setName(toCopy.name);
@@ -177,7 +177,7 @@ public class EditCommand extends Command {
             setGraduationYearMonth(toCopy.graduationYearMonth);
             setCourse(toCopy.course);
             setApplicationStatus(toCopy.status);
-            setTags(toCopy.skills);
+            setSkills(toCopy.skills);
         }
 
         /**
@@ -252,19 +252,19 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
+         * Sets {@code skill} to this object's {@code skill}.
+         * A defensive copy of {@code skill} is used internally.
          */
-        public void setTags(Set<Skill> skills) {
+        public void setSkills(Set<Skill> skills) {
             this.skills = (skills != null) ? new HashSet<>(skills) : null;
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * Returns an unmodifiable skill set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
+         * Returns {@code Optional#empty()} if {@code skill} is null.
          */
-        public Optional<Set<Skill>> getTags() {
+        public Optional<Set<Skill>> getSkills() {
             return (skills != null) ? Optional.of(Collections.unmodifiableSet(skills)) : Optional.empty();
         }
 
@@ -291,7 +291,7 @@ public class EditCommand extends Command {
                     && getGraduationYearMonth().equals(e.getGraduationYearMonth())
                     && getCourse().equals(e.getCourse())
                     && getApplicationStatus().equals(e.getApplicationStatus())
-                    && getTags().equals(e.getTags());
+                    && getSkills().equals(e.getSkills());
         }
 
         @Override
@@ -304,7 +304,8 @@ public class EditCommand extends Command {
                     + ", institution=" + institution
                     + ", graduation year month=" + graduationYearMonth
                     + ", course=" + course
-                    + ", tags=" + skills + '}';
+                    + ", skill=" + skills + '}';
         }
+
     }
 }

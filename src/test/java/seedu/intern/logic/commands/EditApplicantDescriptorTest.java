@@ -7,7 +7,7 @@ import static seedu.intern.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.intern.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.intern.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.intern.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.intern.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.intern.logic.commands.CommandTestUtil.VALID_SKILL_JAVA;
 
 import org.junit.jupiter.api.Test;
 
@@ -48,7 +48,7 @@ public class EditApplicantDescriptorTest {
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different tags -> returns false
-        editedAmy = new EditApplicantDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
+        editedAmy = new EditApplicantDescriptorBuilder(DESC_AMY).withSkills(VALID_SKILL_JAVA).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 }

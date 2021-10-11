@@ -70,7 +70,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         GraduationYearMonth graduationYearMonth = ParserUtil.parseGraduationYearMonth(
                 argMultimap.getValue(PREFIX_GRADUATIONYEARMONTH).get());
         Course course = ParserUtil.parseCourse(argMultimap.getValue(PREFIX_COURSE).get());
-        Set<Skill> skillList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_SKILL));
+        Set<Skill> skillList = ParserUtil.parseSkills(argMultimap.getAllValues(PREFIX_SKILL));
 
         Applicant applicant;
         if (argMultimap.getValue(PREFIX_STATUS).isEmpty()) {
