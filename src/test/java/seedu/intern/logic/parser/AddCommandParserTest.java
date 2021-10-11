@@ -25,8 +25,8 @@ import static seedu.intern.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.intern.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.intern.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.intern.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
-import static seedu.intern.logic.commands.CommandTestUtil.SKILL_DESC_PYTHON;
 import static seedu.intern.logic.commands.CommandTestUtil.SKILL_DESC_JAVA;
+import static seedu.intern.logic.commands.CommandTestUtil.SKILL_DESC_PYTHON;
 import static seedu.intern.logic.commands.CommandTestUtil.VALID_COURSE_BOB;
 import static seedu.intern.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.intern.logic.commands.CommandTestUtil.VALID_GRADE_BOB;
@@ -34,8 +34,8 @@ import static seedu.intern.logic.commands.CommandTestUtil.VALID_GRADUATION_YEARM
 import static seedu.intern.logic.commands.CommandTestUtil.VALID_INSTITUTION_BOB;
 import static seedu.intern.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.intern.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.intern.logic.commands.CommandTestUtil.VALID_SKILL_PYTHON;
 import static seedu.intern.logic.commands.CommandTestUtil.VALID_SKILL_JAVA;
+import static seedu.intern.logic.commands.CommandTestUtil.VALID_SKILL_PYTHON;
 import static seedu.intern.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.intern.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.intern.testutil.TypicalApplicants.AMY;
@@ -117,13 +117,13 @@ public class AddCommandParserTest {
                 new AddCommand(expectedApplicant));
 
         // multiple SKILLs - all accepted
-        Applicant expectedApplicantMultipleSKILLs = new ApplicantBuilder(BOB)
+        Applicant expectedApplicantMultipleSkills = new ApplicantBuilder(BOB)
                 .withSkills(VALID_SKILL_PYTHON, VALID_SKILL_JAVA)
                 .build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                         + GRADE_DESC_BOB + INSTITUTION_DESC_BOB + COURSE_DESC_BOB
                         + GRADUATION_YEARMONTH_DESC_BOB + SKILL_DESC_JAVA + SKILL_DESC_PYTHON,
-                new AddCommand(expectedApplicantMultipleSKILLs));
+                new AddCommand(expectedApplicantMultipleSkills));
     }
 
     @Test

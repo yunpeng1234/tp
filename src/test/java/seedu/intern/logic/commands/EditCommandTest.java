@@ -2,7 +2,14 @@ package seedu.intern.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.intern.logic.commands.CommandTestUtil.*;
+import static seedu.intern.logic.commands.CommandTestUtil.DESC_AMY;
+import static seedu.intern.logic.commands.CommandTestUtil.DESC_BOB;
+import static seedu.intern.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.intern.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.intern.logic.commands.CommandTestUtil.VALID_SKILL_JAVA;
+import static seedu.intern.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.intern.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.intern.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.intern.testutil.TypicalApplicants.getTypicalInternWatcher;
 import static seedu.intern.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.intern.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
