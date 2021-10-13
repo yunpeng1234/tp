@@ -68,8 +68,8 @@ public class PersonCard extends UiPart<Region> {
         course.setText(applicant.getCourse().value);
 
         applicant.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .sorted(Comparator.comparing(tag -> tag.skillName))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.skillName)));
     }
 
     @Override

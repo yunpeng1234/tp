@@ -41,7 +41,7 @@ public class ApplicantUtil {
         sb.append(PREFIX_COURSE + applicant.getCourse().value + " ");
         sb.append(PREFIX_GRADUATIONYEARMONTH + applicant.getGraduationYearMonth().value + " ");
         applicant.getTags().stream().forEach(
-            s -> sb.append(PREFIX_SKILL + s.tagName + " ")
+            s -> sb.append(PREFIX_SKILL + s.skillName + " ")
         );
         return sb.toString();
     }
@@ -65,7 +65,7 @@ public class ApplicantUtil {
             if (skills.isEmpty()) {
                 sb.append(PREFIX_SKILL);
             } else {
-                skills.forEach(s -> sb.append(PREFIX_SKILL).append(s.tagName).append(" "));
+                skills.forEach(s -> sb.append(PREFIX_SKILL).append(s.skillName).append(" "));
             }
         }
         return sb.toString();

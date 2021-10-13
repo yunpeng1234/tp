@@ -25,7 +25,7 @@ class JsonAdaptedSkill {
      * Converts a given {@code Tag} into this class for Jackson use.
      */
     public JsonAdaptedSkill(Skill source) {
-        skillName = source.tagName;
+        skillName = source.skillName;
     }
 
     @JsonValue
@@ -39,7 +39,7 @@ class JsonAdaptedSkill {
      * @throws IllegalValueException if there were any data constraints violated in the adapted skill.
      */
     public Skill toModelType() throws IllegalValueException {
-        if (!Skill.isValidTagName(skillName)) {
+        if (!Skill.isValidSkillName(skillName)) {
             throw new IllegalValueException(Skill.MESSAGE_CONSTRAINTS);
         }
         return new Skill(skillName);

@@ -168,7 +168,7 @@ public class ParserUtil {
     public static Skill parseTag(String tag) throws ParseException {
         requireNonNull(tag);
         String trimmedTag = tag.trim();
-        if (!Skill.isValidTagName(trimmedTag)) {
+        if (!Skill.isValidSkillName(trimmedTag)) {
             throw new ParseException(Skill.MESSAGE_CONSTRAINTS);
         }
         return new Skill(trimmedTag);
