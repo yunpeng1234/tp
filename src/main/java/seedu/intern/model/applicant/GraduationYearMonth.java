@@ -31,7 +31,13 @@ public class GraduationYearMonth {
      * Returns true if a given string is a valid grade name.
      */
     public static boolean isValidGraduationYearMonth(String test) {
-        int holder = Integer.parseInt(test.split("/")[0]);
+        int holder;
+        if (test.matches(VALIDATION_REGEX)) {
+            holder = Integer.parseInt(test.split("/")[0]);
+        } else {
+            return false;
+        }
+
         // month in between 1-12 inclusive
         return test.matches(VALIDATION_REGEX) && holder >= 1 && holder <= 12;
     }
