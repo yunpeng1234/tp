@@ -4,31 +4,31 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Tag in the address book.
- * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
+ * Represents a Skill in Intern Watcher.
+ * Guarantees: immutable; name is valid as declared in {@link #isValidSkillName(String)}
  */
 public class Skill {
 
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
-    public final String tagName;
+    public final String skillName;
 
     /**
-     * Constructs a {@code Tag}.
+     * Constructs a {@code Skill}.
      *
-     * @param tagName A valid tag name.
+     * @param skillName A valid tag name.
      */
-    public Skill(String tagName) {
-        requireNonNull(tagName);
-        checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
-        this.tagName = tagName;
+    public Skill(String skillName) {
+        requireNonNull(skillName);
+        checkArgument(isValidSkillName(skillName), MESSAGE_CONSTRAINTS);
+        this.skillName = skillName;
     }
 
     /**
-     * Returns true if a given string is a valid tag name.
+     * Returns true if a given string is a valid skill name.
      */
-    public static boolean isValidTagName(String test) {
+    public static boolean isValidSkillName(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
@@ -36,19 +36,19 @@ public class Skill {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Skill // instanceof handles nulls
-                && tagName.equals(((Skill) other).tagName)); // state check
+                && skillName.equals(((Skill) other).skillName)); // state check
     }
 
     @Override
     public int hashCode() {
-        return tagName.hashCode();
+        return skillName.hashCode();
     }
 
     /**
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + tagName + ']';
+        return '[' + skillName + ']';
     }
 
 }

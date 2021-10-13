@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's GraduationYearMonth in the Intern Watcher.
+ * Represents an applicant's GraduationYearMonth in Intern Watcher.
  * Guarantees: immutable; is valid as declared in {@link #isValidGraduationYearMonth(String)}
  */
 public class GraduationYearMonth {
@@ -31,7 +31,12 @@ public class GraduationYearMonth {
      * Returns true if a given string is a valid grade name.
      */
     public static boolean isValidGraduationYearMonth(String test) {
-        int holder = Integer.parseInt(test.split("/")[0]);
+        int holder;
+        if (test.matches(VALIDATION_REGEX)) {
+            holder = Integer.parseInt(test.split("/")[0]);
+        } else {
+            return false;
+        }
         // month in between 1-12 inclusive
         return test.matches(VALIDATION_REGEX) && holder >= 1 && holder <= 12;
     }

@@ -19,7 +19,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditCommand.EditApplicantDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.skills.Skill;
 
@@ -58,43 +58,43 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
 
-        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
+        EditApplicantDescriptor editApplicantDescriptor = new EditApplicantDescriptor();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+            editApplicantDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            editPersonDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
+            editApplicantDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
         }
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
+            editApplicantDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
         }
         if (argMultimap.getValue(PREFIX_GRADE).isPresent()) {
-            editPersonDescriptor.setGrade(ParserUtil.parseGrade(argMultimap.getValue(PREFIX_GRADE).get()));
+            editApplicantDescriptor.setGrade(ParserUtil.parseGrade(argMultimap.getValue(PREFIX_GRADE).get()));
         }
         if (argMultimap.getValue(PREFIX_INSTITUTION).isPresent()) {
-            editPersonDescriptor
+            editApplicantDescriptor
                     .setInstitution(ParserUtil.parseInstitution(argMultimap.getValue(PREFIX_INSTITUTION).get()));
         }
         if (argMultimap.getValue(PREFIX_GRADUATIONYEARMONTH).isPresent()) {
-            editPersonDescriptor
+            editApplicantDescriptor
                     .setGraduationYearMonth(ParserUtil.parseGraduationYearMonth(
                             argMultimap.getValue(PREFIX_GRADUATIONYEARMONTH).get()));
         }
         if (argMultimap.getValue(PREFIX_COURSE).isPresent()) {
-            editPersonDescriptor
+            editApplicantDescriptor
                     .setCourse(ParserUtil.parseCourse(argMultimap.getValue(PREFIX_COURSE).get()));
         }
         if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
-            editPersonDescriptor
+            editApplicantDescriptor
                     .setApplicationStatus(ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get()));
         }
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_SKILL)).ifPresent(editPersonDescriptor::setTags);
+        parseTagsForEdit(argMultimap.getAllValues(PREFIX_SKILL)).ifPresent(editApplicantDescriptor::setTags);
 
-        if (!editPersonDescriptor.isAnyFieldEdited()) {
+        if (!editApplicantDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(index, editPersonDescriptor);
+        return new EditCommand(index, editApplicantDescriptor);
     }
 
     /**
