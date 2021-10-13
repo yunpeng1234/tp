@@ -37,6 +37,7 @@ public class GraduationYearMonth {
         } else {
             return false;
         }
+
         // month in between 1-12 inclusive
         return test.matches(VALIDATION_REGEX) && holder >= 1 && holder <= 12;
     }
