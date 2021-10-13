@@ -42,7 +42,7 @@ public class EditApplicantDescriptorBuilder {
         descriptor.setInstitution(applicant.getInstitution());
         descriptor.setGraduationYearMonth(applicant.getGraduationYearMonth());
         descriptor.setCourse(applicant.getCourse());
-        descriptor.setTags(applicant.getSkills());
+        descriptor.setSkills(applicant.getSkills());
     }
 
     /**
@@ -104,13 +104,15 @@ public class EditApplicantDescriptorBuilder {
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
      * that we are building.
      */
-    public EditApplicantDescriptorBuilder withTags(String... tags) {
-        Set<Skill> skillSet = Stream.of(tags).map(Skill::new).collect(Collectors.toSet());
-        descriptor.setTags(skillSet);
+    public EditApplicantDescriptorBuilder withSkills(String... skills) {
+        Set<Skill> skillSet = Stream.of(skills).map(Skill::new).collect(Collectors.toSet());
+        descriptor.setSkills(skillSet);
         return this;
     }
 
     public EditApplicantDescriptor build() {
         return descriptor;
     }
+
+
 }

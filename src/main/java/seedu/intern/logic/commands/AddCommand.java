@@ -42,8 +42,8 @@ public class AddCommand extends Command {
             + PREFIX_COURSE + "Computer Science "
             + PREFIX_GRADUATIONYEARMONTH + "06/2025 "
             + PREFIX_STATUS + "INTERVIEWED "
-            + PREFIX_SKILL + "friends "
-            + PREFIX_SKILL + "owesMoney";
+            + PREFIX_SKILL + "Java "
+            + PREFIX_SKILL + "Python";
 
     public static final String MESSAGE_SUCCESS = "New applicant added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This applicant already exists in the intern book";

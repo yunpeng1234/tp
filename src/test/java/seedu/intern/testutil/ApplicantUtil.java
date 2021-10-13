@@ -60,8 +60,8 @@ public class ApplicantUtil {
         descriptor.getCourse().ifPresent(course -> sb.append(PREFIX_COURSE).append(course.value).append(" "));
         descriptor.getGraduationYearMonth().ifPresent(graduationYearMonth ->
                 sb.append(PREFIX_GRADUATIONYEARMONTH).append(graduationYearMonth.value).append(" "));
-        if (descriptor.getTags().isPresent()) {
-            Set<Skill> skills = descriptor.getTags().get();
+        if (descriptor.getSkills().isPresent()) {
+            Set<Skill> skills = descriptor.getSkills().get();
             if (skills.isEmpty()) {
                 sb.append(PREFIX_SKILL);
             } else {

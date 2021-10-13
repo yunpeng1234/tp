@@ -24,15 +24,15 @@ public class ModelManager implements Model {
     private final FilteredList<Applicant> filteredApplicants;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given internWatcher and userPrefs.
      */
-    public ModelManager(ReadOnlyInternWatcher addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyInternWatcher internWatcher, ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(internWatcher, userPrefs);
 
-        logger.fine("Initializing with intern book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with intern book: " + internWatcher + " and user prefs " + userPrefs);
 
-        this.internWatcher = new InternWatcher(addressBook);
+        this.internWatcher = new InternWatcher(internWatcher);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredApplicants = new FilteredList<>(this.internWatcher.getPersonList());
     }
@@ -67,20 +67,20 @@ public class ModelManager implements Model {
 
     @Override
     public Path getInternWatcherFilePath() {
-        return userPrefs.getAddressBookFilePath();
+        return userPrefs.getInternWatcherFilePath();
     }
 
     @Override
-    public void setInternWatcherFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setInternWatcherFilePath(Path internWatcherFilePath) {
+        requireNonNull(internWatcherFilePath);
+        userPrefs.setInternWatcherFilePath(internWatcherFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== InternWatcher ================================================================================
 
     @Override
-    public void setInternWatcher(ReadOnlyInternWatcher addressBook) {
-        this.internWatcher.resetData(addressBook);
+    public void setInternWatcher(ReadOnlyInternWatcher internWatcher) {
+        this.internWatcher.resetData(internWatcher);
     }
 
     @Override
@@ -116,7 +116,7 @@ public class ModelManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedInternWatcher}
      */
     @Override
     public ObservableList<Applicant> getFilteredPersonList() {

@@ -37,14 +37,14 @@ public class ModelManagerTest {
     @Test
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setAddressBookFilePath(Paths.get("intern/book/file/path"));
+        userPrefs.setInternWatcherFilePath(Paths.get("intern/book/file/path"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
         // Modifying userPrefs should not modify modelManager's userPrefs
         UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
-        userPrefs.setAddressBookFilePath(Paths.get("new/intern/book/file/path"));
+        userPrefs.setInternWatcherFilePath(Paths.get("new/intern/book/file/path"));
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
     }
 
@@ -61,12 +61,12 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
+    public void setInternWatcherFilePath_nullPath_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.setInternWatcherFilePath(null));
     }
 
     @Test
-    public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
+    public void setInternWatcherFilePath_validPath_setsInternWatcherFilePath() {
         Path path = Paths.get("intern/book/file/path");
         modelManager.setInternWatcherFilePath(path);
         assertEquals(path, modelManager.getInternWatcherFilePath());
@@ -78,12 +78,12 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasPerson_personNotInInternWatcher_returnsFalse() {
         assertFalse(modelManager.hasApplicant(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasPerson_personInInternWatcher_returnsTrue() {
         modelManager.addApplicant(ALICE);
         assertTrue(modelManager.hasApplicant(ALICE));
     }
@@ -113,7 +113,7 @@ public class ModelManagerTest {
         // different types -> returns false
         assertFalse(modelManager.equals(5));
 
-        // different addressBook -> returns false
+        // different internWatcher -> returns false
         assertFalse(modelManager.equals(new ModelManager(differentInternWatcher, userPrefs)));
 
         // different filteredList -> returns false
@@ -126,7 +126,7 @@ public class ModelManagerTest {
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
-        differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
+        differentUserPrefs.setInternWatcherFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(internWatcher, differentUserPrefs)));
     }
 }

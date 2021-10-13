@@ -12,8 +12,8 @@ import static seedu.intern.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.intern.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.intern.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.intern.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.intern.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.intern.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.intern.logic.commands.CommandTestUtil.VALID_SKILL_JAVA;
+import static seedu.intern.logic.commands.CommandTestUtil.VALID_SKILL_PYTHON;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,17 +30,17 @@ public class TypicalApplicants {
     public static final Applicant ALICE = new ApplicantBuilder().withName("Alice Pauline")
             .withEmail("alice@example.com").withPhone("94351253").withGrade("4.50")
             .withInstitution("NUS").withCourse("Computer Science")
-            .withGraduationYearMonth("12/2020").withTags("friends").build();
+            .withGraduationYearMonth("12/2020").withSkills("friends").build();
     public static final Applicant BENSON = new ApplicantBuilder().withName("Benson Meier")
             .withGrade("4.60").withInstitution("NTU").withCourse("Computer Engineering").withEmail("johnd@example.com")
-            .withPhone("98765432").withGraduationYearMonth("06/2025").withTags("owesMoney", "friends")
+            .withPhone("98765432").withGraduationYearMonth("06/2025").withSkills("owesMoney", "friends")
             .build();
     public static final Applicant CARL = new ApplicantBuilder().withName("Carl Kurz").withPhone("95352563")
             .withGrade("4.70").withInstitution("NTU").withCourse("Business and Accounting")
             .withEmail("heinz@example.com").withGraduationYearMonth("12/2023").build();
     public static final Applicant DANIEL = new ApplicantBuilder().withName("Daniel Meier").withPhone("87652533")
             .withGrade("4.80").withInstitution("SMU").withEmail("cornelia@example.com")
-            .withTags("friends").withCourse("Accountancy").withGraduationYearMonth("01/2027").build();
+            .withSkills("friends").withCourse("Accountancy").withGraduationYearMonth("01/2027").build();
     public static final Applicant ELLE = new ApplicantBuilder().withName("Elle Meyer").withPhone("9482224")
             .withGrade("4.90").withInstitution("SUTD").withEmail("werner@example.com")
             .withGraduationYearMonth("12/2024").withCourse("Philosophy").build();
@@ -62,11 +62,11 @@ public class TypicalApplicants {
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Applicant AMY = new ApplicantBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withEmail(VALID_EMAIL_AMY).withTags(VALID_TAG_FRIEND)
+            .withEmail(VALID_EMAIL_AMY).withSkills(VALID_SKILL_JAVA)
             .withGrade(VALID_GRADE_AMY).withInstitution(VALID_INSTITUTION_AMY)
             .withGraduationYearMonth(VALID_GRADUATION_YEARMONTH_AMY).build();
     public static final Applicant BOB = new ApplicantBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-            .withEmail(VALID_EMAIL_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+            .withEmail(VALID_EMAIL_BOB).withSkills(VALID_SKILL_PYTHON, VALID_SKILL_JAVA)
             .withGrade(VALID_GRADE_BOB).withInstitution(VALID_INSTITUTION_BOB)
             .withGraduationYearMonth(VALID_GRADUATION_YEARMONTH_BOB).build();
 
@@ -75,7 +75,7 @@ public class TypicalApplicants {
     private TypicalApplicants() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code InternWatcher} with all the typical persons.
      */
     public static InternWatcher getTypicalInternWatcher() {
         InternWatcher ab = new InternWatcher();

@@ -45,8 +45,8 @@ public class CommandTestUtil {
     public static final String VALID_GRADUATION_YEARMONTH_BOB = "09/2021";
     public static final String VALID_COURSE_AMY = "Computer Science";
     public static final String VALID_COURSE_BOB = "Computer Science";
-    public static final String VALID_TAG_HUSBAND = "husband";
-    public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_SKILL_JAVA = "JAVA";
+    public static final String VALID_SKILL_PYTHON = "PYTHON";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -66,14 +66,14 @@ public class CommandTestUtil {
             + PREFIX_GRADUATIONYEARMONTH + VALID_GRADUATION_YEARMONTH_BOB;
     public static final String COURSE_DESC_AMY = " " + PREFIX_COURSE + VALID_COURSE_AMY;
     public static final String COURSE_DESC_BOB = " " + PREFIX_COURSE + VALID_COURSE_BOB;
-    public static final String TAG_DESC_FRIEND = " " + PREFIX_SKILL + VALID_TAG_FRIEND;
-    public static final String TAG_DESC_HUSBAND = " " + PREFIX_SKILL + VALID_TAG_HUSBAND;
+    public static final String SKILL_DESC_PYTHON = " " + PREFIX_SKILL + VALID_SKILL_PYTHON;
+    public static final String SKILL_DESC_JAVA = " " + PREFIX_SKILL + VALID_SKILL_JAVA;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_GRADE_DESC = " " + PREFIX_GRADE + "5.000"; //3dp not allowed for grades
-    public static final String INVALID_TAG_DESC = " " + PREFIX_SKILL + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_SKILL_DESC = " " + PREFIX_SKILL + "java*"; // '*' not allowed in SKILLs
     public static final String INVALID_INSTITUTION_DESC = " " + PREFIX_INSTITUTION + "NU$"; // '$' not allowed
     @SuppressWarnings("SpellCheckingInspection")
     public static final String INVALID_GRADUATION_YEARMONTH_DESC = " " + PREFIX_GRADUATIONYEARMONTH
@@ -91,12 +91,12 @@ public class CommandTestUtil {
         DESC_AMY = new EditApplicantDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
                 .withGrade(VALID_GRADE_AMY).withInstitution(VALID_INSTITUTION_AMY).withCourse(VALID_COURSE_AMY)
-                .withGraduationYearMonth(VALID_GRADUATION_YEARMONTH_AMY).withTags(VALID_TAG_FRIEND).build();
+                .withGraduationYearMonth(VALID_GRADUATION_YEARMONTH_AMY).withSkills(VALID_SKILL_PYTHON).build();
         DESC_BOB = new EditApplicantDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withGrade(VALID_GRADE_BOB).withInstitution(VALID_INSTITUTION_BOB).withCourse(VALID_COURSE_BOB)
                 .withGraduationYearMonth(VALID_GRADUATION_YEARMONTH_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withSkills(VALID_SKILL_JAVA, VALID_SKILL_PYTHON).build();
     }
 
     /**
