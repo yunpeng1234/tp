@@ -40,10 +40,6 @@ task coverage(type: JacocoReport) {
     }
 }
 
-application {
-    mainClassName = 'seedu.intern.Main'
-}
-
 dependencies {
     String jUnitVersion = '5.4.0'
     String javaFxVersion = '11'
