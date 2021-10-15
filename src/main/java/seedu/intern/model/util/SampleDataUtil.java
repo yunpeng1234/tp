@@ -25,24 +25,24 @@ public class SampleDataUtil {
         return new Applicant[] {
             new Applicant(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                     new Grade("4.50"), new Institution("NTU"),
-                    new Course("Computer Science"), new GraduationYearMonth("06-2020"), getSkillSet("HTML")),
+                    new Course("Computer Science"), new GraduationYearMonth("06/2020"), getSkillSet("HTML")),
             new Applicant(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                     new Grade("4.60"),
-                    new Institution("SUTD"), new Course("Computer Science"), new GraduationYearMonth("06-2020"),
+                    new Institution("SUTD"), new Course("Computer Science"), new GraduationYearMonth("06/2020"),
                     getSkillSet("HTML", "CSS")),
             new Applicant(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                     new Grade("4.70"), new Institution("YALE"),
-                    new Course("Computer Science"), new GraduationYearMonth("06-2020"), getSkillSet("Java")),
+                    new Course("Computer Science"), new GraduationYearMonth("06/2020"), getSkillSet("Java")),
             new Applicant(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                     new Grade("4.80"),
                     new Institution("NTU"), new Course("Computer Science"),
-                    new GraduationYearMonth("06-2020"), getSkillSet("Python")),
+                    new GraduationYearMonth("06/2020"), getSkillSet("Python")),
             new Applicant(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                     new Grade("4.90"), new Institution("SUSS"),
-                    new Course("Computer Science"), new GraduationYearMonth("06-2020"), getSkillSet("CSS")),
+                    new Course("Computer Science"), new GraduationYearMonth("06/2020"), getSkillSet("CSS")),
             new Applicant(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                     new Grade("5.00"), new Institution("SMU"),
-                    new Course("Computer Science"), new GraduationYearMonth("06-2020"), getSkillSet("Office"))
+                    new Course("Computer Science"), new GraduationYearMonth("06/2020"), getSkillSet("Office"))
         };
     }
 

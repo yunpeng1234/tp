@@ -66,8 +66,8 @@ dependencies {
 }
 
 shadowJar {
-    archiveName = 'addressbook.jar'
-    archiveVersion = 'v1.1'
+    archiveName = 'internwatcher.jar'
+    archiveVersion = 'v1.2'
 }
 
 defaultTasks 'clean', 'test'
