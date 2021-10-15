@@ -40,6 +40,10 @@ task coverage(type: JacocoReport) {
     }
 }
 
+application {
+    mainClassName = 'seedu.intern.Main'
+}
+
 dependencies {
     String jUnitVersion = '5.4.0'
     String javaFxVersion = '11'
@@ -66,8 +70,8 @@ dependencies {
 }
 
 shadowJar {
-    archiveName = 'addressbook.jar'
-    archiveVersion = 'v1.1'
+    archiveName = 'internwatcher'
+    archiveVersion = 'v1.2'
 }
 
 defaultTasks 'clean', 'test'
