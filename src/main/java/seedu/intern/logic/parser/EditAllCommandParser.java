@@ -15,7 +15,6 @@ public class EditAllCommandParser implements Parser<EditAllCommand> {
      * Parses the given {@code String} of arguments in the context of the EditAllCommand
      * and returns an EditAllCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
-     * @return
      */
     public EditAllCommand parse(String args) throws ParseException {
         requireNonNull(args);
