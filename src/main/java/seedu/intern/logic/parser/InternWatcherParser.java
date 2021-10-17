@@ -10,6 +10,7 @@ import seedu.intern.logic.commands.AddCommand;
 import seedu.intern.logic.commands.ClearCommand;
 import seedu.intern.logic.commands.Command;
 import seedu.intern.logic.commands.DeleteCommand;
+import seedu.intern.logic.commands.EditAllCommand;
 import seedu.intern.logic.commands.EditCommand;
 import seedu.intern.logic.commands.ExitCommand;
 import seedu.intern.logic.commands.FindCommand;
@@ -67,6 +68,9 @@ public class InternWatcherParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case EditAllCommand.COMMAND_WORD:
+            return new EditAllCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

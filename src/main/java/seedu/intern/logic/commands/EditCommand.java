@@ -304,6 +304,7 @@ public class EditCommand extends Command {
                     + ", institution=" + institution
                     + ", graduation year month=" + graduationYearMonth
                     + ", course=" + course
+                    + ", status=" + status
                     + ", skill=" + skills + '}';
         }
 
