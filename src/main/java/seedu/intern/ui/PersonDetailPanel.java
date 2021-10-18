@@ -68,10 +68,10 @@ public class PersonDetailPanel extends UiPart<Region> {
      * The array must contain 4 elements, containing,
      *
      * @param text String array containing:
-     *             First index: Institution
+     *             First Index: Institution
      *             Second Index: Course
      *             Thrid Index: Year of Graduation
-     *             Fourth index: Grade
+     *             Fourth Index: Grade
      */
     private void setAcademicTab(String[] text) {
 

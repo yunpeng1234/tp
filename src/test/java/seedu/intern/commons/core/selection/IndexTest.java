@@ -1,4 +1,4 @@
-package seedu.intern.commons.core.index;
+package seedu.intern.commons.core.selection;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
