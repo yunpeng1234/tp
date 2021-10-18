@@ -2,7 +2,6 @@ package seedu.intern.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_STATUS;
-import static seedu.intern.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 import java.util.Optional;
@@ -33,10 +32,12 @@ public class EditAllCommand extends Command {
             + "provided fields."
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: "
-            + "[" + PREFIX_STATUS + "STATUS]\n";
+            + "[" + PREFIX_STATUS + "STATUS]\n"
+            + "Example: " + COMMAND_WORD + " 1 "
+            + PREFIX_STATUS + "INTERVIEWED";
 
     // TODO: update this message
-    public static final String MESSAGE_EDIT_ALL_SUCCESS = "Edited currently displayed applicants: ";
+    public static final String MESSAGE_EDIT_ALL_SUCCESS = "Successfully edited %d of %d applicants.\n";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.\n";
 
     private final EditAllDescriptor editAllDescriptor;
@@ -61,10 +62,7 @@ public class EditAllCommand extends Command {
             addSuccesses++;
         }
 
-        String result = addSuccesses + " of " + lastShownList.size() + " applicants updated\n";
-
-        model.updateFilteredApplicantList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_ALL_SUCCESS, result));
+        return new CommandResult(String.format(MESSAGE_EDIT_ALL_SUCCESS, addSuccesses, lastShownList.size()));
     }
 
     /**
