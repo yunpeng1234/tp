@@ -10,7 +10,6 @@ import static seedu.intern.testutil.TypicalSelections.SELECTION_ALL;
 import static seedu.intern.testutil.TypicalSelections.SELECTION_FIRST_PERSON;
 import static seedu.intern.testutil.TypicalSelections.SELECTION_SECOND_PERSON;
 
-
 import org.junit.jupiter.api.Test;
 
 import seedu.intern.commons.core.Messages;
