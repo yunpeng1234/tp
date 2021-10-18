@@ -6,9 +6,10 @@ import static seedu.intern.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.intern.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.intern.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.intern.testutil.TypicalApplicants.getTypicalInternWatcher;
+import static seedu.intern.testutil.TypicalSelections.SELECTION_ALL;
 import static seedu.intern.testutil.TypicalSelections.SELECTION_FIRST_PERSON;
 import static seedu.intern.testutil.TypicalSelections.SELECTION_SECOND_PERSON;
-import static seedu.intern.testutil.TypicalSelections.SELECTION_ALL;
+
 
 import org.junit.jupiter.api.Test;
 

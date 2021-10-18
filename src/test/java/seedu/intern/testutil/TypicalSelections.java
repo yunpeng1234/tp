@@ -1,12 +1,10 @@
 package seedu.intern.testutil;
 
-import seedu.intern.commons.core.selection.Index;
-import seedu.intern.commons.core.selection.Selection;
-
 import static seedu.intern.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.intern.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.intern.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 
+import seedu.intern.commons.core.selection.Selection;
 
 public class TypicalSelections {
     public static final Selection SELECTION_FIRST_PERSON = Selection.fromIndex(INDEX_FIRST_PERSON);

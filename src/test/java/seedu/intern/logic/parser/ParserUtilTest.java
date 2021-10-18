@@ -5,8 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.intern.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.intern.testutil.Assert.assertThrows;
 import static seedu.intern.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.intern.testutil.TypicalSelections.SELECTION_FIRST_PERSON;
 import static seedu.intern.testutil.TypicalSelections.SELECTION_ALL;
+import static seedu.intern.testutil.TypicalSelections.SELECTION_FIRST_PERSON;
+
 
 import java.util.Arrays;
 import java.util.Collections;
