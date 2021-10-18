@@ -74,6 +74,8 @@ public class Selection {
 
         if (this.hasIndex() && this.getIndexOneBased() != otherSelection.getIndexOneBased()) {
             return false;
-        } else return !this.hasAllFlag() || this.getAllFlag() == otherSelection.getAllFlag();
+        } else {
+            return !this.hasAllFlag() || this.getAllFlag() == otherSelection.getAllFlag();
+        }
     }
 }

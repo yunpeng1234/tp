@@ -2,7 +2,6 @@ package seedu.intern.logic.parser;
 
 import static seedu.intern.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import seedu.intern.commons.core.selection.Index;
 import seedu.intern.commons.core.selection.Selection;
 import seedu.intern.logic.commands.DeleteCommand;
 import seedu.intern.logic.parser.exceptions.ParseException;
