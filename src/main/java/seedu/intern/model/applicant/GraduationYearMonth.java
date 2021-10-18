@@ -58,4 +58,27 @@ public class GraduationYearMonth {
     public int hashCode() {
         return value.hashCode();
     }
+
+    /**
+     * Returns 0 if values of two dates are equivalent, 1 if date 1 is later than date 2 and -1 otherwise.
+     * @param date1 first date for comparison
+     * @param date2 second date for comparison
+     * @return an integer indicating the comparison result
+     */
+    public static int compareDate(String date1, String date2) {
+        if (date1 == date2 || date1.compareTo(date2) == 0) {
+            return 0;
+        }
+        int year1 = Integer.parseInt(date1.split("/")[1]);
+        int month1 = Integer.parseInt(date1.split("/")[0]);
+        int year2 = Integer.parseInt(date2.split("/")[1]);
+        int month2 = Integer.parseInt(date2.split("/")[0]);
+        if (year1 > year2) {
+            return 1;
+        } else if (year1 == year2 && month1 > month2) {
+            return 1;
+        } else {
+            return -1;
+        }
+    }
 }

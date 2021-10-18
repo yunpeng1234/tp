@@ -115,6 +115,18 @@ public class ParserUtil {
     }
 
     /**
+     * Parses {@code Collection<String> institutions} into a {@code Set<Institution>}.
+     */
+    public static Set<Institution> parseInstitutions(Collection<String> institutions) throws ParseException {
+        requireNonNull(institutions);
+        final Set<Institution> institutionSet = new HashSet<>();
+        for (String institution : institutions) {
+            institutionSet.add(parseInstitution(institution));
+        }
+        return institutionSet;
+    }
+
+    /**
      * Parses a {@code String graduationYearMonth} into an {@code GraduationYearMonth}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -145,6 +157,18 @@ public class ParserUtil {
     }
 
     /**
+     * Parses {@code Collection<String> courses} into a {@code Set<Course>}.
+     */
+    public static Set<Course> parseCourses(Collection<String> courses) throws ParseException {
+        requireNonNull(courses);
+        final Set<Course> courseSet = new HashSet<>();
+        for (String course : courses) {
+            courseSet.add(parseCourse(course));
+        }
+        return courseSet;
+    }
+
+    /**
      * Parses a {@code String status} into an {@code ApplicationStatus}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -157,6 +181,19 @@ public class ParserUtil {
             throw new ParseException(ApplicationStatus.MESSAGE_CONSTRAINTS);
         }
         return new ApplicationStatus(trimmedStatus);
+    }
+
+    /**
+     * Parses {@code Collection<String> skills} into a {@code Set<ApplicationStatus>}.
+     */
+    public static Set<ApplicationStatus> parseApplicationStatuses(Collection<String> applicationStatuses)
+            throws ParseException {
+        requireNonNull(applicationStatuses);
+        final Set<ApplicationStatus> applicationStatusSet = new HashSet<>();
+        for (String applicationStatus : applicationStatuses) {
+            applicationStatusSet.add(parseStatus(applicationStatus));
+        }
+        return applicationStatusSet;
     }
 
     /**
