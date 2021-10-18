@@ -40,9 +40,9 @@ public class DeleteCommand extends Command {
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
-        if(targetIndex.getZeroBased() == -1) {
+        if (targetIndex.getZeroBased() == -1) {
             int length = lastShownList.size();
-            for(int i = 0; i < length; i++ ) {
+            for (int i = 0; i < length; i++) {
                 Applicant applicantToDelete = lastShownList.get(0);
                 model.deleteApplicant(applicantToDelete);
             }
