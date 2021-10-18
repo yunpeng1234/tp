@@ -22,7 +22,9 @@ public class DeleteCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Applicant: %1$s";
+
+    public static final String MESSAGE_DELETE_ALL_SUCCESS = " %1$s Applicants deleted!";
 
     private final Index targetIndex;
 
@@ -38,10 +40,18 @@ public class DeleteCommand extends Command {
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
-
-        Applicant applicantToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deleteApplicant(applicantToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, applicantToDelete));
+        if(targetIndex.getZeroBased() == -1) {
+            int length = lastShownList.size();
+            for(int i = 0; i < length; i++ ) {
+                Applicant applicantToDelete = lastShownList.get(0);
+                model.deleteApplicant(applicantToDelete);
+            }
+            return new CommandResult(String.format(MESSAGE_DELETE_ALL_SUCCESS, String.valueOf(length)));
+        } else {
+            Applicant applicantToDelete = lastShownList.get(targetIndex.getZeroBased());
+            model.deleteApplicant(applicantToDelete);
+            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, applicantToDelete));
+        }
     }
 
     @Override
