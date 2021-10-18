@@ -7,6 +7,7 @@
     "grade": "4.50",
     "institution": "NUS",
     "course": "Computer Science",
+    "status": "REJECTED",
     "graduationYearMonth" : "12/2020",
     "skills" : [ "friends" ]
   }, {
@@ -16,6 +17,7 @@
     "grade": "4.60",
     "institution": "NTU",
     "course": "Computer Engineering",
+    "status": "INTERVIEWED",
     "graduationYearMonth" : "06/2025",
     "skills" : [ "owesMoney", "friends" ]
   }, {
@@ -24,6 +26,7 @@
     "email" : "heinz@example.com",
     "grade": "4.70",
     "institution": "NTU",
+    "status": "ACCEPTED",
     "course": "Business and Accounting",
     "graduationYearMonth" : "12/2023",
     "skills" : [ ]
