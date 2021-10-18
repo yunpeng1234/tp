@@ -19,7 +19,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.intern.commons.core.Messages;
-import seedu.intern.commons.core.index.Index;
+import seedu.intern.commons.core.selection.Index;
 import seedu.intern.commons.util.CollectionUtil;
 import seedu.intern.logic.commands.exceptions.CommandException;
 import seedu.intern.model.Model;

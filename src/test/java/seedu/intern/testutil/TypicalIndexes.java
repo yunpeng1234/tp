@@ -1,6 +1,6 @@
 package seedu.intern.testutil;
 
-import seedu.intern.commons.core.index.Index;
+import seedu.intern.commons.core.selection.Index;
 
 /**
  * A utility class containing a list of {@code Index} objects to be used in tests.
