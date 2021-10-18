@@ -36,6 +36,15 @@ public class Index {
     }
 
     /**
+     * Creates a special {@code Index} by making it -1.
+     */
+    public static Index fromSpecial() {
+        Index special = new Index(0);
+        special.setSpecialIndex();
+        return special;
+    }
+
+    /**
      * Creates a new {@code Index} using a zero-based index.
      */
     public static Index fromZeroBased(int zeroBasedIndex) {
