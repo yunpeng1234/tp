@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.intern.logic.commands.EditCommand.EditApplicantDescriptor;
 import seedu.intern.model.applicant.Applicant;
+import seedu.intern.model.applicant.ApplicationStatus;
 import seedu.intern.model.applicant.Course;
 import seedu.intern.model.applicant.Email;
 import seedu.intern.model.applicant.Grade;
@@ -40,6 +41,7 @@ public class EditApplicantDescriptorBuilder {
         descriptor.setEmail(applicant.getEmail());
         descriptor.setGrade(applicant.getGrade());
         descriptor.setInstitution(applicant.getInstitution());
+        descriptor.setApplicationStatus(applicant.getApplicationStatus());
         descriptor.setGraduationYearMonth(applicant.getGraduationYearMonth());
         descriptor.setCourse(applicant.getCourse());
         descriptor.setSkills(applicant.getSkills());
@@ -82,6 +84,14 @@ public class EditApplicantDescriptorBuilder {
      */
     public EditApplicantDescriptorBuilder withInstitution(String institution) {
         descriptor.setInstitution(new Institution(institution));
+        return this;
+    }
+
+    /**
+     * Sets the {@code ApplicationStatus} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditApplicantDescriptorBuilder withApplicationStatus(String status) {
+        descriptor.setApplicationStatus(new ApplicationStatus(status));
         return this;
     }
 

@@ -33,8 +33,8 @@ public class EditAllCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: "
             + "[" + PREFIX_STATUS + "STATUS]\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_STATUS + "INTERVIEWED";
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_STATUS + " INTERVIEWED";
 
     // TODO: update this message
     public static final String MESSAGE_EDIT_ALL_SUCCESS = "Successfully edited %d of %d applicants.\n";
@@ -82,6 +82,7 @@ public class EditAllCommand extends Command {
         Course updatedCourse = applicantToEdit.getCourse();
         Set<Skill> updatedSkills = applicantToEdit.getSkills();
 
+        // Fields editable by editAllCommand
         ApplicationStatus updatedStatus = editAllDescriptor.getApplicationStatus()
                 .orElse(applicantToEdit.getApplicationStatus());
 

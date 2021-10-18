@@ -29,14 +29,14 @@ public class TypicalApplicants {
 
     public static final Applicant ALICE = new ApplicantBuilder().withName("Alice Pauline")
             .withEmail("alice@example.com").withPhone("94351253").withGrade("4.50")
-            .withInstitution("NUS").withCourse("Computer Science")
+            .withInstitution("NUS").withCourse("Computer Science").withApplicationStatus("REJECTED")
             .withGraduationYearMonth("12/2020").withSkills("friends").build();
-    public static final Applicant BENSON = new ApplicantBuilder().withName("Benson Meier")
+    public static final Applicant BENSON = new ApplicantBuilder().withName("Benson Meier").withApplicationStatus("INTERVIEWED")
             .withGrade("4.60").withInstitution("NTU").withCourse("Computer Engineering").withEmail("johnd@example.com")
             .withPhone("98765432").withGraduationYearMonth("06/2025").withSkills("owesMoney", "friends")
             .build();
     public static final Applicant CARL = new ApplicantBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withGrade("4.70").withInstitution("NTU").withCourse("Business and Accounting")
+            .withGrade("4.70").withInstitution("NTU").withCourse("Business and Accounting").withApplicationStatus("ACCEPTED")
             .withEmail("heinz@example.com").withGraduationYearMonth("12/2023").build();
     public static final Applicant DANIEL = new ApplicantBuilder().withName("Daniel Meier").withPhone("87652533")
             .withGrade("4.80").withInstitution("SMU").withEmail("cornelia@example.com")
