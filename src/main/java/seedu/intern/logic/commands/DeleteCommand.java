@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import seedu.intern.commons.core.Messages;
-import seedu.intern.commons.core.selection.Index;
 import seedu.intern.commons.core.selection.Selection;
 import seedu.intern.logic.commands.exceptions.CommandException;
 import seedu.intern.model.Model;
