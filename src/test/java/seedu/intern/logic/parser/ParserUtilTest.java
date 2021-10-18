@@ -5,7 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.intern.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.intern.testutil.Assert.assertThrows;
 import static seedu.intern.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.intern.testutil.TypicalIndexes.INDEX_SPECIAL;
+import static seedu.intern.testutil.TypicalSelections.SELECTION_FIRST_PERSON;
+import static seedu.intern.testutil.TypicalSelections.SELECTION_ALL;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -64,19 +65,19 @@ public class ParserUtilTest {
     @Test
     public void parseDelete_outOfRangeInput_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
-            -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
+            -> ParserUtil.parseSelection(Long.toString(Integer.MAX_VALUE + 1)));
     }
 
     @Test
     public void parseDelete_validInput_success() throws Exception {
         // No whitespaces
-        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseDelete("1"));
+        assertEquals(SELECTION_FIRST_PERSON, ParserUtil.parseSelection("1"));
 
         // Leading and trailing whitespaces
-        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseDelete("  1  "));
+        assertEquals(SELECTION_FIRST_PERSON, ParserUtil.parseSelection("  1  "));
 
-        // All keywaord
-        assertEquals(INDEX_SPECIAL, ParserUtil.parseDelete("all"));
+        // All keyword
+        assertEquals(SELECTION_ALL, ParserUtil.parseSelection("ALL"));
     }
 
     @Test

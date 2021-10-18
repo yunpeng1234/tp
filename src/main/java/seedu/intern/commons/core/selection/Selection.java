@@ -11,6 +11,10 @@ public class Selection {
         this.isSelectAll = isSelectAll;
     }
 
+    public Index getIndex() {
+        return index;
+    }
+
     public int getIndexOneBased() {
         if (hasIndex()) {
             return this.index.getOneBased();
@@ -49,5 +53,27 @@ public class Selection {
 
     public static Selection fromIndex(Index index) {
         return new Selection(index, null);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Selection)) { // instanceof handles nulls
+            return false;
+        }
+
+        Selection otherSelection = (Selection) other;
+
+        if (this.hasIndex() != otherSelection.hasIndex()
+                || this.hasAllFlag() != otherSelection.hasAllFlag()) {
+            return false;
+        }
+
+        if (this.hasIndex() && this.getIndexOneBased() != otherSelection.getIndexOneBased()) {
+            return false;
+        } else return !this.hasAllFlag() || this.getAllFlag() == otherSelection.getAllFlag();
     }
 }

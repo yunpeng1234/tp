@@ -51,7 +51,7 @@ public class ParserUtil {
         String trimmedSelection = selection.trim();
         if (StringUtil.isInteger(trimmedSelection) && !StringUtil.isNonZeroUnsignedInteger(trimmedSelection)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
-        } else if (!StringUtil.isAll(trimmedSelection)) {
+        } else if (!StringUtil.isNonZeroUnsignedInteger(trimmedSelection) && !StringUtil.isAll(trimmedSelection)) {
             throw new ParseException(MESSAGE_INVALID_SELECTION);
         }
 
