@@ -1,26 +1,15 @@
 package seedu.intern.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.intern.logic.commands.CommandTestUtil.DESC_AMY;
-import static seedu.intern.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.intern.logic.commands.CommandTestUtil.DESC_ALL_AMY;
 import static seedu.intern.logic.commands.CommandTestUtil.DESC_ALL_BOB;
-import static seedu.intern.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.intern.logic.commands.CommandTestUtil.VALID_STATUS_AMY;
-import static seedu.intern.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.intern.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.intern.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.intern.testutil.TypicalApplicants.getTypicalInternWatcher;
-import static seedu.intern.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.intern.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.intern.commons.core.Messages;
-import seedu.intern.commons.core.index.Index;
 import seedu.intern.logic.commands.EditAllCommand.EditAllDescriptor;
 import seedu.intern.model.InternWatcher;
 import seedu.intern.model.Model;
@@ -29,7 +18,6 @@ import seedu.intern.model.UserPrefs;
 import seedu.intern.model.applicant.Applicant;
 import seedu.intern.testutil.ApplicantBuilder;
 import seedu.intern.testutil.EditAllDescriptorBuilder;
-import seedu.intern.testutil.EditApplicantDescriptorBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
