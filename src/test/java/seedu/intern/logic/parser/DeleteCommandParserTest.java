@@ -27,7 +27,7 @@ public class DeleteCommandParserTest {
     }
 
     @Test
-    public void parse_validArgs_All_returnsDeleteCommand() {
+    public void parse_validArgs_all_returnsDeleteCommand() {
         assertParseSuccess(parser, "all", new DeleteCommand(INDEX_SPECIAL));
     }
 

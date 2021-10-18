@@ -6,7 +6,9 @@ import static seedu.intern.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.intern.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.intern.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.intern.testutil.TypicalApplicants.getTypicalInternWatcher;
-import static seedu.intern.testutil.TypicalIndexes.*;
+import static seedu.intern.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.intern.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.intern.testutil.TypicalIndexes.INDEX_SPECIAL;
 
 import org.junit.jupiter.api.Test;
 
@@ -43,7 +45,8 @@ public class DeleteCommandTest {
         Applicant applicantToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_SPECIAL);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_ALL_SUCCESS, model.getFilteredPersonList().size());
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_ALL_SUCCESS,
+                model.getFilteredPersonList().size());
 
         ModelManager expectedModel = new ModelManager();
 
@@ -57,7 +60,8 @@ public class DeleteCommandTest {
         Applicant applicantToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_SPECIAL);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_ALL_SUCCESS, model.getFilteredPersonList().size());
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_ALL_SUCCESS,
+                model.getFilteredPersonList().size());
 
         Model expectedModel = new ModelManager(model.getInternWatcher(), new UserPrefs());
         expectedModel.deleteApplicant(applicantToDelete);
