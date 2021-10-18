@@ -1,8 +1,8 @@
 package seedu.intern.commons.core.selection;
 
 public class Selection {
-    private final String MESSAGE_MISSING_INDEX = "Selection does not contain an Index.";
-    private final String MESSAGE_MISSING_FLAG = "Selection does not contain an All Flag.";
+    private static final String MESSAGE_MISSING_INDEX = "Selection does not contain an Index.";
+    private static final String MESSAGE_MISSING_FLAG = "Selection does not contain an All Flag.";
     private final Index index;
     private final Boolean isSelectAll;
 

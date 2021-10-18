@@ -39,6 +39,7 @@ public class Index {
      * @deprecated Use {@code Selection} instead.
      * Creates a special {@code Index} by making it -1.
      */
+    @Deprecated
     public static Index fromSpecial() {
         Index special = new Index(0);
         special.setSpecialIndex();

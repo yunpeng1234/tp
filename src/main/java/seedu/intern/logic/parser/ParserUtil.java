@@ -68,6 +68,7 @@ public class ParserUtil {
      * returns it. Leading and trailing whitespaces will be trimmed.
      * @throws ParseException if the specified selection is invalid (not non-zero unsigned integer).
      */
+    @Deprecated
     public static Index parseDelete(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
         if (trimmedIndex.equals("all")) {
