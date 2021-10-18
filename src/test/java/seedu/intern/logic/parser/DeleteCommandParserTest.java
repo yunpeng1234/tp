@@ -22,12 +22,12 @@ public class DeleteCommandParserTest {
     private DeleteCommandParser parser = new DeleteCommandParser();
 
     @Test
-    public void parse_validArgs_Int_returnsDeleteCommand() {
+    public void parse_validArgsInt_returnsDeleteCommand() {
         assertParseSuccess(parser, "1", new DeleteCommand(INDEX_FIRST_PERSON));
     }
 
     @Test
-    public void parse_validArgs_all_returnsDeleteCommand() {
+    public void parse_validArgsAll_returnsDeleteCommand() {
         assertParseSuccess(parser, "all", new DeleteCommand(INDEX_SPECIAL));
     }
 
