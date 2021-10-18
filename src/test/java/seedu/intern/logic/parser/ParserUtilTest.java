@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.intern.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.intern.testutil.Assert.assertThrows;
 import static seedu.intern.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.intern.testutil.TypicalIndexes.INDEX_SPECIAL;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -53,6 +54,29 @@ public class ParserUtilTest {
 
         // Leading and trailing whitespaces
         assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
+    }
+
+    @Test
+    public void parseDelete_invalidInput_success() throws Exception {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDelete("10 a"));
+    }
+
+    @Test
+    public void parseDelete_outOfRangeInput_throwsParseException() {
+        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
+            -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
+    }
+
+    @Test
+    public void parseDelete_validInput_success() throws Exception {
+        // No whitespaces
+        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseDelete("1"));
+
+        // Leading and trailing whitespaces
+        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseDelete("  1  "));
+
+        // All keywaord
+        assertEquals(INDEX_SPECIAL, ParserUtil.parseDelete("all"));
     }
 
     @Test

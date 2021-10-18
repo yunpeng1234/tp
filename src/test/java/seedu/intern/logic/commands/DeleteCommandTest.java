@@ -8,6 +8,7 @@ import static seedu.intern.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.intern.testutil.TypicalApplicants.getTypicalInternWatcher;
 import static seedu.intern.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.intern.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.intern.testutil.TypicalIndexes.INDEX_SPECIAL;
 
 import org.junit.jupiter.api.Test;
 
@@ -35,6 +36,36 @@ public class DeleteCommandTest {
 
         ModelManager expectedModel = new ModelManager(model.getInternWatcher(), new UserPrefs());
         expectedModel.deleteApplicant(applicantToDelete);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_validAllUnfilteredList_success() {
+        Applicant applicantToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_SPECIAL);
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_ALL_SUCCESS,
+                model.getFilteredPersonList().size());
+
+        ModelManager expectedModel = new ModelManager();
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_validAllFilteredList_success() {
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+
+        Applicant applicantToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_SPECIAL);
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_ALL_SUCCESS,
+                model.getFilteredPersonList().size());
+
+        Model expectedModel = new ModelManager(model.getInternWatcher(), new UserPrefs());
+        expectedModel.deleteApplicant(applicantToDelete);
+        showNoPerson(expectedModel);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
