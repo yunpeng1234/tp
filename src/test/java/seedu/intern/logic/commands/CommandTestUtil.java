@@ -23,7 +23,6 @@ import seedu.intern.model.InternWatcher;
 import seedu.intern.model.Model;
 import seedu.intern.model.applicant.Applicant;
 import seedu.intern.model.applicant.NameContainsKeywordsPredicate;
-import seedu.intern.testutil.EditAllDescriptorBuilder;
 import seedu.intern.testutil.EditApplicantDescriptorBuilder;
 
 /**
@@ -93,8 +92,6 @@ public class CommandTestUtil {
 
     public static final EditCommand.EditApplicantDescriptor DESC_AMY;
     public static final EditCommand.EditApplicantDescriptor DESC_BOB;
-    public static final EditAllCommand.EditAllDescriptor DESC_ALL_AMY;
-    public static final EditAllCommand.EditAllDescriptor DESC_ALL_BOB;
 
     static {
         DESC_AMY = new EditApplicantDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -106,8 +103,6 @@ public class CommandTestUtil {
                 .withGrade(VALID_GRADE_BOB).withInstitution(VALID_INSTITUTION_BOB).withCourse(VALID_COURSE_BOB)
                 .withGraduationYearMonth(VALID_GRADUATION_YEARMONTH_BOB)
                 .withSkills(VALID_SKILL_JAVA, VALID_SKILL_PYTHON).build();
-        DESC_ALL_AMY = new EditAllDescriptorBuilder().withApplicationStatus(VALID_STATUS_AMY).build();
-        DESC_ALL_BOB = new EditAllDescriptorBuilder().withApplicationStatus(VALID_STATUS_BOB).build();
     }
 
     /**

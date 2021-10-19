@@ -16,7 +16,7 @@ public class Selection {
     }
 
     public int getIndexOneBased() {
-        if (hasIndex()) {
+        if (this.hasIndex()) {
             return this.index.getOneBased();
         } else {
             throw new NullPointerException(MESSAGE_MISSING_INDEX);
@@ -24,7 +24,7 @@ public class Selection {
     }
 
     public int getIndexZeroBased() {
-        if (hasIndex()) {
+        if (this.hasIndex()) {
             return this.index.getZeroBased();
         } else {
             throw new NullPointerException(MESSAGE_MISSING_INDEX);
@@ -74,8 +74,10 @@ public class Selection {
 
         if (this.hasIndex() && this.getIndexOneBased() != otherSelection.getIndexOneBased()) {
             return false;
+        } else if (this.hasAllFlag() && this.getAllFlag() != otherSelection.getAllFlag()) {
+            return false;
         } else {
-            return !this.hasAllFlag() || this.getAllFlag() == otherSelection.getAllFlag();
+            return true;
         }
     }
 }
