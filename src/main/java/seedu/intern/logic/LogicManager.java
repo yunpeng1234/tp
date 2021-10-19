@@ -65,6 +65,11 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public Applicant getApplicant() {
+        return model.getApplicant();
+    }
+
+    @Override
     public Path getInternWatcherFilePath() {
         return model.getInternWatcherFilePath();
     }

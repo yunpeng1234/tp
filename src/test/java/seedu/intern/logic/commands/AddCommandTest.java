@@ -129,6 +129,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void displayApplicant(Applicant applicant) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deleteApplicant(Applicant target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -140,6 +145,16 @@ public class AddCommandTest {
 
         @Override
         public ObservableList<Applicant> getFilteredPersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Applicant getApplicant() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateApplicant(Applicant newApplicant) {
             throw new AssertionError("This method should not be called.");
         }
 

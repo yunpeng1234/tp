@@ -59,6 +59,11 @@ public interface Model {
     boolean hasApplicant(Applicant applicant);
 
     /**
+     * Displays given applicant
+     */
+    void displayApplicant(Applicant applicant);
+
+    /**
      * Deletes the given applicant.
      * The applicant must exist in the intern watcher.
      */
@@ -81,6 +86,13 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered applicant list */
     ObservableList<Applicant> getFilteredPersonList();
 
+    /** Returns an unmodifiable view of the applicant to display */
+    Applicant getApplicant();
+
+    /**
+     * Updates the selected applicant.
+     */
+    void updateApplicant(Applicant newApplicant);
     /**
      * Updates the filter of the filtered applicant list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
