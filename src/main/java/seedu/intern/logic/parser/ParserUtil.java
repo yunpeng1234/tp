@@ -1,8 +1,8 @@
 package seedu.intern.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.intern.logic.parser.CliSyntax.FLAG_ALL;
 import static seedu.intern.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.intern.logic.parser.CliSyntax.FLAG_ALL;
 
 import java.util.Arrays;
 import java.util.Collection;
