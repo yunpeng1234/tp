@@ -18,10 +18,10 @@ import seedu.intern.model.applicant.Applicant;
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
-
     private final InternWatcher internWatcher;
     private final UserPrefs userPrefs;
     private final FilteredList<Applicant> filteredApplicants;
+    private Applicant applicant;
 
     /**
      * Initializes a ModelManager with the given internWatcher and userPrefs.
@@ -95,6 +95,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void displayApplicant(Applicant applicant) {
+        updateApplicant(applicant);
+    }
+
+    @Override
     public void deleteApplicant(Applicant target) {
         internWatcher.removePerson(target);
     }
@@ -121,6 +126,16 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Applicant> getFilteredPersonList() {
         return filteredApplicants;
+    }
+
+    @Override
+    public Applicant getApplicant() {
+        return applicant;
+    }
+
+    @Override
+    public void updateApplicant(Applicant newApplicant) {
+        applicant = newApplicant;
     }
 
     @Override
