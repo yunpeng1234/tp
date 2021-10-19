@@ -11,6 +11,10 @@ public class Selection {
         this.isSelectAll = isSelectAll;
     }
 
+    public Index getIndex() {
+        return index;
+    }
+
     public int getIndexOneBased() {
         if (this.hasIndex()) {
             return this.index.getOneBased();

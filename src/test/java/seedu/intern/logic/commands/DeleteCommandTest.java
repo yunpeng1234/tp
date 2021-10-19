@@ -6,14 +6,15 @@ import static seedu.intern.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.intern.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.intern.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.intern.testutil.TypicalApplicants.getTypicalInternWatcher;
-import static seedu.intern.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.intern.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.intern.testutil.TypicalIndexes.INDEX_SPECIAL;
+import static seedu.intern.testutil.TypicalSelections.SELECTION_ALL;
+import static seedu.intern.testutil.TypicalSelections.SELECTION_FIRST_PERSON;
+import static seedu.intern.testutil.TypicalSelections.SELECTION_SECOND_PERSON;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.intern.commons.core.Messages;
 import seedu.intern.commons.core.selection.Index;
+import seedu.intern.commons.core.selection.Selection;
 import seedu.intern.model.Model;
 import seedu.intern.model.ModelManager;
 import seedu.intern.model.UserPrefs;
@@ -29,8 +30,8 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Applicant applicantToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+        Applicant applicantToDelete = model.getFilteredPersonList().get(SELECTION_FIRST_PERSON.getIndexZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(SELECTION_FIRST_PERSON);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, applicantToDelete);
 
@@ -42,8 +43,7 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validAllUnfilteredList_success() {
-        Applicant applicantToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_SPECIAL);
+        DeleteCommand deleteCommand = new DeleteCommand(SELECTION_ALL);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_ALL_SUCCESS,
                 model.getFilteredPersonList().size());
@@ -55,10 +55,10 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validAllFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showPersonAtIndex(model, SELECTION_FIRST_PERSON.getIndex());
 
-        Applicant applicantToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_SPECIAL);
+        Applicant applicantToDelete = model.getFilteredPersonList().get(SELECTION_FIRST_PERSON.getIndexZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(SELECTION_ALL);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_ALL_SUCCESS,
                 model.getFilteredPersonList().size());
@@ -73,17 +73,17 @@ public class DeleteCommandTest {
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
+        DeleteCommand deleteCommand = new DeleteCommand(Selection.fromIndex(outOfBoundIndex));
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showPersonAtIndex(model, SELECTION_FIRST_PERSON.getIndex());
 
-        Applicant applicantToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+        Applicant applicantToDelete = model.getFilteredPersonList().get(SELECTION_FIRST_PERSON.getIndexZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(SELECTION_FIRST_PERSON);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, applicantToDelete);
 
@@ -96,11 +96,11 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showPersonAtIndex(model, SELECTION_FIRST_PERSON.getIndex());
 
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
+        Selection outOfBoundIndex = SELECTION_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of intern book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getInternWatcher().getPersonList().size());
+        assertTrue(outOfBoundIndex.getIndexZeroBased() < model.getInternWatcher().getPersonList().size());
 
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
@@ -109,14 +109,14 @@ public class DeleteCommandTest {
 
     @Test
     public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_PERSON);
-        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_PERSON);
+        DeleteCommand deleteFirstCommand = new DeleteCommand(SELECTION_FIRST_PERSON);
+        DeleteCommand deleteSecondCommand = new DeleteCommand(SELECTION_SECOND_PERSON);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_PERSON);
+        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(SELECTION_FIRST_PERSON);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false

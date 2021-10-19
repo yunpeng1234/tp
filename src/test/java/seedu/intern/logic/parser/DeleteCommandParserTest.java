@@ -3,8 +3,8 @@ package seedu.intern.logic.parser;
 import static seedu.intern.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.intern.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.intern.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.intern.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.intern.testutil.TypicalIndexes.INDEX_SPECIAL;
+import static seedu.intern.testutil.TypicalSelections.SELECTION_ALL;
+import static seedu.intern.testutil.TypicalSelections.SELECTION_FIRST_PERSON;
 
 import org.junit.jupiter.api.Test;
 
@@ -23,12 +23,12 @@ public class DeleteCommandParserTest {
 
     @Test
     public void parse_validArgsInt_returnsDeleteCommand() {
-        assertParseSuccess(parser, "1", new DeleteCommand(INDEX_FIRST_PERSON));
+        assertParseSuccess(parser, "1", new DeleteCommand(SELECTION_FIRST_PERSON));
     }
 
     @Test
     public void parse_validArgsAll_returnsDeleteCommand() {
-        assertParseSuccess(parser, "all", new DeleteCommand(INDEX_SPECIAL));
+        assertParseSuccess(parser, "ALL", new DeleteCommand(SELECTION_ALL));
     }
 
     @Test
