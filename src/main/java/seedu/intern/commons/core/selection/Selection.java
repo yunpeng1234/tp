@@ -12,7 +12,7 @@ public class Selection {
     }
 
     public int getIndexOneBased() {
-        if (hasIndex()) {
+        if (this.hasIndex()) {
             return this.index.getOneBased();
         } else {
             throw new NullPointerException(MESSAGE_MISSING_INDEX);
@@ -20,7 +20,7 @@ public class Selection {
     }
 
     public int getIndexZeroBased() {
-        if (hasIndex()) {
+        if (this.hasIndex()) {
             return this.index.getZeroBased();
         } else {
             throw new NullPointerException(MESSAGE_MISSING_INDEX);
@@ -49,5 +49,31 @@ public class Selection {
 
     public static Selection fromIndex(Index index) {
         return new Selection(index, null);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Selection)) { // instanceof handles nulls
+            return false;
+        }
+
+        Selection otherSelection = (Selection) other;
+
+        if (this.hasIndex() != otherSelection.hasIndex()
+                || this.hasAllFlag() != otherSelection.hasAllFlag()) {
+            return false;
+        }
+
+        if (this.hasIndex() && this.getIndexOneBased() != otherSelection.getIndexOneBased()) {
+            return false;
+        } else if (this.hasAllFlag() && this.getAllFlag() != otherSelection.getAllFlag()) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }
