@@ -7,7 +7,7 @@ import seedu.intern.model.Model;
 
 public class UndoCommand extends Command {
     public static final String COMMAND_WORD = "undo";
-    public static final String MESSAGE_SUCCESS = "Command has been undone: %s";
+    public static final String MESSAGE_SUCCESS = "Command has been undone";
     public static final String MESSAGE_NO_UNDO = "No command to undo";
 
     @Override
@@ -18,7 +18,7 @@ public class UndoCommand extends Command {
             throw new CommandException(MESSAGE_NO_UNDO);
         }
 
-        String command = model.undo();
-        return new CommandResult(String.format(MESSAGE_SUCCESS, command));
+        model.undoInternWatcher();
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 }

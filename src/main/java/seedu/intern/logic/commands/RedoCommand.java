@@ -7,7 +7,7 @@ import seedu.intern.model.Model;
 
 public class RedoCommand extends Command {
     public static final String COMMAND_WORD = "redo";
-    public static final String MESSAGE_SUCCESS = "Undone command has been redone: %s";
+    public static final String MESSAGE_SUCCESS = "Undone command has been redone";
     public static final String MESSAGE_NO_UNDO = "No command to redo";
 
     @Override
@@ -18,7 +18,7 @@ public class RedoCommand extends Command {
             throw new CommandException(MESSAGE_NO_UNDO);
         }
 
-        String command = model.redo();
-        return new CommandResult(String.format(MESSAGE_SUCCESS, command));
+        model.redoInternWatcher();
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 }
