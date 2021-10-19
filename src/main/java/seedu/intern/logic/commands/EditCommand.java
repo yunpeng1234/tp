@@ -20,6 +20,7 @@ import java.util.Set;
 
 import seedu.intern.commons.core.Messages;
 import seedu.intern.commons.core.selection.Index;
+import seedu.intern.commons.core.selection.Selection;
 import seedu.intern.commons.util.CollectionUtil;
 import seedu.intern.logic.commands.exceptions.CommandException;
 import seedu.intern.model.Model;
@@ -42,9 +43,9 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the applicant identified "
-            + "by the index number used in the displayed applicant list. "
+            + "by the index number in the currently displayed list, or all currently displayed applicants. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Index Parameters: INDEX (must be a positive integer)"
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
@@ -52,28 +53,43 @@ public class EditCommand extends Command {
             + "[" + PREFIX_INSTITUTION + "INSTITUTION] "
             + "[" + PREFIX_COURSE + "COURSE] "
             + "[" + PREFIX_GRADUATIONYEARMONTH + "GRADUATION_YEAR_MONTH] "
-            + "[" + PREFIX_STATUS + "STATUS] "
+            + "[" + PREFIX_STATUS + "APPLICATION STATUS] "
             + "[" + PREFIX_SKILL + "SKILL]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
+            + "Example index: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_EMAIL + "johndoe@example.com\n"
+            + "ALL Parameters: ALL (must be uppercase)"
+            + "[" + PREFIX_STATUS + "APPLICATION STATUS] "
+            + "Example all: " + COMMAND_WORD + " ALL "
+            + PREFIX_STATUS + "APPLIED\n";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Applicant: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This applicant already exists in Intern Watcher.";
+    public static final String MESSAGE_EDIT_ALL_SUCCESS = "Successfully edited %d of %d applicants.";
 
-    private final Index index;
+    private final Selection selection;
     private final EditApplicantDescriptor editApplicantDescriptor;
 
     /**
+     * @deprecated Use selection constructor instead.
      * @param index of the applicant in the filtered applicant list to edit
      * @param editApplicantDescriptor details to edit the applicant with
      */
+    @Deprecated
     public EditCommand(Index index, EditApplicantDescriptor editApplicantDescriptor) {
-        requireNonNull(index);
+        this(Selection.fromIndex(index), editApplicantDescriptor);
+    }
+
+    /**
+     * @param selection of the applicant(s) in the filtered applicant list to edit
+     * @param editApplicantDescriptor details to edit the applicant with
+     */
+    public EditCommand(Selection selection, EditApplicantDescriptor editApplicantDescriptor) {
+        requireNonNull(selection);
         requireNonNull(editApplicantDescriptor);
 
-        this.index = index;
+        this.selection = selection;
         this.editApplicantDescriptor = new EditApplicantDescriptor(editApplicantDescriptor);
     }
 
@@ -82,28 +98,44 @@ public class EditCommand extends Command {
         requireNonNull(model);
         List<Applicant> lastShownList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        if (selection.hasIndex()) {
+            if (selection.getIndexZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
+
+            Applicant applicantToEdit = lastShownList.get(selection.getIndexZeroBased());
+            Applicant editedApplicant = createEditedApplicant(applicantToEdit, editApplicantDescriptor);
+
+            if (!applicantToEdit.isSameApplicant(editedApplicant) && model.hasApplicant(editedApplicant)) {
+                throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            }
+
+            model.setApplicant(applicantToEdit, editedApplicant);
+            model.updateFilteredApplicantList(PREDICATE_SHOW_ALL_PERSONS);
+            return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedApplicant));
+        } else {
+            if (!selection.getAllFlag()) {
+                throw new CommandException(Messages.MESSAGE_UNEXPECTED_FLAG);
+            }
+            int addSuccesses = 0;
+
+            // TODO: Catch failures to update?
+            for (Applicant applicantToEdit : lastShownList) {
+                Applicant editedApplicant = createEditedApplicant(applicantToEdit, editApplicantDescriptor);
+                model.setApplicant(applicantToEdit, editedApplicant);
+                addSuccesses++;
+            }
+
+            return new CommandResult(String.format(MESSAGE_EDIT_ALL_SUCCESS, addSuccesses, lastShownList.size()));
         }
-
-        Applicant applicantToEdit = lastShownList.get(index.getZeroBased());
-        Applicant editedApplicant = createEditedPerson(applicantToEdit, editApplicantDescriptor);
-
-        if (!applicantToEdit.isSameApplicant(editedApplicant) && model.hasApplicant(editedApplicant)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
-
-        model.setApplicant(applicantToEdit, editedApplicant);
-        model.updateFilteredApplicantList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedApplicant));
     }
 
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Applicant createEditedPerson(Applicant applicantToEdit,
-                                                EditApplicantDescriptor editApplicantDescriptor) {
+    private static Applicant createEditedApplicant(Applicant applicantToEdit,
+                                                   EditApplicantDescriptor editApplicantDescriptor) {
         assert applicantToEdit != null;
 
         Name updatedName = editApplicantDescriptor.getName().orElse(applicantToEdit.getName());
@@ -139,7 +171,7 @@ public class EditCommand extends Command {
 
         // state check
         EditCommand e = (EditCommand) other;
-        return index.equals(e.index)
+        return selection.equals(e.selection)
                 && editApplicantDescriptor.equals(e.editApplicantDescriptor);
     }
 
@@ -304,8 +336,8 @@ public class EditCommand extends Command {
                     + ", institution=" + institution
                     + ", graduation year month=" + graduationYearMonth
                     + ", course=" + course
+                    + ", status=" + status
                     + ", skill=" + skills + '}';
         }
-
     }
 }

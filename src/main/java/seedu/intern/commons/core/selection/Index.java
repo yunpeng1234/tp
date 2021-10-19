@@ -31,6 +31,21 @@ public class Index {
         return zeroBasedIndex + 1;
     }
 
+    public void setSpecialIndex() {
+        zeroBasedIndex = -1;
+    }
+
+    /**
+     * @deprecated Use {@code Selection} instead.
+     * Creates a special {@code Index} by making it -1.
+     */
+    @Deprecated
+    public static Index fromSpecial() {
+        Index special = new Index(0);
+        special.setSpecialIndex();
+        return special;
+    }
+
     /**
      * Creates a new {@code Index} using a zero-based index.
      */

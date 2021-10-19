@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.intern.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.intern.testutil.Assert.assertThrows;
 import static seedu.intern.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.intern.testutil.TypicalSelections.SELECTION_ALL;
+import static seedu.intern.testutil.TypicalSelections.SELECTION_FIRST_PERSON;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -53,6 +55,29 @@ public class ParserUtilTest {
 
         // Leading and trailing whitespaces
         assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
+    }
+
+    @Test
+    public void parseDelete_invalidInput_success() throws Exception {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDelete("10 a"));
+    }
+
+    @Test
+    public void parseDelete_outOfRangeInput_throwsParseException() {
+        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
+            -> ParserUtil.parseSelection(Long.toString(Integer.MAX_VALUE + 1)));
+    }
+
+    @Test
+    public void parseDelete_validInput_success() throws Exception {
+        // No whitespaces
+        assertEquals(SELECTION_FIRST_PERSON, ParserUtil.parseSelection("1"));
+
+        // Leading and trailing whitespaces
+        assertEquals(SELECTION_FIRST_PERSON, ParserUtil.parseSelection("  1  "));
+
+        // All keyword
+        assertEquals(SELECTION_ALL, ParserUtil.parseSelection("ALL"));
     }
 
     @Test

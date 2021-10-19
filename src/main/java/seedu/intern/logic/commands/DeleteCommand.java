@@ -6,6 +6,7 @@ import java.util.List;
 
 import seedu.intern.commons.core.Messages;
 import seedu.intern.commons.core.selection.Index;
+import seedu.intern.commons.core.selection.Selection;
 import seedu.intern.logic.commands.exceptions.CommandException;
 import seedu.intern.model.Model;
 import seedu.intern.model.applicant.Applicant;
@@ -22,12 +23,14 @@ public class DeleteCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Applicant: %1$s";
 
-    private final Index targetIndex;
+    public static final String MESSAGE_DELETE_ALL_SUCCESS = " %1$s Applicants deleted!";
 
-    public DeleteCommand(Index targetIndex) {
-        this.targetIndex = targetIndex;
+    private final Selection targetSelection;
+
+    public DeleteCommand(Selection targetSelection) {
+        this.targetSelection = targetSelection;
     }
 
     @Override
@@ -35,19 +38,29 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         List<Applicant> lastShownList = model.getFilteredPersonList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        if (targetSelection.hasIndex()) {
+            if (targetSelection.getIndexZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
         }
-
-        Applicant applicantToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deleteApplicant(applicantToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, applicantToDelete));
+        if (targetSelection.hasAllFlag()) {
+            int length = lastShownList.size();
+            for (int i = 0; i < length; i++) {
+                Applicant applicantToDelete = lastShownList.get(0);
+                model.deleteApplicant(applicantToDelete);
+            }
+            return new CommandResult(String.format(MESSAGE_DELETE_ALL_SUCCESS, String.valueOf(length)));
+        } else {
+            Applicant applicantToDelete = lastShownList.get(targetSelection.getIndexZeroBased());
+            model.deleteApplicant(applicantToDelete);
+            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, applicantToDelete));
+        }
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof DeleteCommand // instanceof handles nulls
-                && targetIndex.equals(((DeleteCommand) other).targetIndex)); // state check
+                && targetSelection.equals(((DeleteCommand) other).targetSelection)); // state check
     }
 }

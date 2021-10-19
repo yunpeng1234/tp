@@ -18,6 +18,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.intern.commons.core.selection.Index;
+import seedu.intern.commons.core.selection.Selection;
 import seedu.intern.logic.commands.EditCommand;
 import seedu.intern.logic.commands.EditCommand.EditApplicantDescriptor;
 import seedu.intern.logic.parser.exceptions.ParseException;
@@ -50,12 +51,24 @@ public class EditCommandParser implements Parser<EditCommand> {
                 PREFIX_STATUS);
 
 
-        Index index;
+        Selection selection;
 
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            selection = ParserUtil.parseSelection(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+        }
+        if (selection.hasAllFlag() && (argMultimap.getValue(PREFIX_NAME).isPresent()
+                || argMultimap.getValue(PREFIX_PHONE).isPresent()
+                || argMultimap.getValue(PREFIX_COURSE).isPresent()
+                || argMultimap.getValue(PREFIX_EMAIL).isPresent()
+                || argMultimap.getValue(PREFIX_GRADE).isPresent()
+                || argMultimap.getValue(PREFIX_GRADUATIONYEARMONTH).isPresent()
+                || argMultimap.getValue(PREFIX_INSTITUTION).isPresent()
+                || argMultimap.getValue(PREFIX_SKILL).isPresent()
+                )) {
+            throw new ParseException("ALL FLAG CAN ONLY BE USED WITH:\n"
+                    + "[" + PREFIX_STATUS + "APPLICATION STATUS]\n");
         }
 
         EditApplicantDescriptor editApplicantDescriptor = new EditApplicantDescriptor();
@@ -94,7 +107,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(index, editApplicantDescriptor);
+        return new EditCommand(selection, editApplicantDescriptor);
     }
 
     /**

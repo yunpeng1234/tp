@@ -1,12 +1,14 @@
 package seedu.intern.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.intern.logic.parser.CliSyntax.FLAG_ALL;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 import seedu.intern.commons.core.selection.Index;
+import seedu.intern.commons.core.selection.Selection;
 import seedu.intern.commons.util.StringUtil;
 import seedu.intern.logic.parser.exceptions.ParseException;
 import seedu.intern.model.applicant.ApplicationStatus;
@@ -25,14 +27,56 @@ import seedu.intern.model.skills.Skill;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_SELECTION = "Selection is not a non-zero unsigned integer or ALL.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
-     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     * @throws ParseException if the specified selection is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+        return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses {@code selection} into a {@code Selection} and returns it. Leading and trailing whitespaces will be
+     * trimmed.
+     * @throws ParseException if the specified selection is invalid.
+     */
+    public static Selection parseSelection(String selection) throws ParseException {
+        String trimmedSelection = selection.trim();
+        if (StringUtil.isInteger(trimmedSelection) && !StringUtil.isNonZeroUnsignedInteger(trimmedSelection)) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        } else if (!StringUtil.isNonZeroUnsignedInteger(trimmedSelection) && !StringUtil.isAll(trimmedSelection)) {
+            throw new ParseException(MESSAGE_INVALID_SELECTION);
+        }
+
+        if (StringUtil.isAll(trimmedSelection)) {
+            return Selection.fromAllFlag(selection.equals(FLAG_ALL));
+        } else {
+            return Selection.fromIndex(Index.fromOneBased(Integer.parseInt(trimmedSelection)));
+        }
+    }
+
+    /**
+     * @deprecated Use parseSelection instead.
+     * Parses {@code oneBasedIndex/ ALL keyword} into an {@code Index} and
+     * returns it. Leading and trailing whitespaces will be trimmed.
+     * @throws ParseException if the specified selection is invalid (not non-zero unsigned integer).
+     */
+    @Deprecated
+    public static Index parseDelete(String oneBasedIndex) throws ParseException {
+        String trimmedIndex = oneBasedIndex.trim();
+        if (trimmedIndex.equals("all")) {
+            Index specialTag = Index.fromZeroBased(0);
+            specialTag.setSpecialIndex();
+            return specialTag;
+        }
+
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
