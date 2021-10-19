@@ -1,13 +1,17 @@
 package seedu.intern.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.intern.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.intern.commons.core.index.Index;
 import seedu.intern.commons.util.StringUtil;
+import seedu.intern.logic.commands.FilterCommand;
 import seedu.intern.logic.parser.exceptions.ParseException;
 import seedu.intern.model.applicant.ApplicationStatus;
 import seedu.intern.model.applicant.Course;
@@ -157,13 +161,34 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code Collection<String> courses} into a {@code Set<Course>}.
+     * Parses a {@code String courseFilter} into a {@code List<String>}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code course} is invalid.
      */
-    public static Set<Course> parseCourses(Collection<String> courses) throws ParseException {
+    public static List<String> parseCourseFilter(String courseFilter) throws ParseException {
+        requireNonNull(courseFilter);
+        String trimmedCourse = courseFilter.trim();
+        if (!Course.isValidCourse(trimmedCourse)) {
+            throw new ParseException(Course.MESSAGE_CONSTRAINTS);
+        }
+        if (trimmedCourse.isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+        }
+        String[] courseKeywords = trimmedCourse.split("\\s+");
+
+        return Arrays.asList(courseKeywords);
+    }
+
+    /**
+     * Parses {@code Collection<String> courseFilters} into a {@code Set<List<String>>}.
+     */
+    public static Set<List<String>> parseCourseFilters(Collection<String> courses) throws ParseException {
         requireNonNull(courses);
-        final Set<Course> courseSet = new HashSet<>();
+        final Set<List<String>> courseSet = new HashSet<>();
         for (String course : courses) {
-            courseSet.add(parseCourse(course));
+            courseSet.add(parseCourseFilter(course));
         }
         return courseSet;
     }

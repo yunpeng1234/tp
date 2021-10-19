@@ -10,6 +10,7 @@ import static seedu.intern.logic.parser.CliSyntax.PREFIX_STATUS;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -17,7 +18,6 @@ import seedu.intern.logic.commands.FilterCommand;
 import seedu.intern.logic.commands.FilterCommand.FilterDescriptor;
 import seedu.intern.logic.parser.exceptions.ParseException;
 import seedu.intern.model.applicant.ApplicationStatus;
-import seedu.intern.model.applicant.Course;
 import seedu.intern.model.applicant.Institution;
 import seedu.intern.model.skills.Skill;
 
@@ -50,9 +50,8 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         parseInstitutionsForEdit(argMultimap.getAllValues(PREFIX_INSTITUTION))
                 .ifPresent(filterDescriptor::setInstitutions);
         if (argMultimap.getValue(PREFIX_GRADUATIONYEARMONTH).isPresent()) {
-            filterDescriptor
-                    .setGraduationYearMonth(ParserUtil.parseGraduationYearMonth(
-                            argMultimap.getValue(PREFIX_GRADUATIONYEARMONTH).get()));
+            filterDescriptor.setGraduationYearMonth(ParserUtil.parseGraduationYearMonth(
+                    argMultimap.getValue(PREFIX_GRADUATIONYEARMONTH).get()));
         }
         parseCoursesForEdit(argMultimap.getAllValues(PREFIX_COURSE)).ifPresent(filterDescriptor::setCourses);
         parseApplicationStatusesForEdit(argMultimap.getAllValues(PREFIX_STATUS))
@@ -60,7 +59,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         parseSkillsForEdit(argMultimap.getAllValues(PREFIX_SKILL)).ifPresent(filterDescriptor::setSkills);
 
         if (!filterDescriptor.isAnyFieldFiltered()) {
-            throw new ParseException(MESSAGE_NOT_FILTERED);
+            throw new ParseException(MESSAGE_NOT_FILTERED + "\n" + FilterCommand.MESSAGE_USAGE);
         }
 
         return new FilterCommand(filterDescriptor);
@@ -79,14 +78,15 @@ public class FilterCommandParser implements Parser<FilterCommand> {
     }
 
 
-    private Optional<Set<Course>> parseCoursesForEdit(Collection<String> courses) throws ParseException {
+    private Optional<Set<List<String>>> parseCoursesForEdit(Collection<String> courses) throws ParseException {
         assert courses != null;
 
         if (courses.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> courseSet = courses.size() == 1 && courses.contains("") ? Collections.emptySet() : courses;
-        return Optional.of(ParserUtil.parseCourses(courseSet));
+        Collection<String> courseSet = courses.size() == 1 && courses.contains("")
+                ? Collections.emptySet() : courses;
+        return Optional.of(ParserUtil.parseCourseFilters(courseSet));
     }
 
     private Optional<Set<ApplicationStatus>> parseApplicationStatusesForEdit(Collection<String> statuses)

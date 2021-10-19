@@ -1,5 +1,6 @@
 package seedu.intern.model.applicant;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -17,7 +18,7 @@ public class CombineFiltersPredicate implements Predicate<Applicant> {
 
     /**
      * Constructor for a CombineFilterPredicate
-     * @param filterDescriptor
+     * @param filterDescriptor a FilterDescriptor that has details of the filters
      */
     public CombineFiltersPredicate(FilterDescriptor filterDescriptor) {
         this.filterDescriptor = filterDescriptor;
@@ -30,7 +31,7 @@ public class CombineFiltersPredicate implements Predicate<Applicant> {
         Optional<Grade> grade = filterDescriptor.getGrade();
         Optional<Set<Institution>> institutions = filterDescriptor.getInstitutions();
         Optional<GraduationYearMonth> graduationYearMonth = filterDescriptor.getGraduationYearMonth();
-        Optional<Set<Course>> courses = filterDescriptor.getCourses();
+        Optional<Set<List<String>>> courses = filterDescriptor.getCourses();
         Optional<Set<ApplicationStatus>> statuses = filterDescriptor.getApplicationStatuses();
         Optional<Set<Skill>> skills = filterDescriptor.getSkills();
 
@@ -44,8 +45,9 @@ public class CombineFiltersPredicate implements Predicate<Applicant> {
                 setResult(result && GraduationYearMonth.compareDate(applicant.getGraduationYearMonth().value,
                         graduationContent.value) < 0));
         courses.ifPresent(coursesContent ->
-                setResult(result && coursesContent.stream().anyMatch(course ->
-                        StringUtil.containsWordIgnoreCase(applicant.getCourse().value, course.value))));
+                setResult(result && coursesContent.stream().anyMatch(courseFilter ->
+                        courseFilter.stream().allMatch(courseKeyword ->
+                                StringUtil.containsWordIgnoreCase(applicant.getCourse().value, courseKeyword)))));
         statuses.ifPresent(statusesContent ->
                 setResult(result && statusesContent.stream().anyMatch(status ->
                         StringUtil.containsWordIgnoreCase(applicant.getApplicationStatus().value.name(),
