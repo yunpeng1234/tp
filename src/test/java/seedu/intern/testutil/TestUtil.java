@@ -5,7 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import seedu.intern.commons.core.index.Index;
+import seedu.intern.commons.core.selection.Index;
 import seedu.intern.model.Model;
 import seedu.intern.model.applicant.Applicant;
 

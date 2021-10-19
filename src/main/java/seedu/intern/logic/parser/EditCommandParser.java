@@ -17,7 +17,7 @@ import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.intern.commons.core.index.Index;
+import seedu.intern.commons.core.selection.Index;
 import seedu.intern.logic.commands.EditCommand;
 import seedu.intern.logic.commands.EditCommand.EditApplicantDescriptor;
 import seedu.intern.logic.parser.exceptions.ParseException;

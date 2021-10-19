@@ -12,7 +12,7 @@ import static seedu.intern.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import org.junit.jupiter.api.Test;
 
 import seedu.intern.commons.core.Messages;
-import seedu.intern.commons.core.index.Index;
+import seedu.intern.commons.core.selection.Index;
 import seedu.intern.model.Model;
 import seedu.intern.model.ModelManager;
 import seedu.intern.model.UserPrefs;

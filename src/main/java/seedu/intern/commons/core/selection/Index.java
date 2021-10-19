@@ -1,4 +1,4 @@
-package seedu.intern.commons.core.index;
+package seedu.intern.commons.core.selection;
 
 /**
  * Represents a zero-based or one-based index.

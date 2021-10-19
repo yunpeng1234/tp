@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.intern.commons.core.index.Index;
+import seedu.intern.commons.core.selection.Index;
 import seedu.intern.commons.util.StringUtil;
 import seedu.intern.logic.parser.exceptions.ParseException;
 import seedu.intern.model.applicant.ApplicationStatus;

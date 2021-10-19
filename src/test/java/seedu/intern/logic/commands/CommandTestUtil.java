@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.intern.commons.core.index.Index;
+import seedu.intern.commons.core.selection.Index;
 import seedu.intern.logic.commands.exceptions.CommandException;
 import seedu.intern.model.InternWatcher;
 import seedu.intern.model.Model;
