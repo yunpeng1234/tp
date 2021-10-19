@@ -84,7 +84,7 @@ A applicant can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com addr/311, Clementi Ave 2 g/4.50 i/NTU c/CS y/06/2025 a/INTERVIEWED t/friends t/owesMoney`
+* `add n/John Doe p/98765432 e/johnd@example.com addr/311, Clementi Ave 2 g/4.50 i/NTU c/CS y/06/2025 a/INTERVIEWED s/Python s/Java`
 
 ### Listing all applicants : `list`
 
@@ -92,22 +92,23 @@ Shows a list of all applicants in Inter Watcher.
 
 Format: `list`
 
-### Editing a applicant : `edit`
+### Editing applicants : `edit`
 
-Edits an existing applicant in Inter Watcher.
+Edits an existing applicant, or all currently displayed applicants in Inter Watcher. 
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [g/GRADE] [i/INSTITUTION] [c/COURSE] [y/GRADUATION_YEAR_MONTH] [a/STATUS] [t/TAG]…`
-
-* Edits the applicant at the specified `INDEX`. The index refers to the index number shown in the displayed applicant list. The index **must be a positive integer** 1, 2, 3, …+
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [g/GRADE] [i/INSTITUTION] [c/COURSE] [y/GRADUATION_YEAR_MONTH] [a/STATUS] [t/SKILL]…`
+`edit ALL [a/STATUS]`
+* If `INDEX` is specified, Edits the applicant at the specified `INDEX`. The index refers to the index number shown in the displayed applicant list. The index **must be a positive integer** 1, 2, 3, …+
+* If `ALL` is specified, edits all applicants currently displayed.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the applicant will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+* You can remove all the person’s skills by typing `s/` without
+    specifying any skills after it.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st applicant to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd applicant to be `Betsy Crower` and clears all existing tags.
+*  `edit 2 n/Betsy Crower s/` Edits the name of the 2nd applicant to be `Betsy Crower` and clears all existing skills.
 
 ### Locating applicants by name: `find`
 
