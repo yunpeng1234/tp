@@ -10,13 +10,14 @@ import static seedu.intern.logic.parser.CliSyntax.PREFIX_INSTITUTION;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_SKILL;
+import static seedu.intern.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.intern.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.intern.commons.core.index.Index;
+import seedu.intern.commons.core.selection.Index;
 import seedu.intern.logic.commands.exceptions.CommandException;
 import seedu.intern.model.InternWatcher;
 import seedu.intern.model.Model;
@@ -37,6 +38,8 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_GRADE_AMY = "4.50";
     public static final String VALID_GRADE_BOB = "4.60";
+    public static final String VALID_STATUS_AMY = "INTERVIEWED";
+    public static final String VALID_STATUS_BOB = "REJECTED";
     public static final String VALID_INSTITUTION_AMY = "NUS";
     public static final String VALID_INSTITUTION_BOB = "NUSS";
     @SuppressWarnings("SpellCheckingInspection")
@@ -64,6 +67,8 @@ public class CommandTestUtil {
     @SuppressWarnings("SpellCheckingInspection")
     public static final String GRADUATION_YEARMONTH_DESC_BOB = " "
             + PREFIX_GRADUATIONYEARMONTH + VALID_GRADUATION_YEARMONTH_BOB;
+    public static final String STATUS_DESC_AMY = " " + PREFIX_STATUS + VALID_STATUS_AMY;
+    public static final String STATUS_DESC_BOB = " " + PREFIX_STATUS + VALID_STATUS_BOB;
     public static final String COURSE_DESC_AMY = " " + PREFIX_COURSE + VALID_COURSE_AMY;
     public static final String COURSE_DESC_BOB = " " + PREFIX_COURSE + VALID_COURSE_BOB;
     public static final String SKILL_DESC_PYTHON = " " + PREFIX_SKILL + VALID_SKILL_PYTHON;
@@ -75,6 +80,7 @@ public class CommandTestUtil {
     public static final String INVALID_GRADE_DESC = " " + PREFIX_GRADE + "5.000"; //3dp not allowed for grades
     public static final String INVALID_SKILL_DESC = " " + PREFIX_SKILL + "java*"; // '*' not allowed in SKILLs
     public static final String INVALID_INSTITUTION_DESC = " " + PREFIX_INSTITUTION + "NU$"; // '$' not allowed
+    public static final String INVALID_STATUS_DESC = " " + PREFIX_STATUS + "somestring"; // value must be in enum
     @SuppressWarnings("SpellCheckingInspection")
     public static final String INVALID_GRADUATION_YEARMONTH_DESC = " " + PREFIX_GRADUATIONYEARMONTH
             + "13/2021"; // invalid month not allowed
@@ -89,11 +95,11 @@ public class CommandTestUtil {
 
     static {
         DESC_AMY = new EditApplicantDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
+                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withApplicationStatus(VALID_STATUS_AMY)
                 .withGrade(VALID_GRADE_AMY).withInstitution(VALID_INSTITUTION_AMY).withCourse(VALID_COURSE_AMY)
                 .withGraduationYearMonth(VALID_GRADUATION_YEARMONTH_AMY).withSkills(VALID_SKILL_PYTHON).build();
         DESC_BOB = new EditApplicantDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withApplicationStatus(VALID_STATUS_BOB)
                 .withGrade(VALID_GRADE_BOB).withInstitution(VALID_INSTITUTION_BOB).withCourse(VALID_COURSE_BOB)
                 .withGraduationYearMonth(VALID_GRADUATION_YEARMONTH_BOB)
                 .withSkills(VALID_SKILL_JAVA, VALID_SKILL_PYTHON).build();

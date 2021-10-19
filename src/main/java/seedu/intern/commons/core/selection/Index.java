@@ -1,4 +1,4 @@
-package seedu.intern.commons.core.index;
+package seedu.intern.commons.core.selection;
 
 /**
  * Represents a zero-based or one-based index.
@@ -29,6 +29,21 @@ public class Index {
 
     public int getOneBased() {
         return zeroBasedIndex + 1;
+    }
+
+    public void setSpecialIndex() {
+        zeroBasedIndex = -1;
+    }
+
+    /**
+     * @deprecated Use {@code Selection} instead.
+     * Creates a special {@code Index} by making it -1.
+     */
+    @Deprecated
+    public static Index fromSpecial() {
+        Index special = new Index(0);
+        special.setSpecialIndex();
+        return special;
     }
 
     /**

@@ -4,6 +4,7 @@ package seedu.intern.logic.parser;
  * Contains Command Line Interface (CLI) syntax definitions common to multiple commands
  */
 public class CliSyntax {
+    public static final String FLAG_ALL = "ALL";
 
     /* Prefix definitions */
     public static final Prefix PREFIX_NAME = new Prefix("n/");

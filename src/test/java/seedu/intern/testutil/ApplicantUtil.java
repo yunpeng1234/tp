@@ -8,6 +8,7 @@ import static seedu.intern.logic.parser.CliSyntax.PREFIX_INSTITUTION;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_SKILL;
+import static seedu.intern.logic.parser.CliSyntax.PREFIX_STATUS;
 
 import java.util.Set;
 
@@ -55,6 +56,8 @@ public class ApplicantUtil {
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getGrade().ifPresent(grade -> sb.append(PREFIX_GRADE).append(grade.value).append(" "));
+        descriptor.getApplicationStatus()
+                .ifPresent(status -> sb.append(PREFIX_STATUS).append(status.value).append(" "));
         descriptor.getInstitution().ifPresent(institution -> sb.append(PREFIX_INSTITUTION)
                 .append(institution.value).append(" "));
         descriptor.getCourse().ifPresent(course -> sb.append(PREFIX_COURSE).append(course.value).append(" "));
