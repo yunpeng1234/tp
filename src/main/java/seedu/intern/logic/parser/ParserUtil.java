@@ -1,15 +1,19 @@
 package seedu.intern.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.intern.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.intern.logic.parser.CliSyntax.FLAG_ALL;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.intern.commons.core.selection.Index;
 import seedu.intern.commons.core.selection.Selection;
 import seedu.intern.commons.util.StringUtil;
+import seedu.intern.logic.commands.FilterCommand;
 import seedu.intern.logic.parser.exceptions.ParseException;
 import seedu.intern.model.applicant.ApplicationStatus;
 import seedu.intern.model.applicant.Course;
@@ -159,6 +163,18 @@ public class ParserUtil {
     }
 
     /**
+     * Parses {@code Collection<String> institutions} into a {@code Set<Institution>}.
+     */
+    public static Set<Institution> parseInstitutions(Collection<String> institutions) throws ParseException {
+        requireNonNull(institutions);
+        final Set<Institution> institutionSet = new HashSet<>();
+        for (String institution : institutions) {
+            institutionSet.add(parseInstitution(institution));
+        }
+        return institutionSet;
+    }
+
+    /**
      * Parses a {@code String graduationYearMonth} into an {@code GraduationYearMonth}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -189,6 +205,39 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String courseFilter} into a {@code List<String>}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code course} is invalid.
+     */
+    public static List<String> parseCourseFilter(String courseFilter) throws ParseException {
+        requireNonNull(courseFilter);
+        String trimmedCourse = courseFilter.trim();
+        if (!Course.isValidCourse(trimmedCourse)) {
+            throw new ParseException(Course.MESSAGE_CONSTRAINTS);
+        }
+        if (trimmedCourse.isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+        }
+        String[] courseKeywords = trimmedCourse.split("\\s+");
+
+        return Arrays.asList(courseKeywords);
+    }
+
+    /**
+     * Parses {@code Collection<String> courseFilters} into a {@code Set<List<String>>}.
+     */
+    public static Set<List<String>> parseCourseFilters(Collection<String> courses) throws ParseException {
+        requireNonNull(courses);
+        final Set<List<String>> courseSet = new HashSet<>();
+        for (String course : courses) {
+            courseSet.add(parseCourseFilter(course));
+        }
+        return courseSet;
+    }
+
+    /**
      * Parses a {@code String status} into an {@code ApplicationStatus}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -201,6 +250,19 @@ public class ParserUtil {
             throw new ParseException(ApplicationStatus.MESSAGE_CONSTRAINTS);
         }
         return new ApplicationStatus(trimmedStatus);
+    }
+
+    /**
+     * Parses {@code Collection<String> skills} into a {@code Set<ApplicationStatus>}.
+     */
+    public static Set<ApplicationStatus> parseApplicationStatuses(Collection<String> applicationStatuses)
+            throws ParseException {
+        requireNonNull(applicationStatuses);
+        final Set<ApplicationStatus> applicationStatusSet = new HashSet<>();
+        for (String applicationStatus : applicationStatuses) {
+            applicationStatusSet.add(parseStatus(applicationStatus));
+        }
+        return applicationStatusSet;
     }
 
     /**
