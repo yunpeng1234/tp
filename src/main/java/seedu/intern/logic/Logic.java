@@ -33,6 +33,9 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Applicant> getFilteredPersonList();
 
+    /** Returns an unmodifiable view of the applicant to view*/
+    Applicant getApplicant();
+
     /**
      * Returns the user prefs' intern book file path.
      */

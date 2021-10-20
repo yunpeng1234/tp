@@ -16,6 +16,7 @@ import seedu.intern.logic.Logic;
 import seedu.intern.logic.commands.CommandResult;
 import seedu.intern.logic.commands.exceptions.CommandException;
 import seedu.intern.logic.parser.exceptions.ParseException;
+import seedu.intern.model.applicant.Applicant;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -196,11 +197,18 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            if (commandResult.isView()) {
+                handleView(logic.getApplicant());
+            }
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    private void handleView(Applicant applicant) {
+        personDetail.showApplicant(applicant);
     }
 }
