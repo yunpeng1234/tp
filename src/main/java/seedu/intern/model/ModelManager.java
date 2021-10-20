@@ -18,8 +18,7 @@ import seedu.intern.model.applicant.Applicant;
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
-    private final InternWatcher internWatcher;
-    private final UndoManager undoManager;
+    private final VersionedInternWatcher internWatcher;
     private final UserPrefs userPrefs;
     private final FilteredList<Applicant> filteredApplicants;
     private Applicant applicant;
@@ -33,8 +32,7 @@ public class ModelManager implements Model {
 
         logger.fine("Initializing with intern book: " + internWatcher + " and user prefs " + userPrefs);
 
-        this.internWatcher = new InternWatcher(internWatcher);
-        this.undoManager = new UndoManager(this.internWatcher);
+        this.internWatcher = new VersionedInternWatcher(internWatcher);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredApplicants = new FilteredList<>(this.internWatcher.getPersonList());
     }
@@ -169,27 +167,27 @@ public class ModelManager implements Model {
 
     @Override
     public void commitInternWatcher() {
-        undoManager.commitState();
+        internWatcher.commitState();
     }
 
     @Override
     public void undoInternWatcher() {
-        undoManager.undo();
+        internWatcher.undo();
     }
 
     @Override
     public void redoInternWatcher() {
-        undoManager.redo();
+        internWatcher.redo();
     }
 
     @Override
     public boolean isUndoAvailable() {
-        return undoManager.canUndo();
+        return internWatcher.canUndo();
     }
 
     @Override
     public boolean isRedoAvailable() {
-        return undoManager.canRedo();
+        return internWatcher.canRedo();
     }
 
 }
