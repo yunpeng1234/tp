@@ -7,10 +7,10 @@ import seedu.intern.model.Model;
 
 public class UndoCommand extends Command {
     public static final String COMMAND_WORD = "undo";
-    public static final String MESSAGE_SUCCESS = "Command has been undone";
-    public static final String MESSAGE_NO_UNDO = "No command to undo";
+    public static final String MESSAGE_SUCCESS = "Action has been undone";
+    public static final String MESSAGE_NO_UNDO = "No action to undo";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Undo previous command.\n"
+            + ": Undo previous action. Only actions that change the applicant list can be undone.\n"
             + "Example: " + COMMAND_WORD;
 
     @Override
