@@ -112,6 +112,7 @@ public class EditCommand extends Command {
 
             model.setApplicant(applicantToEdit, editedApplicant);
             model.updateFilteredApplicantList(PREDICATE_SHOW_ALL_PERSONS);
+            model.commitInternWatcher();
             return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedApplicant));
         } else {
             if (!selection.getAllFlag()) {
@@ -125,7 +126,7 @@ public class EditCommand extends Command {
                 model.setApplicant(applicantToEdit, editedApplicant);
                 addSuccesses++;
             }
-
+            model.commitInternWatcher();
             return new CommandResult(String.format(MESSAGE_EDIT_ALL_SUCCESS, addSuccesses, lastShownList.size()));
         }
     }
