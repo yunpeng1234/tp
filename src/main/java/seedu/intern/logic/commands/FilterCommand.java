@@ -32,7 +32,8 @@ public class FilterCommand extends Command {
 
     public static final String COMMAND_WORD = "filter";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters all applicants based on criteria provided "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": "
+            + "Lists all applicants in InternWatcher with fields matching the arguments provided "
             + "and displays them as a list. \n"
             + "For valid grade filter, display list with applicants with grade not less than the filter. \n"
             + "For valid graduation filter, display list with applicants with graduation strictly before the filter. \n"
