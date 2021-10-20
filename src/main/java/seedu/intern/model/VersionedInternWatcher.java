@@ -3,25 +3,21 @@ package seedu.intern.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UndoManager extends InternWatcher {
-    private List<InternWatcher> watcherStateList;
+public class VersionedInternWatcher extends InternWatcher {
+    private List<ReadOnlyInternWatcher> watcherStateList;
     private int currStateIndex;
 
-    public UndoManager(InternWatcher initialState) {
-        this.currStateIndex = 0;
+    public VersionedInternWatcher(ReadOnlyInternWatcher initialState) {
+        super(initialState);
 
+        this.currStateIndex = 0;
         this.watcherStateList = new ArrayList<>();
-        this.watcherStateList.add(initialState);
+        this.watcherStateList.add(new InternWatcher(initialState));
     }
 
     public void commitState() {
-        int stateListSize = watcherStateList.size();
-        if (currStateIndex != stateListSize - 1) {
-            for (int i = currStateIndex + 1; i < stateListSize; i++) {
-                watcherStateList.remove(i);
-            }
-        }
-
+        int listSize = watcherStateList.size();
+        watcherStateList.subList(currStateIndex + 1, listSize).clear();
         watcherStateList.add(new InternWatcher(this));
         currStateIndex++;
     }
