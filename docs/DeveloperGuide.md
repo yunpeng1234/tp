@@ -154,6 +154,11 @@ Classes used by multiple components are in the `seedu.InternWatcher.commons` pac
 
 This section describes some noteworthy details on how certain features are implemented.
 
+###  Delete ALL feature
+
+#### Implementation
+The implementation of delete all function is based on the common `Selection` class that both delete and edit share. With the `Selection` having and `Index` as well as a boolean flag, it allows us to extend parsing towards a new flag with is "ALL". From there, we can just loop through the displayed list, deleting the first index until the list is empty.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
