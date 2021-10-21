@@ -1,6 +1,26 @@
 package seedu.intern.logic.parser;
 
-import static seedu.intern.logic.commands.CommandTestUtil.*;
+import static seedu.intern.logic.commands.CommandTestUtil.COURSE_DESC_AMY;
+import static seedu.intern.logic.commands.CommandTestUtil.COURSE_DESC_BOB;
+import static seedu.intern.logic.commands.CommandTestUtil.GRADE_DESC_BOB;
+import static seedu.intern.logic.commands.CommandTestUtil.GRADUATION_YEARMONTH_DESC_BOB;
+import static seedu.intern.logic.commands.CommandTestUtil.INSTITUTION_DESC_AMY;
+import static seedu.intern.logic.commands.CommandTestUtil.INSTITUTION_DESC_BOB;
+import static seedu.intern.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.intern.logic.commands.CommandTestUtil.STATUS_DESC_AMY;
+import static seedu.intern.logic.commands.CommandTestUtil.STATUS_DESC_BOB;
+import static seedu.intern.logic.commands.CommandTestUtil.SKILL_DESC_JAVA;
+import static seedu.intern.logic.commands.CommandTestUtil.SKILL_DESC_PYTHON;
+import static seedu.intern.logic.commands.CommandTestUtil.VALID_GRADE_BOB;
+import static seedu.intern.logic.commands.CommandTestUtil.VALID_INSTITUTION_AMY;
+import static seedu.intern.logic.commands.CommandTestUtil.VALID_INSTITUTION_BOB;
+import static seedu.intern.logic.commands.CommandTestUtil.VALID_STATUS_AMY;
+import static seedu.intern.logic.commands.CommandTestUtil.VALID_STATUS_BOB;
+import static seedu.intern.logic.commands.CommandTestUtil.VALID_COURSE_AMY;
+import static seedu.intern.logic.commands.CommandTestUtil.VALID_COURSE_BOB;
+import static seedu.intern.logic.commands.CommandTestUtil.VALID_GRADUATION_YEARMONTH_BOB;
+import static seedu.intern.logic.commands.CommandTestUtil.VALID_SKILL_PYTHON;
+import static seedu.intern.logic.commands.CommandTestUtil.VALID_SKILL_JAVA;
 import static seedu.intern.logic.commands.FilterCommand.MESSAGE_NOT_FILTERED;
 import static seedu.intern.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.intern.logic.parser.CommandParserTestUtil.assertParseSuccess;
