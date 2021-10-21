@@ -1,6 +1,5 @@
 package seedu.intern.testutil;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -11,7 +10,6 @@ import java.util.stream.Stream;
 import seedu.intern.logic.commands.FilterCommand.FilterApplicantDescriptor;
 import seedu.intern.model.applicant.Applicant;
 import seedu.intern.model.applicant.ApplicationStatus;
-import seedu.intern.model.applicant.Course;
 import seedu.intern.model.applicant.Grade;
 import seedu.intern.model.applicant.GraduationYearMonth;
 import seedu.intern.model.applicant.Institution;

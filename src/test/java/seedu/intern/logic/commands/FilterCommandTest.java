@@ -1,21 +1,27 @@
 package seedu.intern.logic.commands;
 
-import org.junit.jupiter.api.Test;
-import seedu.intern.model.Model;
-import seedu.intern.model.ModelManager;
-import seedu.intern.model.UserPrefs;
-import seedu.intern.model.applicant.CombineFiltersPredicate;
-import seedu.intern.logic.commands.FilterCommand.FilterApplicantDescriptor;
-import seedu.intern.testutil.FilterApplicantDescriptorBuilder;
-
-import java.util.Arrays;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.intern.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.intern.logic.commands.CommandTestUtil.*;
-import static seedu.intern.logic.commands.CommandTestUtil.VALID_GRADUATION_YEARMONTH_BOB;
-import static seedu.intern.testutil.TypicalApplicants.*;
+import static seedu.intern.testutil.TypicalApplicants.ALICE;
+import static seedu.intern.testutil.TypicalApplicants.BENSON;
+import static seedu.intern.testutil.TypicalApplicants.DANIEL;
+import static seedu.intern.testutil.TypicalApplicants.ELLE;
 import static seedu.intern.testutil.TypicalApplicants.FIONA;
+import static seedu.intern.testutil.TypicalApplicants.GEORGE;
+import static seedu.intern.testutil.TypicalApplicants.getTypicalInternWatcher;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.intern.model.Model;
+import seedu.intern.model.ModelManager;
+import seedu.intern.model.UserPrefs;
+import seedu.intern.logic.commands.FilterCommand.FilterApplicantDescriptor;
+import seedu.intern.model.applicant.CombineFiltersPredicate;
+import seedu.intern.testutil.FilterApplicantDescriptorBuilder;
+import java.util.Arrays;
+
+
 
 public class FilterCommandTest {
     private Model model = new ModelManager(getTypicalInternWatcher(), new UserPrefs());
