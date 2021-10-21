@@ -1,7 +1,5 @@
 package seedu.intern.logic.commands;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.intern.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.intern.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -14,6 +12,8 @@ import static seedu.intern.testutil.TypicalApplicants.GEORGE;
 import static seedu.intern.testutil.TypicalApplicants.getTypicalInternWatcher;
 
 import java.util.Arrays;
+import org.junit.jupiter.api.Test;
+
 
 import seedu.intern.model.Model;
 import seedu.intern.model.ModelManager;

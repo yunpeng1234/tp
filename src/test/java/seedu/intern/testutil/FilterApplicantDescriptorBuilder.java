@@ -87,7 +87,8 @@ public class FilterApplicantDescriptorBuilder {
      * Sets the {@code Course} of the {@code EditPersonDescriptor} that we are building.
      */
     public FilterApplicantDescriptorBuilder withCourses(String... courses) {
-        Set<List<String>> courseSet = Stream.of(courses).map((x) -> Arrays.asList(x.split(" "))).collect(Collectors.toSet());
+        Set<List<String>> courseSet = Stream.of(courses).map((x) -> Arrays.asList(x.split(" ")))
+                .collect(Collectors.toSet());
         descriptor.setCourses(courseSet);
         return this;
     }
