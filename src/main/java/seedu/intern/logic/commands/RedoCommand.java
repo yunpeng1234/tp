@@ -5,6 +5,9 @@ import static java.util.Objects.requireNonNull;
 import seedu.intern.logic.commands.exceptions.CommandException;
 import seedu.intern.model.Model;
 
+/**
+ * Restores the model to a state before a previous undo action.
+ */
 public class RedoCommand extends Command {
     public static final String COMMAND_WORD = "redo";
     public static final String MESSAGE_SUCCESS = "Undone action has been redone";

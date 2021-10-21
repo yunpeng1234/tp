@@ -5,6 +5,9 @@ import static java.util.Objects.requireNonNull;
 import seedu.intern.logic.commands.exceptions.CommandException;
 import seedu.intern.model.Model;
 
+/**
+ * Reverts the model to a previous state.
+ */
 public class UndoCommand extends Command {
     public static final String COMMAND_WORD = "undo";
     public static final String MESSAGE_SUCCESS = "Action has been undone";
