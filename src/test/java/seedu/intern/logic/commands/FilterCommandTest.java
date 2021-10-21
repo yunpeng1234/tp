@@ -15,7 +15,7 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.intern.logic.commands.FilterCommand.FilterApplicantDescriptor;\
+import seedu.intern.logic.commands.FilterCommand.FilterApplicantDescriptor;
 import seedu.intern.model.Model;
 import seedu.intern.model.ModelManager;
 import seedu.intern.model.UserPrefs;
