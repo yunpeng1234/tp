@@ -159,6 +159,19 @@ This section describes some noteworthy details on how certain features are imple
 #### Implementation
 The implementation of delete all function is based on the common `Selection` class that both delete and edit share. With the `Selection` having and `Index` as well as a boolean flag, it allows us to extend parsing towards a new flag with is "ALL". From there, we can just loop through the displayed list, deleting the first index until the list is empty.
 
+### Filter feature
+
+#### Implementation 
+
+The filter mechanism is facilitated by `FilterCommandParser`. 
+It produces a `FilterApplicantDescriptor`, which in turn feeds in to create a `FilterCommand`. 
+<br/>
+`Optional` and `set` data structures have been used to contain optional set of filters for different attributes within `FilterApplicantDescriptor`. 
+<br/>
+The `FilterCommand` will make use of the `FilterApplicantDescriptor` to create a `CombineFiltersPredicate` that will be supplied to `ModelManager#updateFilteredApplicantList(Predicate<Applicant>)` in its `execute` method.
+<br/>
+`ModelManager` helps filter through the applicant list with specified filter criteria contained and interpreted by the `CombineFiltersPredicate#test()`.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation

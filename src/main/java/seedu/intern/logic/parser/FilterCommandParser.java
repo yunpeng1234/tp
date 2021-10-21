@@ -57,12 +57,9 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         parseApplicationStatusesForEdit(argMultimap.getAllValues(PREFIX_STATUS))
                 .ifPresent(filterApplicantDescriptor::setApplicationStatuses);
         parseSkillsForEdit(argMultimap.getAllValues(PREFIX_SKILL)).ifPresent(filterApplicantDescriptor::setSkills);
-
         if (!filterApplicantDescriptor.isAnyFieldFiltered()) {
             throw new ParseException(String.format(MESSAGE_NOT_FILTERED, FilterCommand.MESSAGE_USAGE));
-
         }
-
         return new FilterCommand(filterApplicantDescriptor);
     }
 
