@@ -15,7 +15,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.intern.logic.commands.FilterCommand;
-import seedu.intern.logic.commands.FilterCommand.FilterDescriptor;
+import seedu.intern.logic.commands.FilterCommand.FilterApplicantDescriptor;
 import seedu.intern.logic.parser.exceptions.ParseException;
 import seedu.intern.model.applicant.ApplicationStatus;
 import seedu.intern.model.applicant.Institution;
@@ -42,27 +42,28 @@ public class FilterCommandParser implements Parser<FilterCommand> {
                         PREFIX_GRADUATIONYEARMONTH,
                         PREFIX_STATUS);
 
-        FilterDescriptor filterDescriptor = new FilterDescriptor();
+        FilterApplicantDescriptor filterApplicantDescriptor = new FilterApplicantDescriptor();
 
         if (argMultimap.getValue(PREFIX_GRADE).isPresent()) {
-            filterDescriptor.setGrade(ParserUtil.parseGrade(argMultimap.getValue(PREFIX_GRADE).get()));
+            filterApplicantDescriptor.setGrade(ParserUtil.parseGrade(argMultimap.getValue(PREFIX_GRADE).get()));
         }
         parseInstitutionsForEdit(argMultimap.getAllValues(PREFIX_INSTITUTION))
-                .ifPresent(filterDescriptor::setInstitutions);
+                .ifPresent(filterApplicantDescriptor::setInstitutions);
         if (argMultimap.getValue(PREFIX_GRADUATIONYEARMONTH).isPresent()) {
-            filterDescriptor.setGraduationYearMonth(ParserUtil.parseGraduationYearMonth(
+            filterApplicantDescriptor.setGraduationYearMonth(ParserUtil.parseGraduationYearMonth(
                     argMultimap.getValue(PREFIX_GRADUATIONYEARMONTH).get()));
         }
-        parseCoursesForEdit(argMultimap.getAllValues(PREFIX_COURSE)).ifPresent(filterDescriptor::setCourses);
+        parseCoursesForEdit(argMultimap.getAllValues(PREFIX_COURSE)).ifPresent(filterApplicantDescriptor::setCourses);
         parseApplicationStatusesForEdit(argMultimap.getAllValues(PREFIX_STATUS))
-                .ifPresent(filterDescriptor::setApplicationStatuses);
-        parseSkillsForEdit(argMultimap.getAllValues(PREFIX_SKILL)).ifPresent(filterDescriptor::setSkills);
+                .ifPresent(filterApplicantDescriptor::setApplicationStatuses);
+        parseSkillsForEdit(argMultimap.getAllValues(PREFIX_SKILL)).ifPresent(filterApplicantDescriptor::setSkills);
 
-        if (!filterDescriptor.isAnyFieldFiltered()) {
-            throw new ParseException(MESSAGE_NOT_FILTERED + "\n" + FilterCommand.MESSAGE_USAGE);
+        if (!filterApplicantDescriptor.isAnyFieldFiltered()) {
+            throw new ParseException(String.format(MESSAGE_NOT_FILTERED, FilterCommand.MESSAGE_USAGE));
+
         }
 
-        return new FilterCommand(filterDescriptor);
+        return new FilterCommand(filterApplicantDescriptor);
     }
 
 

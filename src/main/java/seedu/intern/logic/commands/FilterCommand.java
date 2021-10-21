@@ -52,17 +52,17 @@ public class FilterCommand extends Command {
             + "[" + PREFIX_SKILL + "SKILL]...\n"
             + "Example: " + COMMAND_WORD + " g/4.5 i/NUS c/computer science a/APPLIED s/HTML";
 
-    public static final String MESSAGE_NOT_FILTERED = "At least one field to filter must be provided.";
+    public static final String MESSAGE_NOT_FILTERED = "At least one field to filter must be provided. \n%1$s";
 
-    private final FilterDescriptor filterDescriptor;
+    private final FilterApplicantDescriptor filterApplicantDescriptor;
     private final CombineFiltersPredicate predicate;
 
     /**
-     * @param filterDescriptor details to filter the applicant with
+     * @param filterApplicantDescriptor details to filter the applicant with
      */
-    public FilterCommand(FilterDescriptor filterDescriptor) {
-        this.filterDescriptor = new FilterDescriptor(filterDescriptor);
-        this.predicate = new CombineFiltersPredicate(this.filterDescriptor);
+    public FilterCommand(FilterApplicantDescriptor filterApplicantDescriptor) {
+        this.filterApplicantDescriptor = new FilterApplicantDescriptor(filterApplicantDescriptor);
+        this.predicate = new CombineFiltersPredicate(this.filterApplicantDescriptor);
     }
 
     @Override
@@ -77,14 +77,14 @@ public class FilterCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof FilterCommand // instanceof handles nulls
-                && filterDescriptor.equals(((FilterCommand) other).filterDescriptor)); // state check
+                && filterApplicantDescriptor.equals(((FilterCommand) other).filterApplicantDescriptor)); // state check
     }
 
     /**
      * Stores the details to Filter the applicant with. Each non-empty field value will replace the
      * corresponding field value of the applicant.
      */
-    public static class FilterDescriptor {
+    public static class FilterApplicantDescriptor {
         private Grade grade;
         private Set<Institution> institutions;
         private GraduationYearMonth graduationYearMonth;
@@ -92,13 +92,13 @@ public class FilterCommand extends Command {
         private Set<ApplicationStatus> statuses;
         private Set<Skill> skills;
 
-        public FilterDescriptor() {}
+        public FilterApplicantDescriptor() {}
 
         /**
          * Copy constructor.
          * A defensive copy of {@code skill} is used internally.
          */
-        public FilterDescriptor(FilterDescriptor toCopy) {
+        public FilterApplicantDescriptor(FilterApplicantDescriptor toCopy) {
             setGrade(toCopy.grade);
             setInstitutions(toCopy.institutions);
             setGraduationYearMonth(toCopy.graduationYearMonth);
@@ -179,12 +179,12 @@ public class FilterCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof FilterDescriptor)) {
+            if (!(other instanceof FilterApplicantDescriptor)) {
                 return false;
             }
 
             // state check
-            FilterDescriptor e = (FilterDescriptor) other;
+            FilterApplicantDescriptor e = (FilterApplicantDescriptor) other;
 
             return getGrade().equals(e.getGrade())
                     && getInstitutions().equals(e.getInstitutions())
@@ -196,7 +196,7 @@ public class FilterCommand extends Command {
 
         @Override
         public String toString() {
-            return "FilterDescriptor{"
+            return "FilterApplicantDescriptor{"
                     + ", grade=" + grade
                     + ", institution=" + institutions
                     + ", graduation year month=" + graduationYearMonth

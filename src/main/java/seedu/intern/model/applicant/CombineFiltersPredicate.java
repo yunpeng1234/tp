@@ -6,34 +6,35 @@ import java.util.Set;
 import java.util.function.Predicate;
 
 import seedu.intern.commons.util.StringUtil;
-import seedu.intern.logic.commands.FilterCommand.FilterDescriptor;
+import seedu.intern.logic.commands.FilterCommand;
+import seedu.intern.logic.commands.FilterCommand.FilterApplicantDescriptor;
 import seedu.intern.model.skills.Skill;
 
 /**
  * Tests that a {@code Applicant}'s {@code Name} matches any of the keywords given.
  */
 public class CombineFiltersPredicate implements Predicate<Applicant> {
-    private final FilterDescriptor filterDescriptor;
+    private final FilterApplicantDescriptor filterApplicantDescriptor;
     private boolean result;
 
     /**
      * Constructor for a CombineFilterPredicate
-     * @param filterDescriptor a FilterDescriptor that has details of the filters
+     * @param filterApplicantDescriptor a FilterApplicantDescriptor that has details of the filters
      */
-    public CombineFiltersPredicate(FilterDescriptor filterDescriptor) {
-        this.filterDescriptor = filterDescriptor;
+    public CombineFiltersPredicate(FilterCommand.FilterApplicantDescriptor filterApplicantDescriptor) {
+        this.filterApplicantDescriptor = filterApplicantDescriptor;
         result = true;
     }
 
     @Override
     public boolean test(Applicant applicant) {
         result = true;
-        Optional<Grade> grade = filterDescriptor.getGrade();
-        Optional<Set<Institution>> institutions = filterDescriptor.getInstitutions();
-        Optional<GraduationYearMonth> graduationYearMonth = filterDescriptor.getGraduationYearMonth();
-        Optional<Set<List<String>>> courses = filterDescriptor.getCourses();
-        Optional<Set<ApplicationStatus>> statuses = filterDescriptor.getApplicationStatuses();
-        Optional<Set<Skill>> skills = filterDescriptor.getSkills();
+        Optional<Grade> grade = filterApplicantDescriptor.getGrade();
+        Optional<Set<Institution>> institutions = filterApplicantDescriptor.getInstitutions();
+        Optional<GraduationYearMonth> graduationYearMonth = filterApplicantDescriptor.getGraduationYearMonth();
+        Optional<Set<List<String>>> courses = filterApplicantDescriptor.getCourses();
+        Optional<Set<ApplicationStatus>> statuses = filterApplicantDescriptor.getApplicationStatuses();
+        Optional<Set<Skill>> skills = filterApplicantDescriptor.getSkills();
 
         grade.ifPresent(gradeContent ->
                 setResult(result && Float.compare(Float.parseFloat(applicant.getGrade().value),
@@ -62,7 +63,8 @@ public class CombineFiltersPredicate implements Predicate<Applicant> {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof CombineFiltersPredicate // instanceof handles nulls
-                && filterDescriptor.equals(((CombineFiltersPredicate) other).filterDescriptor)); // state check
+                && filterApplicantDescriptor.equals(((CombineFiltersPredicate) other)
+                .filterApplicantDescriptor)); // state check
     }
 
     private void setResult(boolean newResult) {
