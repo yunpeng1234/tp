@@ -165,7 +165,7 @@ public class AddCommandTest {
 
         @Override
         public void commitInternWatcher() {
-            throw new AssertionError("This method should not be called.");
+            System.out.println("Add command test");
         }
 
         @Override
