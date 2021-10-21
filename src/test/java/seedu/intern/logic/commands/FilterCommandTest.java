@@ -1,24 +1,14 @@
 package seedu.intern.logic.commands;
 
-import com.sun.glass.ui.Application;
 import org.junit.jupiter.api.Test;
 import seedu.intern.model.Model;
 import seedu.intern.model.ModelManager;
 import seedu.intern.model.UserPrefs;
-import seedu.intern.model.applicant.ApplicationStatus;
 import seedu.intern.model.applicant.CombineFiltersPredicate;
-import seedu.intern.model.applicant.Grade;
-import seedu.intern.model.applicant.GraduationYearMonth;
-import seedu.intern.model.applicant.NameContainsKeywordsPredicate;
 import seedu.intern.logic.commands.FilterCommand.FilterApplicantDescriptor;
-import seedu.intern.model.skills.Skill;
 import seedu.intern.testutil.FilterApplicantDescriptorBuilder;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.intern.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;

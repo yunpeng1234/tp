@@ -63,7 +63,8 @@ public class CombineFiltersPredicate implements Predicate<Applicant> {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof CombineFiltersPredicate // instanceof handles nulls
-                && filterApplicantDescriptor.equals(((CombineFiltersPredicate) other).filterApplicantDescriptor)); // state check
+                && filterApplicantDescriptor.equals(((CombineFiltersPredicate) other)
+                .filterApplicantDescriptor)); // state check
     }
 
     private void setResult(boolean newResult) {

@@ -1,29 +1,16 @@
 package seedu.intern.logic.parser;
 
-import static seedu.intern.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.intern.logic.commands.CommandTestUtil.*;
 import static seedu.intern.logic.commands.FilterCommand.MESSAGE_NOT_FILTERED;
 import static seedu.intern.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.intern.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.intern.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.intern.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.intern.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.intern.testutil.TypicalApplicants.AMY;
-import static seedu.intern.testutil.TypicalApplicants.BOB;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.intern.logic.commands.AddCommand;
 import seedu.intern.logic.commands.FilterCommand;
 import seedu.intern.logic.commands.FilterCommand.FilterApplicantDescriptor;
-import seedu.intern.model.applicant.Applicant;
-import seedu.intern.model.applicant.NameContainsKeywordsPredicate;
-import seedu.intern.testutil.ApplicantBuilder;
 import seedu.intern.testutil.FilterApplicantDescriptorBuilder;
 
-
-import java.util.Arrays;
-import java.util.logging.Filter;
 
 public class FilterCommandParserTest {
     private FilterCommandParser parser = new FilterCommandParser();
