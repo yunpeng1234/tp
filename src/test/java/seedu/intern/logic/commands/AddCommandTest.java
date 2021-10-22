@@ -162,6 +162,31 @@ public class AddCommandTest {
         public void updateFilteredApplicantList(Predicate<Applicant> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void commitInternWatcher() {
+            System.out.println("Add command test");
+        }
+
+        @Override
+        public void undoInternWatcher() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void redoInternWatcher() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isUndoAvailable() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isRedoAvailable() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

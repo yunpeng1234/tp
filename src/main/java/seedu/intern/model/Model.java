@@ -93,9 +93,37 @@ public interface Model {
      * Updates the selected applicant.
      */
     void updateApplicant(Applicant newApplicant);
+
     /**
      * Updates the filter of the filtered applicant list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredApplicantList(Predicate<Applicant> predicate);
+
+    /**
+     * Saves the current InternWatcher state.
+     */
+    void commitInternWatcher();
+
+    /**
+     * Reverts the InternWatcher to a previous state.
+     */
+    void undoInternWatcher();
+
+    /**
+     * Restores the InternWatcher to it's state before a previous undo action.
+     */
+    void redoInternWatcher();
+
+    /**
+     * Returns true if the model has a previous state to revert to.
+     * @return if an undo action is possible.
+     */
+    boolean isUndoAvailable();
+
+    /**
+     * Returns true if the model has a previous undone state to restore to.
+     * @return if a redo action is possible.
+     */
+    boolean isRedoAvailable();
 }

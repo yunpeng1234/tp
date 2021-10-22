@@ -67,6 +67,7 @@ public class AddCommand extends Command {
         }
 
         model.addApplicant(toAdd);
+        model.commitInternWatcher();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

@@ -48,10 +48,12 @@ public class DeleteCommand extends Command {
                 Applicant applicantToDelete = lastShownList.get(0);
                 model.deleteApplicant(applicantToDelete);
             }
+            model.commitInternWatcher();
             return new CommandResult(String.format(MESSAGE_DELETE_ALL_SUCCESS, String.valueOf(length)));
         } else {
             Applicant applicantToDelete = lastShownList.get(targetSelection.getIndexZeroBased());
             model.deleteApplicant(applicantToDelete);
+            model.commitInternWatcher();
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, applicantToDelete));
         }
     }
