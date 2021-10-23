@@ -172,41 +172,41 @@ The `FilterCommand` will make use of the `FilterApplicantDescriptor` to create a
 <br/>
 `ModelManager` helps filter through the applicant list with specified filter criteria contained and interpreted by the `CombineFiltersPredicate#test()`.
 
-### \[Proposed\] Undo/redo feature
+### Undo/redo feature
 
-#### Proposed Implementation
+#### Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedInternWatcher`. It extends `InternWatcher` with an undo/redo history, stored internally as an `InternWatcherStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The undo/redo mechanism is facilitated by `VersionedInternWatcher`. It extends `InternWatcher` with an undo/redo history, stored internally as an `watcherStateList` and `currStatePointer`. Additionally, it implements the following operations:
 
-* `VersionedInternWatcher#commit()` — Saves the current address book state in its history.
-* `VersionedInternWatcher#undo()` — Restores the previous address book state from its history.
-* `VersionedInternWatcher#redo()` — Restores a previously undone address book state from its history.
+* `VersionedInternWatcher#commitState()` — Saves the current Intern Watcher state in its history.
+* `VersionedInternWatcher#undo()` — Restores the previous Intern Watcher state from its history.
+* `VersionedInternWatcher#redo()` — Restores a previously undone Intern Watcher state from its history.
 
 These operations are exposed in the `Model` interface as `Model#commitInternWatcher()`, `Model#undoInternWatcher()` and `Model#redoInternWatcher()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedInternWatcher` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `VersionedInternWatcher` will be initialized with the initial Intern Watcher state, and the `currStatePointer` pointing to that single Intern Watcher state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th applicant in the address book. The `delete` command calls `Model#commitInternWatcher()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `InternWatcherStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th applicant in the applicant list . The `delete` command calls `Model#commitInternWatcher()`, causing the modified state of the applicant list after the `delete 5` command executes to be saved in the `watcherStateList`, and the `currStatePointer` is shifted to the newly inserted Intern Watcher state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new applicant. The `add` command also calls `Model#commitInternWatcher()`, causing another modified address book state to be saved into the `InternWatcherStateList`.
+Step 3. The user executes `add n/David …​` to add a new applicant. The `add` command also calls `Model#commitInternWatcher()`, causing another modified Intern Watcher state to be saved into the `watcherStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitInternWatcher()`, so the address book state will not be saved into the `InternWatcherStateList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitInternWatcher()`, so the Intern Watcher state will not be saved into the `watcherStateList`.
 
 </div>
 
-Step 4. The user now decides that adding the applicant was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoInternWatcher()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the applicant was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoInternWatcher()`, which will shift the `currStatePointer` once to the left, pointing it to the previous state, and restores the applicant list to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial InternWatcher state, then there are no previous InternWatcher states to restore. The `undo` command uses `Model#canUndoInternWatcher()` to check if this is the case. If so, it will return an error to the user rather
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currStatePointer` is at index 0, pointing to the initial Intern Watcher state, then there are no previous Intern Watcher states to restore. The `undo` command uses `Model#canUndoInternWatcher()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
 </div>
@@ -219,17 +219,17 @@ The following sequence diagram shows how the undo operation works:
 
 </div>
 
-The `redo` command does the opposite — it calls `Model#redoInternWatcher()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redoInternWatcher()`, which shifts the `currStatePointer` once to the right, pointing to the previously undone state, and restores the applicant list to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `InternWatcherStateList.size() - 1`, pointing to the latest address book state, then there are no undone InternWatcher states to restore. The `redo` command uses `Model#canRedoInternWatcher()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currStatePointer` is at index `watcherStateList.size() - 1`, pointing to the latest Intern Watcher state, then there are no undone Intern Watcher states to restore. The `redo` command uses `Model#canRedoInternWatcher()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitInternWatcher()`, `Model#undoInternWatcher()` or `Model#redoInternWatcher()`. Thus, the `InternWatcherStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the applicant list, such as `list`, will usually not call `Model#commitInternWatcher()`, `Model#undoInternWatcher()` or `Model#redoInternWatcher()`. Thus, the `watcherStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitInternWatcher()`. Since the `currentStatePointer` is not pointing at the end of the `InternWatcherStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitInternWatcher()`. Since the `currStatePointer` is not pointing at the end of the `watcherStateList`, all Intern Watcher states after the `currStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
@@ -241,7 +241,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Aspect: How undo & redo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Alternative 1 (current choice):** Saves the entire applicant list.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
@@ -249,8 +249,7 @@ The following activity diagram summarizes what happens when a user executes a ne
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the applicant being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
+    
 
 ### \[Proposed\] Data archiving
 
