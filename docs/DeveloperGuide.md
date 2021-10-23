@@ -188,15 +188,15 @@ Given below is an example usage scenario and how the undo/redo mechanism behaves
 
 Step 1. The user launches the application for the first time. The `VersionedInternWatcher` will be initialized with the initial Intern Watcher state, and the `currStatePointer` pointing to that single Intern Watcher state.
 
-![UndoRedoState0](images/UndoRedoState0.png)
+![UndoRedoState0](images/undo-redo/UndoRedoState0.png)
 
 Step 2. The user executes `delete 5` command to delete the 5th applicant in the applicant list . The `delete` command calls `Model#commitInternWatcher()`, causing the modified state of the applicant list after the `delete 5` command executes to be saved in the `watcherStateList`, and the `currStatePointer` is shifted to the newly inserted Intern Watcher state.
 
-![UndoRedoState1](images/UndoRedoState1.png)
+![UndoRedoState1](images/undo-redo/UndoRedoState1.png)
 
 Step 3. The user executes `add n/David …​` to add a new applicant. The `add` command also calls `Model#commitInternWatcher()`, causing another modified Intern Watcher state to be saved into the `watcherStateList`.
 
-![UndoRedoState2](images/UndoRedoState2.png)
+![UndoRedoState2](images/undo-redo/UndoRedoState2.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitInternWatcher()`, so the Intern Watcher state will not be saved into the `watcherStateList`.
 
@@ -204,7 +204,7 @@ Step 3. The user executes `add n/David …​` to add a new applicant. The `add`
 
 Step 4. The user now decides that adding the applicant was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoInternWatcher()`, which will shift the `currStatePointer` once to the left, pointing it to the previous state, and restores the applicant list to that state.
 
-![UndoRedoState3](images/UndoRedoState3.png)
+![UndoRedoState3](images/undo-redo/UndoRedoState3.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currStatePointer` is at index 0, pointing to the initial Intern Watcher state, then there are no previous Intern Watcher states to restore. The `undo` command uses `Model#canUndoInternWatcher()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
@@ -213,7 +213,7 @@ than attempting to perform the undo.
 
 The following sequence diagram shows how the undo operation works:
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
+![UndoSequenceDiagram](images/undo-redo/UndoSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
@@ -227,11 +227,11 @@ The `redo` command does the opposite — it calls `Model#redoInternWatcher()
 
 Step 5. The user then decides to execute the command `list`. Commands that do not modify the applicant list, such as `list`, will usually not call `Model#commitInternWatcher()`, `Model#undoInternWatcher()` or `Model#redoInternWatcher()`. Thus, the `watcherStateList` remains unchanged.
 
-![UndoRedoState4](images/UndoRedoState4.png)
+![UndoRedoState4](images/undo-redo/UndoRedoState4.png)
 
 Step 6. The user executes `clear`, which calls `Model#commitInternWatcher()`. Since the `currStatePointer` is not pointing at the end of the `watcherStateList`, all Intern Watcher states after the `currStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
-![UndoRedoState5](images/UndoRedoState5.png)
+![UndoRedoState5](images/undo-redo/UndoRedoState5.png)
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
