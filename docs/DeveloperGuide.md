@@ -154,6 +154,27 @@ Classes used by multiple components are in the `seedu.InternWatcher.commons` pac
 
 This section describes some noteworthy details on how certain features are implemented.
 
+###  Edit ALL feature
+
+#### Implementation
+The edit ALL mechanism is facilitated by the new `Selection` class. A new parser `ParserUtil#parseSelection` 
+has been added to parse `Selection` values, which accepts either integers or the `ALL` string. The `Selection` class supports 
+operations `Selection#hasAllFlag` and `Selection#hasIndex`, which is used by `EditCommand#execute`. `EditCommand#execute` 
+has been modified, such that whenever `Selection#hasAllFlag` returns `true`, `EditCommand#execute` edits all applicants with 
+the fields specified. `Selection` has been given a private constructor with static factory methods `Selection#fromIndex` and 
+`Selection#fromAllFlag` to ensure `Selection` should not contain both index and all flag.
+
+#### Design considerations:
+**Aspect: How edit ALL is parsed**
+- **Alternative 1 (current choice)**: Modify the parser to parse the `Selection`, accepting a special flag to indicate all applicants
+should be edited.
+    - Pros: Easy to implement
+    - Cons: `EditCommand` and its related parsers may become harder to test since its behaviour is now different depending
+    on the user input.
+- **Alternative 2**: Create a separate `EditAllCommand` with its own parser.
+    - Pros: Easier to test, the behaviour of `EditAllCommand` should not affect `EditCommand`.
+    - Cons: Harder to implement. Users might also find editing multiple applicants having a separate command unintuitive.
+
 ###  Delete ALL feature
 
 #### Implementation
