@@ -3,6 +3,7 @@ package seedu.intern.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.intern.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.intern.logic.parser.CliSyntax.FLAG_ALL;
+import static seedu.intern.logic.parser.CliSyntax.FLAG_TOGGLE;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -52,17 +53,27 @@ public class ParserUtil {
      * @throws ParseException if the specified selection is invalid.
      */
     public static Selection parseSelection(String selection) throws ParseException {
-        String trimmedSelection = selection.trim();
-        if (StringUtil.isInteger(trimmedSelection) && !StringUtil.isNonZeroUnsignedInteger(trimmedSelection)) {
+        String [] trimmedSelection = selection.trim().split(" ");
+        if (StringUtil.isInteger(trimmedSelection[0]) && !StringUtil.isNonZeroUnsignedInteger(trimmedSelection[0])) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
-        } else if (!StringUtil.isNonZeroUnsignedInteger(trimmedSelection) && !StringUtil.isAll(trimmedSelection)) {
+        } else if (!StringUtil.isNonZeroUnsignedInteger(trimmedSelection[0])
+                && !StringUtil.isAll(trimmedSelection[0])) {
+            throw new ParseException(MESSAGE_INVALID_SELECTION);
+        } else if (trimmedSelection.length == 2
+                && !trimmedSelection[1].equals(FLAG_TOGGLE)) {
+            System.out.println(trimmedSelection[1]);
             throw new ParseException(MESSAGE_INVALID_SELECTION);
         }
 
-        if (StringUtil.isAll(trimmedSelection)) {
-            return Selection.fromAllFlag(selection.equals(FLAG_ALL));
+        if (StringUtil.isAll(trimmedSelection[0])) {
+            return Selection.fromAllFlag(trimmedSelection[0].equals(FLAG_ALL));
         } else {
-            return Selection.fromIndex(Index.fromOneBased(Integer.parseInt(trimmedSelection)));
+            if (trimmedSelection.length == 2 && StringUtil.isToggle(trimmedSelection[1])) {
+                return Selection.fromIndexAndToggle(Index.fromOneBased(Integer.parseInt(trimmedSelection[0])),
+                        true);
+            } else {
+                return Selection.fromIndex(Index.fromOneBased(Integer.parseInt(trimmedSelection[0])));
+            }
         }
     }
 

@@ -3,6 +3,7 @@ package seedu.intern.commons.util;
 import static java.util.Objects.requireNonNull;
 import static seedu.intern.commons.util.AppUtil.checkArgument;
 import static seedu.intern.logic.parser.CliSyntax.FLAG_ALL;
+import static seedu.intern.logic.parser.CliSyntax.FLAG_TOGGLE;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -90,5 +91,15 @@ public class StringUtil {
         requireNonNull(s);
 
         return s.equals(FLAG_ALL);
+    }
+
+    /**
+     * Returns true if {@code s} is a TOGGLE flag.
+     * @throws NullPointerException if {@code s} is null.
+     */
+    public static boolean isToggle(String s) {
+        requireNonNull(s);
+
+        return s.equals(FLAG_TOGGLE);
     }
 }

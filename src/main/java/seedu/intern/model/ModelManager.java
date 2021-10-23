@@ -22,6 +22,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Applicant> filteredApplicants;
     private Applicant applicant;
+    private boolean isToggle;
 
     /**
      * Initializes a ModelManager with the given internWatcher and userPrefs.
@@ -95,11 +96,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void displayApplicant(Applicant applicant) {
-        updateApplicant(applicant);
-    }
-
-    @Override
     public void deleteApplicant(Applicant target) {
         internWatcher.removePerson(target);
     }
@@ -126,16 +122,6 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Applicant> getFilteredPersonList() {
         return filteredApplicants;
-    }
-
-    @Override
-    public Applicant getApplicant() {
-        return applicant;
-    }
-
-    @Override
-    public void updateApplicant(Applicant newApplicant) {
-        applicant = newApplicant;
     }
 
     @Override
@@ -188,6 +174,32 @@ public class ModelManager implements Model {
     @Override
     public boolean isRedoAvailable() {
         return internWatcher.canRedo();
+    }
+
+    //=========== View ============================================================================
+    @Override
+    public void displayApplicant(Applicant applicant, boolean isToggle) {
+        updateApplicant(applicant);
+        updateGetIsToggle(isToggle);
+    }
+
+    @Override
+    public boolean getIsToggle() {
+        return isToggle;
+    }
+
+    private void updateGetIsToggle(boolean isToggle) {
+        this.isToggle = isToggle;
+    }
+
+    @Override
+    public Applicant getApplicant() {
+        return applicant;
+    }
+
+    @Override
+    public void updateApplicant(Applicant newApplicant) {
+        applicant = newApplicant;
     }
 
 }

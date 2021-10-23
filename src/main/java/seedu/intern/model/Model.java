@@ -61,7 +61,7 @@ public interface Model {
     /**
      * Displays given applicant
      */
-    void displayApplicant(Applicant applicant);
+    void displayApplicant(Applicant applicant, boolean isToggle);
 
     /**
      * Deletes the given applicant.
@@ -126,4 +126,6 @@ public interface Model {
      * @return if a redo action is possible.
      */
     boolean isRedoAvailable();
+
+    boolean getIsToggle();
 }
