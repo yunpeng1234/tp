@@ -53,27 +53,42 @@ public class ParserUtil {
      * @throws ParseException if the specified selection is invalid.
      */
     public static Selection parseSelection(String selection) throws ParseException {
-        String [] trimmedSelection = selection.trim().split(" ");
-        if (StringUtil.isInteger(trimmedSelection[0]) && !StringUtil.isNonZeroUnsignedInteger(trimmedSelection[0])) {
+        String trimmedSelection = selection.trim();
+        if (StringUtil.isInteger(trimmedSelection) && !StringUtil.isNonZeroUnsignedInteger(trimmedSelection)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
-        } else if (!StringUtil.isNonZeroUnsignedInteger(trimmedSelection[0])
-                && !StringUtil.isAll(trimmedSelection[0])) {
-            throw new ParseException(MESSAGE_INVALID_SELECTION);
-        } else if (trimmedSelection.length == 2
-                && !trimmedSelection[1].equals(FLAG_TOGGLE)) {
-            System.out.println(trimmedSelection[1]);
+        } else if (!StringUtil.isNonZeroUnsignedInteger(trimmedSelection)
+                && !StringUtil.isAll(trimmedSelection)) {
             throw new ParseException(MESSAGE_INVALID_SELECTION);
         }
 
-        if (StringUtil.isAll(trimmedSelection[0])) {
-            return Selection.fromAllFlag(trimmedSelection[0].equals(FLAG_ALL));
+        if (StringUtil.isAll(trimmedSelection)) {
+            return Selection.fromExtraConditionFlag(trimmedSelection.equals(FLAG_ALL));
         } else {
-            if (trimmedSelection.length == 2 && StringUtil.isToggle(trimmedSelection[1])) {
-                return Selection.fromIndexAndToggle(Index.fromOneBased(Integer.parseInt(trimmedSelection[0])),
-                        true);
-            } else {
-                return Selection.fromIndex(Index.fromOneBased(Integer.parseInt(trimmedSelection[0])));
-            }
+            return Selection.fromIndex(Index.fromOneBased(Integer.parseInt(trimmedSelection)));
+        }
+    }
+
+    /**
+     * Parses {@code selection} into a {@code Selection} with a
+     * {@code Index} and {@code isExtraCondition} flag and returns it.
+     * Leading and trailing whitespaces will be
+     * trimmed.
+     * @throws ParseException if the specified selection is invalid.
+     */
+    public static Selection parseView(String selection) throws ParseException {
+        String [] trimmedSelection = selection.trim().split(" ");
+        if (StringUtil.isInteger(trimmedSelection[0]) && !StringUtil.isNonZeroUnsignedInteger(trimmedSelection[0])) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+        if (trimmedSelection.length == 2 && !StringUtil.isToggle(trimmedSelection[1])) {
+            throw new ParseException(MESSAGE_INVALID_SELECTION);
+        }
+
+        if (trimmedSelection.length == 2) {
+            return Selection.fromIndexAndToggle(Index.fromOneBased(Integer.parseInt(trimmedSelection[0])),
+                    trimmedSelection[1].equals(FLAG_TOGGLE));
+        } else {
+            return Selection.fromIndex(Index.fromOneBased(Integer.parseInt(trimmedSelection[0])));
         }
     }
 

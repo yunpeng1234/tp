@@ -18,7 +18,7 @@ public class ViewCommandParser implements Parser<ViewCommand> {
      */
     public ViewCommand parse(String args) throws ParseException {
         try {
-            Selection selection = ParserUtil.parseSelection(args);
+            Selection selection = ParserUtil.parseView(args);
             return new ViewCommand(selection);
         } catch (ParseException pe) {
             throw new ParseException(

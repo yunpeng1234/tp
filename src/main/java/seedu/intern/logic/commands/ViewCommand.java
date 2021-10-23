@@ -41,7 +41,7 @@ public class ViewCommand extends Command {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
         }
-        if (targetSelection.hasToggle()) {
+        if (targetSelection.hasExtraConditionFlag()) {
             Applicant applicantToView = lastShownList.get(targetSelection.getIndexZeroBased());
             model.displayApplicant(applicantToView, true);
             return new CommandResult(String.format(MESSAGE_VIEW_PERSON_SUCCESS, applicantToView), false, false, true);

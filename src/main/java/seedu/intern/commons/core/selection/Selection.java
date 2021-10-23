@@ -2,16 +2,13 @@ package seedu.intern.commons.core.selection;
 
 public class Selection {
     private static final String MESSAGE_MISSING_INDEX = "Selection does not contain an Index.";
-    private static final String MESSAGE_MISSING_FLAG = "Selection does not contain an All Flag.";
-    private static final String MESSAGE_MISSING_TOGGLE_FLAG = "Selection does not contain a Toggle Flag.";
+    private static final String MESSAGE_MISSING_FLAG = "Selection does not contain an Extra Condition Flag.";
     private final Index index;
-    private final Boolean isSelectAll;
-    private final Boolean isToggle;
+    private final Boolean isExtraCondition;
 
-    private Selection(Index index, Boolean isSelectAll, Boolean isToggle) {
+    private Selection(Index index, Boolean isExtraCondition) {
         this.index = index;
-        this.isSelectAll = isSelectAll;
-        this.isToggle = isToggle;
+        this.isExtraCondition = isExtraCondition;
     }
 
     public Index getIndex() {
@@ -34,44 +31,32 @@ public class Selection {
         }
     }
 
-    public boolean getAllFlag() {
-        if (hasAllFlag()) {
-            return isSelectAll;
+    public boolean getExtraConditionFlag() {
+        if (hasExtraConditionFlag()) {
+            return isExtraCondition;
         } else {
             throw new NullPointerException(MESSAGE_MISSING_FLAG);
         }
-    }
-
-    public boolean getisToggle() {
-        if (hasToggle()) {
-            return isToggle;
-        } else {
-            throw new NullPointerException(MESSAGE_MISSING_TOGGLE_FLAG);
-        }
-    }
-
-    public boolean hasToggle() {
-        return this.isToggle != null;
     }
 
     public boolean hasIndex() {
         return this.index != null;
     }
 
-    public boolean hasAllFlag() {
-        return this.isSelectAll != null;
+    public boolean hasExtraConditionFlag() {
+        return this.isExtraCondition != null;
     }
 
-    public static Selection fromAllFlag(boolean flag) {
-        return new Selection(null, flag, null);
+    public static Selection fromExtraConditionFlag(boolean flag) {
+        return new Selection(null, flag);
     }
 
     public static Selection fromIndex(Index index) {
-        return new Selection(index, null, null);
+        return new Selection(index, null);
     }
 
-    public static Selection fromIndexAndToggle(Index index, boolean toggle) {
-        return new Selection(index, null, toggle);
+    public static Selection fromIndexAndToggle(Index index, boolean isExtraCondition) {
+        return new Selection(index, isExtraCondition);
     }
 
     @Override
@@ -87,16 +72,14 @@ public class Selection {
         Selection otherSelection = (Selection) other;
 
         if (this.hasIndex() != otherSelection.hasIndex()
-                || this.hasAllFlag() != otherSelection.hasAllFlag()
-                || this.hasToggle() != otherSelection.hasToggle()) {
+                || this.hasExtraConditionFlag() != otherSelection.hasExtraConditionFlag()) {
             return false;
         }
 
         if (this.hasIndex() && this.getIndexOneBased() != otherSelection.getIndexOneBased()) {
             return false;
-        } else if (this.hasAllFlag() && this.getAllFlag() != otherSelection.getAllFlag()) {
-            return false;
-        } else if (this.hasToggle() && this.getisToggle() != otherSelection.getisToggle()) {
+        } else if (this.hasExtraConditionFlag()
+                && this.getExtraConditionFlag() != otherSelection.getExtraConditionFlag()) {
             return false;
         } else {
             return true;
