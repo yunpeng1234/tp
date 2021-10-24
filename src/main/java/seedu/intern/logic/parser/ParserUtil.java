@@ -33,6 +33,7 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_SELECTION = "Selection is not a non-zero unsigned integer or ALL.";
+    public static final String MESSAGE_INVALID_TAG = "Selection provided does not end with TOGGLE";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -77,11 +78,11 @@ public class ParserUtil {
      */
     public static Selection parseView(String selection) throws ParseException {
         String [] trimmedSelection = selection.trim().split(" ");
-        if(trimmedSelection.length > 2) {
+        if (trimmedSelection.length > 2) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
 
-        if(!StringUtil.isInteger(trimmedSelection[0])) {
+        if (!StringUtil.isInteger(trimmedSelection[0])) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
 
@@ -89,7 +90,7 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         if (trimmedSelection.length == 2 && !StringUtil.isToggle(trimmedSelection[1])) {
-            throw new ParseException(MESSAGE_INVALID_SELECTION);
+            throw new ParseException(MESSAGE_INVALID_TAG);
         }
 
         if (trimmedSelection.length == 2) {

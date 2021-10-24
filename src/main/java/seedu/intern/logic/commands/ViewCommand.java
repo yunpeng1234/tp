@@ -58,9 +58,6 @@ public class ViewCommand extends Command {
                 || (other instanceof ViewCommand // instanceof handles nulls
                 && targetSelection.equals(((ViewCommand) other).targetSelection)); // state check
     }
-
-    public void setTargetSelection () {
-        System.out.println(this.targetSelection);
-    }
+    
 }
 

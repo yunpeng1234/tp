@@ -85,12 +85,4 @@ public class Selection {
             return true;
         }
     }
-
-    @Override
-    public String toString() {
-        return "Selection{" +
-                "index=" + index +
-                ", isExtraCondition=" + isExtraCondition +
-                '}';
-    }
 }
