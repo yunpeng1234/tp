@@ -57,7 +57,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
-        if (selection.hasAllFlag() && (argMultimap.getValue(PREFIX_NAME).isPresent()
+        if (selection.hasExtraConditionFlag() && (argMultimap.getValue(PREFIX_NAME).isPresent()
                 || argMultimap.getValue(PREFIX_PHONE).isPresent()
                 || argMultimap.getValue(PREFIX_COURSE).isPresent()
                 || argMultimap.getValue(PREFIX_EMAIL).isPresent()

@@ -129,7 +129,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void displayApplicant(Applicant applicant) {
+        public void displayApplicant(Applicant applicant, boolean toggle) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -185,6 +185,11 @@ public class AddCommandTest {
 
         @Override
         public boolean isRedoAvailable() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean getIsToggle() {
             throw new AssertionError("This method should not be called.");
         }
     }

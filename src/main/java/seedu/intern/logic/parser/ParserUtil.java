@@ -3,6 +3,7 @@ package seedu.intern.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.intern.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.intern.logic.parser.CliSyntax.FLAG_ALL;
+import static seedu.intern.logic.parser.CliSyntax.FLAG_TOGGLE;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -55,14 +56,39 @@ public class ParserUtil {
         String trimmedSelection = selection.trim();
         if (StringUtil.isInteger(trimmedSelection) && !StringUtil.isNonZeroUnsignedInteger(trimmedSelection)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
-        } else if (!StringUtil.isNonZeroUnsignedInteger(trimmedSelection) && !StringUtil.isAll(trimmedSelection)) {
+        } else if (!StringUtil.isNonZeroUnsignedInteger(trimmedSelection)
+                && !StringUtil.isAll(trimmedSelection)) {
             throw new ParseException(MESSAGE_INVALID_SELECTION);
         }
 
         if (StringUtil.isAll(trimmedSelection)) {
-            return Selection.fromAllFlag(selection.equals(FLAG_ALL));
+            return Selection.fromExtraConditionFlag(trimmedSelection.equals(FLAG_ALL));
         } else {
             return Selection.fromIndex(Index.fromOneBased(Integer.parseInt(trimmedSelection)));
+        }
+    }
+
+    /**
+     * Parses {@code selection} into a {@code Selection} with a
+     * {@code Index} and {@code isExtraCondition} flag and returns it.
+     * Leading and trailing whitespaces will be
+     * trimmed.
+     * @throws ParseException if the specified selection is invalid.
+     */
+    public static Selection parseView(String selection) throws ParseException {
+        String [] trimmedSelection = selection.trim().split(" ");
+        if (StringUtil.isInteger(trimmedSelection[0]) && !StringUtil.isNonZeroUnsignedInteger(trimmedSelection[0])) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+        if (trimmedSelection.length == 2 && !StringUtil.isToggle(trimmedSelection[1])) {
+            throw new ParseException(MESSAGE_INVALID_SELECTION);
+        }
+
+        if (trimmedSelection.length == 2) {
+            return Selection.fromIndexAndToggle(Index.fromOneBased(Integer.parseInt(trimmedSelection[0])),
+                    trimmedSelection[1].equals(FLAG_TOGGLE));
+        } else {
+            return Selection.fromIndex(Index.fromOneBased(Integer.parseInt(trimmedSelection[0])));
         }
     }
 

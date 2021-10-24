@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import seedu.intern.commons.core.Messages;
-import seedu.intern.commons.core.selection.Index;
+import seedu.intern.commons.core.selection.Selection;
 import seedu.intern.logic.commands.exceptions.CommandException;
 import seedu.intern.model.Model;
 import seedu.intern.model.applicant.Applicant;
@@ -25,10 +25,10 @@ public class ViewCommand extends Command {
 
     public static final String MESSAGE_VIEW_PERSON_SUCCESS = "Displayed Applicant details: %1$s";
 
-    private final Index targetIndex;
+    private final Selection targetSelection;
 
-    public ViewCommand(Index targetIndex) {
-        this.targetIndex = targetIndex;
+    public ViewCommand(Selection targetSelection) {
+        this.targetSelection = targetSelection;
     }
 
     @Override
@@ -36,19 +36,27 @@ public class ViewCommand extends Command {
         requireNonNull(model);
         List<Applicant> lastShownList = model.getFilteredPersonList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        if (targetSelection.hasIndex()) {
+            if (targetSelection.getIndexZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
         }
-        Applicant applicantToDisplay = lastShownList.get(targetIndex.getZeroBased());
-        model.displayApplicant(applicantToDisplay);
-        return new CommandResult(String.format(MESSAGE_VIEW_PERSON_SUCCESS, applicantToDisplay), false, false, true);
+        if (targetSelection.hasExtraConditionFlag()) {
+            Applicant applicantToView = lastShownList.get(targetSelection.getIndexZeroBased());
+            model.displayApplicant(applicantToView, true);
+            return new CommandResult(String.format(MESSAGE_VIEW_PERSON_SUCCESS, applicantToView), false, false, true);
+        } else {
+            Applicant applicantToView = lastShownList.get(targetSelection.getIndexZeroBased());
+            model.displayApplicant(applicantToView, false);
+            return new CommandResult(String.format(MESSAGE_VIEW_PERSON_SUCCESS, applicantToView), false, false, true);
+        }
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ViewCommand // instanceof handles nulls
-                && targetIndex.equals(((ViewCommand) other).targetIndex)); // state check
+                && targetSelection.equals(((ViewCommand) other).targetSelection)); // state check
     }
 }
 

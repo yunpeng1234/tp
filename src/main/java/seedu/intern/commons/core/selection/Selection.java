@@ -2,13 +2,13 @@ package seedu.intern.commons.core.selection;
 
 public class Selection {
     private static final String MESSAGE_MISSING_INDEX = "Selection does not contain an Index.";
-    private static final String MESSAGE_MISSING_FLAG = "Selection does not contain an All Flag.";
+    private static final String MESSAGE_MISSING_FLAG = "Selection does not contain an Extra Condition Flag.";
     private final Index index;
-    private final Boolean isSelectAll;
+    private final Boolean isExtraCondition;
 
-    private Selection(Index index, Boolean isSelectAll) {
+    private Selection(Index index, Boolean isExtraCondition) {
         this.index = index;
-        this.isSelectAll = isSelectAll;
+        this.isExtraCondition = isExtraCondition;
     }
 
     public Index getIndex() {
@@ -31,9 +31,9 @@ public class Selection {
         }
     }
 
-    public boolean getAllFlag() {
-        if (hasAllFlag()) {
-            return isSelectAll;
+    public boolean getExtraConditionFlag() {
+        if (hasExtraConditionFlag()) {
+            return isExtraCondition;
         } else {
             throw new NullPointerException(MESSAGE_MISSING_FLAG);
         }
@@ -43,16 +43,20 @@ public class Selection {
         return this.index != null;
     }
 
-    public boolean hasAllFlag() {
-        return this.isSelectAll != null;
+    public boolean hasExtraConditionFlag() {
+        return this.isExtraCondition != null;
     }
 
-    public static Selection fromAllFlag(boolean flag) {
+    public static Selection fromExtraConditionFlag(boolean flag) {
         return new Selection(null, flag);
     }
 
     public static Selection fromIndex(Index index) {
         return new Selection(index, null);
+    }
+
+    public static Selection fromIndexAndToggle(Index index, boolean isExtraCondition) {
+        return new Selection(index, isExtraCondition);
     }
 
     @Override
@@ -68,13 +72,14 @@ public class Selection {
         Selection otherSelection = (Selection) other;
 
         if (this.hasIndex() != otherSelection.hasIndex()
-                || this.hasAllFlag() != otherSelection.hasAllFlag()) {
+                || this.hasExtraConditionFlag() != otherSelection.hasExtraConditionFlag()) {
             return false;
         }
 
         if (this.hasIndex() && this.getIndexOneBased() != otherSelection.getIndexOneBased()) {
             return false;
-        } else if (this.hasAllFlag() && this.getAllFlag() != otherSelection.getAllFlag()) {
+        } else if (this.hasExtraConditionFlag()
+                && this.getExtraConditionFlag() != otherSelection.getExtraConditionFlag()) {
             return false;
         } else {
             return true;

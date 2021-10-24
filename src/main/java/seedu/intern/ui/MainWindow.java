@@ -127,7 +127,7 @@ public class MainWindow extends UiPart<Stage> {
         personDetail = new PersonDetailPanel();
         personDetailPlaceholder.getChildren().add(personDetail.getRoot());
         personListPanel.addSelectedListener((observable, oldValue, newValue) -> {
-            personDetail.showApplicant(newValue);
+            personDetail.showApplicant(newValue, false);
         });
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
@@ -198,7 +198,7 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             if (commandResult.isView()) {
-                handleView(logic.getApplicant());
+                handleView(logic.getApplicant(), logic.getIsToggle());
             }
             return commandResult;
         } catch (CommandException | ParseException e) {
@@ -208,7 +208,7 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    private void handleView(Applicant applicant) {
-        personDetail.showApplicant(applicant);
+    private void handleView(Applicant applicant, boolean isToggle) {
+        personDetail.showApplicant(applicant, isToggle);
     }
 }

@@ -116,7 +116,7 @@ public class EditCommand extends Command {
             model.commitInternWatcher();
             return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedApplicant));
         } else {
-            if (!selection.getAllFlag()) {
+            if (!selection.getExtraConditionFlag()) {
                 throw new CommandException(Messages.MESSAGE_UNEXPECTED_FLAG);
             }
 

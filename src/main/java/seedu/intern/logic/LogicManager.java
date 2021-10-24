@@ -70,6 +70,11 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public boolean getIsToggle() {
+        return model.getIsToggle();
+    }
+
+    @Override
     public Path getInternWatcherFilePath() {
         return model.getInternWatcherFilePath();
     }
