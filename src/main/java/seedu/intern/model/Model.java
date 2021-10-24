@@ -101,17 +101,17 @@ public interface Model {
     void updateFilteredApplicantList(Predicate<Applicant> predicate);
 
     /**
-     * Saves the current InternWatcher state.
+     * Saves the current InternWatcher state to its history.
      */
     void commitInternWatcher();
 
     /**
-     * Reverts the InternWatcher to a previous state.
+     * Restores the InternWatcher to a previous state from its history.
      */
     void undoInternWatcher();
 
     /**
-     * Restores the InternWatcher to it's state before a previous undo action.
+     * Restores the InternWatcher to a previously undone state from its history.
      */
     void redoInternWatcher();
 
