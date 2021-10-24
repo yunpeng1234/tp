@@ -12,6 +12,7 @@ import static seedu.intern.logic.parser.CliSyntax.PREFIX_SKILL;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.intern.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -112,21 +113,31 @@ public class EditCommand extends Command {
 
             model.setApplicant(applicantToEdit, editedApplicant);
             model.updateFilteredApplicantList(PREDICATE_SHOW_ALL_PERSONS);
+            model.commitInternWatcher();
             return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedApplicant));
         } else {
             if (!selection.getAllFlag()) {
                 throw new CommandException(Messages.MESSAGE_UNEXPECTED_FLAG);
             }
-            int addSuccesses = 0;
 
-            // TODO: Catch failures to update?
-            for (Applicant applicantToEdit : lastShownList) {
+            int totalApplicants = lastShownList.size();
+            int addSuccesses = 0;
+            // Create copy of list
+            ArrayList<Applicant> targetApplicants = new ArrayList<>(lastShownList);
+
+            for (Applicant applicantToEdit : targetApplicants) {
                 Applicant editedApplicant = createEditedApplicant(applicantToEdit, editApplicantDescriptor);
+
+                if (!applicantToEdit.isSameApplicant(editedApplicant) && model.hasApplicant(editedApplicant)) {
+                    continue;
+                }
+
                 model.setApplicant(applicantToEdit, editedApplicant);
                 addSuccesses++;
             }
 
-            return new CommandResult(String.format(MESSAGE_EDIT_ALL_SUCCESS, addSuccesses, lastShownList.size()));
+            model.commitInternWatcher();
+            return new CommandResult(String.format(MESSAGE_EDIT_ALL_SUCCESS, addSuccesses, totalApplicants));
         }
     }
 
