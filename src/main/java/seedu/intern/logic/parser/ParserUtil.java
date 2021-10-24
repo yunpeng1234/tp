@@ -77,6 +77,14 @@ public class ParserUtil {
      */
     public static Selection parseView(String selection) throws ParseException {
         String [] trimmedSelection = selection.trim().split(" ");
+        if(trimmedSelection.length > 2) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+
+        if(!StringUtil.isInteger(trimmedSelection[0])) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+
         if (StringUtil.isInteger(trimmedSelection[0]) && !StringUtil.isNonZeroUnsignedInteger(trimmedSelection[0])) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
