@@ -7,6 +7,7 @@ import static seedu.intern.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_GRADUATIONYEARMONTH;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_INSTITUTION;
+import static seedu.intern.logic.parser.CliSyntax.PREFIX_JOB;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_SKILL;
@@ -36,8 +37,8 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_GRADE,
-                        PREFIX_STATUS, PREFIX_SKILL, PREFIX_INSTITUTION, PREFIX_COURSE, PREFIX_GRADUATIONYEARMONTH);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_GRADE, PREFIX_STATUS,
+                        PREFIX_SKILL, PREFIX_INSTITUTION, PREFIX_COURSE, PREFIX_GRADUATIONYEARMONTH, PREFIX_JOB);
         ArgumentTokenizer.tokenize(args,
                 PREFIX_NAME,
                 PREFIX_PHONE,
@@ -47,6 +48,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                 PREFIX_INSTITUTION,
                 PREFIX_COURSE,
                 PREFIX_GRADUATIONYEARMONTH,
+                PREFIX_JOB,
                 PREFIX_STATUS);
 
 
@@ -64,6 +66,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                 || argMultimap.getValue(PREFIX_GRADE).isPresent()
                 || argMultimap.getValue(PREFIX_GRADUATIONYEARMONTH).isPresent()
                 || argMultimap.getValue(PREFIX_INSTITUTION).isPresent()
+                || argMultimap.getValue(PREFIX_JOB).isPresent()
                 || argMultimap.getValue(PREFIX_SKILL).isPresent()
                 )) {
             throw new ParseException("ALL FLAG CAN ONLY BE USED WITH:\n"
@@ -95,6 +98,10 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_COURSE).isPresent()) {
             editApplicantDescriptor
                     .setCourse(ParserUtil.parseCourse(argMultimap.getValue(PREFIX_COURSE).get()));
+        }
+        if (argMultimap.getValue(PREFIX_JOB).isPresent()) {
+            editApplicantDescriptor
+                    .setJob(ParserUtil.parseJob(argMultimap.getValue(PREFIX_JOB).get()));
         }
         if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
             editApplicantDescriptor

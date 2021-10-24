@@ -21,6 +21,7 @@ import seedu.intern.model.applicant.Email;
 import seedu.intern.model.applicant.Grade;
 import seedu.intern.model.applicant.GraduationYearMonth;
 import seedu.intern.model.applicant.Institution;
+import seedu.intern.model.applicant.Job;
 import seedu.intern.model.applicant.Name;
 import seedu.intern.model.applicant.Phone;
 import seedu.intern.model.skills.Skill;
@@ -187,6 +188,66 @@ public class ParserUtil {
             throw new ParseException(GraduationYearMonth.MESSAGE_CONSTRAINTS);
         }
         return new GraduationYearMonth(trimmedYearMonth);
+    }
+
+    /**
+     * Parses a {@code String job} into an {@code Job}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code job} is invalid.
+     */
+    public static Job parseJob(String job) throws ParseException {
+        requireNonNull(job);
+        String trimmedJobName = job.trim();
+        if (!Job.isValidJobName(job)) {
+            throw new ParseException(Job.MESSAGE_CONSTRAINTS);
+        }
+        return new Job(trimmedJobName);
+    }
+
+    /**
+     * Parses {@code Collection<String> jobs} into a {@code Set<Job>}.
+     */
+    public static Set<Job> parseJobs(Collection<String> jobs) throws ParseException {
+        requireNonNull(jobs);
+        final Set<Job> jobSet = new HashSet<>();
+        for (String job : jobs) {
+            jobSet.add(parseJob(job));
+        }
+        return jobSet;
+    }
+
+    /**
+     * Parses a {@code String jobFilter} into a {@code List<String>}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code job} is invalid.
+     */
+    public static List<String> parseJobFilter(String jobFilter) throws ParseException {
+        requireNonNull(jobFilter);
+        String trimmedJob = jobFilter.trim();
+        if (!Job.isValidJobName(trimmedJob)) {
+            throw new ParseException(Job.MESSAGE_CONSTRAINTS);
+        }
+        if (trimmedJob.isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+        }
+        String[] jobKeywords = trimmedJob.split("\\s+");
+
+        return Arrays.asList(jobKeywords);
+    }
+
+    /**
+     * Parses {@code Collection<String> jobFilters} into a {@code Set<List<String>>}.
+     */
+    public static Set<List<String>> parseJobFilters(Collection<String> jobs) throws ParseException {
+        requireNonNull(jobs);
+        final Set<List<String>> jobSet = new HashSet<>();
+        for (String job : jobs) {
+            jobSet.add(parseJobFilter(job));
+        }
+        return jobSet;
     }
 
     /**
