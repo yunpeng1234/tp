@@ -1,10 +1,10 @@
 package seedu.intern.model;
 
+import static seedu.intern.logic.commands.RedoCommand.MESSAGE_NO_REDO;
+import static seedu.intern.logic.commands.UndoCommand.MESSAGE_NO_UNDO;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import static seedu.intern.logic.commands.UndoCommand.MESSAGE_NO_UNDO;
-import static seedu.intern.logic.commands.RedoCommand.MESSAGE_NO_REDO;
 
 import seedu.intern.logic.commands.exceptions.CommandException;
 
