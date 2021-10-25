@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-Intern Watcher (IW) is a **desktop app for managing internship applicants, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, IW can get your applicant management tasks done faster than traditional GUI apps.
+Intern Watcher (IW) is a **desktop app for Human Resource Managers to manage internship applicants, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, IW can get your applicant management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -14,15 +14,16 @@ Intern Watcher (IW) is a **desktop app for managing internship applicants, optim
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `*.jar` from [here](https://github.com/AY2122S1-CS2103T-F12-2/tp/releases).
+2. Download the latest `*.jar` from [here](https://github.com/AY2122S1-CS2103T-F12-2/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your InterWatcher.
+3. Copy the file to the folder you want to use as the _home folder_ for your InternWatcher.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+   
+6. Some example commands you can try:
 
    * **`list`** : Lists all applicants.
 
@@ -34,7 +35,7 @@ Intern Watcher (IW) is a **desktop app for managing internship applicants, optim
 
    * **`exit`** : Exits the app.
 
-2. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -66,21 +67,21 @@ Intern Watcher (IW) is a **desktop app for managing internship applicants, optim
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
 Format: `help`
 
 
-### Adding a applicant: `add`
+### Adding an applicant: `add`
 
-Adds a applicant to Inter Watcher.
+Adds an applicant to Intern Watcher.
 
 Format: `add n/NAME p/PHONE e/EMAIL g/GRADE i/INSTITUTION c/COURSE y/GRADUATION_YEAR_MONTH [a/STATUS] [s/SKILL]…+`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A applicant can have any number of tags (including 0)
+An applicant can have any number of tags (including 0)
 </div>
 
 Examples:
@@ -88,13 +89,13 @@ Examples:
 
 ### Listing all applicants : `list`
 
-Shows a list of all applicants in Inter Watcher.
+Shows a list of all applicants in Intern Watcher.
 
 Format: `list`
 
 ### Editing applicants : `edit`
 
-Edits an existing applicant, or all currently displayed applicants in Inter Watcher. 
+Edits an existing applicant, or all currently displayed applicants in Intern Watcher. 
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [g/GRADE] [i/INSTITUTION] [c/COURSE] [y/GRADUATION_YEAR_MONTH] [a/STATUS] [t/SKILL]…`
 `edit ALL [a/STATUS]`
@@ -128,7 +129,7 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a applicant : `delete`
+### Deleting an applicant : `delete`
 
 Deletes the specified applicant from Inter Watcher.
 
@@ -139,14 +140,41 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …+
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd applicant in Inter Watcher.
+* `list` followed by `delete 2` deletes the 2nd applicant in Intern Watcher.
 * `find Betsy` followed by `delete 1` deletes the 1st applicant in the results of the `find` command.
 
 ### Clearing all entries : `clear`
 
-Clears all entries from Inter Watcher.
+Clears all applicant entries from Intern Watcher.
 
 Format: `clear`
+
+### Undoing an action : `undo`
+
+Undoes the last undoable action. 
+
+Format: `undo`
+* Restores Intern Watcher to a state before the last undoable action.
+* If the current state of Intern Watcher is the oldest state, the undo command will not be invoked. 
+* Undoable actions include: `add`, `edit`, `delete`, `clear`, `redo`.
+
+Examples:
+* `undo` (after `delete 2`). The applicant that was removed will be restored in Intern Watcher.
+* `undo` (after initial startup of Intern Watcher). As there are no previous states to restore, no undo action will be performed.
+
+### Redoing an action: `redo`
+
+Redoes the last undoable action.
+
+Format: `redo`
+* `redo` is the reverse of `undo`. The command restores the state of Intern Watcher to the last undoable action that was undone. 
+* If the current state of Intern Watcher is the newest state, the redo command will not be invoked.
+* If a new undoable action is performed after the last undo command, the current state becomes the newest state.
+* Undoable actions include: `add`, `edit`, `delete`, `clear`, `redo`.
+
+Examples:
+* `clear` followed by `undo` followed by `redo`. The clear command will be redone. 
+* `undo` followed by `delete 3`. As the state after `delete` becomes the newest state, there are no undoable actions to be redone. 
 
 ### Exiting the program : `exit`
 
@@ -156,30 +184,26 @@ Format: `exit`
 
 ### Saving the data
 
-InterWatcher data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+InternWatcher data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-InterWatcher data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+InternWatcher data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, InterWatcher will discard all data and start with an empty data file at the next run.
+If your changes to the data file makes its format invalid, InternWatcher will discard all data and start with an empty data file at the next run.
 </div>
 
 ### Finding by Status/Skills `[coming soon]`
 
 _Details coming soon ..._
 
-### Undoing a command `[coming soon]`
-
-_Details coming soon..._
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous InterWatcher home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous InternWatcher home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
