@@ -42,7 +42,7 @@ public class DeleteCommand extends Command {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
         }
-        if (targetSelection.hasExtraConditionFlag()) {
+        if (targetSelection.hasAllSelectFlag() && targetSelection.checkAllSelected()) {
             int length = lastShownList.size();
             for (int i = 0; i < length; i++) {
                 Applicant applicantToDelete = lastShownList.get(0);
