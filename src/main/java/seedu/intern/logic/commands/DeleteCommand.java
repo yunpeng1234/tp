@@ -16,16 +16,15 @@ import seedu.intern.model.applicant.Applicant;
 public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the applicant identified by the index number used in the displayed applicant list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Applicant: %1$s";
-
     public static final String MESSAGE_DELETE_ALL_SUCCESS = " %1$s Applicants deleted!";
-
+    public static final String MESSAGE_COMMIT_DELETE = "Delete applicant: %1$s";
+    public static final String MESSAGE_COMMIT_DELETE_ALL = "Delete %1$s applicants";
     private final Selection targetSelection;
 
     public DeleteCommand(Selection targetSelection) {
@@ -48,12 +47,12 @@ public class DeleteCommand extends Command {
                 Applicant applicantToDelete = lastShownList.get(0);
                 model.deleteApplicant(applicantToDelete);
             }
-            model.commitInternWatcher();
+            model.commitInternWatcher(String.format(MESSAGE_COMMIT_DELETE_ALL, String.valueOf(length)));
             return new CommandResult(String.format(MESSAGE_DELETE_ALL_SUCCESS, String.valueOf(length)));
         } else {
             Applicant applicantToDelete = lastShownList.get(targetSelection.getIndexZeroBased());
             model.deleteApplicant(applicantToDelete);
-            model.commitInternWatcher();
+            model.commitInternWatcher(String.format(MESSAGE_COMMIT_DELETE, applicantToDelete));
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, applicantToDelete));
         }
     }
