@@ -64,4 +64,3 @@ public class ViewCommand extends Command {
                 && targetIndex.equals(((ViewCommand) other).targetIndex)); // state check
     }
 }
-
