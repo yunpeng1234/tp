@@ -18,7 +18,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.intern.commons.core.selection.Index;
-import seedu.intern.commons.core.selection.Selection;
 import seedu.intern.logic.commands.exceptions.CommandException;
 import seedu.intern.model.InternWatcher;
 import seedu.intern.model.Model;
@@ -156,20 +155,6 @@ public class CommandTestUtil {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
 
         Applicant applicant = model.getFilteredPersonList().get(targetIndex.getZeroBased());
-        final String[] splitName = applicant.getName().fullName.split("\\s+");
-        model.updateFilteredApplicantList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
-
-        assertEquals(1, model.getFilteredPersonList().size());
-    }
-
-    /**
-     * Updates {@code model}'s filtered list to show only the applicant at the given {@code targetIndex} in the
-     * {@code model}'s intern book.
-     */
-    public static void showSelectedApplicant(Model model, Selection targetSelection) {
-        assertTrue(targetSelection.getIndexZeroBased() < model.getFilteredPersonList().size());
-
-        Applicant applicant = model.getFilteredPersonList().get(targetSelection.getIndexZeroBased());
         final String[] splitName = applicant.getName().fullName.split("\\s+");
         model.updateFilteredApplicantList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
