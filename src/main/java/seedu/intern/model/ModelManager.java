@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.intern.commons.core.GuiSettings;
 import seedu.intern.commons.core.LogsCenter;
+import seedu.intern.logic.commands.exceptions.CommandException;
 import seedu.intern.model.applicant.Applicant;
 
 /**
@@ -152,18 +153,18 @@ public class ModelManager implements Model {
     //=========== Undo/Redo ============================================================================
 
     @Override
-    public void commitInternWatcher() {
-        internWatcher.commitState();
+    public void commitInternWatcher(String commitMessage) {
+        internWatcher.commitState(commitMessage);
     }
 
     @Override
-    public void undoInternWatcher() {
-        internWatcher.undo();
+    public String undoInternWatcher() throws CommandException {
+        return internWatcher.undo();
     }
 
     @Override
-    public void redoInternWatcher() {
-        internWatcher.redo();
+    public String redoInternWatcher() throws CommandException {
+        return internWatcher.redo();
     }
 
     @Override
