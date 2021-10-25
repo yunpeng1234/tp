@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.intern.commons.core.GuiSettings;
+import seedu.intern.logic.commands.exceptions.CommandException;
 import seedu.intern.model.applicant.Applicant;
 
 /**
@@ -103,17 +104,19 @@ public interface Model {
     /**
      * Saves the current InternWatcher state to its history.
      */
-    void commitInternWatcher();
+    void commitInternWatcher(String commitMessage);
 
     /**
      * Restores the InternWatcher to a previous state from its history.
+     * @return
      */
-    void undoInternWatcher();
+    String undoInternWatcher() throws CommandException;
 
     /**
      * Restores the InternWatcher to a previously undone state from its history.
+     * @return
      */
-    void redoInternWatcher();
+    String redoInternWatcher() throws CommandException;
 
     /**
      * Returns true if the model has a previous state to revert to.
