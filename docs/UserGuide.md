@@ -30,6 +30,12 @@ Intern Watcher (IW) is a **desktop app for Human Resource Managers to manage int
    * **`add`**`n/John p/123 e/a@a.com addr/Singapore g/4.50 i/NTU c/CS y/06/2025 a/INTERVIEWED` : Adds a applicant named `John` to Intern Watcher.
 
    * **`delete`**`3` : Deletes the 3rd applicant shown in the current list.
+     
+   * **`view`**`3`**`TOGGLE` : Shows the 3rd applicant's skills.
+
+   * **`undo`** : Undos the last command the user has entered.
+     
+   * **`redo`** : Redos the last command the user has undoed.
 
    * **`clear`** : Deletes all applicants.
 
@@ -46,7 +52,9 @@ Intern Watcher (IW) is a **desktop app for Human Resource Managers to manage int
 **:information_source: Notes about the command formats:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  This excludes special tags for **`edit`** **`view`** **`delete`** commands. <br>
+  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.<br>
+  e.g. in `delete ALL`, `ALL` is to be typed verbatim in full capital letters by the user.
 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
@@ -92,6 +100,19 @@ Examples:
 Shows a list of all applicants in Intern Watcher.
 
 Format: `list`
+
+### Viewing an applicant : `view`
+
+Shows the specified applicant's academic records, or skills. 
+
+Format: `view INDEX [T]`
+
+* If only `INDEX` is specified, it will show the specified applicant's academic records.
+* If `T` is also specified along with `INDEX`, it will show the specified applicant's skills instead.
+
+Examples:
+* `view 1` Shows the 1st applicant's academic records on the displayed applicants list.
+* `view 2 T` Shows the 2nd applicant's skills on the displayed applicants list.
 
 ### Editing applicants : `edit`
 
@@ -149,14 +170,17 @@ Examples:
 
 Deletes the specified applicant from Inter Watcher.
 
-Format: `delete INDEX`
+Format: `delete INDEX` `delete INDEX ALL`
 
-* Deletes the applicant at the specified `INDEX`.
+* If `INDEX` is specified, Deletes the applicant at the specified `INDEX` or all currently displayed applicants in the Intern Watcher.
 * The index refers to the index number shown in the displayed applicant list.
 * The index **must be a positive integer** 1, 2, 3, …+
+* If `ALL` is specified, Deletes all applicants currently displayed.
+
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd applicant in Intern Watcher.
+* `list` followed by `delete ALL` deletes the all applicants in Intern Watcher. Effect is similar to `clear` when used in conjunction with `list`.
 * `find Betsy` followed by `delete 1` deletes the 1st applicant in the results of the `find` command.
 
 ### Clearing all entries : `clear`
@@ -170,6 +194,7 @@ Format: `clear`
 Undoes the last undoable action. 
 
 Format: `undo`
+
 * Restores Intern Watcher to a state before the last undoable action.
 * If the current state of Intern Watcher is the oldest state, the undo command will not be invoked. 
 * Undoable actions include: `add`, `edit`, `delete`, `clear`, `redo`.
@@ -183,6 +208,7 @@ Examples:
 Redoes the last undoable action.
 
 Format: `redo`
+
 * `redo` is the reverse of `undo`. The command restores the state of Intern Watcher to the last undoable action that was undone. 
 * If the current state of Intern Watcher is the newest state, the redo command will not be invoked.
 * If a new undoable action is performed after the last undo command, the current state becomes the newest state.
@@ -210,9 +236,26 @@ InternWatcher data are saved as a JSON file `[JAR file location]/data/internwatc
 If your changes to the data file makes its format invalid, InternWatcher will discard all data and start with an empty data file at the next run.
 </div>
 
-### Finding by Status/Skills `[coming soon]`
+### Filtering by Fields 
 
-_Details coming soon ..._
+Filters the applicants to Intern Watcher.
+
+Format: `filter [g/GRADE] [i/INSTITUTION]…+ [c/COURSE]…+ [y/GRADUATION_YEAR_MONTH] [a/STATUS] [s/SKILL]…+`
+
+
+* `filter` will show applicants that matches all fields specified.
+* If `[g/GRADE]` is specified, it will show all applicants with grades higher or equal to the `g/Grade` specified.
+* Likewise, if `[y/GRADUATION_YEAR_MONTH]` is specified, it will show all applicants with graduation dates that is before the `GRADUATION_YEAR_MONTH` specified.
+* If more than 1 of `[s/SKILL]…+` is specified, applicants that matches at least one of the `s/SKILL` specified will be shown.
+* This is the same of both of `[i/INSTITUTION]…+` `[c/COURSE]…+` as well.
+
+Examples:
+* `filter s/PYTHON s/JAVA` will show applicants with skills in either JAVA or PYTHON or both.
+* `filter g/4.50` will show applicants with a grade more than or equals 4.50.
+* `filter y/06/2022` will show applicants  with graduation date earlier than June 2022.
+* `filter s/JAVA y/06/2022 i/NUS` will show applicants that graduate earlier than June 2022, knows JAVA and is from NUS.
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -235,3 +278,7 @@ e.g.,`edit 2 n/James Lee e/jameslee@example.com`, `edit ALL a/REJECTED`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
+**Filter** | `filter [g/GRADE] [i/INSTITUTION]…+ [c/COURSE]…+ [y/GRADUATION_YEAR_MONTH] [a/STATUS] [s/SKILL]…+` <br> e.g. , `filter s/JAVA y/06/2022 i/NUS a/REJECTED`
+**Undo** | `undo`
+**Redo** | `redo`
+**View** | `view INDEX [T]` <br> e.g. , `view 2 T`
