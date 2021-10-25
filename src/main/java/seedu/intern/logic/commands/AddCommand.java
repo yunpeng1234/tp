@@ -46,7 +46,8 @@ public class AddCommand extends Command {
             + PREFIX_SKILL + "Python";
 
     public static final String MESSAGE_SUCCESS = "New applicant added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This applicant already exists in the intern book";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This applicant already exists in Intern Watcher";
+    public static final String MESSAGE_COMMIT_ADD = "Add applicant: %1$s";
 
     private final Applicant toAdd;
 
@@ -67,7 +68,7 @@ public class AddCommand extends Command {
         }
 
         model.addApplicant(toAdd);
-        model.commitInternWatcher();
+        model.commitInternWatcher(String.format(MESSAGE_COMMIT_ADD, toAdd));
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

@@ -68,6 +68,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This applicant already exists in Intern Watcher.";
     public static final String MESSAGE_EDIT_ALL_SUCCESS = "Successfully edited %d of %d applicants.";
+    public static final String MESSAGE_COMMIT_EDIT = "Edit Applicant: %1$s";
+    public static final String MESSAGE_COMMIT_EDIT_ALL = "Edit %d applicants.";
 
     private final Selection selection;
     private final EditApplicantDescriptor editApplicantDescriptor;
@@ -126,7 +128,7 @@ public class EditCommand extends Command {
 
             model.setApplicant(applicantToEdit, editedApplicant);
             model.updateFilteredApplicantList(PREDICATE_SHOW_ALL_PERSONS);
-            model.commitInternWatcher();
+            model.commitInternWatcher(String.format(MESSAGE_COMMIT_EDIT, editedApplicant));
             return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedApplicant));
         } else {
             if (!selection.checkAllSelected()) {
@@ -149,7 +151,7 @@ public class EditCommand extends Command {
                 addSuccesses++;
             }
 
-            model.commitInternWatcher();
+            model.commitInternWatcher(String.format(MESSAGE_COMMIT_EDIT_ALL, addSuccesses));
             return new CommandResult(String.format(MESSAGE_EDIT_ALL_SUCCESS, addSuccesses, totalApplicants));
         }
     }
