@@ -108,13 +108,13 @@ public interface Model {
 
     /**
      * Restores the InternWatcher to a previous state from its history.
-     * @return
+     * @return Command that was undone.
      */
     String undoInternWatcher() throws CommandException;
 
     /**
      * Restores the InternWatcher to a previously undone state from its history.
-     * @return
+     * @return Command that was redone.
      */
     String redoInternWatcher() throws CommandException;
 
