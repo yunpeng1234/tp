@@ -98,7 +98,7 @@ public class ParserUtil {
                     trimmedSelection[1].equals(FLAG_TOGGLE));
         } else {
             return new Pair<>(Index.fromOneBased(Integer.parseInt(trimmedSelection[0])),
-                    null);
+                    false);
         }
     }
 
