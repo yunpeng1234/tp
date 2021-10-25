@@ -164,17 +164,17 @@ public class AddCommandTest {
         }
 
         @Override
-        public void commitInternWatcher() {
+        public void commitInternWatcher(String commitMessage) {
             System.out.println("Add command test");
         }
 
         @Override
-        public void undoInternWatcher() {
+        public String undoInternWatcher() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void redoInternWatcher() {
+        public String redoInternWatcher() {
             throw new AssertionError("This method should not be called.");
         }
 
