@@ -83,12 +83,25 @@ public class EditCommand extends Command {
     }
 
     /**
+     * Public constructor for {@code EditCommand}.
      * @param selection of the applicant(s) in the filtered applicant list to edit
      * @param editApplicantDescriptor details to edit the applicant with
      */
     public EditCommand(Selection selection, EditApplicantDescriptor editApplicantDescriptor) {
         requireNonNull(selection);
         requireNonNull(editApplicantDescriptor);
+
+        // editApplicant Descriptor should only contain ApplicationStatus if All flag is present
+        assert(!selection.hasAllSelectFlag()
+                || selection.checkAllSelected()
+                && editApplicantDescriptor.getName().isEmpty()
+                && editApplicantDescriptor.getCourse().isEmpty()
+                && editApplicantDescriptor.getEmail().isEmpty()
+                && editApplicantDescriptor.getGrade().isEmpty()
+                && editApplicantDescriptor.getGraduationYearMonth().isEmpty()
+                && editApplicantDescriptor.getInstitution().isEmpty()
+                && editApplicantDescriptor.getSkills().isEmpty()
+                && editApplicantDescriptor.getPhone().isEmpty());
 
         this.selection = selection;
         this.editApplicantDescriptor = new EditApplicantDescriptor(editApplicantDescriptor);
@@ -116,7 +129,7 @@ public class EditCommand extends Command {
             model.commitInternWatcher();
             return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedApplicant));
         } else {
-            if (!selection.getExtraConditionFlag()) {
+            if (!selection.checkAllSelected()) {
                 throw new CommandException(Messages.MESSAGE_UNEXPECTED_FLAG);
             }
 

@@ -9,7 +9,18 @@ import static seedu.intern.commons.util.AppUtil.checkArgument;
  */
 public class ApplicationStatus {
     public enum Status {
-        APPLIED, RECEIVED, SCHEDULED, INTERVIEWED, OFFERED, ACCEPTED, REJECTED
+        APPLIED("#FF0000"), RECEIVED("#FF0000"), SCHEDULED("#eb9e34"),
+        INTERVIEWED("#d1cc2a"), OFFERED("#358f21"), ACCEPTED("#76f25a"), REJECTED("#8c8c8c");
+
+        private final String colour;
+
+        private Status(String colour) {
+            this.colour = colour;
+        }
+
+        private Status() {
+            this.colour = "#3e7b91";
+        }
     }
 
     public static final Status DEFAULT_STATUS = Status.APPLIED;
@@ -56,6 +67,13 @@ public class ApplicationStatus {
      */
     public static boolean isValidStatus(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns the colour each application status should be set to.
+     */
+    public String getColour() {
+        return value.colour;
     }
 
     @Override
