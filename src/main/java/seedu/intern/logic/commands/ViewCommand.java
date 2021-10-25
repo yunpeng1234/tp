@@ -59,4 +59,3 @@ public class ViewCommand extends Command {
                 && targetSelection.equals(((ViewCommand) other).targetSelection)); // state check
     }
 }
-
