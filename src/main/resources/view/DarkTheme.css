@@ -132,15 +132,20 @@
 }
 
 .list-cell:filled:even {
-    -fx-background-color: #c9ada7;
+    -fx-background-color: derive(#f2e9e4, 20%);
 }
 
 .list-cell:filled:odd {
-    -fx-background-color: #decbc6;
+    -fx-background-color: derive(#f2e9e4, 20%);
 }
 
 .list-cell:filled:selected {
+    -fx-background-radius: 20;
     -fx-background-color: #9a8c98;
+}
+
+.list-cell:filled:empty {
+    -fx-background-color: derive(#f2e9e4, 20%)
 }
 
 .list-cell:filled:selected #cardPane {
@@ -340,8 +345,10 @@
 }
 
 #cardPane {
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
     -fx-background-color: transparent;
-    -fx-border-width: 0;
+    -fx-border-width: 1;
 }
 
 #commandTypeLabel {
@@ -350,6 +357,8 @@
 }
 
 #commandTextField {
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
     -fx-background-color: transparent #c9ada7 transparent #c9ada7;
     -fx-background-insets: 0;
     -fx-border-color: #c9ada7 #c9ada7 #22223b #c9ada7;
@@ -366,9 +375,11 @@
 }
 
 #resultDisplay .content {
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
     -fx-background-color: transparent, #c9ada7, transparent, #c9ada7;
-    -fx-background-radius: 0;
 }
+
 
 #tags {
     -fx-hgap: 7;
@@ -408,12 +419,13 @@
 }
 
 #skills .label {
+    -fx-min-height: 30;
     -fx-text-fill: #22223b;
-    -fx-background-color: #3e7b91;
+    -fx-background-color: #ADD8e6;
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
-    -fx-background-radius: 2;
-    -fx-font-size: 11;
+    -fx-background-radius: 15;
+    -fx-font-size: 15;
 }
 
 .tab-pane {
@@ -421,3 +433,17 @@
     -fx-text-fill: #22223b;
 }
 
+#placeholder {
+    -fx-background-radius: 20;
+        -fx-border-radius: 20;
+}
+
+.text-area .scroll-pane {
+    -fx-background-color: transparent;
+}
+.text-area .scroll-pane .viewport{
+    -fx-background-color: transparent;
+}
+.text-area .scroll-pane .content{
+    -fx-background-color: transparent;
+}
