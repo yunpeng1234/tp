@@ -2,7 +2,6 @@ package seedu.intern.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.intern.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.intern.logic.parser.CliSyntax.FLAG_ALL;
 import static seedu.intern.logic.parser.CliSyntax.FLAG_TOGGLE;
 
 import java.util.Arrays;
@@ -11,6 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javafx.util.Pair;
 import seedu.intern.commons.core.selection.Index;
 import seedu.intern.commons.core.selection.Selection;
 import seedu.intern.commons.util.StringUtil;
@@ -63,7 +63,7 @@ public class ParserUtil {
         }
 
         if (StringUtil.isAll(trimmedSelection)) {
-            return Selection.fromExtraConditionFlag(trimmedSelection.equals(FLAG_ALL));
+            return Selection.fromAllFlag();
         } else {
             return Selection.fromIndex(Index.fromOneBased(Integer.parseInt(trimmedSelection)));
         }
@@ -76,7 +76,7 @@ public class ParserUtil {
      * trimmed.
      * @throws ParseException if the specified selection is invalid.
      */
-    public static Selection parseView(String selection) throws ParseException {
+    public static Pair<Index, Boolean> parseView(String selection) throws ParseException {
         String [] trimmedSelection = selection.trim().split(" ");
         if (trimmedSelection.length > 2) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
@@ -94,10 +94,11 @@ public class ParserUtil {
         }
 
         if (trimmedSelection.length == 2) {
-            return Selection.fromIndexAndToggle(Index.fromOneBased(Integer.parseInt(trimmedSelection[0])),
+            return new Pair<>(Index.fromOneBased(Integer.parseInt(trimmedSelection[0])),
                     trimmedSelection[1].equals(FLAG_TOGGLE));
         } else {
-            return Selection.fromIndex(Index.fromOneBased(Integer.parseInt(trimmedSelection[0])));
+            return new Pair<>(Index.fromOneBased(Integer.parseInt(trimmedSelection[0])),
+                    null);
         }
     }
 
@@ -110,7 +111,7 @@ public class ParserUtil {
     @Deprecated
     public static Index parseDelete(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
-        if (trimmedIndex.equals("all")) {
+        if (trimmedIndex.equals("ALL")) {
             Index specialTag = Index.fromZeroBased(0);
             specialTag.setSpecialIndex();
             return specialTag;
