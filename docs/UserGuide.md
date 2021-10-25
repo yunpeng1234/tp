@@ -105,14 +105,14 @@ Format: `list`
 
 Shows the specified applicant's academic records, or skills. 
 
-Format: `view INDEX [TOGGLE]`
+Format: `view INDEX [T]`
 
 * If only `INDEX` is specified, it will show the specified applicant's academic records.
-* If `TOGGLE` is also specified along with `INDEX`, it will show the specified applicant's skills instead.
+* If `T` is also specified along with `INDEX`, it will show the specified applicant's skills instead.
 
 Examples:
 * `view 1` Shows the 1st applicant's academic records on the displayed applicants list.
-* `view 2 TOGGLE` Shows the 2nd applicant's skills on the displayed applicants list.
+* `view 2 T` Shows the 2nd applicant's skills on the displayed applicants list.
 
 ### Editing applicants : `edit`
 
@@ -220,7 +220,7 @@ InternWatcher data are saved as a JSON file `[JAR file location]/data/internwatc
 If your changes to the data file makes its format invalid, InternWatcher will discard all data and start with an empty data file at the next run.
 </div>
 
-### Filtering by Status/Skills `[coming soon]`
+### Filtering by Fields 
 
 Filters the applicants to Intern Watcher.
 
@@ -264,4 +264,4 @@ Action | Format, Examples
 **Filter** | `filter [g/GRADE] [i/INSTITUTION]…+ [c/COURSE]…+ [y/GRADUATION_YEAR_MONTH] [a/STATUS] [s/SKILL]…+` <br> e.g. , `filter s/JAVA y/06/2022 i/NUS a/REJECTED`
 **Undo** | `undo`
 **Redo** | `redo`
-**View** | `view INDEX [TOGGLE]` <br> e.g. , `view 2 TOGGLE`
+**View** | `view INDEX [T]` <br> e.g. , `view 2 T`
