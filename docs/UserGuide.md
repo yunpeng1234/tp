@@ -214,7 +214,7 @@ InternWatcher data are saved in the hard disk automatically after any command th
 
 ### Editing the data file
 
-InternWatcher data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+InternWatcher data are saved as a JSON file `[JAR file location]/data/internwatcher.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, InternWatcher will discard all data and start with an empty data file at the next run.
@@ -254,10 +254,14 @@ Examples:
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE e/EMAIL addr/ADDRESS g/GRADE i/INSTITUTION c/COURSE y/GRADUATION_YEAR_MONTH [a/STATUS] [t/TAG]…++` <br> e.g., `add n/John p/999 e/a@a.com addr/Singapore 2 g/4.00 i/NTU c/CS y/06/2025 a/INTERVIEWED t/friends`
+**Add** | `add n/NAME p/PHONE e/EMAIL g/GRADE i/INSTITUTION c/COURSE y/GRADUATION_YEAR_MONTH [a/STATUS] [t/TAG]…++` <br> e.g., `add n/John p/999 e/a@a.com addr/Singapore 2 g/4.00 i/NTU c/CS y/06/2025 a/INTERVIEWED t/friends`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [addr/ADDRESS] [g/GRADE] [i/INSTITUTION] [c/COURSE] [y/GRADUATION_YEAR_MONTH] [a/STATUS] [t/TAG]…`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [g/GRADE] [i/INSTITUTION] [c/COURSE] [y/GRADUATION_YEAR_MONTH] [a/STATUS] [t/TAG]…`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
+**Filter** | `filter [g/GRADE] [i/INSTITUTION]…+ [c/COURSE]…+ [y/GRADUATION_YEAR_MONTH] [a/STATUS] [s/SKILL]…+` <br> e.g. , `filter s/JAVA y/06/2022 i/NUS a/REJECTED`
+**Undo** | `undo`
+**Redo** | `redo`
+**View** | `view INDEX [TOGGLE]` <br> e.g. , `view 2 TOGGLE`
