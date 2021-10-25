@@ -97,9 +97,8 @@ Format: `list`
 
 Edits an existing applicant, or all currently displayed applicants in Intern Watcher. 
 
-Format: 
-1. `edit INDEX] [n/NAME] [p/PHONE] [e/EMAIL] [g/GRADE] [i/INSTITUTION] [c/COURSE] [y/GRADUATION_YEAR_MONTH] [a/STATUS] [t/SKILL]…`
-2. `edit ALL [a/STATUS]`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [g/GRADE] [i/INSTITUTION] [c/COURSE] [y/GRADUATION_YEAR_MONTH] [a/STATUS] [t/SKILL]…`
+`edit ALL [a/STATUS]`
 * If `INDEX` is specified, Edits the applicant at the specified `INDEX`. The index refers to the index number shown in the displayed applicant list. The index **must be a positive integer** 1, 2, 3, …+
 * If `ALL` is specified, edits all applicants currently displayed.
 * At least one of the optional fields must be provided.
@@ -111,7 +110,6 @@ Format:
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st applicant to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower s/` Edits the name of the 2nd applicant to be `Betsy Crower` and clears all existing skills.
-*  `edit ALL a/ACCEPTED` Edits all currently displayed applicants to have the `ACCEPTED` Application Status.
 
 ### Locating applicants by name: `find`
 
