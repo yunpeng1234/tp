@@ -118,19 +118,35 @@ Examples:
 
 Edits an existing applicant, or all currently displayed applicants in Intern Watcher. 
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [g/GRADE] [i/INSTITUTION] [c/COURSE] [y/GRADUATION_YEAR_MONTH] [a/STATUS] [t/SKILL]…`
-`edit ALL [a/STATUS]`
+Format: 
+1. `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [g/GRADE] [i/INSTITUTION] [c/COURSE] [y/GRADUATION_YEAR_MONTH] [a/STATUS] [t/SKILL]…`
+2. `edit ALL [a/STATUS]`
 * If `INDEX` is specified, Edits the applicant at the specified `INDEX`. The index refers to the index number shown in the displayed applicant list. The index **must be a positive integer** 1, 2, 3, …+
 * If `ALL` is specified, edits all applicants currently displayed.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the applicant will be removed i.e adding of tags is not cumulative.
+* When editing skills, the existing skills of the applicant will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s skills by typing `s/` without
     specifying any skills after it.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st applicant to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower s/` Edits the name of the 2nd applicant to be `Betsy Crower` and clears all existing skills.
+
+|Command|Effect|
+|---|---|
+|<img src="images/EditIndexBefore.png" alt="drawing" />|<img src="images/EditIndexAfter.png" alt="drawing" />|
+
+*  `edit 1 s/` Clears all existing skills of the 1st applicant .
+
+|Command|Effect|
+|---|---|
+|<img src="images/EditSkillBefore.png" alt="drawing" />|<img src="images/EditSkillAfter.png" alt="drawing" />|
+
+*  `filter a/INTERVIEWED` followed by `edit ALL a/ACCEPTED` Updates all applicants with `INTERVIEWED` application status to have the `ACCEPTED` status.
+
+|Command|Effect|
+|---|---|
+|<img src="images/EditAllBefore.png" alt="drawing" />|<img src="images/EditAllAfter.png" alt="drawing" />|
 
 ### Locating applicants by name: `find`
 
@@ -254,10 +270,11 @@ Examples:
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE e/EMAIL g/GRADE i/INSTITUTION c/COURSE y/GRADUATION_YEAR_MONTH [a/STATUS] [t/TAG]…++` <br> e.g., `add n/John p/999 e/a@a.com addr/Singapore 2 g/4.00 i/NTU c/CS y/06/2025 a/INTERVIEWED t/friends`
+**Add** | `add n/NAME p/PHONE e/EMAIL g/GRADE i/INSTITUTION c/COURSE y/GRADUATION_YEAR_MONTH [a/STATUS] [s/SKILL]…++` <br> e.g., `add n/John p/999 e/a@a.com g/4.00 i/NTU c/CS y/06/2025 a/INTERVIEWED s/Python`
 **Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [g/GRADE] [i/INSTITUTION] [c/COURSE] [y/GRADUATION_YEAR_MONTH] [a/STATUS] [t/TAG]…`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Delete** | `delete INDEX/ALL`<br> e.g., `delete 3`, `delete ALL`
+**Edit** | `edit INDEX/ALL [n/NAME] [p/PHONE] [e/EMAIL] [addr/ADDRESS] [g/GRADE] [i/INSTITUTION] [c/COURSE] [y/GRADUATION_YEAR_MONTH] [a/STATUS] [t/TAG]…`<br> 
+e.g.,`edit 2 n/James Lee e/jameslee@example.com`, `edit ALL a/REJECTED`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
