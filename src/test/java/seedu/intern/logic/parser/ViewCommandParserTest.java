@@ -3,10 +3,8 @@ package seedu.intern.logic.parser;
 import static seedu.intern.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.intern.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.intern.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.intern.testutil.TypicalSelections.SELECTION_FIRST_PERSON;
-import static seedu.intern.testutil.TypicalSelections.SELECTION_FIRST_PERSON_TAG;
-import static seedu.intern.testutil.TypicalSelections.SELECTION_SECOND_PERSON;
-import static seedu.intern.testutil.TypicalSelections.SELECTION_SECOND_PERSON_TAG;
+import static seedu.intern.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.intern.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 
 import org.junit.jupiter.api.Test;
 
@@ -17,22 +15,22 @@ public class ViewCommandParserTest {
 
     @Test
     public void parse_validArgNoTag_returnsViewCommand() {
-        assertParseSuccess(parser, "1", new ViewCommand(SELECTION_FIRST_PERSON));
+        assertParseSuccess(parser, "1", new ViewCommand(INDEX_FIRST_PERSON, false));
     }
 
     @Test
     public void parse_validArgWithTag_returnsViewCommand() {
-        assertParseSuccess(parser, "1 TOGGLE", new ViewCommand(SELECTION_FIRST_PERSON_TAG));
+        assertParseSuccess(parser, "1 TOGGLE", new ViewCommand(INDEX_FIRST_PERSON, true));
     }
 
     @Test
     public void parse_validArgsNoTagTwo_returnsViewCommand() {
-        assertParseSuccess(parser, "2", new ViewCommand(SELECTION_SECOND_PERSON));
+        assertParseSuccess(parser, "2", new ViewCommand(INDEX_SECOND_PERSON, false));
     }
 
     @Test
     public void parse_validArgsWithTagTwo_returnsViewCommand() {
-        assertParseSuccess(parser, "2 TOGGLE", new ViewCommand(SELECTION_SECOND_PERSON_TAG));
+        assertParseSuccess(parser, "2 TOGGLE", new ViewCommand(INDEX_SECOND_PERSON, true));
     }
 
     @Test
