@@ -56,7 +56,7 @@ public class PersonCard extends UiPart<Region> {
     }
 
     public String setColour(int index) {
-        if (index % 2 ==0) {
+        if (index % 2 == 0) {
             return "-fx-background-color: #decbc6;";
         } else {
             return "-fx-background-color: #c9ada7;";
