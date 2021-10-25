@@ -2,13 +2,13 @@ package seedu.intern.commons.core.selection;
 
 public class Selection {
     private static final String MESSAGE_MISSING_INDEX = "Selection does not contain an Index.";
-    private static final String MESSAGE_MISSING_FLAG = "Selection does not contain an ALL Flag.";
+    private static final String MESSAGE_MISSING_FLAG = "Selection does not contain an Extra Condition Flag.";
     private final Index index;
-    private final Boolean isAllSelected;
+    private final Boolean isExtraCondition;
 
-    private Selection(Index index, Boolean isAllSelected) {
+    private Selection(Index index, Boolean isExtraCondition) {
         this.index = index;
-        this.isAllSelected = isAllSelected;
+        this.isExtraCondition = isExtraCondition;
     }
 
     public Index getIndex() {
@@ -31,33 +31,32 @@ public class Selection {
         }
     }
 
-    /**
-     * Returns true if ALL flag has been set by the user.
-     */
-    public boolean checkAllSelected() {
-        if (!hasAllSelectFlag()) {
+    public boolean getExtraConditionFlag() {
+        if (hasExtraConditionFlag()) {
+            return isExtraCondition;
+        } else {
             throw new NullPointerException(MESSAGE_MISSING_FLAG);
         }
-        // isAllSelected should not be false, as constructors are private.
-        assert this.isAllSelected;
-
-        return isAllSelected;
     }
 
     public boolean hasIndex() {
         return this.index != null;
     }
 
-    public boolean hasAllSelectFlag() {
-        return this.isAllSelected != null;
+    public boolean hasExtraConditionFlag() {
+        return this.isExtraCondition != null;
     }
 
-    public static Selection fromAllFlag() {
-        return new Selection(null, true);
+    public static Selection fromExtraConditionFlag(boolean flag) {
+        return new Selection(null, flag);
     }
 
     public static Selection fromIndex(Index index) {
         return new Selection(index, null);
+    }
+
+    public static Selection fromIndexAndToggle(Index index, boolean isExtraCondition) {
+        return new Selection(index, isExtraCondition);
     }
 
     @Override
@@ -73,14 +72,14 @@ public class Selection {
         Selection otherSelection = (Selection) other;
 
         if (this.hasIndex() != otherSelection.hasIndex()
-                || this.hasAllSelectFlag() != otherSelection.hasAllSelectFlag()) {
+                || this.hasExtraConditionFlag() != otherSelection.hasExtraConditionFlag()) {
             return false;
         }
 
         if (this.hasIndex() && this.getIndexOneBased() != otherSelection.getIndexOneBased()) {
             return false;
-        } else if (this.hasAllSelectFlag()
-                && this.checkAllSelected() != otherSelection.checkAllSelected()) {
+        } else if (this.hasExtraConditionFlag()
+                && this.getExtraConditionFlag() != otherSelection.getExtraConditionFlag()) {
             return false;
         } else {
             return true;

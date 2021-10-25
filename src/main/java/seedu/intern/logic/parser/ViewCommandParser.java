@@ -2,8 +2,7 @@ package seedu.intern.logic.parser;
 
 import static seedu.intern.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import javafx.util.Pair;
-import seedu.intern.commons.core.selection.Index;
+import seedu.intern.commons.core.selection.Selection;
 import seedu.intern.logic.commands.ViewCommand;
 import seedu.intern.logic.parser.exceptions.ParseException;
 
@@ -19,8 +18,8 @@ public class ViewCommandParser implements Parser<ViewCommand> {
      */
     public ViewCommand parse(String args) throws ParseException {
         try {
-            Pair<Index, Boolean> parsed = ParserUtil.parseView(args);
-            return new ViewCommand(parsed.getKey(), parsed.getValue());
+            Selection selection = ParserUtil.parseView(args);
+            return new ViewCommand(selection);
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE), pe);
