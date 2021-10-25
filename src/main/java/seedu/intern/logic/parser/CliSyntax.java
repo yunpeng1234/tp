@@ -5,7 +5,7 @@ package seedu.intern.logic.parser;
  */
 public class CliSyntax {
     public static final String FLAG_ALL = "ALL";
-    public static final String FLAG_TOGGLE = "TOGGLE";
+    public static final String FLAG_TOGGLE = "T";
 
     /* Prefix definitions */
     public static final Prefix PREFIX_NAME = new Prefix("n/");
