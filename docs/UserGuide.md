@@ -27,7 +27,7 @@ Intern Watcher (IW) is a **desktop app for Human Resource Managers to manage int
 
    * **`list`** : Lists all applicants.
 
-   * **`add`**`n/John p/123 e/a@a.com addr/Singapore g/4.50 i/NTU c/CS y/06/2025 a/INTERVIEWED` : Adds a applicant named `John` to Intern Watcher.
+   * **`add`**`n/John p/123 e/a@a.com g/4.50 i/NTU c/CS y/06/2025 a/INTERVIEWED` : Adds an applicant named `John` to Intern Watcher.
 
    * **`delete`**`3` : Deletes the 3rd applicant shown in the current list.
      
@@ -57,10 +57,10 @@ Intern Watcher (IW) is a **desktop app for Human Resource Managers to manage int
   e.g. in `delete ALL`, `ALL` is to be typed verbatim in full capital letters by the user.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [s/SKILL]` can be used as `n/John Doe s/friend` or as `n/John Doe`.
 
 * Items with `…`+ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…+` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[s/SKILL]…+` can be used as ` ` (i.e. 0 times), `s/friend`, `s/friend s/family` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -86,14 +86,17 @@ Format: `help`
 
 Adds an applicant to Intern Watcher.
 
-Format: `add n/NAME p/PHONE e/EMAIL g/GRADE i/INSTITUTION c/COURSE y/GRADUATION_YEAR_MONTH [a/STATUS] [s/SKILL]…+`
+Format: `add n/NAME p/PHONE e/EMAIL g/GRADE i/INSTITUTION c/COURSE y/GRADUATION_YEAR_MONTH [a/APPLICATION_STATUS] [s/SKILL]…+`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 An applicant can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com addr/311, Clementi Ave 2 g/4.50 i/NTU c/CS y/06/2025 a/INTERVIEWED s/Python s/Java`
+
+* `add n/Alex Yeoh p/98765432 e/johnd@example.com g/4.50 i/NTU c/CS y/06/2025 a/SCHEDULED s/Python s/Java` adds 
+an applicant with the specified information.
+  ![Add result](images/AddResult.png)
 
 ### Listing all applicants : `list`
 
@@ -119,8 +122,8 @@ Examples:
 Edits an existing applicant, or all currently displayed applicants in Intern Watcher. 
 
 Format: 
-1. `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [g/GRADE] [i/INSTITUTION] [c/COURSE] [y/GRADUATION_YEAR_MONTH] [a/STATUS] [t/SKILL]…`
-2. `edit ALL [a/STATUS]`
+1. `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [g/GRADE] [i/INSTITUTION] [c/COURSE] [y/GRADUATION_YEAR_MONTH] [a/APPLICATION_STATUS] [s/SKILL]…`
+2. `edit ALL [a/APPLICATION_STATUS]`
 * If `INDEX` is specified, Edits the applicant at the specified `INDEX`. The index refers to the index number shown in the displayed applicant list. The index **must be a positive integer** 1, 2, 3, …+
 * If `ALL` is specified, edits all applicants currently displayed.
 * At least one of the optional fields must be provided.
@@ -142,7 +145,7 @@ Examples:
 |---|---|
 |<img src="images/EditSkillBefore.png" alt="drawing" />|<img src="images/EditSkillAfter.png" alt="drawing" />|
 
-*  `filter a/INTERVIEWED` followed by `edit ALL a/ACCEPTED` Updates all applicants with `INTERVIEWED` application status to have the `ACCEPTED` status.
+*  `filter a/INTERVIEWED` followed by `edit ALL a/ACCEPTED` Updates all applicants with `INTERVIEWED` application status to have the `ACCEPTED` APPLICATION_STATUS.
 
 |Command|Effect|
 |---|---|
@@ -250,11 +253,10 @@ Format: `filter [g/GRADE] [i/INSTITUTION]…+ [c/COURSE]…+ [y/GRADUATION_YEAR_
 * This is the same of both of `[i/INSTITUTION]…+` `[c/COURSE]…+` as well.
 
 Examples:
-* `filter s/PYTHON s/JAVA` will show applicants with skills in either JAVA or PYTHON or both.
+* `filter s/Python s/Java` will show applicants with skills in either JAVA or PYTHON or both.
 * `filter g/4.50` will show applicants with a grade more than or equals 4.50.
 * `filter y/06/2022` will show applicants  with graduation date earlier than June 2022.
-* `filter s/JAVA y/06/2022 i/NUS` will show applicants that graduate earlier than June 2022, knows JAVA and is from NUS.
-
+* `filter s/Java y/06/2022 i/NUS` will show applicants that graduate earlier than June 2022, knows JAVA and is from NUS.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -270,10 +272,10 @@ Examples:
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE e/EMAIL g/GRADE i/INSTITUTION c/COURSE y/GRADUATION_YEAR_MONTH [a/STATUS] [s/SKILL]…++` <br> e.g., `add n/John p/999 e/a@a.com g/4.00 i/NTU c/CS y/06/2025 a/INTERVIEWED s/Python`
+**Add** | `add n/NAME p/PHONE e/EMAIL g/GRADE i/INSTITUTION c/COURSE y/GRADUATION_YEAR_MONTH [a/APPLICATION_STATUS] [s/SKILL]…++` <br> e.g., `add n/John p/999 e/a@a.com g/4.00 i/NTU c/CS y/06/2025 a/INTERVIEWED s/Python`
 **Clear** | `clear`
 **Delete** | `delete INDEX/ALL`<br> e.g., `delete 3`, `delete ALL`
-**Edit** | `edit INDEX/ALL [n/NAME] [p/PHONE] [e/EMAIL] [addr/ADDRESS] [g/GRADE] [i/INSTITUTION] [c/COURSE] [y/GRADUATION_YEAR_MONTH] [a/STATUS] [t/TAG]…`<br> 
+**Edit** | `edit INDEX/ALL [n/NAME] [p/PHONE] [e/EMAIL] [g/GRADE] [i/INSTITUTION] [c/COURSE] [y/GRADUATION_YEAR_MONTH] [a/APPLICATION_STATUS] [s/SKILL]…`<br> 
 e.g.,`edit 2 n/James Lee e/jameslee@example.com`, `edit ALL a/REJECTED`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
