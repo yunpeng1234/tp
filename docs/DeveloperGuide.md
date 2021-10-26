@@ -158,10 +158,10 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Implementation
 The edit ALL mechanism is facilitated by the new `Selection` class. A new parser `ParserUtil#parseSelection` 
-has been added to parse `Selection` values, which accepts either integers or the `ALL` string. The `Selection` class supports 
-operations `Selection#hasAllFlag` and `Selection#hasIndex`, which is used by `EditCommand#execute`. `EditCommand#execute` 
-has been modified, such that whenever `Selection#hasAllFlag` returns `true`, `EditCommand#execute` edits all applicants with 
-the fields specified. `Selection` has been given a private constructor with static factory methods `Selection#fromIndex` and 
+has been added to parse `Selection` values, which accepts either integers or the `ALL` string. The `Selection` class supports
+operations `Selection#hasAllFlag` and `Selection#hasIndex`, which is used by `EditCommand#execute`. `EditCommand#execute`
+has been modified, such that whenever `Selection#hasAllFlag` returns `true`, `EditCommand#execute` edits all applicants with
+the fields specified. `Selection` has been given a private constructor with static factory methods `Selection#fromIndex` and
 `Selection#fromAllFlag` to ensure `Selection` should not contain both index and all flag.
 
 #### Design considerations:
@@ -182,12 +182,12 @@ The implementation of delete all function is based on the common `Selection` cla
 
 ### Filter feature
 
-#### Implementation 
+#### Implementation
 
-The filter mechanism is facilitated by `FilterCommandParser`. 
-It produces a `FilterApplicantDescriptor`, which in turn feeds in to create a `FilterCommand`. 
+The filter mechanism is facilitated by `FilterCommandParser`.
+It produces a `FilterApplicantDescriptor`, which in turn feeds in to create a `FilterCommand`.
 <br/>
-`Optional` and `set` data structures have been used to contain optional set of filters for different attributes within `FilterApplicantDescriptor`. 
+`Optional` and `set` data structures have been used to contain optional set of filters for different attributes within `FilterApplicantDescriptor`.
 <br/>
 The `FilterCommand` will make use of the `FilterApplicantDescriptor` to create a `CombineFiltersPredicate` that will be supplied to `ModelManager#updateFilteredApplicantList(Predicate<Applicant>)` in its `execute` method.
 <br/>
@@ -270,7 +270,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the applicant being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
-    
 
 ### \[Proposed\] Data archiving
 
