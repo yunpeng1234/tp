@@ -10,7 +10,7 @@ import seedu.intern.model.Model;
  */
 public class UndoCommand extends Command {
     public static final String COMMAND_WORD = "undo";
-    public static final String MESSAGE_SUCCESS = "Action has been undone";
+    public static final String MESSAGE_SUCCESS = "Action has been undone: \n%1$s";
     public static final String MESSAGE_NO_UNDO = "No action to undo";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Undo previous action. Only actions that change the applicant list can be undone.\n"
@@ -24,7 +24,7 @@ public class UndoCommand extends Command {
             throw new CommandException(MESSAGE_NO_UNDO);
         }
 
-        model.undoInternWatcher();
-        return new CommandResult(MESSAGE_SUCCESS);
+        String undoneCommand = model.undoInternWatcher();
+        return new CommandResult(String.format(MESSAGE_SUCCESS, undoneCommand));
     }
 }

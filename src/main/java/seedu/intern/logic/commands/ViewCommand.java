@@ -26,9 +26,14 @@ public class ViewCommand extends Command {
     public static final String MESSAGE_VIEW_PERSON_SUCCESS = "Displayed Applicant details: %1$s";
 
     private final Index targetIndex;
+    private final Boolean toggle;
 
-    public ViewCommand(Index targetIndex) {
-        this.targetIndex = targetIndex;
+    /**
+     * User can view applicant details in Intern Watcher.
+     */
+    public ViewCommand(Index index, Boolean toggle) {
+        this.targetIndex = index;
+        this.toggle = toggle;
     }
 
     @Override
@@ -36,12 +41,20 @@ public class ViewCommand extends Command {
         requireNonNull(model);
         List<Applicant> lastShownList = model.getFilteredPersonList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        if (targetIndex != null) {
+            if (targetIndex.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
         }
-        Applicant applicantToDisplay = lastShownList.get(targetIndex.getZeroBased());
-        model.displayApplicant(applicantToDisplay);
-        return new CommandResult(String.format(MESSAGE_VIEW_PERSON_SUCCESS, applicantToDisplay), false, false, true);
+        if (toggle) {
+            Applicant applicantToView = lastShownList.get(targetIndex.getZeroBased());
+            model.displayApplicant(applicantToView, true);
+            return new CommandResult(String.format(MESSAGE_VIEW_PERSON_SUCCESS, applicantToView), false, false, true);
+        } else {
+            Applicant applicantToView = lastShownList.get(targetIndex.getZeroBased());
+            model.displayApplicant(applicantToView, false);
+            return new CommandResult(String.format(MESSAGE_VIEW_PERSON_SUCCESS, applicantToView), false, false, true);
+        }
     }
 
     @Override
@@ -51,4 +64,3 @@ public class ViewCommand extends Command {
                 && targetIndex.equals(((ViewCommand) other).targetIndex)); // state check
     }
 }
-

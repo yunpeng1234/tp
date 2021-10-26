@@ -52,6 +52,7 @@ public class PersonCard extends UiPart<Region> {
         email.setText(applicant.getEmail().value);
         job.setText(applicant.getJob().jobName);
         status.setText(applicant.getApplicationStatus().value.toString());
+        status.setStyle(String.format("-fx-background-color: %s;", applicant.getApplicationStatus().getColour()));
     }
 
     @Override

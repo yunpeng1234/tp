@@ -1,14 +1,20 @@
 package seedu.intern.model;
 
+import static seedu.intern.logic.commands.RedoCommand.MESSAGE_NO_REDO;
+import static seedu.intern.logic.commands.UndoCommand.MESSAGE_NO_UNDO;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import seedu.intern.logic.commands.exceptions.CommandException;
 
 /**
  * {@code InternWatcher} that keeps track of a list of its previous states.
  */
 public class VersionedInternWatcher extends InternWatcher {
     private List<ReadOnlyInternWatcher> watcherStateList;
-    private int currStateIndex;
+    private List<String> commandHistory;
+    private int currStatePointer;
 
     /**
      * Initialises a VersionedInternWatcher with the initial state.
@@ -17,54 +23,62 @@ public class VersionedInternWatcher extends InternWatcher {
     public VersionedInternWatcher(ReadOnlyInternWatcher initialState) {
         super(initialState);
 
-        this.currStateIndex = 0;
+        this.currStatePointer = 0;
         this.watcherStateList = new ArrayList<>();
+        this.commandHistory = new ArrayList<>();
         this.watcherStateList.add(new InternWatcher(initialState));
+        this.commandHistory.add("Initial State");
     }
 
     /**
-     * Saves a copy of the current InternWatcher state to the list of states.
+     * Saves a copy of the current InternWatcher state to the watcherStateList.
      */
-    public void commitState() {
+    public void commitState(String commitMessage) {
         int listSize = watcherStateList.size();
-        watcherStateList.subList(currStateIndex + 1, listSize).clear();
+        watcherStateList.subList(currStatePointer + 1, listSize).clear();
+        commandHistory.subList(currStatePointer + 1, listSize).clear();
         watcherStateList.add(new InternWatcher(this));
-        currStateIndex++;
+        commandHistory.add(commitMessage);
+        currStatePointer++;
     }
 
     /**
-     * Reverts the InternWatcher to the previous state.
+     * Restores the InternWatcher to a previous state in the watcherStateList.
      */
-    public void undo() {
-        if (canUndo()) {
-            currStateIndex--;
-            resetData(watcherStateList.get(currStateIndex));
+    public String undo() throws CommandException {
+        if (!canUndo()) {
+            throw new CommandException(MESSAGE_NO_UNDO);
         }
+        currStatePointer--;
+        resetData(watcherStateList.get(currStatePointer));
+        return commandHistory.get(currStatePointer + 1);
     }
 
     /**
-     * Restores the InternWatcher to the state before the previous undo action.
+     * Restores the InternWatcher to a previously undone state in the watcherStateList.
      */
-    public void redo() {
-        if (canRedo()) {
-            currStateIndex++;
-            resetData(watcherStateList.get(currStateIndex));
+    public String redo() throws CommandException {
+        if (!canRedo()) {
+            throw new CommandException(MESSAGE_NO_REDO);
         }
+        currStatePointer++;
+        resetData(watcherStateList.get(currStatePointer));
+        return commandHistory.get(currStatePointer);
     }
 
     /**
-     * Return true if there is a previous state to revert to.
+     * Return true if there is a previous state to restore in the watcherStateList.
      * @return if undo is possible.
      */
     public boolean canUndo() {
-        return currStateIndex > 0;
+        return currStatePointer > 0;
     }
 
     /**
-     * Return true if there is a previous undone state to restore.
+     * Return true if there is a previously undone state to restore in the watcherStateList.
      * @return if redo is possible.
      */
     public boolean canRedo() {
-        return currStateIndex < watcherStateList.size() - 1;
+        return currStatePointer < watcherStateList.size() - 1;
     }
 }

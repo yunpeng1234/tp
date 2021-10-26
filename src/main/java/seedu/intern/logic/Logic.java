@@ -36,6 +36,9 @@ public interface Logic {
     /** Returns an unmodifiable view of the applicant to view*/
     Applicant getApplicant();
 
+    /** Returns an unmodifiable view of the toggle setting*/
+    boolean getIsToggle();
+
     /**
      * Returns the user prefs' intern book file path.
      */

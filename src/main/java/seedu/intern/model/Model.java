@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.intern.commons.core.GuiSettings;
+import seedu.intern.logic.commands.exceptions.CommandException;
 import seedu.intern.model.applicant.Applicant;
 
 /**
@@ -61,7 +62,7 @@ public interface Model {
     /**
      * Displays given applicant
      */
-    void displayApplicant(Applicant applicant);
+    void displayApplicant(Applicant applicant, boolean isToggle);
 
     /**
      * Deletes the given applicant.
@@ -101,19 +102,21 @@ public interface Model {
     void updateFilteredApplicantList(Predicate<Applicant> predicate);
 
     /**
-     * Saves the current InternWatcher state.
+     * Saves the current InternWatcher state to its history.
      */
-    void commitInternWatcher();
+    void commitInternWatcher(String commitMessage);
 
     /**
-     * Reverts the InternWatcher to a previous state.
+     * Restores the InternWatcher to a previous state from its history.
+     * @return Command that was undone.
      */
-    void undoInternWatcher();
+    String undoInternWatcher() throws CommandException;
 
     /**
-     * Restores the InternWatcher to it's state before a previous undo action.
+     * Restores the InternWatcher to a previously undone state from its history.
+     * @return Command that was redone.
      */
-    void redoInternWatcher();
+    String redoInternWatcher() throws CommandException;
 
     /**
      * Returns true if the model has a previous state to revert to.
@@ -126,4 +129,6 @@ public interface Model {
      * @return if a redo action is possible.
      */
     boolean isRedoAvailable();
+
+    boolean getIsToggle();
 }

@@ -2,13 +2,13 @@ package seedu.intern.commons.core.selection;
 
 public class Selection {
     private static final String MESSAGE_MISSING_INDEX = "Selection does not contain an Index.";
-    private static final String MESSAGE_MISSING_FLAG = "Selection does not contain an All Flag.";
+    private static final String MESSAGE_MISSING_FLAG = "Selection does not contain an ALL Flag.";
     private final Index index;
-    private final Boolean isSelectAll;
+    private final Boolean isAllSelected;
 
-    private Selection(Index index, Boolean isSelectAll) {
+    private Selection(Index index, Boolean isAllSelected) {
         this.index = index;
-        this.isSelectAll = isSelectAll;
+        this.isAllSelected = isAllSelected;
     }
 
     public Index getIndex() {
@@ -31,24 +31,29 @@ public class Selection {
         }
     }
 
-    public boolean getAllFlag() {
-        if (hasAllFlag()) {
-            return isSelectAll;
-        } else {
+    /**
+     * Returns true if ALL flag has been set by the user.
+     */
+    public boolean checkAllSelected() {
+        if (!hasAllSelectFlag()) {
             throw new NullPointerException(MESSAGE_MISSING_FLAG);
         }
+        // isAllSelected should not be false, as constructors are private.
+        assert this.isAllSelected;
+
+        return isAllSelected;
     }
 
     public boolean hasIndex() {
         return this.index != null;
     }
 
-    public boolean hasAllFlag() {
-        return this.isSelectAll != null;
+    public boolean hasAllSelectFlag() {
+        return this.isAllSelected != null;
     }
 
-    public static Selection fromAllFlag(boolean flag) {
-        return new Selection(null, flag);
+    public static Selection fromAllFlag() {
+        return new Selection(null, true);
     }
 
     public static Selection fromIndex(Index index) {
@@ -68,13 +73,14 @@ public class Selection {
         Selection otherSelection = (Selection) other;
 
         if (this.hasIndex() != otherSelection.hasIndex()
-                || this.hasAllFlag() != otherSelection.hasAllFlag()) {
+                || this.hasAllSelectFlag() != otherSelection.hasAllSelectFlag()) {
             return false;
         }
 
         if (this.hasIndex() && this.getIndexOneBased() != otherSelection.getIndexOneBased()) {
             return false;
-        } else if (this.hasAllFlag() && this.getAllFlag() != otherSelection.getAllFlag()) {
+        } else if (this.hasAllSelectFlag()
+                && this.checkAllSelected() != otherSelection.checkAllSelected()) {
             return false;
         } else {
             return true;
