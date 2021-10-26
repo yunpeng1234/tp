@@ -44,8 +44,7 @@ public class CombineFiltersPredicate implements Predicate<Applicant> {
                 setResult(result && institutionsContent.stream().anyMatch(institution ->
                         StringUtil.containsWordIgnoreCase(applicant.getInstitution().value, institution.value))));
         graduationYearMonth.ifPresent(graduationContent ->
-                setResult(result && GraduationYearMonth.compareDate(applicant.getGraduationYearMonth().value,
-                        graduationContent.value) < 0));
+                setResult(result && applicant.getGraduationYearMonth().isBefore(graduationContent)));
         courses.ifPresent(coursesContent ->
                 setResult(result && coursesContent.stream().anyMatch(courseFilter ->
                         courseFilter.stream().allMatch(courseKeyword ->

@@ -76,7 +76,7 @@ class JsonAdaptedApplicant {
         grade = source.getGrade().value;
         institution = source.getInstitution().value;
         course = source.getCourse().value;
-        graduationYearMonth = source.getGraduationYearMonth().value;
+        graduationYearMonth = source.getGraduationYearMonth().toString();
         job = source.getJob().jobName;
         status = source.getApplicationStatus().value.toString();
         skills.addAll(source.getSkills().stream()
