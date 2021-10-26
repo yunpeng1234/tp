@@ -29,6 +29,10 @@ Intern Watcher (IW) is a **desktop app for Human Resource Managers to manage int
 
    * **`add`**`n/John p/123 e/a@a.com g/4.50 i/NTU c/CS y/06/2025 a/INTERVIEWED` : Adds an applicant named `John` to Intern Watcher.
 
+   * **`find john` : Lists all applicants whose name containing john.
+
+   * **`filter`**`g/4.50 c/CS` : Lists all applicants that have a grade not less than 4.50 and study CS course.
+
    * **`delete`**`3` : Deletes the 3rd applicant shown in the current list.
      
    * **`view`**`3`**`TOGGLE` : Shows the 3rd applicant's skills.
@@ -248,9 +252,9 @@ Format: `filter [g/GRADE] [i/INSTITUTION]…+ [c/COURSE]…+ [y/GRADUATION_YEAR_
 
 * `filter` will show applicants that matches all fields specified.
 * If `[g/GRADE]` is specified, it will show all applicants with grades higher or equal to the `g/Grade` specified.
-* Likewise, if `[y/GRADUATION_YEAR_MONTH]` is specified, it will show all applicants with graduation dates that is before the `GRADUATION_YEAR_MONTH` specified.
+* Likewise, if `[y/GRADUATION_YEAR_MONTH]` is specified, it will show all applicants with graduation dates that is strictly before the `GRADUATION_YEAR_MONTH` specified.
 * If more than 1 of `[s/SKILL]…+` is specified, applicants that matches at least one of the `s/SKILL` specified will be shown.
-* This is the same of both of `[i/INSTITUTION]…+` `[c/COURSE]…+` as well.
+* This is the same of both of `[i/INSTITUTION]…+` `[c/COURSE]…+` `[a/Status]…+` as well.
 
 Examples:
 * `filter s/Python s/Java` will show applicants with skills in either JAVA or PYTHON or both.
