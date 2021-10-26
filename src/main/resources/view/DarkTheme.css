@@ -184,6 +184,8 @@
 }
 
 .result-display {
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
     -fx-background-color: transparent;
     -fx-font-family: "Open Sans Light";
     -fx-font-size: 13pt;
@@ -377,7 +379,7 @@
 #resultDisplay .content {
     -fx-background-radius: 20;
     -fx-border-radius: 20;
-    -fx-background-color: transparent, #c9ada7, transparent, #c9ada7;
+    -fx-background-color: c9ada7;
 }
 
 
@@ -392,6 +394,14 @@
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
+    -fx-font-size: 11;
+}
+
+#status .label {
+    -fx-text-fill: #22223b;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
     -fx-font-size: 11;
 }
 
@@ -435,7 +445,7 @@
 
 #placeholder {
     -fx-background-radius: 20;
-        -fx-border-radius: 20;
+    -fx-border-radius: 20;
 }
 
 .text-area .scroll-pane {
@@ -446,4 +456,53 @@
 }
 .text-area .scroll-pane .content{
     -fx-background-color: transparent;
+}
+
+.scroll-bar{
+ -fx-background-color: c9ada7;
+ -fx-background-radius: 2em;
+}
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track {
+ -fx-background-color: transparent;
+ -fx-border-color:transparent;
+ -fx-background-radius: 2em;
+}
+.scroll-bar:vertical .track-background,
+.scroll-bar:horizontal .track-background {
+ -fx-background-color: transparent;
+ -fx-background-insets: 0;
+ -fx-background-radius: 2em;
+}
+.scroll-bar:horizontal .thumb {
+ -fx-background-color: derive(#f2e9e4, 10%);
+ -fx-background-radius: 2em;
+}
+.scroll-bar:vertical .thumb {
+ -fx-background-color: derive(#f2e9e4, 10%);
+ -fx-background-radius: 2em;
+}
+.scroll-bar:horizontal .thumb:hover,
+.scroll-bar:vertical .thumb:hover {
+ -fx-background-color: derive(#f2e9e4, 20%);
+}
+.scroll-bar:horizontal .thumb:pressed,
+.scroll-bar:vertical .thumb:pressed {
+ -fx-background-color: derive(#f2e9e4, 40%);
+}
+.scroll-bar:vertical .increment-button, .scroll-bar:vertical .decrement-button {
+ -fx-background-color:transparent;
+ -fx-background-radius: 2em;
+ -fx-padding: 1;
+}
+.scroll-bar:horizontal .increment-button, .scroll-bar:horizontal .decrement-button {
+ -fx-background-color:transparent;
+ -fx-background-radius: 2em;
+ -fx-padding: 1;
+}
+
+.scroll-bar:vertical:focused,
+.scroll-bar:horizontal:focused {
+ -fx-background-color: transparent,rgb(96,96,96),rgb(96,96,96);
 }
