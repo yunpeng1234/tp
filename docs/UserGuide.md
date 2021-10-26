@@ -35,7 +35,7 @@ Intern Watcher (IW) is a **desktop app for Human Resource Managers to manage int
 
    * **`delete`**`3` : Deletes the 3rd applicant shown in the current list.
      
-   * **`view`**`3`**`TOGGLE` : Shows the 3rd applicant's skills.
+   * **`view`**`3`**`T` : Shows the 3rd applicant's skills.
 
    * **`undo`** : Undos the last command the user has entered.
      
@@ -64,7 +64,7 @@ Intern Watcher (IW) is a **desktop app for Human Resource Managers to manage int
   e.g `n/NAME [s/SKILL]` can be used as `n/John Doe s/friend` or as `n/John Doe`.
 
 * Items with `…`+ after them can be used multiple times including zero times.<br>
-  e.g. `[s/SKILL]…+` can be used as ` ` (i.e. 0 times), `s/friend`, `s/friend s/family` etc.
+  e.g. `[s/SKILL]…+` can be used as ` ` (i.e. 0 times), `s/Java`, `s/Python s/C` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -104,22 +104,24 @@ an applicant with the specified information.
 
 ### Listing all applicants : `list`
 
-Shows a list of all applicants in Intern Watcher.
+Displays the list of all applicants in Intern Watcher.
 
 Format: `list`
 
-### Viewing an applicant : `view`
+### Viewing an applicant's details : `view`
 
-Shows the specified applicant's academic records, or skills. 
+Displays the specified applicant's academic records, or skills. 
 
 Format: `view INDEX [T]`
 
-* If only `INDEX` is specified, it will show the specified applicant's academic records.
-* If `T` is also specified along with `INDEX`, it will show the specified applicant's skills instead.
+* If only `INDEX` is specified, it will show the specified applicant's academic records by default.
+  * The index refers to the index number shown in the displayed applicant list. 
+  * The index must be a positive integer 1, 2, 3, …+
+* If `T` is also specified along with `INDEX`, it will toggle to the next tab applicant detail window.
 
 Examples:
-* `view 1` Shows the 1st applicant's academic records on the displayed applicants list.
-* `view 2 T` Shows the 2nd applicant's skills on the displayed applicants list.
+* `list` followed by `view 1` Shows the 1st applicant's academic records on the displayed applicants list.
+* `view 2 T` Shows the 2nd applicant's skills on the displayed applicant's list, if academic records was previously selected.
 
 ### Editing applicants : `edit`
 
@@ -245,7 +247,7 @@ If your changes to the data file makes its format invalid, InternWatcher will di
 
 ### Filtering by Fields 
 
-Filters the applicants to Intern Watcher.
+Filters the applicants in Intern Watcher by a given field.
 
 Format: `filter [g/GRADE] [i/INSTITUTION]…+ [c/COURSE]…+ [y/GRADUATION_YEAR_MONTH] [a/STATUS] [s/SKILL]…+`
 
@@ -279,8 +281,7 @@ Action | Format, Examples
 **Add** | `add n/NAME p/PHONE e/EMAIL g/GRADE i/INSTITUTION c/COURSE y/GRADUATION_YEAR_MONTH [a/APPLICATION_STATUS] [s/SKILL]…++` <br> e.g., `add n/John p/999 e/a@a.com g/4.00 i/NTU c/CS y/06/2025 a/INTERVIEWED s/Python`
 **Clear** | `clear`
 **Delete** | `delete INDEX/ALL`<br> e.g., `delete 3`, `delete ALL`
-**Edit** | `edit INDEX/ALL [n/NAME] [p/PHONE] [e/EMAIL] [g/GRADE] [i/INSTITUTION] [c/COURSE] [y/GRADUATION_YEAR_MONTH] [a/APPLICATION_STATUS] [s/SKILL]…`<br> 
-e.g.,`edit 2 n/James Lee e/jameslee@example.com`, `edit ALL a/REJECTED`
+**Edit** | `edit INDEX/ALL [n/NAME] [p/PHONE] [e/EMAIL] [g/GRADE] [i/INSTITUTION] [c/COURSE] [y/GRADUATION_YEAR_MONTH] [a/APPLICATION_STATUS] [s/SKILL]…`<br>e.g.,`edit 2 n/James Lee e/jameslee@example.com`, `edit ALL a/REJECTED`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
@@ -288,3 +289,4 @@ e.g.,`edit 2 n/James Lee e/jameslee@example.com`, `edit ALL a/REJECTED`
 **Undo** | `undo`
 **Redo** | `redo`
 **View** | `view INDEX [T]` <br> e.g. , `view 2 T`
+**Exit** | `exit`
