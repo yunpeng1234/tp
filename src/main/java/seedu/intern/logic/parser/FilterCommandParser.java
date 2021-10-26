@@ -5,6 +5,7 @@ import static seedu.intern.logic.parser.CliSyntax.PREFIX_COURSE;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_GRADUATIONYEARMONTH;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_INSTITUTION;
+import static seedu.intern.logic.parser.CliSyntax.PREFIX_JOB;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_SKILL;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_STATUS;
 
@@ -39,6 +40,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
                         PREFIX_GRADE,
                         PREFIX_INSTITUTION,
                         PREFIX_COURSE,
+                        PREFIX_JOB,
                         PREFIX_GRADUATIONYEARMONTH,
                         PREFIX_STATUS);
 
@@ -57,6 +59,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         parseApplicationStatusesForEdit(argMultimap.getAllValues(PREFIX_STATUS))
                 .ifPresent(filterApplicantDescriptor::setApplicationStatuses);
         parseSkillsForEdit(argMultimap.getAllValues(PREFIX_SKILL)).ifPresent(filterApplicantDescriptor::setSkills);
+        parseJobsForEdit(argMultimap.getAllValues(PREFIX_JOB)).ifPresent(filterApplicantDescriptor::setJobs);
         if (!filterApplicantDescriptor.isAnyFieldFiltered()) {
             throw new ParseException(String.format(MESSAGE_NOT_FILTERED, FilterCommand.MESSAGE_USAGE));
         }
@@ -75,6 +78,16 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         return Optional.of(ParserUtil.parseInstitutions(institutionSet));
     }
 
+    private Optional<Set<List<String>>> parseJobsForEdit(Collection<String> jobs) throws ParseException {
+        assert jobs != null;
+
+        if (jobs.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> jobSet = jobs.size() == 1 && jobs.contains("")
+                ? Collections.emptySet() : jobs;
+        return Optional.of(ParserUtil.parseJobFilters(jobSet));
+    }
 
     private Optional<Set<List<String>>> parseCoursesForEdit(Collection<String> courses) throws ParseException {
         assert courses != null;
