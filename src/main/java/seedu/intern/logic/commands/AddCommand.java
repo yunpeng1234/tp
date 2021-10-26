@@ -43,7 +43,7 @@ public class AddCommand extends Command {
             + PREFIX_INSTITUTION + "NTU "
             + PREFIX_COURSE + "Computer Science "
             + PREFIX_GRADUATIONYEARMONTH + "06/2025 "
-            + PREFIX_JOB + "Software Engineer"
+            + PREFIX_JOB + "Software Engineer "
             + PREFIX_STATUS + "INTERVIEWED "
             + PREFIX_SKILL + "Java "
             + PREFIX_SKILL + "Python";
