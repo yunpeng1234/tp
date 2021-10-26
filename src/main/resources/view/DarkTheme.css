@@ -429,6 +429,7 @@
 }
 
 #skills .label {
+    -fx-label-padding: 0 5 0 5;
     -fx-min-height: 30;
     -fx-text-fill: #22223b;
     -fx-background-color: #ADD8e6;

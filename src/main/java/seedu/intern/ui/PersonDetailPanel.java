@@ -109,7 +109,7 @@ public class PersonDetailPanel extends UiPart<Region> {
 
         skillSet.stream()
                 .sorted(Comparator.comparing(skill -> skill.skillName))
-                .forEach(skill -> skills.getChildren().add(new Label(" " + skill.skillName + " ")));
+                .forEach(skill -> skills.getChildren().add(new Label( skill.skillName)));
 
     }
 }
