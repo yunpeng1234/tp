@@ -9,8 +9,8 @@ import static seedu.intern.commons.util.AppUtil.checkArgument;
  */
 public class Skill {
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "Skill Tag names should only contain alphabet characters, spaces and '+#' symbols, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Skill Tag names should only contain alphabet characters, "
+            + "spaces and '+#' symbols, and it should not be blank";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+[\\p{Alnum} ]*[+#]*";
 
     public final String skillName;
