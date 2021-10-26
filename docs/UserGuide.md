@@ -22,7 +22,7 @@ Intern Watcher (IW) is a **desktop app for Human Resource Managers to manage int
    ![Ui](images/Ui.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   
+
 6. Some example commands you can try:
 
    * **`list`** : Lists all applicants.
@@ -34,18 +34,18 @@ Intern Watcher (IW) is a **desktop app for Human Resource Managers to manage int
    * **`filter`**`g/4.50 c/CS` : Lists all applicants that have a grade not less than 4.50 and study CS course.
 
    * **`delete`**`3` : Deletes the 3rd applicant shown in the current list.
-     
-   * **`view`**`3`**`TOGGLE` : Shows the 3rd applicant's skills.
 
-   * **`undo`** : Undos the last command the user has entered.
-     
-   * **`redo`** : Redos the last command the user has undoed.
+   * **`view`**`3`**`T` : Shows the 3rd applicant's skills.
+
+   * **`undo`** : Undo the last command the user has entered.
+
+   * **`redo`** : Redo the last command the user has undoed.
 
    * **`clear`** : Deletes all applicants.
 
    * **`exit`** : Exits the app.
 
-6. Refer to the [Features](#features) below for details of each command.
+7. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -64,7 +64,7 @@ Intern Watcher (IW) is a **desktop app for Human Resource Managers to manage int
   e.g `n/NAME [s/SKILL]` can be used as `n/John Doe s/friend` or as `n/John Doe`.
 
 * Items with `…`+ after them can be used multiple times including zero times.<br>
-  e.g. `[s/SKILL]…+` can be used as ` ` (i.e. 0 times), `s/friend`, `s/friend s/family` etc.
+  e.g. `[s/SKILL]…+` can be used as ` ` (i.e. 0 times), `s/Java`, `s/Python s/C` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -98,34 +98,36 @@ An applicant can have any number of tags (including 0)
 
 Examples:
 
-* `add n/Alex Yeoh p/98765432 e/johnd@example.com g/4.50 i/NTU c/CS y/06/2025 a/SCHEDULED s/Python s/Java` adds 
-an applicant with the specified information.
+* `add n/Alex Yeoh p/98765432 e/johnd@example.com g/4.50 i/NTU c/CS y/06/2025 a/SCHEDULED s/Python s/Java` adds
+ an applicant with the specified information.
   ![Add result](images/AddResult.png)
 
 ### Listing all applicants : `list`
 
-Shows a list of all applicants in Intern Watcher.
+Displays the list of all applicants in Intern Watcher.
 
 Format: `list`
 
-### Viewing an applicant : `view`
+### Viewing an applicant's details : `view`
 
-Shows the specified applicant's academic records, or skills. 
+Displays the specified applicant's academic records, or skills.
 
 Format: `view INDEX [T]`
 
-* If only `INDEX` is specified, it will show the specified applicant's academic records.
-* If `T` is also specified along with `INDEX`, it will show the specified applicant's skills instead.
+* If only `INDEX` is specified, it will show the specified applicant's academic records by default.
+  * The index refers to the index number shown in the displayed applicant list.
+  * The index must be a positive integer 1, 2, 3, …+
+* If `T` is also specified along with `INDEX`, it will toggle to the next tab applicant detail window.
 
 Examples:
-* `view 1` Shows the 1st applicant's academic records on the displayed applicants list.
-* `view 2 T` Shows the 2nd applicant's skills on the displayed applicants list.
+* `list` followed by `view 1` Shows the 1st applicant's academic records on the displayed applicants list.
+* `view 2 T` Shows the 2nd applicant's skills on the displayed applicant's list, if academic records was previously selected.
 
 ### Editing applicants : `edit`
 
-Edits an existing applicant, or all currently displayed applicants in Intern Watcher. 
+Edits an existing applicant, or all currently displayed applicants in Intern Watcher.
 
-Format: 
+Format:
 1. `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [g/GRADE] [i/INSTITUTION] [c/COURSE] [y/GRADUATION_YEAR_MONTH] [a/APPLICATION_STATUS] [s/SKILL]…`
 2. `edit ALL [a/APPLICATION_STATUS]`
 * If `INDEX` is specified, Edits the applicant at the specified `INDEX`. The index refers to the index number shown in the displayed applicant list. The index **must be a positive integer** 1, 2, 3, …+
@@ -198,12 +200,12 @@ Format: `clear`
 
 ### Undoing an action : `undo`
 
-Undoes the last undoable action. 
+Undoes the last undoable action.
 
 Format: `undo`
 
 * Restores Intern Watcher to a state before the last undoable action.
-* If the current state of Intern Watcher is the oldest state, the undo command will not be invoked. 
+* If the current state of Intern Watcher is the oldest state, the undo command will not be invoked.
 * Undoable actions include: `add`, `edit`, `delete`, `clear`, `redo`.
 
 Examples:
@@ -216,14 +218,14 @@ Redoes the last undoable action.
 
 Format: `redo`
 
-* `redo` is the reverse of `undo`. The command restores the state of Intern Watcher to the last undoable action that was undone. 
+* `redo` is the reverse of `undo`. The command restores the state of Intern Watcher to the last undoable action that was undone.
 * If the current state of Intern Watcher is the newest state, the redo command will not be invoked.
 * If a new undoable action is performed after the last undo command, the current state becomes the newest state.
 * Undoable actions include: `add`, `edit`, `delete`, `clear`, `redo`.
 
 Examples:
-* `clear` followed by `undo` followed by `redo`. The clear command will be redone. 
-* `undo` followed by `delete 3`. As the state after `delete` becomes the newest state, there are no undoable actions to be redone. 
+* `clear` followed by `undo` followed by `redo`. The clear command will be redone.
+* `undo` followed by `delete 3`. As the state after `delete` becomes the newest state, there are no undoable actions to be redone.
 
 ### Exiting the program : `exit`
 
@@ -243,9 +245,9 @@ InternWatcher data are saved as a JSON file `[JAR file location]/data/internwatc
 If your changes to the data file makes its format invalid, InternWatcher will discard all data and start with an empty data file at the next run.
 </div>
 
-### Filtering by Fields 
+### Filtering by Fields
 
-Filters the applicants to Intern Watcher.
+Filters the applicants in Intern Watcher by a given field.
 
 Format: `filter [g/GRADE] [i/INSTITUTION]…+ [c/COURSE]…+ [y/GRADUATION_YEAR_MONTH] [a/STATUS] [s/SKILL]…+`
 
@@ -279,8 +281,7 @@ Action | Format, Examples
 **Add** | `add n/NAME p/PHONE e/EMAIL g/GRADE i/INSTITUTION c/COURSE y/GRADUATION_YEAR_MONTH [a/APPLICATION_STATUS] [s/SKILL]…++` <br> e.g., `add n/John p/999 e/a@a.com g/4.00 i/NTU c/CS y/06/2025 a/INTERVIEWED s/Python`
 **Clear** | `clear`
 **Delete** | `delete INDEX/ALL`<br> e.g., `delete 3`, `delete ALL`
-**Edit** | `edit INDEX/ALL [n/NAME] [p/PHONE] [e/EMAIL] [g/GRADE] [i/INSTITUTION] [c/COURSE] [y/GRADUATION_YEAR_MONTH] [a/APPLICATION_STATUS] [s/SKILL]…`<br> 
-e.g.,`edit 2 n/James Lee e/jameslee@example.com`, `edit ALL a/REJECTED`
+**Edit** | `edit INDEX/ALL [n/NAME] [p/PHONE] [e/EMAIL] [g/GRADE] [i/INSTITUTION] [c/COURSE] [y/GRADUATION_YEAR_MONTH] [a/APPLICATION_STATUS] [s/SKILL]…`<br>e.g.,`edit 2 n/James Lee e/jameslee@example.com`, `edit ALL a/REJECTED`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
@@ -288,3 +289,4 @@ e.g.,`edit 2 n/James Lee e/jameslee@example.com`, `edit ALL a/REJECTED`
 **Undo** | `undo`
 **Redo** | `redo`
 **View** | `view INDEX [T]` <br> e.g. , `view 2 T`
+**Exit** | `exit`
