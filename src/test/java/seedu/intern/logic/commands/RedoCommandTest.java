@@ -18,80 +18,94 @@ import seedu.intern.model.applicant.Applicant;
 import seedu.intern.testutil.ApplicantBuilder;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for UndoCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for RedoCommand.
  */
-public class UndoCommandTest {
+public class RedoCommandTest {
     private Model model = new ModelManager(getTypicalInternWatcher(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalInternWatcher(), new UserPrefs());
 
     @Test
-    public void execute_undoAdd_success() {
+    public void execute_redoAdd_success() throws CommandException {
         Applicant applicant = new ApplicantBuilder().build();
         String commitText = String.format(AddCommand.MESSAGE_COMMIT_ADD, applicant);
         model.addApplicant(applicant);
         model.commitInternWatcher(commitText);
+        model.undoInternWatcher();
 
-        String expectedMessage = String.format(UndoCommand.MESSAGE_SUCCESS, commitText);
+        expectedModel.addApplicant(applicant);
 
-        assertCommandSuccess(new UndoCommand(), model, expectedMessage, expectedModel);
+        String expectedMessage = String.format(RedoCommand.MESSAGE_SUCCESS, commitText);
+
+        assertCommandSuccess(new RedoCommand(), model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_undoDelete_success() {
+    public void execute_redoDelete_success() throws CommandException {
         Applicant applicantToDelete = model.getFilteredPersonList().get(SELECTION_FIRST_PERSON.getIndexZeroBased());
         String commitText = String.format(DeleteCommand.MESSAGE_COMMIT_DELETE, applicantToDelete);
         model.deleteApplicant(applicantToDelete);
         model.commitInternWatcher(commitText);
+        model.undoInternWatcher();
 
-        String expectedMessage = String.format(UndoCommand.MESSAGE_SUCCESS, commitText);
+        expectedModel.deleteApplicant(applicantToDelete);
 
-        assertCommandSuccess(new UndoCommand(), model, expectedMessage, expectedModel);
+        String expectedMessage = String.format(RedoCommand.MESSAGE_SUCCESS, commitText);
+
+        assertCommandSuccess(new RedoCommand(), model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_undoDeleteAll_success() {
+    public void execute_redoDeleteAll_success() throws CommandException {
         List<Applicant> lastShownList = model.getFilteredPersonList();
         int length = lastShownList.size();
         for (int i = 0; i < length; i++) {
             Applicant applicantToDelete = lastShownList.get(0);
             model.deleteApplicant(applicantToDelete);
+            expectedModel.deleteApplicant(applicantToDelete);
         }
         String commitText = String.format(DeleteCommand.MESSAGE_COMMIT_DELETE_ALL, String.valueOf(length));
         model.commitInternWatcher(commitText);
+        model.undoInternWatcher();
 
-        String expectedMessage = String.format(UndoCommand.MESSAGE_SUCCESS, commitText);
+        String expectedMessage = String.format(RedoCommand.MESSAGE_SUCCESS, commitText);
 
-        assertCommandSuccess(new UndoCommand(), model, expectedMessage, expectedModel);
+        assertCommandSuccess(new RedoCommand(), model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_undoEdit_success() {
+    public void execute_redoEdit_success() throws CommandException {
         Applicant editedApplicant = new ApplicantBuilder().build();
         String commitText = String.format(EditCommand.MESSAGE_COMMIT_EDIT, editedApplicant);
         model.setApplicant(model.getFilteredPersonList().get(0), editedApplicant);
         model.commitInternWatcher(commitText);
+        model.undoInternWatcher();
 
-        String expectedMessage = String.format(UndoCommand.MESSAGE_SUCCESS, commitText);
+        expectedModel.setApplicant(model.getFilteredPersonList().get(0), editedApplicant);
 
-        assertCommandSuccess(new UndoCommand(), model, expectedMessage, expectedModel);
+        String expectedMessage = String.format(RedoCommand.MESSAGE_SUCCESS, commitText);
+
+        assertCommandSuccess(new RedoCommand(), model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_undoClear_success() {
+    public void execute_redoClear_success() throws CommandException {
         String commitText = ClearCommand.MESSAGE_COMMIT_CLEAR;
 
         model.setInternWatcher(new InternWatcher());
         model.commitInternWatcher(commitText);
+        model.undoInternWatcher();
 
-        String expectedMessage = String.format(UndoCommand.MESSAGE_SUCCESS, commitText);
+        expectedModel.setInternWatcher(new InternWatcher());
 
-        assertCommandSuccess(new UndoCommand(), model, expectedMessage, expectedModel);
+        String expectedMessage = String.format(RedoCommand.MESSAGE_SUCCESS, commitText);
+
+        assertCommandSuccess(new RedoCommand(), model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_noUndo_throwsCommandException() {
-        UndoCommand undoCommand = new UndoCommand();
+    public void execute_noRedo_throwsCommandException() {
+        RedoCommand redoCommand = new RedoCommand();
 
-        assertThrows(CommandException.class, UndoCommand.MESSAGE_NO_UNDO, () -> undoCommand.execute(model));
+        assertThrows(CommandException.class, RedoCommand.MESSAGE_NO_REDO, () -> redoCommand.execute(model));
     }
 }
