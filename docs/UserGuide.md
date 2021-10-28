@@ -121,7 +121,16 @@ Format: `view INDEX [T]`
 
 Examples:
 * `list` followed by `view 1` Shows the 1st applicant's academic records on the displayed applicants list.
+
+|Command|Effect|
+|---|---|
+|<img src="images/FilterBefore.png" alt="drawing" />|<img src="images/ViewOneAfter.png" alt="drawing" />|
+
 * `view 2 T` Shows the 2nd applicant's skills on the displayed applicant's list, if academic records was previously selected.
+
+|Command|Effect|
+|---|---|
+|<img src="images/FilterBefore.png" alt="drawing" />|<img src="images/ViewTwoTAfter.png" alt="drawing" />|
 
 ### Editing applicants : `edit`
 
@@ -189,9 +198,59 @@ Format: `delete INDEX` `delete INDEX ALL`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd applicant in Intern Watcher.
-* `list` followed by `delete ALL` deletes the all applicants in Intern Watcher. Effect is similar to `clear` when used in conjunction with `list`.
-* `find Betsy` followed by `delete 1` deletes the 1st applicant in the results of the `find` command.
 
+|Command|Effect|
+|---|---|
+|<img src="images/DeleteBefore.png" alt="drawing" />|<img src="images/DeleteTwoAfter.png" alt="drawing" />|
+
+* `list` followed by `delete ALL` deletes the all applicants in Intern Watcher. Effect is similar to `clear` when used in conjunction with `list`.
+
+|Command|Effect|
+|---|---|
+|<img src="images/DeleteBefore.png" alt="drawing" />|<img src="images/DeleteALLAfter.png" alt="drawing" />|
+
+* `find Ali` followed by `delete 1` deletes the 1st applicant in the results of the `find` command.
+
+|Command|Effect|
+|---|---|
+|<img src="images/DeleteFindAli.png" alt="drawing" />|<img src="images/DeleteFindAliAfter.png" alt="drawing" />|
+
+### Filtering by Fields
+
+Filters the applicants in Intern Watcher by a given field.
+
+Format: `filter [g/GRADE] [i/INSTITUTION]…+ [c/COURSE]…+ [y/GRADUATION_YEAR_MONTH] [j/JOB] [a/STATUS] [s/SKILL]…+`
+
+
+* `filter` will show applicants that matches all fields specified.
+* If `[g/GRADE]` is specified, it will show all applicants with grades higher or equal to the `g/Grade` specified.
+* Likewise, if `[y/GRADUATION_YEAR_MONTH]` is specified, it will show all applicants with graduation dates that is strictly before the `GRADUATION_YEAR_MONTH` specified.
+* If more than 1 of `[s/SKILL]…+` is specified, applicants that matches at least one of the `s/SKILL` specified will be shown.
+* This is the same of both of `[i/INSTITUTION]…+` `[c/COURSE]…+` `[a/Status]…+` as well.
+
+Examples:
+* `filter s/Python s/Java` will show applicants with skills in either JAVA or PYTHON or both.
+  |Command|Effect|
+  |---|---|
+  |<img src="images/FilterBefore.png" alt="drawing" />|<img src="images/FilterSkillAfter.png" alt="drawing" />|  
+
+* `filter g/4.60` will show applicants with a grade more than or equals 4.60.
+
+  |Command|Effect|
+    |---|---|
+  |<img src="images/FilterBefore.png" alt="drawing" />|<img src="images/FilterGradeAfter.png" alt="drawing" />|
+  
+* `filter y/06/2022` will show applicants  with graduation date earlier than June 2022.
+  
+  |Command|Effect|
+  |---|---|
+  |<img src="images/FilterBefore.png" alt="drawing" />|<img src="images/FilterYearAfter.png" alt="drawing" />|
+
+* `filter s/Java y/06/2022 i/NUS` will show applicants that graduate earlier than June 2022, knows JAVA and is from NUS.
+  
+  |Command|Effect|
+  |---|---|
+  |<img src="images/FilterBeforeSpecific.png" alt="drawing" />|<img src="images/FilterAfterSpecific.png" alt="drawing" />|
 ### Clearing all entries : `clear`
 
 Clears all applicant entries from Intern Watcher.
@@ -210,6 +269,11 @@ Format: `undo`
 
 Examples:
 * `undo` (after `delete 2`). The applicant that was removed will be restored in Intern Watcher.
+
+|Command|Effect|
+|---|---|
+|<img src="images/UndoBefore.png" alt="drawing" />|<img src="images/UndoAfter.png" alt="drawing" />|
+
 * `undo` (after initial startup of Intern Watcher). As there are no previous states to restore, no undo action will be performed.
 
 ### Redoing an action: `redo`
@@ -225,7 +289,12 @@ Format: `redo`
 
 Examples:
 * `clear` followed by `undo` followed by `redo`. The clear command will be redone.
-* `undo` followed by `delete 3`. As the state after `delete` becomes the newest state, there are no undoable actions to be redone.
+
+|Command|Effect|
+|---|---|
+|<img src="images/RedoClearBefore.png" alt="drawing" />|<img src="images/RedoClearAfter.png" alt="drawing" />|
+
+* `undo` followed by `delete 2`. As the state after `delete` becomes the newest state, there are no undoable actions to be redone.
 
 ### Exiting the program : `exit`
 
@@ -245,25 +314,26 @@ InternWatcher data are saved as a JSON file `[JAR file location]/data/internwatc
 If your changes to the data file makes its format invalid, InternWatcher will discard all data and start with an empty data file at the next run.
 </div>
 
-### Filtering by Fields
+--------------------------------------------------------------------------------------------------------------------
+### Specification of Fields
+`Grade` : Number with 2 d.p from 0.00 - 5.00.
 
-Filters the applicants in Intern Watcher by a given field.
+`Name` : Alphanumeric characters and space only. Should not be blank.
 
-Format: `filter [g/GRADE] [i/INSTITUTION]…+ [c/COURSE]…+ [y/GRADUATION_YEAR_MONTH] [j/JOB] [a/STATUS] [s/SKILL]…+`
+`Phone` : Only contains digits from 0 - 9, with a minimum of 3 digits.
 
+`Institution` : Alphanumeric characters and space only. Should not be blank.
 
-* `filter` will show applicants that matches all fields specified.
-* If `[g/GRADE]` is specified, it will show all applicants with grades higher or equal to the `g/Grade` specified.
-* Likewise, if `[y/GRADUATION_YEAR_MONTH]` is specified, it will show all applicants with graduation dates that is strictly before the `GRADUATION_YEAR_MONTH` specified.
-* If more than 1 of `[s/SKILL]…+` is specified, applicants that matches at least one of the `s/SKILL` specified will be shown.
-* This is the same of both of `[i/INSTITUTION]…+` `[c/COURSE]…+` `[a/Status]…+` as well.
+`Job` : Alphabet character and space only. Should not be blank.
 
-Examples:
-* `filter s/Python s/Java` will show applicants with skills in either JAVA or PYTHON or both.
-* `filter g/4.50` will show applicants with a grade more than or equals 4.50.
-* `filter y/06/2022` will show applicants  with graduation date earlier than June 2022.
-* `filter s/Java y/06/2022 i/NUS` will show applicants that graduate earlier than June 2022, knows JAVA and is from NUS.
+`Status` : Should only be one of these 7 statuses, `ACCEPTED` , `REJECTED`, `ACCEPTED`, `INTERVIEWED`, `APPLIED` , `SCHEDULED`, `RECEIVED` and `OFFERED`.
 
+`Course` : Alphabet characters and space only. Should not be blank.
+
+`Email` : Should be in the form of *Local-part*@**Domain**. *Local-part* should contain only alphanumeric characters with only these special characters `+_.-`. 
+**Domain** can be separated into ***label*** with `.` if necessary. Each ***label*** should only contain alphanumeric characters and seperated and is separated by `-` if necessary. domain is at least 2 characters long and needs to start and end with alphanumeric characters.
+
+`Skill`: Alphanumeri characters, spaces and `+#` symbols only.
 
 --------------------------------------------------------------------------------------------------------------------
 
