@@ -215,7 +215,7 @@ Examples:
 |---|---|
 |<img src="images/DeleteFindAli.png" alt="drawing" />|<img src="images/DeleteFindAliAfter.png" alt="drawing" />|
 
-### Filtering by Fields
+### Filtering by Fields : `filter`
 
 Filters the applicants in Intern Watcher by a given field.
 
