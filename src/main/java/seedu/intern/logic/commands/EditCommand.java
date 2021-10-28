@@ -6,6 +6,7 @@ import static seedu.intern.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_GRADUATIONYEARMONTH;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_INSTITUTION;
+import static seedu.intern.logic.parser.CliSyntax.PREFIX_JOB;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_SKILL;
@@ -32,6 +33,7 @@ import seedu.intern.model.applicant.Email;
 import seedu.intern.model.applicant.Grade;
 import seedu.intern.model.applicant.GraduationYearMonth;
 import seedu.intern.model.applicant.Institution;
+import seedu.intern.model.applicant.Job;
 import seedu.intern.model.applicant.Name;
 import seedu.intern.model.applicant.Phone;
 import seedu.intern.model.skills.Skill;
@@ -54,6 +56,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_INSTITUTION + "INSTITUTION] "
             + "[" + PREFIX_COURSE + "COURSE] "
             + "[" + PREFIX_GRADUATIONYEARMONTH + "GRADUATION_YEAR_MONTH] "
+            + "[" + PREFIX_JOB + "APPLIED JOB] "
             + "[" + PREFIX_STATUS + "APPLICATION STATUS] "
             + "[" + PREFIX_SKILL + "SKILL]...\n"
             + "Example index: " + COMMAND_WORD + " 1 "
@@ -173,6 +176,7 @@ public class EditCommand extends Command {
         GraduationYearMonth updatedGraduationYearMonth = editApplicantDescriptor.getGraduationYearMonth()
                 .orElse(applicantToEdit.getGraduationYearMonth());
         Course updatedCourse = editApplicantDescriptor.getCourse().orElse(applicantToEdit.getCourse());
+        Job updatedJob = editApplicantDescriptor.getJob().orElse(applicantToEdit.getJob());
         ApplicationStatus updatedStatus = editApplicantDescriptor.getApplicationStatus()
                 .orElse(applicantToEdit.getApplicationStatus());
         Set<Skill> updatedSkills = editApplicantDescriptor.getSkills().orElse(applicantToEdit.getSkills());
@@ -180,7 +184,7 @@ public class EditCommand extends Command {
 
         return new Applicant(updatedName, updatedPhone, updatedEmail,
                 updatedGrade, updatedInstitution, updatedCourse,
-                updatedGraduationYearMonth, updatedStatus, updatedSkills);
+                updatedGraduationYearMonth, updatedJob, updatedStatus, updatedSkills);
     }
 
     @Override
@@ -217,6 +221,7 @@ public class EditCommand extends Command {
         private Institution institution;
         private GraduationYearMonth graduationYearMonth;
         private Course course;
+        private Job job;
         private ApplicationStatus status;
         private Set<Skill> skills;
 
@@ -234,6 +239,7 @@ public class EditCommand extends Command {
             setInstitution(toCopy.institution);
             setGraduationYearMonth(toCopy.graduationYearMonth);
             setCourse(toCopy.course);
+            setJob(toCopy.job);
             setApplicationStatus(toCopy.status);
             setSkills(toCopy.skills);
         }
@@ -243,7 +249,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(
-                    name, phone, email, grade, institution, graduationYearMonth, course, status, skills);
+                    name, phone, email, grade, institution, graduationYearMonth, course, job, status, skills);
         }
 
         public void setName(Name name) {
@@ -302,6 +308,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(course);
         }
 
+        public void setJob(Job job) {
+            this.job = job;
+        }
+
+        public Optional<Job> getJob() {
+            return Optional.ofNullable(job);
+        }
+
         public void setApplicationStatus(ApplicationStatus status) {
             this.status = status;
         }
@@ -349,6 +363,7 @@ public class EditCommand extends Command {
                     && getInstitution().equals(e.getInstitution())
                     && getGraduationYearMonth().equals(e.getGraduationYearMonth())
                     && getCourse().equals(e.getCourse())
+                    && getJob().equals(e.getJob())
                     && getApplicationStatus().equals(e.getApplicationStatus())
                     && getSkills().equals(e.getSkills());
         }
@@ -363,6 +378,7 @@ public class EditCommand extends Command {
                     + ", institution=" + institution
                     + ", graduation year month=" + graduationYearMonth
                     + ", course=" + course
+                    + ", applied job=" + job
                     + ", status=" + status
                     + ", skill=" + skills + '}';
         }

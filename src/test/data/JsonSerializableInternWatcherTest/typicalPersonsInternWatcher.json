@@ -9,6 +9,7 @@
     "course": "Computer Science",
     "status": "REJECTED",
     "graduationYearMonth" : "12/2020",
+    "job" : "Software Engineer",
     "skills" : [ "python" ]
   }, {
     "name" : "Benson Meier",
@@ -19,6 +20,7 @@
     "course": "Computer Engineering",
     "status": "INTERVIEWED",
     "graduationYearMonth" : "06/2025",
+    "job" : "Hardware Engineer",
     "skills" : [ "java", "python" ]
   }, {
     "name" : "Carl Kurz",
@@ -29,6 +31,7 @@
     "status": "ACCEPTED",
     "course": "Business and Accounting",
     "graduationYearMonth" : "12/2023",
+    "job" : "Accountant",
     "skills" : [ "java" ]
   }, {
     "name" : "Daniel Meier",
@@ -39,6 +42,7 @@
     "course": "Accountancy",
     "status": "INTERVIEWED",
     "graduationYearMonth" : "01/2027",
+    "job" : "Finance Manager",
     "skills" : [ "python" ]
   }, {
     "name" : "Elle Meyer",
@@ -49,6 +53,7 @@
     "course": "Philosophy",
     "status": "ACCEPTED",
     "graduationYearMonth" : "12/2024",
+    "job" : "Helper",
     "skills" : [ "C" ]
   }, {
     "name" : "Fiona Kunz",
@@ -59,6 +64,7 @@
     "course": "Life Science",
     "status": "INTERVIEWED",
     "graduationYearMonth" : "12/2021",
+    "job" : "Researcher",
     "skills" : [ "C" ]
   }, {
     "name" : "George Best",
@@ -69,6 +75,7 @@
     "course": "Social Work",
     "status": "REJECTED",
     "graduationYearMonth" : "03/2023",
+    "job" : "Software Engineer",
     "skills" : [ "C" ]
   } ]
 }

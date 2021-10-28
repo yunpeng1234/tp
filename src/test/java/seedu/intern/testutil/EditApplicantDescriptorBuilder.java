@@ -12,6 +12,7 @@ import seedu.intern.model.applicant.Email;
 import seedu.intern.model.applicant.Grade;
 import seedu.intern.model.applicant.GraduationYearMonth;
 import seedu.intern.model.applicant.Institution;
+import seedu.intern.model.applicant.Job;
 import seedu.intern.model.applicant.Name;
 import seedu.intern.model.applicant.Phone;
 import seedu.intern.model.skills.Skill;
@@ -107,6 +108,13 @@ public class EditApplicantDescriptorBuilder {
      */
     public EditApplicantDescriptorBuilder withCourse(String course) {
         descriptor.setCourse(new Course(course));
+        return this;
+    }
+    /**
+     * Sets the {@code Job} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditApplicantDescriptorBuilder withJob(String job) {
+        descriptor.setJob(new Job(job));
         return this;
     }
 

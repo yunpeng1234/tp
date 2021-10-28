@@ -10,6 +10,7 @@ import seedu.intern.model.applicant.Email;
 import seedu.intern.model.applicant.Grade;
 import seedu.intern.model.applicant.GraduationYearMonth;
 import seedu.intern.model.applicant.Institution;
+import seedu.intern.model.applicant.Job;
 import seedu.intern.model.applicant.Name;
 import seedu.intern.model.applicant.Phone;
 import seedu.intern.model.skills.Skill;
@@ -25,6 +26,7 @@ public class ApplicantBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_GRADE = "4.50";
     public static final String DEFAULT_INSTITUTION = "NTU";
+    public static final String DEFAULT_JOB = "Software Engineer";
     @SuppressWarnings("SpellCheckingInspection")
     public static final String DEFAULT_GRADUATIONYEARMONTH = "06/2024";
     public static final String DEFAULT_COURSE = "Computer Science";
@@ -37,6 +39,7 @@ public class ApplicantBuilder {
     private Institution institution;
     private GraduationYearMonth graduationYearMonth;
     private Course course;
+    private Job job;
     private Set<Skill> skills;
 
     /**
@@ -51,6 +54,7 @@ public class ApplicantBuilder {
         graduationYearMonth = new GraduationYearMonth(DEFAULT_GRADUATIONYEARMONTH);
         status = new ApplicationStatus(ApplicationStatus.DEFAULT_STATUS);
         course = new Course(DEFAULT_COURSE);
+        job = new Job(DEFAULT_JOB);
         skills = new HashSet<>();
     }
 
@@ -65,6 +69,7 @@ public class ApplicantBuilder {
         institution = applicantToCopy.getInstitution();
         graduationYearMonth = applicantToCopy.getGraduationYearMonth();
         course = applicantToCopy.getCourse();
+        job = applicantToCopy.getJob();
         status = applicantToCopy.getApplicationStatus();
         skills = new HashSet<>(applicantToCopy.getSkills());
     }
@@ -116,11 +121,20 @@ public class ApplicantBuilder {
         this.institution = new Institution(institution);
         return this;
     }
+
     /**
      * Sets the {@code GraduationYearMonth} of the {@code Applicant} that we are building.
      */
     public ApplicantBuilder withGraduationYearMonth(String graduationYearMonth) {
         this.graduationYearMonth = new GraduationYearMonth(graduationYearMonth);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Job} of the {@code Applicant} that we are building.
+     */
+    public ApplicantBuilder withJob(String job) {
+        this.job = new Job(job);
         return this;
     }
 
@@ -142,6 +156,6 @@ public class ApplicantBuilder {
 
 
     public Applicant build() {
-        return new Applicant(name, phone, email, grade, institution, course, graduationYearMonth, status, skills);
+        return new Applicant(name, phone, email, grade, institution, course, graduationYearMonth, job, status, skills);
     }
 }

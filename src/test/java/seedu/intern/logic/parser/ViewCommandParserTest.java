@@ -20,7 +20,7 @@ public class ViewCommandParserTest {
 
     @Test
     public void parse_validArgWithTag_returnsViewCommand() {
-        assertParseSuccess(parser, "1 TOGGLE", new ViewCommand(INDEX_FIRST_PERSON, true));
+        assertParseSuccess(parser, "1 T", new ViewCommand(INDEX_FIRST_PERSON, true));
     }
 
     @Test
@@ -30,7 +30,7 @@ public class ViewCommandParserTest {
 
     @Test
     public void parse_validArgsWithTagTwo_returnsViewCommand() {
-        assertParseSuccess(parser, "2 TOGGLE", new ViewCommand(INDEX_SECOND_PERSON, true));
+        assertParseSuccess(parser, "2 T", new ViewCommand(INDEX_SECOND_PERSON, true));
     }
 
     @Test
@@ -41,7 +41,7 @@ public class ViewCommandParserTest {
 
     @Test
     public void parse_invalidArgsTwo_throwsParseException() {
-        assertParseFailure(parser, "TOGGLE",
+        assertParseFailure(parser, "T",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
     }
 
@@ -58,13 +58,13 @@ public class ViewCommandParserTest {
     }
     @Test
     public void parse_invalidArgsShortSpaceWithValidInput_throwsParseException() {
-        assertParseFailure(parser, "1  TOGGLE",
+        assertParseFailure(parser, "1  T",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidArgsLongSpaceWithValidInput_throwsParseException() {
-        assertParseFailure(parser, "1      TOGGLE",
+        assertParseFailure(parser, "1      T",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
     }
 }

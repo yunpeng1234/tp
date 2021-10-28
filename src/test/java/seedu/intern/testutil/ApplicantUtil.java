@@ -5,6 +5,7 @@ import static seedu.intern.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_GRADUATIONYEARMONTH;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_INSTITUTION;
+import static seedu.intern.logic.parser.CliSyntax.PREFIX_JOB;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_SKILL;
@@ -40,7 +41,8 @@ public class ApplicantUtil {
         sb.append(PREFIX_GRADE + applicant.getGrade().value + " ");
         sb.append(PREFIX_INSTITUTION + applicant.getInstitution().value + " ");
         sb.append(PREFIX_COURSE + applicant.getCourse().value + " ");
-        sb.append(PREFIX_GRADUATIONYEARMONTH + applicant.getGraduationYearMonth().value + " ");
+        sb.append(PREFIX_GRADUATIONYEARMONTH + applicant.getGraduationYearMonth().toString() + " ");
+        sb.append(PREFIX_JOB + applicant.getJob().jobName + " ");
         applicant.getSkills().stream().forEach(
             s -> sb.append(PREFIX_SKILL + s.skillName + " ")
         );
@@ -62,7 +64,8 @@ public class ApplicantUtil {
                 .append(institution.value).append(" "));
         descriptor.getCourse().ifPresent(course -> sb.append(PREFIX_COURSE).append(course.value).append(" "));
         descriptor.getGraduationYearMonth().ifPresent(graduationYearMonth ->
-                sb.append(PREFIX_GRADUATIONYEARMONTH).append(graduationYearMonth.value).append(" "));
+                sb.append(PREFIX_GRADUATIONYEARMONTH).append(graduationYearMonth.toString()).append(" "));
+        descriptor.getJob().ifPresent(job -> sb.append(PREFIX_JOB).append(job.jobName).append(" "));
         if (descriptor.getSkills().isPresent()) {
             Set<Skill> skills = descriptor.getSkills().get();
             if (skills.isEmpty()) {

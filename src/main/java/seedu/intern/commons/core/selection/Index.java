@@ -31,6 +31,11 @@ public class Index {
         return zeroBasedIndex + 1;
     }
 
+    /**
+     * @deprecated  Use {@code Selection} instead.
+     * Symbolized special flag in previous iterations of Delete ALL.
+     */
+    @Deprecated
     public void setSpecialIndex() {
         zeroBasedIndex = -1;
     }
