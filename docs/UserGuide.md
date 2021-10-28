@@ -155,7 +155,7 @@ Examples:
 
 |Command|Effect|
 |---|---|
-|<img src="images/EditAllBefore.png" alt="drawing" />|<img src="images/EditAllAfter.png" alt="drawing" />|
+|<img src="images/EditAllStatusBefore.png" alt="drawing" />|<img src="images/EditAllStatusAfter.png" alt="drawing" />|
 
 ### Locating applicants by name: `find`
 
