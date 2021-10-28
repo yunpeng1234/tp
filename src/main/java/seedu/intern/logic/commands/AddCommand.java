@@ -6,6 +6,7 @@ import static seedu.intern.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_GRADUATIONYEARMONTH;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_INSTITUTION;
+import static seedu.intern.logic.parser.CliSyntax.PREFIX_JOB;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_SKILL;
@@ -31,6 +32,7 @@ public class AddCommand extends Command {
             + PREFIX_INSTITUTION + "INSTITUTION "
             + PREFIX_COURSE + "COURSE "
             + PREFIX_GRADUATIONYEARMONTH + "GRADUATION_YEAR_MONTH "
+            + PREFIX_JOB + "APPLIED_JOB "
             + "[" + PREFIX_STATUS + "STATUS] "
             + "[" + PREFIX_SKILL + "SKILL]...\n"
             + "Example: " + COMMAND_WORD + " "
@@ -41,6 +43,7 @@ public class AddCommand extends Command {
             + PREFIX_INSTITUTION + "NTU "
             + PREFIX_COURSE + "Computer Science "
             + PREFIX_GRADUATIONYEARMONTH + "06/2025 "
+            + PREFIX_JOB + "Software Engineer "
             + PREFIX_STATUS + "INTERVIEWED "
             + PREFIX_SKILL + "Java "
             + PREFIX_SKILL + "Python";

@@ -18,6 +18,7 @@ import seedu.intern.model.applicant.Email;
 import seedu.intern.model.applicant.Grade;
 import seedu.intern.model.applicant.GraduationYearMonth;
 import seedu.intern.model.applicant.Institution;
+import seedu.intern.model.applicant.Job;
 import seedu.intern.model.applicant.Name;
 import seedu.intern.model.applicant.Phone;
 
@@ -29,6 +30,7 @@ public class JsonAdaptedApplicantTest {
     private static final String INVALID_INSTITUTION = "NU$@";
     private static final String INVALID_GRADUATION_YEAR_MONTH = "13/2021";
     private static final String INVALID_COURSE = "C0mpter $cience";
+    private static final String INVALID_JOB = "S0ftware $nginnering";
     private static final String INVALID_STATUS = "OOP";
     private static final String INVALID_GRADE = "4.500";
 
@@ -39,6 +41,7 @@ public class JsonAdaptedApplicantTest {
     private static final String VALID_INSTITUTION = BENSON.getInstitution().toString();
     private static final String VALID_GRADUATION_YEAR_MONTH = BENSON.getGraduationYearMonth().toString();
     private static final String VALID_COURSE = BENSON.getCourse().toString();
+    private static final String VALID_JOB = BENSON.getJob().toString();
     private static final String VALID_STATUS = BENSON.getApplicationStatus().toString();
     private static final List<JsonAdaptedSkill> VALID_SKILLS = BENSON.getSkills().stream()
             .map(JsonAdaptedSkill::new)
@@ -54,7 +57,7 @@ public class JsonAdaptedApplicantTest {
     public void toModelType_invalidName_throwsIllegalValueException() {
         JsonAdaptedApplicant person = new JsonAdaptedApplicant(INVALID_NAME, VALID_PHONE, VALID_EMAIL,
                 VALID_GRADE, VALID_INSTITUTION, VALID_COURSE,
-                VALID_GRADUATION_YEAR_MONTH, VALID_STATUS, VALID_SKILLS);
+                VALID_GRADUATION_YEAR_MONTH, VALID_JOB, VALID_STATUS, VALID_SKILLS);
 
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
@@ -64,7 +67,7 @@ public class JsonAdaptedApplicantTest {
     public void toModelType_nullName_throwsIllegalValueException() {
         JsonAdaptedApplicant person = new JsonAdaptedApplicant(null,
                 VALID_PHONE, VALID_EMAIL, VALID_GRADE, VALID_INSTITUTION, VALID_COURSE,
-                VALID_GRADUATION_YEAR_MONTH, VALID_STATUS, VALID_SKILLS);
+                VALID_GRADUATION_YEAR_MONTH, VALID_JOB, VALID_STATUS, VALID_SKILLS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -74,7 +77,7 @@ public class JsonAdaptedApplicantTest {
         JsonAdaptedApplicant person =
                 new JsonAdaptedApplicant(VALID_NAME, INVALID_PHONE, VALID_EMAIL,
                         VALID_GRADUATION_YEAR_MONTH, VALID_GRADE,
-                        VALID_INSTITUTION, VALID_COURSE, VALID_STATUS, VALID_SKILLS);
+                        VALID_INSTITUTION, VALID_COURSE, VALID_JOB, VALID_STATUS, VALID_SKILLS);
 
         String expectedMessage = Phone.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
@@ -84,7 +87,7 @@ public class JsonAdaptedApplicantTest {
     public void toModelType_nullPhone_throwsIllegalValueException() {
         JsonAdaptedApplicant person = new JsonAdaptedApplicant(VALID_NAME,
                 null, VALID_EMAIL, VALID_GRADE, VALID_INSTITUTION, VALID_COURSE,
-                VALID_GRADUATION_YEAR_MONTH, VALID_STATUS, VALID_SKILLS);
+                VALID_GRADUATION_YEAR_MONTH, VALID_JOB, VALID_STATUS, VALID_SKILLS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -94,7 +97,7 @@ public class JsonAdaptedApplicantTest {
         JsonAdaptedApplicant person =
                 new JsonAdaptedApplicant(VALID_NAME,
                         VALID_PHONE, INVALID_EMAIL, VALID_GRADE, VALID_INSTITUTION, VALID_COURSE,
-                        VALID_GRADUATION_YEAR_MONTH, VALID_STATUS, VALID_SKILLS);
+                        VALID_GRADUATION_YEAR_MONTH, VALID_JOB, VALID_STATUS, VALID_SKILLS);
         String expectedMessage = Email.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -103,7 +106,7 @@ public class JsonAdaptedApplicantTest {
     public void toModelType_nullEmail_throwsIllegalValueException() {
         JsonAdaptedApplicant person = new JsonAdaptedApplicant(VALID_NAME,
                 VALID_PHONE, null, VALID_GRADE, VALID_INSTITUTION, VALID_COURSE,
-                VALID_GRADUATION_YEAR_MONTH, VALID_STATUS, VALID_SKILLS);
+                VALID_GRADUATION_YEAR_MONTH, VALID_JOB, VALID_STATUS, VALID_SKILLS);
 
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
@@ -114,7 +117,7 @@ public class JsonAdaptedApplicantTest {
         JsonAdaptedApplicant person =
                 new JsonAdaptedApplicant(VALID_NAME,
                         VALID_PHONE, VALID_EMAIL, INVALID_GRADE, VALID_INSTITUTION, VALID_COURSE,
-                        VALID_GRADUATION_YEAR_MONTH, VALID_STATUS, VALID_SKILLS);
+                        VALID_GRADUATION_YEAR_MONTH, VALID_JOB, VALID_STATUS, VALID_SKILLS);
         String expectedMessage = Grade.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -123,7 +126,7 @@ public class JsonAdaptedApplicantTest {
     public void toModelType_nullGrade_throwsIllegalValueException() {
         JsonAdaptedApplicant person = new JsonAdaptedApplicant(VALID_NAME,
                 VALID_PHONE, VALID_EMAIL, null, VALID_INSTITUTION, VALID_COURSE,
-                VALID_GRADUATION_YEAR_MONTH, VALID_STATUS, VALID_SKILLS);
+                VALID_GRADUATION_YEAR_MONTH, VALID_JOB, VALID_STATUS, VALID_SKILLS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Grade.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -132,7 +135,7 @@ public class JsonAdaptedApplicantTest {
     public void toModelType_invalidInstitution_throwsIllegalValueException() {
         JsonAdaptedApplicant person = new JsonAdaptedApplicant(VALID_NAME, VALID_PHONE, VALID_EMAIL,
                 VALID_GRADE, INVALID_INSTITUTION, VALID_COURSE,
-                VALID_GRADUATION_YEAR_MONTH, VALID_STATUS, VALID_SKILLS);
+                VALID_GRADUATION_YEAR_MONTH, VALID_JOB, VALID_STATUS, VALID_SKILLS);
 
         String expectedMessage = Institution.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
@@ -142,7 +145,7 @@ public class JsonAdaptedApplicantTest {
     public void toModelType_nullInstitution_throwsIllegalValueException() {
         JsonAdaptedApplicant person = new JsonAdaptedApplicant(VALID_NAME,
                 VALID_PHONE, VALID_EMAIL, VALID_GRADE, null, VALID_COURSE,
-                VALID_GRADUATION_YEAR_MONTH, VALID_STATUS, VALID_SKILLS);
+                VALID_GRADUATION_YEAR_MONTH, VALID_JOB, VALID_STATUS, VALID_SKILLS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT,
                 Institution.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
@@ -152,7 +155,7 @@ public class JsonAdaptedApplicantTest {
     public void toModelType_invalidGraduationYearMonth_throwsIllegalValueException() {
         JsonAdaptedApplicant person = new JsonAdaptedApplicant(VALID_NAME, VALID_PHONE, VALID_EMAIL,
                 VALID_GRADE, VALID_INSTITUTION, VALID_COURSE,
-                INVALID_GRADUATION_YEAR_MONTH, VALID_STATUS, VALID_SKILLS);
+                INVALID_GRADUATION_YEAR_MONTH, VALID_JOB, VALID_STATUS, VALID_SKILLS);
 
         String expectedMessage = GraduationYearMonth.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
@@ -162,7 +165,7 @@ public class JsonAdaptedApplicantTest {
     public void toModelType_invalidCourse_throwsIllegalValueException() {
         JsonAdaptedApplicant person = new JsonAdaptedApplicant(VALID_NAME, VALID_PHONE, VALID_EMAIL,
                 VALID_GRADE, VALID_INSTITUTION, INVALID_COURSE,
-                VALID_GRADUATION_YEAR_MONTH, VALID_STATUS, VALID_SKILLS);
+                VALID_GRADUATION_YEAR_MONTH, VALID_JOB, VALID_STATUS, VALID_SKILLS);
 
         String expectedMessage = Course.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
@@ -172,7 +175,7 @@ public class JsonAdaptedApplicantTest {
     public void toModelType_nullGraduationYearMonth_throwsIllegalValueException() {
         JsonAdaptedApplicant person = new JsonAdaptedApplicant(VALID_NAME,
                 VALID_PHONE, VALID_EMAIL, VALID_GRADE, VALID_INSTITUTION, VALID_COURSE,
-                null, VALID_STATUS, VALID_SKILLS);
+                null, VALID_JOB, VALID_STATUS, VALID_SKILLS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT,
                 GraduationYearMonth.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
@@ -182,8 +185,28 @@ public class JsonAdaptedApplicantTest {
     public void toModelType_nullCourse_throwsIllegalValueException() {
         JsonAdaptedApplicant person = new JsonAdaptedApplicant(VALID_NAME,
                 VALID_PHONE, VALID_EMAIL, VALID_GRADE, VALID_INSTITUTION,
-                null, VALID_GRADUATION_YEAR_MONTH, VALID_STATUS, VALID_SKILLS);
+                null, VALID_GRADUATION_YEAR_MONTH, VALID_JOB, VALID_STATUS, VALID_SKILLS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Course.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidJob_throwsIllegalValueException() {
+        JsonAdaptedApplicant person = new JsonAdaptedApplicant(VALID_NAME, VALID_PHONE, VALID_EMAIL,
+                VALID_GRADE, VALID_INSTITUTION, VALID_COURSE,
+                VALID_GRADUATION_YEAR_MONTH, INVALID_JOB, VALID_STATUS, VALID_SKILLS);
+
+        String expectedMessage = Job.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullJob_throwsIllegalValueException() {
+        JsonAdaptedApplicant person = new JsonAdaptedApplicant(VALID_NAME,
+                VALID_PHONE, VALID_EMAIL, VALID_GRADE, VALID_INSTITUTION, VALID_COURSE,
+                VALID_GRADUATION_YEAR_MONTH, null, VALID_STATUS, VALID_SKILLS);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                Job.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
@@ -191,7 +214,7 @@ public class JsonAdaptedApplicantTest {
     public void toModelType_invalidStatus_throwsIllegalValueException() {
         JsonAdaptedApplicant person = new JsonAdaptedApplicant(VALID_NAME, VALID_PHONE, VALID_EMAIL,
                 VALID_GRADE, VALID_INSTITUTION, VALID_COURSE,
-                VALID_GRADUATION_YEAR_MONTH, INVALID_STATUS, VALID_SKILLS);
+                VALID_GRADUATION_YEAR_MONTH, VALID_JOB, INVALID_STATUS, VALID_SKILLS);
         String expectedMessage = ApplicationStatus.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -202,7 +225,7 @@ public class JsonAdaptedApplicantTest {
         invalidSkills.add(new JsonAdaptedSkill(INVALID_SKILL));
         JsonAdaptedApplicant person = new JsonAdaptedApplicant(VALID_NAME, VALID_PHONE, VALID_EMAIL,
                 VALID_GRADE, VALID_INSTITUTION, VALID_COURSE,
-                VALID_GRADUATION_YEAR_MONTH, VALID_STATUS, invalidSkills);
+                VALID_GRADUATION_YEAR_MONTH, VALID_JOB, VALID_STATUS, invalidSkills);
 
         assertThrows(IllegalValueException.class, person::toModelType);
     }
