@@ -191,7 +191,9 @@ has been modified, such that whenever `Selection#hasAllFlag` returns `true`, `De
     - Pros: Easy to implement
     - Cons: `DeleteCommand` and its related parsers may become harder to test since its behaviour is now different depending
       on the user input.
-- **Alternative 2**: Create a special `Index` of -1 when ALL tag is attached, as such,      
+- **Alternative 2**: Create a special `Index` of -1 when ALL tag is attached, as such, only when the index is -1, will we execute 'delete All' 
+    - Pros: Easy to implement
+    - Cons: Bypasses the intention of the Index Class. Having a negative `Index` might throw unexpected errors.
 
 ### Filter feature
 
