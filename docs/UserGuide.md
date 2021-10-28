@@ -230,7 +230,7 @@ Format: `filter [g/GRADE] [i/INSTITUTION]…+ [c/COURSE]…+ [y/GRADUATION_YEAR_
 
 Examples:
 * `filter s/Python s/Java` will show applicants with skills in either JAVA or PYTHON or both.
-  
+
 |Command|Effect|
 |---|---|
 |<img src="images/FilterBefore.png" alt="drawing" />|<img src="images/FilterSkillAfter.png" alt="drawing" />|  
@@ -242,13 +242,13 @@ Examples:
 |<img src="images/FilterBefore.png" alt="drawing" />|<img src="images/FilterGradeAfter.png" alt="drawing" />|
   
 * `filter y/06/2022` will show applicants  with graduation date earlier than June 2022.
-  
+
 |Command|Effect|
 |---|---|
 |<img src="images/FilterBefore.png" alt="drawing" />|<img src="images/FilterYearAfter.png" alt="drawing" />|
 
 * `filter s/Java y/06/2022 i/NUS` will show applicants that graduate earlier than June 2022, knows JAVA and is from NUS.
-  
+
 |Command|Effect|
 |---|---|
 |<img src="images/FilterBeforeSpecific.png" alt="drawing" />|<img src="images/FilterAfterSpecific.png" alt="drawing" />|
