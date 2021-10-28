@@ -56,7 +56,7 @@ Intern Watcher (IW) is a **desktop app for Human Resource Managers to manage int
 **:information_source: Notes about the command formats:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  This excludes special tags for **`edit`** **`view`** **`delete`** commands. <br>
+  This excludes special tags for **`Delete`** **`view`** **`delete`** commands. <br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.<br>
   e.g. in `delete ALL`, `ALL` is to be typed verbatim in full capital letters by the user.
 
@@ -90,7 +90,7 @@ Format: `help`
 
 Adds an applicant to Intern Watcher.
 
-Format: `add n/NAME p/PHONE e/EMAIL g/GRADE i/INSTITUTION c/COURSE y/GRADUATION_YEAR_MONTH [a/APPLICATION_STATUS] [s/SKILL]…+`
+Format: `add n/NAME p/PHONE e/EMAIL g/GRADE i/INSTITUTION c/COURSE y/GRADUATION_YEAR_MONTH j/JOB [a/APPLICATION_STATUS] [s/SKILL]…+`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 An applicant can have any number of tags (including 0)
@@ -98,7 +98,7 @@ An applicant can have any number of tags (including 0)
 
 Examples:
 
-* `add n/Alex Yeoh p/98765432 e/johnd@example.com g/4.50 i/NTU c/CS y/06/2025 a/SCHEDULED s/Python s/Java` adds
+* `add n/Alex Yeoh p/98765432 e/johnd@example.com g/4.50 i/NTU c/CS y/06/2025 j/Software Engineer a/SCHEDULED s/Python s/Java` adds
  an applicant with the specified information.
   ![Add result](images/AddResult.png)
 
@@ -128,7 +128,7 @@ Examples:
 Edits an existing applicant, or all currently displayed applicants in Intern Watcher.
 
 Format:
-1. `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [g/GRADE] [i/INSTITUTION] [c/COURSE] [y/GRADUATION_YEAR_MONTH] [a/APPLICATION_STATUS] [s/SKILL]…`
+1. `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [g/GRADE] [i/INSTITUTION] [c/COURSE] [y/GRADUATION_YEAR_MONTH] [j/JOB] [a/APPLICATION_STATUS] [s/SKILL]…`
 2. `edit ALL [a/APPLICATION_STATUS]`
 * If `INDEX` is specified, Edits the applicant at the specified `INDEX`. The index refers to the index number shown in the displayed applicant list. The index **must be a positive integer** 1, 2, 3, …+
 * If `ALL` is specified, edits all applicants currently displayed.
@@ -249,7 +249,7 @@ If your changes to the data file makes its format invalid, InternWatcher will di
 
 Filters the applicants in Intern Watcher by a given field.
 
-Format: `filter [g/GRADE] [i/INSTITUTION]…+ [c/COURSE]…+ [y/GRADUATION_YEAR_MONTH] [a/STATUS] [s/SKILL]…+`
+Format: `filter [g/GRADE] [i/INSTITUTION]…+ [c/COURSE]…+ [y/GRADUATION_YEAR_MONTH] [j/JOB] [a/STATUS] [s/SKILL]…+`
 
 
 * `filter` will show applicants that matches all fields specified.
@@ -278,14 +278,14 @@ Examples:
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE e/EMAIL g/GRADE i/INSTITUTION c/COURSE y/GRADUATION_YEAR_MONTH [a/APPLICATION_STATUS] [s/SKILL]…++` <br> e.g., `add n/John p/999 e/a@a.com g/4.00 i/NTU c/CS y/06/2025 a/INTERVIEWED s/Python`
+**Add** | `add n/NAME p/PHONE e/EMAIL g/GRADE i/INSTITUTION c/COURSE y/GRADUATION_YEAR_MONTH j/JOB [a/APPLICATION_STATUS] [s/SKILL]…++` <br> e.g., `add n/John p/999 e/a@a.com g/4.00 i/NTU c/CS y/06/2025 j/Software Engineer a/INTERVIEWED s/Python`
 **Clear** | `clear`
 **Delete** | `delete INDEX/ALL`<br> e.g., `delete 3`, `delete ALL`
-**Edit** | `edit INDEX/ALL [n/NAME] [p/PHONE] [e/EMAIL] [g/GRADE] [i/INSTITUTION] [c/COURSE] [y/GRADUATION_YEAR_MONTH] [a/APPLICATION_STATUS] [s/SKILL]…`<br>e.g.,`edit 2 n/James Lee e/jameslee@example.com`, `edit ALL a/REJECTED`
+**Edit** | `edit INDEX/ALL [n/NAME] [p/PHONE] [e/EMAIL] [g/GRADE] [i/INSTITUTION] [c/COURSE] [y/GRADUATION_YEAR_MONTH] [j/JOB] [a/APPLICATION_STATUS] [s/SKILL]…`<br>e.g.,`edit 2 n/James Lee e/jameslee@example.com`, `edit ALL a/REJECTED`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
-**Filter** | `filter [g/GRADE] [i/INSTITUTION]…+ [c/COURSE]…+ [y/GRADUATION_YEAR_MONTH] [a/STATUS] [s/SKILL]…+` <br> e.g. , `filter s/JAVA y/06/2022 i/NUS a/REJECTED`
+**Filter** | `filter [g/GRADE] [i/INSTITUTION]…+ [c/COURSE]…+ [y/GRADUATION_YEAR_MONTH] [j/JOB] [a/STATUS] [s/SKILL]…+` <br> e.g. , `filter s/JAVA y/06/2022 i/NUS a/REJECTED`
 **Undo** | `undo`
 **Redo** | `redo`
 **View** | `view INDEX [T]` <br> e.g. , `view 2 T`

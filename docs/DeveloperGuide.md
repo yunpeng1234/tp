@@ -178,7 +178,20 @@ should be edited.
 ###  Delete ALL feature
 
 #### Implementation
-The implementation of delete all function is based on the common `Selection` class that both delete and edit share. With the `Selection` having and `Index` as well as a boolean flag, it allows us to extend parsing towards a new flag with is "ALL". From there, we can just loop through the displayed list, deleting the first index until the list is empty.
+The delete ALL mechanism is facilitated by the new `Selection` class shared with edit ALL. A new parser `ParserUtil#parseSelection`
+has been added to parse `Selection` values, which accepts either integers or the `ALL` string. The `Selection` class supports
+operations `Selection#hasAllFlag` and `Selection#hasIndex`, which is used by `DeleteCommand#execute`. `DeleteCommand#execute`
+has been modified, such that whenever `Selection#hasAllFlag` returns `true`, `DeleteCommand#execute` delete all applicants on the displayed list. `Selection` has been given a private constructor with static factory methods `Selection#fromIndex` and
+`Selection#fromAllFlag` to ensure `Selection` should not contain both index and all flag.
+
+#### Design considerations:
+**Aspect: How delete ALL is parsed**
+- **Alternative 1 (current choice)**: Modify the parser to parse the `Selection`, accepting a special flag to indicate all applicants
+  should be deleted.
+    - Pros: Easy to implement
+    - Cons: `DeleteCommand` and its related parsers may become harder to test since its behaviour is now different depending
+      on the user input.
+- **Alternative 2**: Create a special `Index` of -1 when ALL tag is attached, as such,      
 
 ### Filter feature
 
