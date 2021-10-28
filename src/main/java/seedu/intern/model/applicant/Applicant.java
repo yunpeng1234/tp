@@ -16,7 +16,7 @@ import seedu.intern.model.skills.Skill;
  */
 public class Applicant {
 
-    private static final String[] DEFAULT_ACADEMICS = { "INSTITUTION", "COURSE", "YEAR", "GRADE" };
+    private static final String[] DEFAULT_ACADEMICS = { "", "", "", "" };
 
     // Identity fields
     private final Name name;

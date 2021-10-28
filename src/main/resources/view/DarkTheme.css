@@ -507,3 +507,10 @@
 .scroll-bar:horizontal:focused {
  -fx-background-color: transparent,rgb(96,96,96),rgb(96,96,96);
 }
+
+.label-details {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Open Sans Light";
+    -fx-text-fill: #22223b;
+    -fx-opacity: 1;
+}
