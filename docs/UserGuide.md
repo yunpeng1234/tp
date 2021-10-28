@@ -56,7 +56,7 @@ Intern Watcher (IW) is a **desktop app for Human Resource Managers to manage int
 **:information_source: Notes about the command formats:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  This excludes special tags for **`Delete`** **`view`** **`delete`** commands. <br>
+  This excludes special tags for **`edit`** **`view`** **`delete`** commands. <br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.<br>
   e.g. in `delete ALL`, `ALL` is to be typed verbatim in full capital letters by the user.
 
