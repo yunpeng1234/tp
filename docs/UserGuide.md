@@ -124,13 +124,13 @@ Examples:
 
 |Command|Effect|
 |---|---|
-|<img src="images/FilterBefore.png" alt="drawing" />|<img src="images/ViewOneAfter.png" alt="drawing" />|
+|<img src="images/ViewOneBefore.png" alt="drawing" />|<img src="images/ViewOneAfter.png" alt="drawing" />|
 
 * `view 2 T` Shows the 2nd applicant's skills on the displayed applicant's list, if academic records was previously selected.
 
 |Command|Effect|
 |---|---|
-|<img src="images/FilterBefore.png" alt="drawing" />|<img src="images/ViewTwoTAfter.png" alt="drawing" />|
+|<img src="images/ViewTwoTBefore.png" alt="drawing" />|<img src="images/ViewTwoTAfter.png" alt="drawing" />|
 
 ### Editing applicants : `edit`
 
@@ -154,7 +154,7 @@ Examples:
 |---|---|
 |<img src="images/EditIndexBefore.png" alt="drawing" />|<img src="images/EditIndexAfter.png" alt="drawing" />|
 
-*  `edit 1 s/` Clears all existing skills of the 1st applicant .
+*  `edit 2 s/` Clears all existing skills of the 2nd applicant .
 
 |Command|Effect|
 |---|---|
@@ -239,13 +239,13 @@ Examples:
 
 |Command|Effect|
 |---|---|
-|<img src="images/FilterBefore.png" alt="drawing" />|<img src="images/FilterGradeAfter.png" alt="drawing" />|
+|<img src="images/FilterGradeBefore.png" alt="drawing" />|<img src="images/FilterGradeAfter.png" alt="drawing" />|
   
 * `filter y/06/2022` will show applicants  with graduation date earlier than June 2022.
 
 |Command|Effect|
 |---|---|
-|<img src="images/FilterBefore.png" alt="drawing" />|<img src="images/FilterYearAfter.png" alt="drawing" />|
+|<img src="images/FilterYearBefore.png" alt="drawing" />|<img src="images/FilterYearAfter.png" alt="drawing" />|
 
 * `filter s/Java y/06/2022 i/NUS` will show applicants that graduate earlier than June 2022, knows JAVA and is from NUS.
 
@@ -278,6 +278,7 @@ Examples:
 
 * `undo` (after initial startup of Intern Watcher). As there are no previous states to restore, no undo action will be performed.
 
+
 ### Redoing an action: `redo`
 
 Redoes the last undoable action.
@@ -297,6 +298,7 @@ Examples:
 |<img src="images/RedoClearBefore.png" alt="drawing" />|<img src="images/RedoClearAfter.png" alt="drawing" />|
 
 * `undo` followed by `delete 2`. As the state after `delete` becomes the newest state, there are no undoable actions to be redone.
+  ![ No action to redo](images/NoRedo.png)
 
 ### Exiting the program : `exit`
 
