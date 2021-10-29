@@ -154,7 +154,7 @@ Examples:
 |---|---|
 |<img src="images/EditIndexBefore.png" alt="drawing" />|<img src="images/EditIndexAfter.png" alt="drawing" />|
 
-*  `edit 2 s/` Clears all existing skills of the 2nd applicant .
+*  `edit 1 s/` Clears all existing skills of the 1st applicant.
 
 |Command|Effect|
 |---|---|
