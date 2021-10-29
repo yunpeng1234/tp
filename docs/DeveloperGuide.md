@@ -207,6 +207,7 @@ It produces a `FilterApplicantDescriptor`, which in turn feeds in to create a `F
 The `FilterCommand` will make use of the `FilterApplicantDescriptor` to create a `CombineFiltersPredicate` that will be supplied to `ModelManager#updateFilteredApplicantList(Predicate<Applicant>)` in its `execute` method.
 <br/>
 `ModelManager` helps filter through the applicant list with specified filter criteria contained and interpreted by the `CombineFiltersPredicate#test()`.
+![FilterSequenceDiagram](images/filter/FilterSequenceDiagram.png)
 
 ### Undo/redo feature
 
