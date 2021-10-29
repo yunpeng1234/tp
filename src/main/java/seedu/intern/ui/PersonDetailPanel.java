@@ -3,11 +3,11 @@ package seedu.intern.ui;
 import java.util.Comparator;
 import java.util.Set;
 
-import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import seedu.intern.model.applicant.Applicant;
@@ -17,8 +17,10 @@ import seedu.intern.model.skills.Skill;
  * Panel containing the details of a Person
  */
 public class PersonDetailPanel extends UiPart<Region> {
-    private static final String FXML = "PersonDetail.fxml";
 
+    private static final String FXML = "PersonDetail.fxml";
+    @FXML
+    private TabPane tabPane;
     @FXML
     private Tab skill;
 
@@ -42,49 +44,48 @@ public class PersonDetailPanel extends UiPart<Region> {
     private FlowPane skills;
 
     /**
-     * Creates a {@code PersonDetailPanel} with the given {@code ObservableList}.
+     * Creates a {@code PersonDetailPanel}.
      */
-    public PersonDetailPanel(ObservableList<Applicant> applicantObservableList) {
+    public PersonDetailPanel() {
         super(FXML);
-        if (!applicantObservableList.isEmpty()) {
-            // To be changed on mouse click
-            setAcademicTab(applicantObservableList.get(0).getAcademics());
-            setSkillTab(applicantObservableList.get(0).getSkills());
+        setAcademicTab(Applicant.getDefaultAcademics());
+        setSkillTab(null);
+    }
+
+    /**
+     * Sets the detail panel to display the {@code Applicant} specified.
+     *
+     * @param applicant Applicant to be displayed
+     */
+    public void showApplicant(Applicant applicant, boolean isToggle) {
+        SingleSelectionModel<Tab> selectionModel = tabPane.getSelectionModel();
+        if (isToggle) {
+            if (selectionModel.getSelectedItem().equals(academic)) {
+                selectionModel.select(skill);
+            } else {
+                selectionModel.select(academic);
+            }
+        } else {
+            selectionModel.select(academic);
+        }
+        if (applicant != null) {
+            setSkillTab(applicant.getSkills());
+            setAcademicTab(applicant.getAcademics());
         } else {
             setAcademicTab(Applicant.getDefaultAcademics());
+            setSkillTab(null);
         }
-        // We are not using ListView so we must add our listeners manually
-        applicantObservableList.addListener((ListChangeListener<Applicant>) c -> {
-            if (!applicantObservableList.isEmpty()) {
-                Applicant current = applicantObservableList.get(0);
-                // To be changed on mouse click
-                setAcademicTab(current.getAcademics());
-                setSkillTab(current.getSkills());
-
-            } else {
-                setAcademicTab(Applicant.getDefaultAcademics());
-            }
-        });
     }
-
-    // TODO: remove this code if unnecessary.
-    /*
-    void setSkillTab(Set text) {
-        AnchorPane temp = (AnchorPane) skill.getContent();
-        Label temp1 = (Label) temp.getChildren().get(0);
-        temp1.setText(text);
-    }
-    */
 
     /**
      * Sets the Academic Tab as per the String array provided.
      * The array must contain 4 elements, containing,
      *
      * @param text String array containing:
-     *             First index: Institution
+     *             First Index: Institution
      *             Second Index: Course
      *             Thrid Index: Year of Graduation
-     *             Fourth index: Grade
+     *             Fourth Index: Grade
      */
     private void setAcademicTab(String[] text) {
 
@@ -95,10 +96,21 @@ public class PersonDetailPanel extends UiPart<Region> {
         grade.setText(text[3]);
     }
 
-    private void setSkillTab(Set<Skill> skillList) {
-        System.out.println(skillList);
-        skillList.stream()
-                .sorted(Comparator.comparing(tag -> tag.skillName))
-                .forEach(tag -> skills.getChildren().add(new Label(tag.skillName)));
+    /**
+     * Sets the Skills Tab as per the set provided.
+     * The set can contain any number of skills.
+     *
+     * @param skillSet Set of skills to be displayed
+     */
+    private void setSkillTab(Set<Skill> skillSet) {
+        skills.getChildren().clear();
+        if (skillSet == null) {
+            return;
+        }
+
+        skillSet.stream()
+                .sorted(Comparator.comparing(skill -> skill.skillName))
+                .forEach(skill -> skills.getChildren().add(new Label( skill.skillName)));
+
     }
 }

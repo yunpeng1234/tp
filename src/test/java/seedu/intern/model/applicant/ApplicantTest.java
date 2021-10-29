@@ -8,7 +8,7 @@ import static seedu.intern.logic.commands.CommandTestUtil.VALID_GRADUATION_YEARM
 import static seedu.intern.logic.commands.CommandTestUtil.VALID_INSTITUTION_BOB;
 import static seedu.intern.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.intern.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.intern.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.intern.logic.commands.CommandTestUtil.VALID_SKILL_JAVA;
 import static seedu.intern.testutil.Assert.assertThrows;
 import static seedu.intern.testutil.TypicalApplicants.ALICE;
 import static seedu.intern.testutil.TypicalApplicants.BOB;
@@ -35,7 +35,7 @@ public class ApplicantTest {
 
         // same name, all other attributes different -> returns true
         Applicant editedAlice = new ApplicantBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+                .withSkills(VALID_SKILL_JAVA).build();
         assertTrue(ALICE.isSameApplicant(editedAlice));
 
         // different name, all other attributes same -> returns false
@@ -95,7 +95,7 @@ public class ApplicantTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false
-        editedAlice = new ApplicantBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
+        editedAlice = new ApplicantBuilder(ALICE).withSkills(VALID_SKILL_JAVA).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 }

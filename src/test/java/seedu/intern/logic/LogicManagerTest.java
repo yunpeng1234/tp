@@ -8,6 +8,7 @@ import static seedu.intern.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.intern.logic.commands.CommandTestUtil.GRADE_DESC_AMY;
 import static seedu.intern.logic.commands.CommandTestUtil.GRADUATION_YEARMONTH_DESC_AMY;
 import static seedu.intern.logic.commands.CommandTestUtil.INSTITUTION_DESC_AMY;
+import static seedu.intern.logic.commands.CommandTestUtil.JOB_DESC_AMY;
 import static seedu.intern.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.intern.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.intern.testutil.Assert.assertThrows;
@@ -83,9 +84,9 @@ public class LogicManagerTest {
 
         // Execute add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + GRADE_DESC_AMY + INSTITUTION_DESC_AMY
+                + GRADE_DESC_AMY + INSTITUTION_DESC_AMY + JOB_DESC_AMY
                 + COURSE_DESC_AMY + GRADUATION_YEARMONTH_DESC_AMY;
-        Applicant expectedApplicant = new ApplicantBuilder(AMY).withTags().build();
+        Applicant expectedApplicant = new ApplicantBuilder(AMY).withSkills().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addApplicant(expectedApplicant);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;

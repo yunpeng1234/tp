@@ -14,9 +14,9 @@ import seedu.intern.model.ReadOnlyInternWatcher;
 import seedu.intern.model.applicant.Applicant;
 
 /**
- * An Immutable AddressBook that is serializable to JSON format.
+ * An Immutable InternWatcher that is serializable to JSON format.
  */
-@JsonRootName(value = "addressbook")
+@JsonRootName(value = "internwatcher")
 class JsonSerializableInternWatcher {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate applicant(s).";

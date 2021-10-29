@@ -7,6 +7,7 @@ import static seedu.intern.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_GRADUATIONYEARMONTH;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_INSTITUTION;
+import static seedu.intern.logic.parser.CliSyntax.PREFIX_JOB;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_SKILL;
@@ -17,7 +18,7 @@ import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.intern.commons.core.index.Index;
+import seedu.intern.commons.core.selection.Selection;
 import seedu.intern.logic.commands.EditCommand;
 import seedu.intern.logic.commands.EditCommand.EditApplicantDescriptor;
 import seedu.intern.logic.parser.exceptions.ParseException;
@@ -36,8 +37,8 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_GRADE,
-                        PREFIX_STATUS, PREFIX_SKILL, PREFIX_INSTITUTION, PREFIX_COURSE, PREFIX_GRADUATIONYEARMONTH);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_GRADE, PREFIX_STATUS,
+                        PREFIX_SKILL, PREFIX_INSTITUTION, PREFIX_COURSE, PREFIX_GRADUATIONYEARMONTH, PREFIX_JOB);
         ArgumentTokenizer.tokenize(args,
                 PREFIX_NAME,
                 PREFIX_PHONE,
@@ -47,15 +48,29 @@ public class EditCommandParser implements Parser<EditCommand> {
                 PREFIX_INSTITUTION,
                 PREFIX_COURSE,
                 PREFIX_GRADUATIONYEARMONTH,
+                PREFIX_JOB,
                 PREFIX_STATUS);
 
 
-        Index index;
+        Selection selection;
 
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            selection = ParserUtil.parseSelection(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+        }
+        if (selection.hasAllSelectFlag() && (argMultimap.getValue(PREFIX_NAME).isPresent()
+                || argMultimap.getValue(PREFIX_PHONE).isPresent()
+                || argMultimap.getValue(PREFIX_COURSE).isPresent()
+                || argMultimap.getValue(PREFIX_EMAIL).isPresent()
+                || argMultimap.getValue(PREFIX_GRADE).isPresent()
+                || argMultimap.getValue(PREFIX_GRADUATIONYEARMONTH).isPresent()
+                || argMultimap.getValue(PREFIX_INSTITUTION).isPresent()
+                || argMultimap.getValue(PREFIX_JOB).isPresent()
+                || argMultimap.getValue(PREFIX_SKILL).isPresent()
+                )) {
+            throw new ParseException("ALL FLAG CAN ONLY BE USED WITH:\n"
+                    + "[" + PREFIX_STATUS + "APPLICATION STATUS]\n");
         }
 
         EditApplicantDescriptor editApplicantDescriptor = new EditApplicantDescriptor();
@@ -84,32 +99,36 @@ public class EditCommandParser implements Parser<EditCommand> {
             editApplicantDescriptor
                     .setCourse(ParserUtil.parseCourse(argMultimap.getValue(PREFIX_COURSE).get()));
         }
+        if (argMultimap.getValue(PREFIX_JOB).isPresent()) {
+            editApplicantDescriptor
+                    .setJob(ParserUtil.parseJob(argMultimap.getValue(PREFIX_JOB).get()));
+        }
         if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
             editApplicantDescriptor
                     .setApplicationStatus(ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get()));
         }
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_SKILL)).ifPresent(editApplicantDescriptor::setTags);
+        parseSkillsForEdit(argMultimap.getAllValues(PREFIX_SKILL)).ifPresent(editApplicantDescriptor::setSkills);
 
         if (!editApplicantDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(index, editApplicantDescriptor);
+        return new EditCommand(selection, editApplicantDescriptor);
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>} if {@code tags} is non-empty.
-     * If {@code tags} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<Tag>} containing zero tags.
+     * Parses {@code Collection<String> skills} into a {@code Set<skill>} if {@code skills} is non-empty.
+     * If {@code skills} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<skill>} containing zero skills.
      */
-    private Optional<Set<Skill>> parseTagsForEdit(Collection<String> tags) throws ParseException {
-        assert tags != null;
+    private Optional<Set<Skill>> parseSkillsForEdit(Collection<String> skills) throws ParseException {
+        assert skills != null;
 
-        if (tags.isEmpty()) {
+        if (skills.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
-        return Optional.of(ParserUtil.parseTags(tagSet));
+        Collection<String> skillSet = skills.size() == 1 && skills.contains("") ? Collections.emptySet() : skills;
+        return Optional.of(ParserUtil.parseSkills(skillSet));
     }
 
 }

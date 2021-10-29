@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.intern.commons.core.GuiSettings;
+import seedu.intern.logic.commands.exceptions.CommandException;
 import seedu.intern.model.applicant.Applicant;
 
 /**
@@ -59,6 +60,11 @@ public interface Model {
     boolean hasApplicant(Applicant applicant);
 
     /**
+     * Displays given applicant
+     */
+    void displayApplicant(Applicant applicant, boolean isToggle);
+
+    /**
      * Deletes the given applicant.
      * The applicant must exist in the intern watcher.
      */
@@ -81,9 +87,48 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered applicant list */
     ObservableList<Applicant> getFilteredPersonList();
 
+    /** Returns an unmodifiable view of the applicant to display */
+    Applicant getApplicant();
+
+    /**
+     * Updates the selected applicant.
+     */
+    void updateApplicant(Applicant newApplicant);
+
     /**
      * Updates the filter of the filtered applicant list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredApplicantList(Predicate<Applicant> predicate);
+
+    /**
+     * Saves the current InternWatcher state to its history.
+     */
+    void commitInternWatcher(String commitMessage);
+
+    /**
+     * Restores the InternWatcher to a previous state from its history.
+     * @return Command that was undone.
+     */
+    String undoInternWatcher() throws CommandException;
+
+    /**
+     * Restores the InternWatcher to a previously undone state from its history.
+     * @return Command that was redone.
+     */
+    String redoInternWatcher() throws CommandException;
+
+    /**
+     * Returns true if the model has a previous state to revert to.
+     * @return if an undo action is possible.
+     */
+    boolean isUndoAvailable();
+
+    /**
+     * Returns true if the model has a previous undone state to restore to.
+     * @return if a redo action is possible.
+     */
+    boolean isRedoAvailable();
+
+    boolean getIsToggle();
 }

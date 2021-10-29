@@ -6,6 +6,7 @@ import static seedu.intern.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_GRADUATIONYEARMONTH;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_INSTITUTION;
+import static seedu.intern.logic.parser.CliSyntax.PREFIX_JOB;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_SKILL;
@@ -31,6 +32,7 @@ public class AddCommand extends Command {
             + PREFIX_INSTITUTION + "INSTITUTION "
             + PREFIX_COURSE + "COURSE "
             + PREFIX_GRADUATIONYEARMONTH + "GRADUATION_YEAR_MONTH "
+            + PREFIX_JOB + "APPLIED_JOB "
             + "[" + PREFIX_STATUS + "STATUS] "
             + "[" + PREFIX_SKILL + "SKILL]...\n"
             + "Example: " + COMMAND_WORD + " "
@@ -41,12 +43,14 @@ public class AddCommand extends Command {
             + PREFIX_INSTITUTION + "NTU "
             + PREFIX_COURSE + "Computer Science "
             + PREFIX_GRADUATIONYEARMONTH + "06/2025 "
+            + PREFIX_JOB + "Software Engineer "
             + PREFIX_STATUS + "INTERVIEWED "
-            + PREFIX_SKILL + "friends "
-            + PREFIX_SKILL + "owesMoney";
+            + PREFIX_SKILL + "Java "
+            + PREFIX_SKILL + "Python";
 
     public static final String MESSAGE_SUCCESS = "New applicant added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This applicant already exists in the intern book";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This applicant already exists in Intern Watcher";
+    public static final String MESSAGE_COMMIT_ADD = "Add applicant: %1$s";
 
     private final Applicant toAdd;
 
@@ -67,6 +71,7 @@ public class AddCommand extends Command {
         }
 
         model.addApplicant(toAdd);
+        model.commitInternWatcher(String.format(MESSAGE_COMMIT_ADD, toAdd));
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

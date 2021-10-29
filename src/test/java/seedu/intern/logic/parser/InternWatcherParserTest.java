@@ -6,6 +6,7 @@ import static seedu.intern.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.intern.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.intern.testutil.Assert.assertThrows;
 import static seedu.intern.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.intern.testutil.TypicalSelections.SELECTION_FIRST_PERSON;
 
 import java.util.Arrays;
 import java.util.List;
@@ -31,7 +32,7 @@ import seedu.intern.testutil.EditApplicantDescriptorBuilder;
 
 public class InternWatcherParserTest {
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final InternWatcherParser parser = new InternWatcherParser();
 
     @Test
     public void parseCommand_add() throws Exception {
@@ -49,8 +50,8 @@ public class InternWatcherParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+                DeleteCommand.COMMAND_WORD + " " + SELECTION_FIRST_PERSON.getIndexOneBased());
+        assertEquals(new DeleteCommand(SELECTION_FIRST_PERSON), command);
     }
 
     @Test

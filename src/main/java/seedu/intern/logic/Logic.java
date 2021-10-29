@@ -24,19 +24,25 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
-     * Returns the AddressBook.
+     * Returns the InternWatcher.
      *
      * @see seedu.intern.model.Model#getInternWatcher()
      */
-    ReadOnlyInternWatcher getAddressBook();
+    ReadOnlyInternWatcher getInternWatcher();
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Applicant> getFilteredPersonList();
 
+    /** Returns an unmodifiable view of the applicant to view*/
+    Applicant getApplicant();
+
+    /** Returns an unmodifiable view of the toggle setting*/
+    boolean getIsToggle();
+
     /**
      * Returns the user prefs' intern book file path.
      */
-    Path getAddressBookFilePath();
+    Path getInternWatcherFilePath();
 
     /**
      * Returns the user prefs' GUI settings.

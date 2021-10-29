@@ -6,12 +6,14 @@ import static seedu.intern.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_GRADUATIONYEARMONTH;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_INSTITUTION;
+import static seedu.intern.logic.parser.CliSyntax.PREFIX_JOB;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_SKILL;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.intern.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -19,7 +21,8 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.intern.commons.core.Messages;
-import seedu.intern.commons.core.index.Index;
+import seedu.intern.commons.core.selection.Index;
+import seedu.intern.commons.core.selection.Selection;
 import seedu.intern.commons.util.CollectionUtil;
 import seedu.intern.logic.commands.exceptions.CommandException;
 import seedu.intern.model.Model;
@@ -30,6 +33,7 @@ import seedu.intern.model.applicant.Email;
 import seedu.intern.model.applicant.Grade;
 import seedu.intern.model.applicant.GraduationYearMonth;
 import seedu.intern.model.applicant.Institution;
+import seedu.intern.model.applicant.Job;
 import seedu.intern.model.applicant.Name;
 import seedu.intern.model.applicant.Phone;
 import seedu.intern.model.skills.Skill;
@@ -42,9 +46,9 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the applicant identified "
-            + "by the index number used in the displayed applicant list. "
+            + "by the index number in the currently displayed list, or all currently displayed applicants. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Index Parameters: INDEX (must be a positive integer)"
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
@@ -52,28 +56,59 @@ public class EditCommand extends Command {
             + "[" + PREFIX_INSTITUTION + "INSTITUTION] "
             + "[" + PREFIX_COURSE + "COURSE] "
             + "[" + PREFIX_GRADUATIONYEARMONTH + "GRADUATION_YEAR_MONTH] "
-            + "[" + PREFIX_STATUS + "STATUS] "
-            + "[" + PREFIX_SKILL + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
+            + "[" + PREFIX_JOB + "APPLIED JOB] "
+            + "[" + PREFIX_STATUS + "APPLICATION STATUS] "
+            + "[" + PREFIX_SKILL + "SKILL]...\n"
+            + "Example index: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_EMAIL + "johndoe@example.com\n"
+            + "ALL Parameters: ALL (must be uppercase)"
+            + "[" + PREFIX_STATUS + "APPLICATION STATUS] "
+            + "Example all: " + COMMAND_WORD + " ALL "
+            + PREFIX_STATUS + "APPLIED\n";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Applicant: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This applicant already exists in Intern Watcher.";
+    public static final String MESSAGE_EDIT_ALL_SUCCESS = "Successfully edited %d of %d applicants.";
+    public static final String MESSAGE_COMMIT_EDIT = "Edit Applicant: %1$s";
+    public static final String MESSAGE_COMMIT_EDIT_ALL = "Edit %d applicants.";
 
-    private final Index index;
+    private final Selection selection;
     private final EditApplicantDescriptor editApplicantDescriptor;
 
     /**
+     * @deprecated Use selection constructor instead.
      * @param index of the applicant in the filtered applicant list to edit
      * @param editApplicantDescriptor details to edit the applicant with
      */
+    @Deprecated
     public EditCommand(Index index, EditApplicantDescriptor editApplicantDescriptor) {
-        requireNonNull(index);
+        this(Selection.fromIndex(index), editApplicantDescriptor);
+    }
+
+    /**
+     * Public constructor for {@code EditCommand}.
+     * @param selection of the applicant(s) in the filtered applicant list to edit
+     * @param editApplicantDescriptor details to edit the applicant with
+     */
+    public EditCommand(Selection selection, EditApplicantDescriptor editApplicantDescriptor) {
+        requireNonNull(selection);
         requireNonNull(editApplicantDescriptor);
 
-        this.index = index;
+        // editApplicant Descriptor should only contain ApplicationStatus if All flag is present
+        assert(!selection.hasAllSelectFlag()
+                || selection.checkAllSelected()
+                && editApplicantDescriptor.getName().isEmpty()
+                && editApplicantDescriptor.getCourse().isEmpty()
+                && editApplicantDescriptor.getEmail().isEmpty()
+                && editApplicantDescriptor.getGrade().isEmpty()
+                && editApplicantDescriptor.getGraduationYearMonth().isEmpty()
+                && editApplicantDescriptor.getInstitution().isEmpty()
+                && editApplicantDescriptor.getSkills().isEmpty()
+                && editApplicantDescriptor.getPhone().isEmpty());
+
+        this.selection = selection;
         this.editApplicantDescriptor = new EditApplicantDescriptor(editApplicantDescriptor);
     }
 
@@ -82,28 +117,54 @@ public class EditCommand extends Command {
         requireNonNull(model);
         List<Applicant> lastShownList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        if (selection.hasIndex()) {
+            if (selection.getIndexZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
+
+            Applicant applicantToEdit = lastShownList.get(selection.getIndexZeroBased());
+            Applicant editedApplicant = createEditedApplicant(applicantToEdit, editApplicantDescriptor);
+
+            if (!applicantToEdit.isSameApplicant(editedApplicant) && model.hasApplicant(editedApplicant)) {
+                throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            }
+
+            model.setApplicant(applicantToEdit, editedApplicant);
+            model.updateFilteredApplicantList(PREDICATE_SHOW_ALL_PERSONS);
+            model.commitInternWatcher(String.format(MESSAGE_COMMIT_EDIT, editedApplicant));
+            return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedApplicant));
+        } else {
+            if (!selection.checkAllSelected()) {
+                throw new CommandException(Messages.MESSAGE_UNEXPECTED_FLAG);
+            }
+
+            int totalApplicants = lastShownList.size();
+            int addSuccesses = 0;
+            // Create copy of list
+            ArrayList<Applicant> targetApplicants = new ArrayList<>(lastShownList);
+
+            for (Applicant applicantToEdit : targetApplicants) {
+                Applicant editedApplicant = createEditedApplicant(applicantToEdit, editApplicantDescriptor);
+
+                if (!applicantToEdit.isSameApplicant(editedApplicant) && model.hasApplicant(editedApplicant)) {
+                    continue;
+                }
+
+                model.setApplicant(applicantToEdit, editedApplicant);
+                addSuccesses++;
+            }
+
+            model.commitInternWatcher(String.format(MESSAGE_COMMIT_EDIT_ALL, addSuccesses));
+            return new CommandResult(String.format(MESSAGE_EDIT_ALL_SUCCESS, addSuccesses, totalApplicants));
         }
-
-        Applicant applicantToEdit = lastShownList.get(index.getZeroBased());
-        Applicant editedApplicant = createEditedPerson(applicantToEdit, editApplicantDescriptor);
-
-        if (!applicantToEdit.isSameApplicant(editedApplicant) && model.hasApplicant(editedApplicant)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
-
-        model.setApplicant(applicantToEdit, editedApplicant);
-        model.updateFilteredApplicantList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedApplicant));
     }
 
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Applicant createEditedPerson(Applicant applicantToEdit,
-                                                EditApplicantDescriptor editApplicantDescriptor) {
+    private static Applicant createEditedApplicant(Applicant applicantToEdit,
+                                                   EditApplicantDescriptor editApplicantDescriptor) {
         assert applicantToEdit != null;
 
         Name updatedName = editApplicantDescriptor.getName().orElse(applicantToEdit.getName());
@@ -115,14 +176,15 @@ public class EditCommand extends Command {
         GraduationYearMonth updatedGraduationYearMonth = editApplicantDescriptor.getGraduationYearMonth()
                 .orElse(applicantToEdit.getGraduationYearMonth());
         Course updatedCourse = editApplicantDescriptor.getCourse().orElse(applicantToEdit.getCourse());
+        Job updatedJob = editApplicantDescriptor.getJob().orElse(applicantToEdit.getJob());
         ApplicationStatus updatedStatus = editApplicantDescriptor.getApplicationStatus()
                 .orElse(applicantToEdit.getApplicationStatus());
-        Set<Skill> updatedSkills = editApplicantDescriptor.getTags().orElse(applicantToEdit.getSkills());
+        Set<Skill> updatedSkills = editApplicantDescriptor.getSkills().orElse(applicantToEdit.getSkills());
 
 
         return new Applicant(updatedName, updatedPhone, updatedEmail,
                 updatedGrade, updatedInstitution, updatedCourse,
-                updatedGraduationYearMonth, updatedStatus, updatedSkills);
+                updatedGraduationYearMonth, updatedJob, updatedStatus, updatedSkills);
     }
 
     @Override
@@ -139,7 +201,7 @@ public class EditCommand extends Command {
 
         // state check
         EditCommand e = (EditCommand) other;
-        return index.equals(e.index)
+        return selection.equals(e.selection)
                 && editApplicantDescriptor.equals(e.editApplicantDescriptor);
     }
 
@@ -159,6 +221,7 @@ public class EditCommand extends Command {
         private Institution institution;
         private GraduationYearMonth graduationYearMonth;
         private Course course;
+        private Job job;
         private ApplicationStatus status;
         private Set<Skill> skills;
 
@@ -166,7 +229,7 @@ public class EditCommand extends Command {
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * A defensive copy of {@code skill} is used internally.
          */
         public EditApplicantDescriptor(EditApplicantDescriptor toCopy) {
             setName(toCopy.name);
@@ -176,15 +239,17 @@ public class EditCommand extends Command {
             setInstitution(toCopy.institution);
             setGraduationYearMonth(toCopy.graduationYearMonth);
             setCourse(toCopy.course);
+            setJob(toCopy.job);
             setApplicationStatus(toCopy.status);
-            setTags(toCopy.skills);
+            setSkills(toCopy.skills);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, grade, institution, status, skills);
+            return CollectionUtil.isAnyNonNull(
+                    name, phone, email, grade, institution, graduationYearMonth, course, job, status, skills);
         }
 
         public void setName(Name name) {
@@ -243,6 +308,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(course);
         }
 
+        public void setJob(Job job) {
+            this.job = job;
+        }
+
+        public Optional<Job> getJob() {
+            return Optional.ofNullable(job);
+        }
+
         public void setApplicationStatus(ApplicationStatus status) {
             this.status = status;
         }
@@ -252,19 +325,19 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
+         * Sets {@code skill} to this object's {@code skill}.
+         * A defensive copy of {@code skill} is used internally.
          */
-        public void setTags(Set<Skill> skills) {
+        public void setSkills(Set<Skill> skills) {
             this.skills = (skills != null) ? new HashSet<>(skills) : null;
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * Returns an unmodifiable skill set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
+         * Returns {@code Optional#empty()} if {@code skill} is null.
          */
-        public Optional<Set<Skill>> getTags() {
+        public Optional<Set<Skill>> getSkills() {
             return (skills != null) ? Optional.of(Collections.unmodifiableSet(skills)) : Optional.empty();
         }
 
@@ -290,8 +363,9 @@ public class EditCommand extends Command {
                     && getInstitution().equals(e.getInstitution())
                     && getGraduationYearMonth().equals(e.getGraduationYearMonth())
                     && getCourse().equals(e.getCourse())
+                    && getJob().equals(e.getJob())
                     && getApplicationStatus().equals(e.getApplicationStatus())
-                    && getTags().equals(e.getTags());
+                    && getSkills().equals(e.getSkills());
         }
 
         @Override
@@ -304,7 +378,9 @@ public class EditCommand extends Command {
                     + ", institution=" + institution
                     + ", graduation year month=" + graduationYearMonth
                     + ", course=" + course
-                    + ", tags=" + skills + '}';
+                    + ", applied job=" + job
+                    + ", status=" + status
+                    + ", skill=" + skills + '}';
         }
     }
 }

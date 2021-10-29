@@ -6,11 +6,13 @@ import java.util.stream.Stream;
 
 import seedu.intern.logic.commands.EditCommand.EditApplicantDescriptor;
 import seedu.intern.model.applicant.Applicant;
+import seedu.intern.model.applicant.ApplicationStatus;
 import seedu.intern.model.applicant.Course;
 import seedu.intern.model.applicant.Email;
 import seedu.intern.model.applicant.Grade;
 import seedu.intern.model.applicant.GraduationYearMonth;
 import seedu.intern.model.applicant.Institution;
+import seedu.intern.model.applicant.Job;
 import seedu.intern.model.applicant.Name;
 import seedu.intern.model.applicant.Phone;
 import seedu.intern.model.skills.Skill;
@@ -40,9 +42,10 @@ public class EditApplicantDescriptorBuilder {
         descriptor.setEmail(applicant.getEmail());
         descriptor.setGrade(applicant.getGrade());
         descriptor.setInstitution(applicant.getInstitution());
+        descriptor.setApplicationStatus(applicant.getApplicationStatus());
         descriptor.setGraduationYearMonth(applicant.getGraduationYearMonth());
         descriptor.setCourse(applicant.getCourse());
-        descriptor.setTags(applicant.getSkills());
+        descriptor.setSkills(applicant.getSkills());
     }
 
     /**
@@ -86,6 +89,14 @@ public class EditApplicantDescriptorBuilder {
     }
 
     /**
+     * Sets the {@code ApplicationStatus} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditApplicantDescriptorBuilder withApplicationStatus(String status) {
+        descriptor.setApplicationStatus(new ApplicationStatus(status));
+        return this;
+    }
+
+    /**
      * Sets the {@code GraduationYearMonth} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditApplicantDescriptorBuilder withGraduationYearMonth(String graduationYearMonth) {
@@ -99,18 +110,27 @@ public class EditApplicantDescriptorBuilder {
         descriptor.setCourse(new Course(course));
         return this;
     }
+    /**
+     * Sets the {@code Job} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditApplicantDescriptorBuilder withJob(String job) {
+        descriptor.setJob(new Job(job));
+        return this;
+    }
 
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
      * that we are building.
      */
-    public EditApplicantDescriptorBuilder withTags(String... tags) {
-        Set<Skill> skillSet = Stream.of(tags).map(Skill::new).collect(Collectors.toSet());
-        descriptor.setTags(skillSet);
+    public EditApplicantDescriptorBuilder withSkills(String... skills) {
+        Set<Skill> skillSet = Stream.of(skills).map(Skill::new).collect(Collectors.toSet());
+        descriptor.setSkills(skillSet);
         return this;
     }
 
     public EditApplicantDescriptor build() {
         return descriptor;
     }
+
+
 }

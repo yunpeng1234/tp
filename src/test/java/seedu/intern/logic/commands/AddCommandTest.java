@@ -20,6 +20,7 @@ import seedu.intern.model.InternWatcher;
 import seedu.intern.model.Model;
 import seedu.intern.model.ReadOnlyInternWatcher;
 import seedu.intern.model.ReadOnlyUserPrefs;
+import seedu.intern.model.VersionedInternWatcher;
 import seedu.intern.model.applicant.Applicant;
 import seedu.intern.testutil.ApplicantBuilder;
 
@@ -129,6 +130,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void displayApplicant(Applicant applicant, boolean toggle) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deleteApplicant(Applicant target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -144,7 +150,47 @@ public class AddCommandTest {
         }
 
         @Override
+        public Applicant getApplicant() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateApplicant(Applicant newApplicant) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredApplicantList(Predicate<Applicant> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void commitInternWatcher(String commitMessage) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String undoInternWatcher() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String redoInternWatcher() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isUndoAvailable() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isRedoAvailable() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean getIsToggle() {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -172,6 +218,7 @@ public class AddCommandTest {
      */
     private class ModelStubAcceptingPersonAdded extends ModelStub {
         final ArrayList<Applicant> personsAdded = new ArrayList<>();
+        final VersionedInternWatcher internWatcher = new VersionedInternWatcher(getInternWatcher());
 
         @Override
         public boolean hasApplicant(Applicant applicant) {
@@ -183,6 +230,12 @@ public class AddCommandTest {
         public void addApplicant(Applicant applicant) {
             requireNonNull(applicant);
             personsAdded.add(applicant);
+        }
+
+        @Override
+        public void commitInternWatcher(String commitMessage) {
+            requireNonNull(commitMessage);
+            internWatcher.commitState(commitMessage);
         }
 
         @Override

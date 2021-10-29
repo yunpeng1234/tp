@@ -33,9 +33,9 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label phone;
     @FXML
-    private Label address;
-    @FXML
     private Label email;
+    @FXML
+    private Label job;
     @FXML
     private Label status;
 
@@ -46,11 +46,22 @@ public class PersonCard extends UiPart<Region> {
     public PersonCard(Applicant applicant, int displayedIndex) {
         super(FXML);
         this.applicant = applicant;
+        this.cardPane.setStyle(setColour(displayedIndex));
         id.setText(displayedIndex + ". ");
         name.setText(applicant.getName().fullName);
         phone.setText(applicant.getPhone().value);
         email.setText(applicant.getEmail().value);
+        job.setText(applicant.getJob().jobName);
         status.setText(applicant.getApplicationStatus().value.toString());
+        status.setStyle(String.format("-fx-background-color: %s;", applicant.getApplicationStatus().getColour()));
+    }
+
+    public String setColour(int index) {
+        if (index % 2 == 0) {
+            return "-fx-background-color: #decbc6;";
+        } else {
+            return "-fx-background-color: #c9ada7;";
+        }
     }
 
     @Override

@@ -3,7 +3,7 @@ package seedu.intern.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.intern.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.intern.logic.commands.CommandTestUtil.VALID_SKILL_JAVA;
 import static seedu.intern.testutil.Assert.assertThrows;
 import static seedu.intern.testutil.TypicalApplicants.ALICE;
 import static seedu.intern.testutil.TypicalApplicants.getTypicalInternWatcher;
@@ -45,7 +45,7 @@ public class InternWatcherTest {
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two persons with the same identity fields
-        Applicant editedAlice = new ApplicantBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
+        Applicant editedAlice = new ApplicantBuilder(ALICE).withSkills(VALID_SKILL_JAVA)
                 .build();
         List<Applicant> newApplicants = Arrays.asList(ALICE, editedAlice);
         InternWatcherStub newData = new InternWatcherStub(newApplicants);
@@ -72,7 +72,7 @@ public class InternWatcherTest {
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         internWatcher.addPerson(ALICE);
-        Applicant editedAlice = new ApplicantBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
+        Applicant editedAlice = new ApplicantBuilder(ALICE).withSkills(VALID_SKILL_JAVA)
                 .build();
         assertTrue(internWatcher.hasPerson(editedAlice));
     }

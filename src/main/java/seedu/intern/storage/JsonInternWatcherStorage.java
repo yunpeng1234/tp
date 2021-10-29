@@ -15,7 +15,7 @@ import seedu.intern.commons.util.JsonUtil;
 import seedu.intern.model.ReadOnlyInternWatcher;
 
 /**
- * A class to access AddressBook data stored as a json file on the hard disk.
+ * A class to access InternWatcher data stored as a json file on the hard disk.
  */
 public class JsonInternWatcherStorage implements InternWatcherStorage {
 

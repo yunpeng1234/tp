@@ -12,7 +12,7 @@ import seedu.intern.model.ReadOnlyUserPrefs;
 import seedu.intern.model.UserPrefs;
 
 /**
- * Manages storage of AddressBook data in local storage.
+ * Manages storage of InternWatcher data in local storage.
  */
 public class StorageManager implements Storage {
 
@@ -21,7 +21,7 @@ public class StorageManager implements Storage {
     private UserPrefsStorage userPrefsStorage;
 
     /**
-     * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
+     * Creates a {@code StorageManager} with the given {@code InternWatcherStorage} and {@code UserPrefStorage}.
      */
     public StorageManager(InternWatcherStorage internWatcherStorage, UserPrefsStorage userPrefsStorage) {
         super();
@@ -47,7 +47,7 @@ public class StorageManager implements Storage {
     }
 
 
-    // ================ AddressBook methods ==============================
+    // ================ InternWatcher methods ==============================
 
     @Override
     public Path getInternWatcherFilePath() {

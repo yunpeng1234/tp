@@ -16,6 +16,7 @@ import seedu.intern.logic.Logic;
 import seedu.intern.logic.commands.CommandResult;
 import seedu.intern.logic.commands.exceptions.CommandException;
 import seedu.intern.logic.parser.exceptions.ParseException;
+import seedu.intern.model.applicant.Applicant;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -120,11 +121,14 @@ public class MainWindow extends UiPart<Stage> {
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getInternWatcherFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        personDetail = new PersonDetailPanel(logic.getFilteredPersonList());
+        personDetail = new PersonDetailPanel();
         personDetailPlaceholder.getChildren().add(personDetail.getRoot());
+        personListPanel.addSelectedListener((observable, oldValue, newValue) -> {
+            personDetail.showApplicant(newValue, false);
+        });
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
@@ -193,11 +197,18 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            if (commandResult.isView()) {
+                handleView(logic.getApplicant(), logic.getIsToggle());
+            }
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    private void handleView(Applicant applicant, boolean isToggle) {
+        personDetail.showApplicant(applicant, isToggle);
     }
 }

@@ -15,7 +15,7 @@ import seedu.intern.model.InternWatcher;
 import seedu.intern.model.ReadOnlyInternWatcher;
 
 public class JsonInternWatcherStorageTest {
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonAddressBookStorageTest");
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonInternWatcherStorageTest");
 
     @TempDir
     public Path testFolder;
@@ -43,31 +43,31 @@ public class JsonInternWatcherStorageTest {
 
     @Test
     public void read_notJsonFormat_exceptionThrown() {
-        assertThrows(DataConversionException.class, () -> readInternWatcher("notJsonFormatAddressBook.json"));
+        assertThrows(DataConversionException.class, () -> readInternWatcher("notJsonFormatInternWatcher.json"));
     }
 
     @Test
-    public void readAddressBook_invalidPersonAddressBook_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readInternWatcher("invalidPersonAddressBook.json"));
+    public void readInternWatcher_invalidPersonInternWatcher_throwDataConversionException() {
+        assertThrows(DataConversionException.class, () -> readInternWatcher("invalidPersonInternWatcher.json"));
     }
 
     @Test
-    public void readAddressBook_invalidAndValidPersonAddressBook_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readInternWatcher("invalidAndValidPersonAddressBook.json"));
+    public void readInternWatcher_invalidAndValidPersonInternWatcher_throwDataConversionException() {
+        assertThrows(DataConversionException.class, () -> readInternWatcher("invalidAndValidPersonInternWatcher.json"));
     }
 
     @Test
-    public void saveAddressBook_nullAddressBook_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> saveAddressBook(null, "SomeFile.json"));
+    public void saveInternWatcher_nullInternWatcher_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> saveInternWatcher(null, "SomeFile.json"));
     }
 
     /**
-     * Saves {@code addressBook} at the specified {@code filePath}.
+     * Saves {@code onternWatcher} at the specified {@code filePath}.
      * */
-    private void saveAddressBook(ReadOnlyInternWatcher addressBook, String filePath) {
+    private void saveInternWatcher(ReadOnlyInternWatcher internWatcher, String filePath) {
         try {
             new JsonInternWatcherStorage(Paths.get(filePath))
-                    .saveInternWatcher(addressBook, addToTestDataPathIfNotNull(filePath));
+                    .saveInternWatcher(internWatcher, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }
@@ -75,6 +75,6 @@ public class JsonInternWatcherStorageTest {
 
     @Test
     public void saveAddressBook_nullFilePath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> saveAddressBook(new InternWatcher(), null));
+        assertThrows(NullPointerException.class, () -> saveInternWatcher(new InternWatcher(), null));
     }
 }

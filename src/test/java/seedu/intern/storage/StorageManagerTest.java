@@ -21,9 +21,9 @@ public class StorageManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonInternWatcherStorage addressBookStorage = new JsonInternWatcherStorage(getTempFilePath("ab"));
+        JsonInternWatcherStorage internWatcherStorage = new JsonInternWatcherStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
+        storageManager = new StorageManager(internWatcherStorage, userPrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -45,7 +45,7 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void getAddressBookFilePath() {
+    public void getinternWatcherFilePath() {
         assertNotNull(storageManager.getInternWatcherFilePath());
     }
 
