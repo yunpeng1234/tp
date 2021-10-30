@@ -93,7 +93,7 @@ Adds an applicant to Intern Watcher.
 Format: `add n/NAME p/PHONE e/EMAIL g/GRADE i/INSTITUTION c/COURSE y/GRADUATION_YEAR_MONTH j/JOB [a/APPLICATION_STATUS] [s/SKILL]…+`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-An applicant can have any number of tags (including 0)
+An applicant can have any number of skills (including 0)
 </div>
 
 Examples:
