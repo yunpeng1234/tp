@@ -75,7 +75,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ApplicantListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/InternWatcher-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/InternWatcher-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/InternWatcher-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/InternWatcher-level3/tree/master/src/main/resources/view/MainWindow.fxml).
 
 The `UI` component,
 
@@ -96,7 +96,7 @@ How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `InternWatcherParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add an applicant).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+1. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
@@ -110,7 +110,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `InternWatcherParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `InternWatcherParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `InternWatcherParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `InternWatcherParser` returns a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
@@ -178,7 +178,22 @@ should be edited.
 ###  Delete ALL feature
 
 #### Implementation
-The implementation of delete all function is based on the common `Selection` class that both delete and edit share. With the `Selection` having and `Index` as well as a boolean flag, it allows us to extend parsing towards a new flag with is "ALL". From there, we can just loop through the displayed list, deleting the first index until the list is empty.
+The `delete` ALL mechanism is facilitated by the new `Selection` class shared with edit ALL. A new parser `ParserUtil#parseSelection`
+has been added to parse `Selection` values, which accepts either integers or the `ALL` string. The `Selection` class supports
+operations `Selection#hasAllFlag` and `Selection#hasIndex`, which is used by `DeleteCommand#execute`. `DeleteCommand#execute`
+has been modified, such that whenever `Selection#hasAllFlag` returns `true`, `DeleteCommand#execute` delete all applicants on the displayed list. `Selection` has been given a private constructor with static factory methods `Selection#fromIndex` and
+`Selection#fromAllFlag` to ensure `Selection` should not contain both index and all flag.
+
+#### Design considerations:
+**Aspect: How delete ALL is parsed**
+- **Alternative 1 (current choice)**: Modify the parser to parse the `Selection`, accepting a special flag to indicate all applicants
+  should be deleted.
+    - Pros: Easy to implement
+    - Cons: `DeleteCommand` and its related parsers may become harder to test since its behaviour is now different depending
+      on the user input.
+- **Alternative 2**: Create a special `Index` of -1 when ALL tag is attached, as such, only when the index is -1, will we execute 'delete All' 
+    - Pros: Easy to implement
+    - Cons: Bypasses the intention of the Index Class. Having a negative `Index` might throw unexpected errors.
 
 ### Filter feature
 
@@ -198,6 +213,7 @@ The `FilterCommand` will make use of the `FilterApplicantDescriptor` to create a
 #### Proposed Implementation
 
 The proposed undo/redo mechanism is facilitated by `VersionedInternWatcher`. It extends `InternWatcher` with an undo/redo history, stored internally as an `InternWatcherStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+
 
 * `VersionedInternWatcher#commit()` — Saves the current address book state in its history.
 * `VersionedInternWatcher#undo()` — Restores the previous address book state from its history.
@@ -395,7 +411,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: Update all applicants' details application**
+**Use case: Update all applicants application**
 
 **MSS**
 
@@ -462,6 +478,27 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+
+### Editing an applicant
+
+1. Editing an applicant while all applicants are shown
+
+   1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list.
+
+   1. Test case: `edit 1 a/ INTERVIEWED`<br>
+      Expected: First applicant of the list modified to have the `INTERVIEWED` application status. Details of the edited applicant shown in the status message. Timestamp in the status bar is updated.
+
+   1. Test case: `edit 0 a/ INTERVIEWED`<br>
+      Expected: No applicant is edited. Error details shown in the status message. Status bar remains the same.
+
+   1. Test case: `edit ALL a/ INTERVIEWED`<br>
+      Expected: All currently displayed applicants modified with the `INTERVIEWED` application status. Number of applicants successfully edited shown in the status message. Timestamp in the status bar is updated.
+
+   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+
+2. _{ more test cases …​ }_
+
 ### Deleting an applicant
 
 1. Deleting an applicant while all applicants are being shown
@@ -485,7 +522,7 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `view 1`<br> 
       Expected: First applicant's details are displayed. Details of the applicant is shown in the status message. Timestamp in the status bar is updated.
    3. Test case: `view 0`<br>
-      Expected: No applicant detail is displayed. Error details shown in the status message. Status bar remains the same. 
+      Expected: No applicant detail displayed. Error details shown in the status message. Status bar remains the same. 
    4. Other incorrect view commands to try: `view`, `view x`. `...`(where x is larger than the list or a non-positive number)<br>
       Expected: Similar to previous.
 2. _{ more test cases …​ }_

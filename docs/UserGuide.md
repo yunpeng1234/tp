@@ -5,6 +5,9 @@ title: User Guide
 
 Intern Watcher (IW) is a **desktop app for managing internship applicants, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, IW can get your applicant management tasks done faster than traditional GUI apps.
 
+You can use Intern Watcher to add, edit and delete the internship applicants. Intern Watcher also allows you to track applicants' details such as grades and skills, as well as filter applicants by their details.
+
+This user guide covers a quick walk through how to use this application, as well as the full descriptions of the features available.
 * Table of Contents
 {:toc}
 
@@ -12,27 +15,33 @@ Intern Watcher (IW) is a **desktop app for managing internship applicants, optim
 
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have Java `11` or above installed in your Computer. You can download it [here](https://www.oracle.com/java/technologies/downloads/#java11).
 
-1. Download the latest `*.jar` from [here](https://github.com/AY2122S1-CS2103T-F12-2/tp/releases).
+2. Download the latest `*.jar` from [here](https://github.com/AY2122S1-CS2103T-F12-2/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your InterWatcher.
+3. Copy the file to the folder you want to use as the _home folder_ for your InterWatcher.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+5. Type any command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+
+6. Some example commands you can try:
 
    * **`list`** : Lists all applicants.
 
-   * **`add`**`n/John p/123 e/a@a.com addr/Singapore g/4.50 i/NTU c/CS y/06/2025 a/INTERVIEWED` : Adds a applicant named `John` to Intern Watcher.
+   * **`add`**`n/John p/123 e/a@a.com g/4.50 i/NTU c/CS y/06/2025 a/INTERVIEWED` : Adds an applicant named `John` to Intern Watcher.
+
+   * **`find john`** : Lists all applicants whose name containing john.
+
+   * **`filter`**`g/4.50 c/CS` : Lists all applicants that have a grade not less than 4.50 studying the CS course.
 
    * **`delete`**`3` : Deletes the 3rd applicant shown in the current list.
 
-   * **`clear`** : Deletes all applicants.
+   * **`view`**`3``T` : Shows the 3rd applicant's skills.
 
-   * **`exit`** : Exits the app.
+   * **`undo`** : Undo the last command the user has entered.
+
+   * **`redo`** : Redo the last command the user has undone.
 
 2. Refer to the [Features](#features) below for details of each command.
 
@@ -56,7 +65,7 @@ Intern Watcher (IW) is a **desktop app for managing internship applicants, optim
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
+* If a command expects only one instance of a parameter, but the parameters has been specified multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
@@ -66,16 +75,16 @@ Intern Watcher (IW) is a **desktop app for managing internship applicants, optim
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
 Format: `help`
 
 
-### Adding a applicant: `add`
+### Adding an applicant: `add`
 
-Adds a applicant to Inter Watcher.
+Adds an applicant to Inter Watcher.
 
 Format: `add n/NAME p/PHONE e/EMAIL g/GRADE i/INSTITUTION c/COURSE y/GRADUATION_YEAR_MONTH [a/STATUS] [s/SKILL]…+`
 
@@ -128,7 +137,7 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a applicant : `delete`
+### Deleting an applicant : `delete`
 
 Deletes the specified applicant from Inter Watcher.
 
@@ -156,11 +165,11 @@ Format: `exit`
 
 ### Saving the data
 
-InterWatcher data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+InterWatcher saves data in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-InterWatcher data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+InterWatcher saves data as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, InterWatcher will discard all data and start with an empty data file at the next run.
