@@ -1,5 +1,5 @@
 title: "Intern watcher"
-theme: minima
+theme: jekyll-theme-leap-day
 
 header_pages:
   - UserGuide.md

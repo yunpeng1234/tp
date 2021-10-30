@@ -90,6 +90,55 @@ public class FilterCommandTest {
     }
 
     @Test
+    public void execute_jobOnly_multiplePersonsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        FilterApplicantDescriptor filterCondition = new FilterApplicantDescriptorBuilder()
+                .withJobs("software engineer").build();
+        CombineFiltersPredicate predicate = new CombineFiltersPredicate(filterCondition);
+        FilterCommand command = new FilterCommand(filterCondition);
+        expectedModel.updateFilteredApplicantList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ALICE, GEORGE), model.getFilteredPersonList());
+    }
+
+
+    @Test
+    public void execute_jobAndCourse_multiplePersonsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        FilterApplicantDescriptor filterCondition = new FilterApplicantDescriptorBuilder()
+                .withJobs("software engineer").withCourses("Social Work", "Computer Science").build();
+        CombineFiltersPredicate predicate = new CombineFiltersPredicate(filterCondition);
+        FilterCommand command = new FilterCommand(filterCondition);
+        expectedModel.updateFilteredApplicantList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ALICE, GEORGE), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_jobAndCourse_onePersonsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        FilterApplicantDescriptor filterCondition = new FilterApplicantDescriptorBuilder()
+                .withJobs("software engineer").withCourses("Computer Science").build();
+        CombineFiltersPredicate predicate = new CombineFiltersPredicate(filterCondition);
+        FilterCommand command = new FilterCommand(filterCondition);
+        expectedModel.updateFilteredApplicantList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ALICE), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_jobAndCourse_noPersonsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        FilterApplicantDescriptor filterCondition = new FilterApplicantDescriptorBuilder()
+                .withJobs("software engineer").withCourses("accountant").build();
+        CombineFiltersPredicate predicate = new CombineFiltersPredicate(filterCondition);
+        FilterCommand command = new FilterCommand(filterCondition);
+        expectedModel.updateFilteredApplicantList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(), model.getFilteredPersonList());
+    }
+
+    @Test
     public void execute_allFields_onePersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
         FilterApplicantDescriptor filterCondition = new FilterApplicantDescriptorBuilder()
@@ -98,6 +147,7 @@ public class FilterCommandTest {
                 .withApplicationStatus("ACCEPTED")
                 .withCourses("PHILOSOPHY")
                 .withGraduationYearMonth("06/2025")
+                .withJobs("Helper")
                 .build();
         CombineFiltersPredicate predicate = new CombineFiltersPredicate(filterCondition);
         FilterCommand command = new FilterCommand(filterCondition);
@@ -115,6 +165,7 @@ public class FilterCommandTest {
                 .withApplicationStatus("ACCEPTED")
                 .withCourses("PHILOSOPHY")
                 .withGraduationYearMonth("06/2025")
+                .withJobs("Helper")
                 .build();
         CombineFiltersPredicate predicate = new CombineFiltersPredicate(filterCondition);
         FilterCommand command = new FilterCommand(filterCondition);

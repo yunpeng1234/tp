@@ -5,6 +5,7 @@ import static seedu.intern.logic.parser.CliSyntax.PREFIX_COURSE;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_GRADUATIONYEARMONTH;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_INSTITUTION;
+import static seedu.intern.logic.parser.CliSyntax.PREFIX_JOB;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_SKILL;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_STATUS;
 
@@ -39,8 +40,8 @@ public class FilterCommand extends Command {
             + "For valid graduation filter, display list with applicants with graduation strictly before the filter. \n"
             + "For valid skill/status filters, "
             + "display list with applicants with all (case-sensitive) skills/statues specified in the filters. \n"
-            + "For valid institution filters, display list with applicants with "
-            + "one of the institutions(case-insensitive) specified among the institution filters. \n"
+            + "For valid institution/job filters, display list with applicants with "
+            + "one of the institutions/jobs(case-insensitive) specified among the institution/job filters. \n"
             + "For valid course filters, display list with applicants with "
             + "course names containing at least one of the course filters specified. \n"
             + "Parameters: "
@@ -48,6 +49,7 @@ public class FilterCommand extends Command {
             + "[" + PREFIX_INSTITUTION + "INSTITUTION] "
             + "[" + PREFIX_COURSE + "COURSE] "
             + "[" + PREFIX_GRADUATIONYEARMONTH + "GRADUATION_YEAR_MONTH] "
+            + "[" + PREFIX_JOB + "APPLIED JOB] "
             + "[" + PREFIX_STATUS + "STATUS] "
             + "[" + PREFIX_SKILL + "SKILL]...\n"
             + "Example: " + COMMAND_WORD + " g/4.5 i/NUS c/computer science a/APPLIED s/HTML";
@@ -89,6 +91,7 @@ public class FilterCommand extends Command {
         private Set<Institution> institutions;
         private GraduationYearMonth graduationYearMonth;
         private Set<List<String>> courses;
+        private Set<List<String>> jobs;
         private Set<ApplicationStatus> statuses;
         private Set<Skill> skills;
 
@@ -103,6 +106,7 @@ public class FilterCommand extends Command {
             setInstitutions(toCopy.institutions);
             setGraduationYearMonth(toCopy.graduationYearMonth);
             setCourses(toCopy.courses);
+            setJobs(toCopy.jobs);
             setApplicationStatuses(toCopy.statuses);
             setSkills(toCopy.skills);
         }
@@ -111,7 +115,8 @@ public class FilterCommand extends Command {
          * Returns true if at least one field is Filtered.
          */
         public boolean isAnyFieldFiltered() {
-            return CollectionUtil.isAnyNonNull(grade, institutions, graduationYearMonth, courses, statuses, skills);
+            return CollectionUtil.isAnyNonNull(grade, institutions, graduationYearMonth,
+                    courses, statuses, jobs, skills);
         }
 
         public void setGrade(Grade grade) {
@@ -136,6 +141,14 @@ public class FilterCommand extends Command {
 
         public Optional<Set<Institution>> getInstitutions() {
             return (institutions != null) ? Optional.of(Collections.unmodifiableSet(institutions)) : Optional.empty();
+        }
+
+        public void setJobs(Set<List<String>> jobs) {
+            this.jobs = (jobs != null) ? new HashSet<>(jobs) : null;
+        }
+
+        public Optional<Set<List<String>>> getJobs() {
+            return (jobs != null) ? Optional.of(Collections.unmodifiableSet(jobs)) : Optional.empty();
         }
 
         public void setCourses(Set<List<String>> courses) {
@@ -190,6 +203,7 @@ public class FilterCommand extends Command {
                     && getInstitutions().equals(e.getInstitutions())
                     && getGraduationYearMonth().equals(e.getGraduationYearMonth())
                     && getCourses().equals(e.getCourses())
+                    && getJobs().equals(e.getJobs())
                     && getApplicationStatuses().equals(e.getApplicationStatuses())
                     && getSkills().equals(e.getSkills());
         }
@@ -201,6 +215,7 @@ public class FilterCommand extends Command {
                     + ", institution=" + institutions
                     + ", graduation year month=" + graduationYearMonth
                     + ", course=" + courses
+                    + ", applied job=" + jobs
                     + ", application status=" + statuses
                     + ", skill=" + skills + '}';
         }

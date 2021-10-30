@@ -17,6 +17,7 @@ import seedu.intern.model.applicant.Email;
 import seedu.intern.model.applicant.Grade;
 import seedu.intern.model.applicant.GraduationYearMonth;
 import seedu.intern.model.applicant.Institution;
+import seedu.intern.model.applicant.Job;
 import seedu.intern.model.applicant.Name;
 import seedu.intern.model.applicant.Phone;
 import seedu.intern.model.skills.Skill;
@@ -35,6 +36,7 @@ class JsonAdaptedApplicant {
     private final String institution;
     private final String graduationYearMonth;
     private final String course;
+    private final String job;
     private final String status;
     private final List<JsonAdaptedSkill> skills = new ArrayList<>();
 
@@ -46,6 +48,7 @@ class JsonAdaptedApplicant {
                                 @JsonProperty("email") String email, @JsonProperty("grade") String grade,
                                 @JsonProperty("institution") String institution, @JsonProperty("course") String course,
                                 @JsonProperty("graduationYearMonth") String graduationYearMonth,
+                                @JsonProperty("job") String job,
                                 @JsonProperty("status") String status,
                                 @JsonProperty("skills") List<JsonAdaptedSkill> skills) {
 
@@ -56,6 +59,7 @@ class JsonAdaptedApplicant {
         this.institution = institution;
         this.course = course;
         this.graduationYearMonth = graduationYearMonth;
+        this.job = job;
         this.status = status;
         if (skills != null) {
             this.skills.addAll(skills);
@@ -72,7 +76,8 @@ class JsonAdaptedApplicant {
         grade = source.getGrade().value;
         institution = source.getInstitution().value;
         course = source.getCourse().value;
-        graduationYearMonth = source.getGraduationYearMonth().value;
+        graduationYearMonth = source.getGraduationYearMonth().toString();
+        job = source.getJob().jobName;
         status = source.getApplicationStatus().value.toString();
         skills.addAll(source.getSkills().stream()
                 .map(JsonAdaptedSkill::new)
@@ -149,8 +154,16 @@ class JsonAdaptedApplicant {
         }
         final Course modelCourse = new Course(course);
 
-        final ApplicationStatus modelStatus;
+        if (job == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Job.class.getSimpleName()));
+        }
+        if (!Job.isValidJobName(job)) {
+            throw new IllegalValueException(Job.MESSAGE_CONSTRAINTS);
+        }
+        final Job modelJob = new Job(job);
 
+        final ApplicationStatus modelStatus;
         if (status == null) {
             modelStatus = new ApplicationStatus();
         } else if (!ApplicationStatus.isValidStatus(status)) {
@@ -162,7 +175,7 @@ class JsonAdaptedApplicant {
         final Set<Skill> modelSkills = new HashSet<>(personSkills);
 
         return new Applicant(modelName, modelPhone, modelEmail, modelGrade,
-                modelInstitution, modelCourse, modelYearMonth , modelStatus, modelSkills);
+                modelInstitution, modelCourse, modelYearMonth , modelJob, modelStatus, modelSkills);
 
     }
 

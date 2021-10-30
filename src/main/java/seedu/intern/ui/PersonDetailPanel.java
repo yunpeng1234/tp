@@ -17,6 +17,7 @@ import seedu.intern.model.skills.Skill;
  * Panel containing the details of a Person
  */
 public class PersonDetailPanel extends UiPart<Region> {
+
     private static final String FXML = "PersonDetail.fxml";
     @FXML
     private TabPane tabPane;
@@ -109,7 +110,7 @@ public class PersonDetailPanel extends UiPart<Region> {
 
         skillSet.stream()
                 .sorted(Comparator.comparing(skill -> skill.skillName))
-                .forEach(skill -> skills.getChildren().add(new Label(skill.skillName)));
+                .forEach(skill -> skills.getChildren().add(new Label( skill.skillName)));
 
     }
 }

@@ -13,6 +13,7 @@ import seedu.intern.model.applicant.ApplicationStatus;
 import seedu.intern.model.applicant.Grade;
 import seedu.intern.model.applicant.GraduationYearMonth;
 import seedu.intern.model.applicant.Institution;
+import seedu.intern.model.applicant.Job;
 import seedu.intern.model.skills.Skill;
 
 /**
@@ -38,9 +39,11 @@ public class FilterApplicantDescriptorBuilder {
         Set<List<String>> courses = new HashSet<List<String>>();
         Set<ApplicationStatus> statuses = new HashSet<>();
         Set<Institution> institutions = new HashSet<>();
+        Set<Job> jobs = new HashSet<>();
         courses.add(keywords);
         statuses.add(applicant.getApplicationStatus());
         institutions.add(applicant.getInstitution());
+        jobs.add(applicant.getJob());
         descriptor = new FilterApplicantDescriptor();
         descriptor.setGrade(applicant.getGrade());
         descriptor.setInstitutions(institutions);
@@ -100,6 +103,17 @@ public class FilterApplicantDescriptorBuilder {
     public FilterApplicantDescriptorBuilder withSkills(String... skills) {
         Set<Skill> skillSet = Stream.of(skills).map(Skill::new).collect(Collectors.toSet());
         descriptor.setSkills(skillSet);
+        return this;
+    }
+
+    /**
+     * Parses the {@code jobs} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
+     * that we are building.
+     */
+    public FilterApplicantDescriptorBuilder withJobs(String... jobs) {
+        Set<List<String>> jobSet = Stream.of(jobs).map((x) -> Arrays.asList(x.split(" ")))
+                .collect(Collectors.toSet());
+        descriptor.setJobs(jobSet);
         return this;
     }
 

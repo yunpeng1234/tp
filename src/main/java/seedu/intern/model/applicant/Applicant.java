@@ -16,7 +16,7 @@ import seedu.intern.model.skills.Skill;
  */
 public class Applicant {
 
-    private static final String[] DEFAULT_ACADEMICS = { "INSTITUTION", "COURSE", "YEAR", "GRADE" };
+    private static final String[] DEFAULT_ACADEMICS = { "", "", "", "" };
 
     // Identity fields
     private final Name name;
@@ -28,6 +28,7 @@ public class Applicant {
     private final Institution institution;
     private final GraduationYearMonth graduationYearMonth;
     private final Course course;
+    private final Job job;
     private final ApplicationStatus status;
     private final Set<Skill> skills = new HashSet<>();
 
@@ -37,8 +38,8 @@ public class Applicant {
      */
     public Applicant(Name name, Phone phone, Email email, Grade grade,
                      Institution institution, Course course, GraduationYearMonth graduationYearMonth,
-                     Set<Skill> skills) {
-        this(name, phone, email, grade, institution, course, graduationYearMonth,
+                     Job job, Set<Skill> skills) {
+        this(name, phone, email, grade, institution, course, graduationYearMonth, job,
                 new ApplicationStatus(ApplicationStatus.DEFAULT_STATUS), skills);
     }
 
@@ -47,8 +48,8 @@ public class Applicant {
      */
     public Applicant(Name name, Phone phone, Email email, Grade grade,
                      Institution institution, Course course, GraduationYearMonth graduationYearMonth,
-                     ApplicationStatus status, Set<Skill> skills) {
-        requireAllNonNull(name, phone, email, grade, status, institution, course, graduationYearMonth, skills);
+                     Job job, ApplicationStatus status, Set<Skill> skills) {
+        requireAllNonNull(name, phone, email, grade, status, institution, course, graduationYearMonth, job, skills);
 
         this.name = name;
         this.phone = phone;
@@ -56,6 +57,7 @@ public class Applicant {
         this.grade = grade;
         this.institution = institution;
         this.graduationYearMonth = graduationYearMonth;
+        this.job = job;
         this.course = course;
         this.status = status;
         this.skills.addAll(skills);
@@ -91,6 +93,10 @@ public class Applicant {
 
     public GraduationYearMonth getGraduationYearMonth() {
         return graduationYearMonth;
+    }
+
+    public Job getJob() {
+        return job;
     }
 
     public String[] getAcademics() {
@@ -144,6 +150,7 @@ public class Applicant {
                 && otherApplicant.getGrade().equals(getGrade())
                 && otherApplicant.getInstitution().equals(getInstitution())
                 && otherApplicant.getGraduationYearMonth().equals(getGraduationYearMonth())
+                && otherApplicant.getJob().equals(getJob())
                 && otherApplicant.getCourse().equals(getCourse())
                 && otherApplicant.getApplicationStatus().equals(getApplicationStatus())
                 && otherApplicant.getSkills().equals(getSkills());
@@ -153,7 +160,7 @@ public class Applicant {
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(name, phone, email, grade, institution, course,
-                graduationYearMonth, status, skills);
+                graduationYearMonth, job, status, skills);
     }
 
     @Override
@@ -173,7 +180,9 @@ public class Applicant {
                 .append("; Course: ")
                 .append(getCourse())
                 .append("; Graduation Year Month: ")
-                .append((getGraduationYearMonth()));
+                .append(getGraduationYearMonth())
+                .append("; Applied Job: ")
+                .append(getJob());
 
         Set<Skill> skills = getSkills();
         if (!skills.isEmpty()) {

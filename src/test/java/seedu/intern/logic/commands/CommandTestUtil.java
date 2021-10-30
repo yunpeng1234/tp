@@ -7,6 +7,7 @@ import static seedu.intern.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_GRADUATIONYEARMONTH;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_INSTITUTION;
+import static seedu.intern.logic.parser.CliSyntax.PREFIX_JOB;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_SKILL;
@@ -18,6 +19,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.intern.commons.core.selection.Index;
+import seedu.intern.commons.core.selection.Selection;
 import seedu.intern.logic.commands.exceptions.CommandException;
 import seedu.intern.model.InternWatcher;
 import seedu.intern.model.Model;
@@ -46,6 +48,8 @@ public class CommandTestUtil {
     public static final String VALID_GRADUATION_YEARMONTH_AMY = "06/2023";
     @SuppressWarnings("SpellCheckingInspection")
     public static final String VALID_GRADUATION_YEARMONTH_BOB = "09/2021";
+    public static final String VALID_JOB_AMY = "Software Engineer";
+    public static final String VALID_JOB_BOB = "Hardware Engineer";
     public static final String VALID_COURSE_AMY = "Computer Science";
     public static final String VALID_COURSE_BOB = "Computer Science";
     public static final String VALID_SKILL_JAVA = "JAVA";
@@ -67,6 +71,8 @@ public class CommandTestUtil {
     @SuppressWarnings("SpellCheckingInspection")
     public static final String GRADUATION_YEARMONTH_DESC_BOB = " "
             + PREFIX_GRADUATIONYEARMONTH + VALID_GRADUATION_YEARMONTH_BOB;
+    public static final String JOB_DESC_AMY = " " + PREFIX_JOB + VALID_JOB_AMY;
+    public static final String JOB_DESC_BOB = " " + PREFIX_JOB + VALID_JOB_BOB;
     public static final String STATUS_DESC_AMY = " " + PREFIX_STATUS + VALID_STATUS_AMY;
     public static final String STATUS_DESC_BOB = " " + PREFIX_STATUS + VALID_STATUS_BOB;
     public static final String COURSE_DESC_AMY = " " + PREFIX_COURSE + VALID_COURSE_AMY;
@@ -84,7 +90,7 @@ public class CommandTestUtil {
     @SuppressWarnings("SpellCheckingInspection")
     public static final String INVALID_GRADUATION_YEARMONTH_DESC = " " + PREFIX_GRADUATIONYEARMONTH
             + "13/2021"; // invalid month not allowed
-
+    public static final String INVALID_JOB_DESC = " " + PREFIX_JOB + "Software $ngineer"; // '$' not allowed
     public static final String INVALID_COURSE_DESC = " " + PREFIX_COURSE + "Computer $cience"; // '$' not allowed
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
@@ -97,11 +103,12 @@ public class CommandTestUtil {
         DESC_AMY = new EditApplicantDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withApplicationStatus(VALID_STATUS_AMY)
                 .withGrade(VALID_GRADE_AMY).withInstitution(VALID_INSTITUTION_AMY).withCourse(VALID_COURSE_AMY)
-                .withGraduationYearMonth(VALID_GRADUATION_YEARMONTH_AMY).withSkills(VALID_SKILL_PYTHON).build();
+                .withGraduationYearMonth(VALID_GRADUATION_YEARMONTH_AMY).withSkills(VALID_SKILL_PYTHON)
+                .withJob(VALID_JOB_AMY).build();
         DESC_BOB = new EditApplicantDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withApplicationStatus(VALID_STATUS_BOB)
                 .withGrade(VALID_GRADE_BOB).withInstitution(VALID_INSTITUTION_BOB).withCourse(VALID_COURSE_BOB)
-                .withGraduationYearMonth(VALID_GRADUATION_YEARMONTH_BOB)
+                .withGraduationYearMonth(VALID_GRADUATION_YEARMONTH_BOB).withJob(VALID_JOB_BOB)
                 .withSkills(VALID_SKILL_JAVA, VALID_SKILL_PYTHON).build();
     }
 
@@ -155,6 +162,20 @@ public class CommandTestUtil {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
 
         Applicant applicant = model.getFilteredPersonList().get(targetIndex.getZeroBased());
+        final String[] splitName = applicant.getName().fullName.split("\\s+");
+        model.updateFilteredApplicantList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+
+        assertEquals(1, model.getFilteredPersonList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the applicant at the given {@code targetIndex} in the
+     * {@code model}'s intern book.
+     */
+    public static void showSelectedApplicant(Model model, Selection targetSelection) {
+        assertTrue(targetSelection.getIndexZeroBased() < model.getFilteredPersonList().size());
+
+        Applicant applicant = model.getFilteredPersonList().get(targetSelection.getIndexZeroBased());
         final String[] splitName = applicant.getName().fullName.split("\\s+");
         model.updateFilteredApplicantList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 

@@ -7,7 +7,8 @@
     "institution": "NUS",
     "course": "Computer Science",
     "graduationYearMonth" : "12/2021",
-    "skills": [ "friends" ]
+    "skills": [ "friends" ],
+    "job" : "Software Engineer"
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
@@ -15,6 +16,7 @@
     "grade": "4.40",
     "institution": "NUSS",
     "course": "Computer Engineering",
-    "graduationYearMonth" : "12/2021"
+    "graduationYearMonth" : "12/2021",
+    "job" : "Hardware Engineer"
   } ]
 }

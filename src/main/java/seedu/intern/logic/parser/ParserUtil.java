@@ -2,7 +2,6 @@ package seedu.intern.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.intern.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.intern.logic.parser.CliSyntax.FLAG_ALL;
 import static seedu.intern.logic.parser.CliSyntax.FLAG_TOGGLE;
 
 import java.util.Arrays;
@@ -11,6 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javafx.util.Pair;
 import seedu.intern.commons.core.selection.Index;
 import seedu.intern.commons.core.selection.Selection;
 import seedu.intern.commons.util.StringUtil;
@@ -22,6 +22,7 @@ import seedu.intern.model.applicant.Email;
 import seedu.intern.model.applicant.Grade;
 import seedu.intern.model.applicant.GraduationYearMonth;
 import seedu.intern.model.applicant.Institution;
+import seedu.intern.model.applicant.Job;
 import seedu.intern.model.applicant.Name;
 import seedu.intern.model.applicant.Phone;
 import seedu.intern.model.skills.Skill;
@@ -33,6 +34,7 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_SELECTION = "Selection is not a non-zero unsigned integer or ALL.";
+    public static final String MESSAGE_INVALID_TAG = "Selection provided does not end with TOGGLE";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -62,7 +64,7 @@ public class ParserUtil {
         }
 
         if (StringUtil.isAll(trimmedSelection)) {
-            return Selection.fromExtraConditionFlag(trimmedSelection.equals(FLAG_ALL));
+            return Selection.fromAllFlag();
         } else {
             return Selection.fromIndex(Index.fromOneBased(Integer.parseInt(trimmedSelection)));
         }
@@ -75,20 +77,29 @@ public class ParserUtil {
      * trimmed.
      * @throws ParseException if the specified selection is invalid.
      */
-    public static Selection parseView(String selection) throws ParseException {
+    public static Pair<Index, Boolean> parseView(String selection) throws ParseException {
         String [] trimmedSelection = selection.trim().split(" ");
+        if (trimmedSelection.length > 2) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+
+        if (!StringUtil.isInteger(trimmedSelection[0])) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+
         if (StringUtil.isInteger(trimmedSelection[0]) && !StringUtil.isNonZeroUnsignedInteger(trimmedSelection[0])) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         if (trimmedSelection.length == 2 && !StringUtil.isToggle(trimmedSelection[1])) {
-            throw new ParseException(MESSAGE_INVALID_SELECTION);
+            throw new ParseException(MESSAGE_INVALID_TAG);
         }
 
         if (trimmedSelection.length == 2) {
-            return Selection.fromIndexAndToggle(Index.fromOneBased(Integer.parseInt(trimmedSelection[0])),
+            return new Pair<>(Index.fromOneBased(Integer.parseInt(trimmedSelection[0])),
                     trimmedSelection[1].equals(FLAG_TOGGLE));
         } else {
-            return Selection.fromIndex(Index.fromOneBased(Integer.parseInt(trimmedSelection[0])));
+            return new Pair<>(Index.fromOneBased(Integer.parseInt(trimmedSelection[0])),
+                    false);
         }
     }
 
@@ -101,7 +112,7 @@ public class ParserUtil {
     @Deprecated
     public static Index parseDelete(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
-        if (trimmedIndex.equals("all")) {
+        if (trimmedIndex.equals("ALL")) {
             Index specialTag = Index.fromZeroBased(0);
             specialTag.setSpecialIndex();
             return specialTag;
@@ -213,6 +224,66 @@ public class ParserUtil {
             throw new ParseException(GraduationYearMonth.MESSAGE_CONSTRAINTS);
         }
         return new GraduationYearMonth(trimmedYearMonth);
+    }
+
+    /**
+     * Parses a {@code String job} into an {@code Job}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code job} is invalid.
+     */
+    public static Job parseJob(String job) throws ParseException {
+        requireNonNull(job);
+        String trimmedJobName = job.trim();
+        if (!Job.isValidJobName(job)) {
+            throw new ParseException(Job.MESSAGE_CONSTRAINTS);
+        }
+        return new Job(trimmedJobName);
+    }
+
+    /**
+     * Parses {@code Collection<String> jobs} into a {@code Set<Job>}.
+     */
+    public static Set<Job> parseJobs(Collection<String> jobs) throws ParseException {
+        requireNonNull(jobs);
+        final Set<Job> jobSet = new HashSet<>();
+        for (String job : jobs) {
+            jobSet.add(parseJob(job));
+        }
+        return jobSet;
+    }
+
+    /**
+     * Parses a {@code String jobFilter} into a {@code List<String>}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code job} is invalid.
+     */
+    public static List<String> parseJobFilter(String jobFilter) throws ParseException {
+        requireNonNull(jobFilter);
+        String trimmedJob = jobFilter.trim();
+        if (!Job.isValidJobName(trimmedJob)) {
+            throw new ParseException(Job.MESSAGE_CONSTRAINTS);
+        }
+        if (trimmedJob.isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+        }
+        String[] jobKeywords = trimmedJob.split("\\s+");
+
+        return Arrays.asList(jobKeywords);
+    }
+
+    /**
+     * Parses {@code Collection<String> jobFilters} into a {@code Set<List<String>>}.
+     */
+    public static Set<List<String>> parseJobFilters(Collection<String> jobs) throws ParseException {
+        requireNonNull(jobs);
+        final Set<List<String>> jobSet = new HashSet<>();
+        for (String job : jobs) {
+            jobSet.add(parseJobFilter(job));
+        }
+        return jobSet;
     }
 
     /**

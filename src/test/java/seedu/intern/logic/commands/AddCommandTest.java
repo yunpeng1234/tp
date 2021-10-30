@@ -20,6 +20,7 @@ import seedu.intern.model.InternWatcher;
 import seedu.intern.model.Model;
 import seedu.intern.model.ReadOnlyInternWatcher;
 import seedu.intern.model.ReadOnlyUserPrefs;
+import seedu.intern.model.VersionedInternWatcher;
 import seedu.intern.model.applicant.Applicant;
 import seedu.intern.testutil.ApplicantBuilder;
 
@@ -164,17 +165,17 @@ public class AddCommandTest {
         }
 
         @Override
-        public void commitInternWatcher() {
-            System.out.println("Add command test");
-        }
-
-        @Override
-        public void undoInternWatcher() {
+        public void commitInternWatcher(String commitMessage) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void redoInternWatcher() {
+        public String undoInternWatcher() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String redoInternWatcher() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -217,6 +218,7 @@ public class AddCommandTest {
      */
     private class ModelStubAcceptingPersonAdded extends ModelStub {
         final ArrayList<Applicant> personsAdded = new ArrayList<>();
+        final VersionedInternWatcher internWatcher = new VersionedInternWatcher(getInternWatcher());
 
         @Override
         public boolean hasApplicant(Applicant applicant) {
@@ -228,6 +230,12 @@ public class AddCommandTest {
         public void addApplicant(Applicant applicant) {
             requireNonNull(applicant);
             personsAdded.add(applicant);
+        }
+
+        @Override
+        public void commitInternWatcher(String commitMessage) {
+            requireNonNull(commitMessage);
+            internWatcher.commitState(commitMessage);
         }
 
         @Override

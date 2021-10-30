@@ -33,6 +33,7 @@ public class CombineFiltersPredicate implements Predicate<Applicant> {
         Optional<Set<Institution>> institutions = filterApplicantDescriptor.getInstitutions();
         Optional<GraduationYearMonth> graduationYearMonth = filterApplicantDescriptor.getGraduationYearMonth();
         Optional<Set<List<String>>> courses = filterApplicantDescriptor.getCourses();
+        Optional<Set<List<String>>> jobs = filterApplicantDescriptor.getJobs();
         Optional<Set<ApplicationStatus>> statuses = filterApplicantDescriptor.getApplicationStatuses();
         Optional<Set<Skill>> skills = filterApplicantDescriptor.getSkills();
 
@@ -43,12 +44,15 @@ public class CombineFiltersPredicate implements Predicate<Applicant> {
                 setResult(result && institutionsContent.stream().anyMatch(institution ->
                         StringUtil.containsWordIgnoreCase(applicant.getInstitution().value, institution.value))));
         graduationYearMonth.ifPresent(graduationContent ->
-                setResult(result && GraduationYearMonth.compareDate(applicant.getGraduationYearMonth().value,
-                        graduationContent.value) < 0));
+                setResult(result && applicant.getGraduationYearMonth().isBefore(graduationContent)));
         courses.ifPresent(coursesContent ->
                 setResult(result && coursesContent.stream().anyMatch(courseFilter ->
                         courseFilter.stream().allMatch(courseKeyword ->
                                 StringUtil.containsWordIgnoreCase(applicant.getCourse().value, courseKeyword)))));
+        jobs.ifPresent(jobsContent ->
+                setResult(result && jobsContent.stream().anyMatch(jobFilter ->
+                        jobFilter.stream().allMatch(jobKeyword ->
+                                StringUtil.containsWordIgnoreCase(applicant.getJob().jobName, jobKeyword)))));
         statuses.ifPresent(statusesContent ->
                 setResult(result && statusesContent.stream().anyMatch(status ->
                         StringUtil.containsWordIgnoreCase(applicant.getApplicationStatus().value.name(),
