@@ -35,7 +35,7 @@ public class Grade {
     }
 
     public static boolean isValidGradeRange(String test) {
-        return Float.parseFloat(test) <= 5.00 && Float.parseFloat(test) >= 0 ;
+        return Float.parseFloat(test) <= 5.00 && Float.parseFloat(test) >= 0;
     }
 
     @Override
