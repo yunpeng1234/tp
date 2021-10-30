@@ -36,15 +36,17 @@ public class GraduationYearMonth {
      * Returns true if a given string is a valid grade name.
      */
     public static boolean isValidGraduationYearMonth(String test) {
-        int holder;
+        int monthHolder;
+        int yearHolder;
         if (test.matches(VALIDATION_REGEX)) {
-            holder = Integer.parseInt(test.split("/")[0]);
+            monthHolder = Integer.parseInt(test.split("/")[0]);
+            yearHolder = Integer.parseInt(test.split("/")[1]);
         } else {
             return false;
         }
 
-        // month in between 1-12 inclusive
-        return test.matches(VALIDATION_REGEX) && holder >= 1 && holder <= 12;
+        // month in between 1-12 inclusive and year lower bound of 2020
+        return test.matches(VALIDATION_REGEX) && monthHolder >= 1 && monthHolder <= 12 && yearHolder >= 2020;
     }
 
     @Override
