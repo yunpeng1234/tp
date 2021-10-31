@@ -21,10 +21,10 @@ public class CourseTest {
         // invalid course
         assertFalse(Course.isValidCourse("^21Business Analytics")); // contains non-alphabetic characters
         assertFalse(Course.isValidCourse("*")); // only non-alphanumeric characters
+        assertFalse(Course.isValidCourse("")); // empty string
 
         // valid course
         assertTrue(Course.isValidCourse("CS")); // alphabets only
-        assertTrue(Course.isValidCourse("")); // empty string
         assertTrue(Course.isValidCourse("Computer Science")); // spaces in between characters
         assertTrue(Course.isValidCourse("Business Analytics")); // with capital letters
         assertTrue(Course.isValidCourse("Double Degree in Computer Science and Mathematics")); // long names
