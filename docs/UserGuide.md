@@ -39,7 +39,7 @@ Intern Watcher (IW) is a **desktop app for Human Resource Managers to manage int
 
    * **`undo`** : Undo the last command the user has entered.
 
-   * **`redo`** : Redo the last command the user has undoed.
+   * **`redo`** : Redo the last command the user has undone.
 
    * **`clear`** : Deletes all applicants.
 
@@ -69,7 +69,7 @@ Intern Watcher (IW) is a **desktop app for Human Resource Managers to manage int
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
+* If a command expects only one instance of a parameter, but the parameter has been specified multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
@@ -143,7 +143,7 @@ Format:
 * If `ALL` is specified, edits all applicants currently displayed.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing skills, the existing skills of the applicant will be removed i.e adding of tags is not cumulative.
+* When editing skills, the existing skills of the applicant will be removed i.e adding of skills is not cumulative.
 * You can remove all the person’s skills by typing `s/` without
     specifying any skills after it.
 
@@ -266,7 +266,7 @@ Undoes the last undoable action.
 Format: `undo`
 
 * Restores Intern Watcher to a state before the last undoable action.
-* If the current state of Intern Watcher is the oldest state, the undo command will not be invoked.
+* If the current state of Intern Watcher is the oldest state, the `undo` command will not be invoked.
 * Undoable actions include: `add`, `edit`, `delete`, `clear`, `redo`.
 
 Examples:
@@ -324,7 +324,7 @@ If your changes to the data file makes its format invalid, InternWatcher will di
 
 `Name` : Alphanumeric characters and space only. Should not be blank.
 
-`Phone` : Only contains digits from 0 - 9, with a minimum of 3 digits.
+`Phone` : Only contains digits from 0 to 9, with a minimum of 3 digits.
 
 `Institution` : Alphanumeric characters and space only. Should not be blank.
 
@@ -335,9 +335,9 @@ If your changes to the data file makes its format invalid, InternWatcher will di
 `Course` : Alphabet characters and space only. Should not be blank.
 
 `Email` : Should be in the form of *Local-part*@**Domain**. *Local-part* should contain only alphanumeric characters with only these special characters `+_.-`. 
-**Domain** can be separated into ***label*** with `.` if necessary. Each ***label*** should only contain alphanumeric characters and seperated and is separated by `-` if necessary. domain is at least 2 characters long and needs to start and end with alphanumeric characters.
+**Domain** can be separated into ***label*** with `.` if necessary. Each ***label*** should only contain alphanumeric characters and separated and is separated by `-` if necessary. domain is at least 2 characters long and needs to start and end with alphanumeric characters.
 
-`Skill`: Alphanumeri characters, spaces and `+#` symbols only.
+`Skill`: Alphanumeric characters, spaces and `+#` symbols only.
 
 --------------------------------------------------------------------------------------------------------------------
 
