@@ -29,13 +29,13 @@ Intern Watcher (IW) is a **desktop app for Human Resource Managers to manage int
 
    * **`add`**`n/John p/123 e/a@a.com g/4.50 i/NTU c/CS y/06/2025 a/INTERVIEWED` : Adds an applicant named `John` to Intern Watcher.
 
-   * **`find john` : Lists all applicants whose name containing john.
+   * **`find`**`john` : Lists all applicants whose name containing john.
 
    * **`filter`**`g/4.50 c/CS` : Lists all applicants that have a grade not less than 4.50 and study CS course.
 
    * **`delete`**`3` : Deletes the 3rd applicant shown in the current list.
 
-   * **`view`**`3`**`T` : Shows the 3rd applicant's skills.
+   * **`view`**`3 T` : Shows the 3rd applicant's skills.
 
    * **`undo`** : Undo the last command the user has entered.
 
@@ -63,7 +63,7 @@ Intern Watcher (IW) is a **desktop app for Human Resource Managers to manage int
 * Items in square brackets are optional.<br>
   e.g `n/NAME [s/SKILL]` can be used as `n/John Doe s/friend` or as `n/John Doe`.
 
-* Items with `…`+ after them can be used multiple times including zero times.<br>
+* Items with `…+` after them can be used multiple times including zero times.<br>
   e.g. `[s/SKILL]…+` can be used as ` ` (i.e. 0 times), `s/Java`, `s/Python s/C` etc.
 
 * Parameters can be in any order.<br>
@@ -93,7 +93,7 @@ Adds an applicant to Intern Watcher.
 Format: `add n/NAME p/PHONE e/EMAIL g/GRADE i/INSTITUTION c/COURSE y/GRADUATION_YEAR_MONTH j/JOB [a/APPLICATION_STATUS] [s/SKILL]…+`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-An applicant can have any number of tags (including 0)
+An applicant can have any number of skills (including 0)
 </div>
 
 Examples:
@@ -330,7 +330,7 @@ If your changes to the data file makes its format invalid, InternWatcher will di
 
 `Job` : Alphabet character and space only. Should not be blank.
 
-`Status` : Should only be one of these 7 statuses, `ACCEPTED` , `REJECTED`, `ACCEPTED`, `INTERVIEWED`, `APPLIED` , `SCHEDULED`, `RECEIVED` and `OFFERED`.
+`Status` : Should only be one of these 7 statuses, `ACCEPTED` , `REJECTED`, `INTERVIEWED`, `APPLIED` , `SCHEDULED`, `RECEIVED` and `OFFERED`.
 
 `Course` : Alphabet characters and space only. Should not be blank.
 
