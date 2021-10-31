@@ -16,7 +16,7 @@ public class Course {
      * The first character of the course must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[a-zA-Z ]*";
+    public static final String VALIDATION_REGEX = "[a-zA-Z][a-zA-Z ]*";
 
     public final String value;
 

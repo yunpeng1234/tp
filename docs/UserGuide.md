@@ -31,18 +31,18 @@ This user guide covers a quick walk through how to use this application, as well
 
    * **`add`**`n/John p/123 e/a@a.com g/4.50 i/NTU c/CS y/06/2025 a/INTERVIEWED` : Adds an applicant named `John` to Intern Watcher.
 
-   * **`find john`** : Lists all applicants whose name containing john.
+   * **`find`** `john` : Lists all applicants whose name containing john.
 
    * **`filter`**`g/4.50 c/CS` : Lists all applicants that have a grade not less than 4.50 studying the CS course.
 
-   * **`delete`**`3` : Deletes the 3rd applicant shown in the current list.
+   * **`delete``3` : Deletes the 3rd applicant shown in the current list.
 
    * **`view`**`3``T` : Shows the 3rd applicant's skills.
 
    * **`undo`** : Undo the last command the user has entered.
 
    * **`redo`** : Redo the last command the user has undone.
-   
+
    * **`clear`** : Deletes all applicants.
    
 
@@ -64,13 +64,14 @@ This user guide covers a quick walk through how to use this application, as well
 * Items in square brackets are optional.<br>
   e.g `n/NAME [s/SKILL]` can be used as `n/John Doe s/friend` or as `n/John Doe`.
 
-* Items with `…`+ after them can be used multiple times including zero times.<br>
+* Items with `…+` after them can be used multiple times including zero times.<br>
   e.g. `[s/SKILL]…+` can be used as ` ` (i.e. 0 times), `s/Java`, `s/Python s/C` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* If a command expects only one instance of a parameter, but the parameters has been specified multiple times, only the last occurrence of the parameter will be taken.<br>
+* If a command expects only one instance of a parameter, but the parameter has been specified multiple times, only the last occurrence of the parameter will be taken.<br>
+
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
@@ -94,7 +95,7 @@ Adds an applicant to Intern Watcher.
 Format: `add n/NAME p/PHONE e/EMAIL g/GRADE i/INSTITUTION c/COURSE y/GRADUATION_YEAR_MONTH j/JOB [a/APPLICATION_STATUS] [s/SKILL]…+`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-An applicant can have any number of tags (including 0)
+An applicant can have any number of skills (including 0)
 </div>
 
 Examples:
@@ -181,7 +182,7 @@ Format:
 * If `ALL` is specified, edits all applicants currently displayed.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing skills, the existing skills of the applicant will be removed i.e adding of tags is not cumulative.
+* When editing skills, the existing skills of the applicant will be removed i.e adding of skills is not cumulative.
 * You can remove all the person’s skills by typing `s/` without
     specifying any skills after it.
 
@@ -266,7 +267,7 @@ Undoes the last undoable action.
 Format: `undo`
 
 * Restores Intern Watcher to a state before the last undoable action.
-* If the current state of Intern Watcher is the oldest state, the undo command will not be invoked.
+* If the current state of Intern Watcher is the oldest state, the `undo` command will not be invoked.
 * Undoable actions include: `add`, `edit`, `delete`, `clear`, `redo`.
 
 Examples:
@@ -325,20 +326,20 @@ If your changes to the data file makes its format invalid, InternWatcher will di
 
 `Name` : Alphanumeric characters and space only. Should not be blank.
 
-`Phone` : Only contains digits from 0 - 9, with a minimum of 3 digits.
+`Phone` : Only contains digits from 0 to 9, with a minimum of 3 digits.
 
 `Institution` : Alphanumeric characters and space only. Should not be blank.
 
 `Job` : Alphabet character and space only. Should not be blank.
 
-`Status` : Should only be one of these 7 statuses, `ACCEPTED` , `REJECTED`, `ACCEPTED`, `INTERVIEWED`, `APPLIED` , `SCHEDULED`, `RECEIVED` and `OFFERED`.
+`Status` : Should only be one of these 7 statuses, `ACCEPTED` , `REJECTED`, `INTERVIEWED`, `APPLIED` , `SCHEDULED`, `RECEIVED` and `OFFERED`.
 
 `Course` : Alphabet characters and space only. Should not be blank.
 
 `Email` : Should be in the form of *Local-part*@**Domain**. *Local-part* should contain only alphanumeric characters with only these special characters `+_.-`. 
-**Domain** can be separated into ***label*** with `.` if necessary. Each ***label*** should only contain alphanumeric characters and seperated and is separated by `-` if necessary. domain is at least 2 characters long and needs to start and end with alphanumeric characters.
+**Domain** can be separated into ***label*** with `.` if necessary. Each ***label*** should only contain alphanumeric characters and separated and is separated by `-` if necessary. domain is at least 2 characters long and needs to start and end with alphanumeric characters.
 
-`Skill`: Alphanumeri characters, spaces and `+#` symbols only.
+`Skill`: Alphanumeric characters, spaces and `+#` symbols only.
 
 --------------------------------------------------------------------------------------------------------------------
 
