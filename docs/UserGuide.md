@@ -144,7 +144,7 @@ Format: `filter [g/GRADE] [i/INSTITUTION]…+ [c/COURSE]…+ [y/GRADUATION_YEAR_
 * `filter` will show applicants that matches all fields specified.
 * If `[g/GRADE]` is specified, it will show all applicants with grades higher or equal to the `g/Grade` specified.
 * Likewise, if `[y/GRADUATION_YEAR_MONTH]` is specified, it will show all applicants with graduation dates that is strictly before the `GRADUATION_YEAR_MONTH` specified.
-* If more than 1 of `[s/SKILL]…+`,`[i/INSTITUTION]…+`,`[c/COURSE]…+`, or `[a/Status]…+`, is specified, applicants with fields that match at least one of the specified fields will be shown.
+* For each of `[s/SKILL]…+`,`[i/INSTITUTION]…+`,`[c/COURSE]…+`, and `[a/Status]…+`, if more than 1 instance of a field, such as `[a/Status]…+` is specified, applicants with fields that match at least one of the `[a/Status]…+` specified will be shown.
 
 Examples:
 * `filter s/Python s/Java` will show applicants with skills in either JAVA or PYTHON or both.
