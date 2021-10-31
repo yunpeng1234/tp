@@ -133,6 +133,43 @@ Examples:
 |---|---|
 |<img src="images/ViewTwoTBefore.png" alt="drawing" />|<img src="images/ViewTwoTAfter.png" alt="drawing" />|
 
+### Filtering by Fields : `filter`
+
+Filters the applicants in Intern Watcher by a given field.
+
+Format: `filter [g/GRADE] [i/INSTITUTION]…+ [c/COURSE]…+ [y/GRADUATION_YEAR_MONTH] [j/JOB] [a/STATUS] [s/SKILL]…+`
+
+
+* `filter` will show applicants that matches all fields specified.
+* If `[g/GRADE]` is specified, it will show all applicants with grades higher or equal to the `g/Grade` specified.
+* Likewise, if `[y/GRADUATION_YEAR_MONTH]` is specified, it will show all applicants with graduation dates that is strictly before the `GRADUATION_YEAR_MONTH` specified.
+* If more than 1 of `[s/SKILL]…+`,`[i/INSTITUTION]…+`,`[c/COURSE]…+`, or `[a/Status]…+`, is specified, applicants with fields that match at least one of the specified fields will be shown.
+
+Examples:
+* `filter s/Python s/Java` will show applicants with skills in either JAVA or PYTHON or both.
+
+|Command|Effect|
+|---|---|
+|<img src="images/FilterBefore.png" alt="drawing" />|<img src="images/FilterSkillAfter.png" alt="drawing" />|  
+
+* `filter g/4.60` will show applicants with a grade more than or equals 4.60.
+
+|Command|Effect|
+|---|---|
+|<img src="images/FilterGradeBefore.png" alt="drawing" />|<img src="images/FilterGradeAfter.png" alt="drawing" />|
+  
+* `filter y/06/2022` will show applicants  with graduation date earlier than June 2022.
+
+|Command|Effect|
+|---|---|
+|<img src="images/FilterYearBefore.png" alt="drawing" />|<img src="images/FilterYearAfter.png" alt="drawing" />|
+
+* `filter s/Java y/06/2022 i/NUS` will show applicants that graduate earlier than June 2022, knows JAVA and is from NUS.
+
+|Command|Effect|
+|---|---|
+|<img src="images/FilterBeforeSpecific.png" alt="drawing" />|<img src="images/FilterAfterSpecific.png" alt="drawing" />|
+
 ### Editing applicants : `edit`
 
 Edits an existing applicant, or all currently displayed applicants in Intern Watcher.
@@ -167,24 +204,6 @@ Examples:
 |---|---|
 |<img src="images/EditAllStatusBefore.png" alt="drawing" />|<img src="images/EditAllStatusAfter.png" alt="drawing" />|
 
-### Locating applicants by name: `find`
-
-Finds applicants whose names contain any of the given keywords.
-
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Applicants matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
-
 ### Deleting an applicant : `delete`
 
 Deletes the specified applicant from Inter Watcher.
@@ -216,43 +235,23 @@ Examples:
 |---|---|
 |<img src="images/DeleteFindAli.png" alt="drawing" />|<img src="images/DeleteFindAliAfter.png" alt="drawing" />|
 
-### Filtering by Fields : `filter`
+### Locating applicants by name: `find`
 
-Filters the applicants in Intern Watcher by a given field.
+Finds applicants whose names contain any of the given keywords.
 
-Format: `filter [g/GRADE] [i/INSTITUTION]…+ [c/COURSE]…+ [y/GRADUATION_YEAR_MONTH] [j/JOB] [a/STATUS] [s/SKILL]…+`
+Format: `find KEYWORD [MORE_KEYWORDS]`
 
-
-* `filter` will show applicants that matches all fields specified.
-* If `[g/GRADE]` is specified, it will show all applicants with grades higher or equal to the `g/Grade` specified.
-* Likewise, if `[y/GRADUATION_YEAR_MONTH]` is specified, it will show all applicants with graduation dates that is strictly before the `GRADUATION_YEAR_MONTH` specified.
-* If more than 1 of `[s/SKILL]…+` is specified, applicants that matches at least one of the `s/SKILL` specified will be shown.
-* This is the same of both of `[i/INSTITUTION]…+` `[c/COURSE]…+` `[a/Status]…+` as well.
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Applicants matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `filter s/Python s/Java` will show applicants with skills in either JAVA or PYTHON or both.
-
-|Command|Effect|
-|---|---|
-|<img src="images/FilterBefore.png" alt="drawing" />|<img src="images/FilterSkillAfter.png" alt="drawing" />|  
-
-* `filter g/4.60` will show applicants with a grade more than or equals 4.60.
-
-|Command|Effect|
-|---|---|
-|<img src="images/FilterGradeBefore.png" alt="drawing" />|<img src="images/FilterGradeAfter.png" alt="drawing" />|
-  
-* `filter y/06/2022` will show applicants  with graduation date earlier than June 2022.
-
-|Command|Effect|
-|---|---|
-|<img src="images/FilterYearBefore.png" alt="drawing" />|<img src="images/FilterYearAfter.png" alt="drawing" />|
-
-* `filter s/Java y/06/2022 i/NUS` will show applicants that graduate earlier than June 2022, knows JAVA and is from NUS.
-
-|Command|Effect|
-|---|---|
-|<img src="images/FilterBeforeSpecific.png" alt="drawing" />|<img src="images/FilterAfterSpecific.png" alt="drawing" />|
+* `find John` returns `john` and `John Doe`
+* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+  ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Clearing all entries : `clear`
 
