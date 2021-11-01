@@ -46,7 +46,7 @@ public class GraduationYearMonth {
         }
 
         // month in between 1-12 inclusive and year lower bound of 2020
-        return test.matches(VALIDATION_REGEX) && monthHolder >= 1 && monthHolder <= 12 && yearHolder >= 2020;
+        return test.matches(VALIDATION_REGEX) && monthHolder >= 1 && monthHolder <= 12 && yearHolder >= 1980;
     }
 
     @Override

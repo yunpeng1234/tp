@@ -33,7 +33,7 @@ public class GraduationYearMonthTest {
         assertFalse(GraduationYearMonth.isValidGraduationYearMonth("/2022")); // missing year
         assertFalse(GraduationYearMonth.isValidGraduationYearMonth("09-2024")); // hyphen between numbers
         assertFalse(GraduationYearMonth.isValidGraduationYearMonth("00/2024")); // invalid month
-        assertFalse(GraduationYearMonth.isValidGraduationYearMonth("01/2019")); // year is before 2020
+        assertFalse(GraduationYearMonth.isValidGraduationYearMonth("01/1500")); // year is below lower boundary
 
         // valid graduation year and month
         assertTrue(GraduationYearMonth.isValidGraduationYearMonth("05/2021")); // exactly 3 numbers
