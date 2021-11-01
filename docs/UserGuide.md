@@ -35,7 +35,7 @@ This user guide covers a quick walk through how to use this application, as well
 
    * **`filter`**`g/4.50 c/CS` : Lists all applicants that have a grade not less than 4.50 studying the CS course.
 
-   * **`delete``3` : Deletes the 3rd applicant shown in the current list.
+   * **`delete`**`3` : Deletes the 3rd applicant shown in the current list.
 
    * **`view`**`3``T` : Shows the 3rd applicant's skills.
 
@@ -332,7 +332,7 @@ If your changes to the data file makes its format invalid, InternWatcher will di
 
 `Job` : Alphabet character and space only. Should not be blank.
 
-`Status` : Should only be one of these 7 statuses, `ACCEPTED` , `REJECTED`, `INTERVIEWED`, `APPLIED` , `SCHEDULED`, `RECEIVED` and `OFFERED`.
+`Status` : Case sensitive. Should only be one of these 7 statuses, `ACCEPTED` , `REJECTED`, `INTERVIEWED`, `APPLIED` , `SCHEDULED`, `RECEIVED` and `OFFERED`.
 
 `Course` : Alphabet characters and space only. Should not be blank.
 
