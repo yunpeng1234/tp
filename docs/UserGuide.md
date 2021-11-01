@@ -19,7 +19,7 @@ This user guide covers a quick walk through how to use this application, as well
 
 2. Download the latest `*.jar` from [here](https://github.com/AY2122S1-CS2103T-F12-2/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your InterWatcher.
+3. Copy the file to the folder you want to use as the _home folder_ for your InternWatcher.
 
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
 
@@ -322,24 +322,25 @@ If your changes to the data file makes its format invalid, InternWatcher will di
 
 --------------------------------------------------------------------------------------------------------------------
 ### Specification of Fields
-`Grade` : Number with 2 d.p from 0.00 - 5.00.
 
-`Name` : Alphanumeric characters and space only. Should not be blank.
+`Name` : The applicant's name. Should only include alphanumeric characters and spaces only. Should not be blank.
 
-`Phone` : Only contains digits from 0 to 9, with a minimum of 3 digits.
+`Phone` : The applicant's phone number. Should only contain digits from 0 to 9, with a minimum length of 3 digits.
 
-`Institution` : Alphanumeric characters and space only. Should not be blank.
-
-`Job` : Alphabet character and space only. Should not be blank.
-
-`Status` : Should only be one of these 7 statuses, `ACCEPTED` , `REJECTED`, `INTERVIEWED`, `APPLIED` , `SCHEDULED`, `RECEIVED` and `OFFERED`.
-
-`Course` : Alphabet characters and space only. Should not be blank.
-
-`Email` : Should be in the form of *Local-part*@**Domain**. *Local-part* should contain only alphanumeric characters with only these special characters `+_.-`. 
+`Email` : The applicant's email address. Should be in the form of *Local-part*@**Domain**. *Local-part* should contain only alphanumeric characters with only these special characters `+_.-`.
 **Domain** can be separated into ***label*** with `.` if necessary. Each ***label*** should only contain alphanumeric characters and separated and is separated by `-` if necessary. domain is at least 2 characters long and needs to start and end with alphanumeric characters.
 
-`Skill`: Alphanumeric characters, spaces and `+#` symbols only.
+`Grade` : The applicant's Grade Point Average (GPA). Should be a number in 2 decimal places from 0.00 - 5.00.
+
+`Institution` : The applicant's school. Should only include alphanumeric characters and space only. Should not be blank.
+
+`Course` : The applicant's course of study in their school. Should only include alphabet characters and space only. Should not be blank.
+
+`Job` : The job/position that the applicant applied for. Should only include alphabet characters and space only. Should not be blank.
+
+`Status` : The status of the applicant's application. Should only be one of these 7 statuses, `ACCEPTED` , `REJECTED`, `INTERVIEWED`, `APPLIED` , `SCHEDULED`, `RECEIVED` and `OFFERED`.
+
+`Skill`: The applicant's skillset. Should only include alphanumeric characters, spaces and `+#` symbols only.
 
 --------------------------------------------------------------------------------------------------------------------
 
