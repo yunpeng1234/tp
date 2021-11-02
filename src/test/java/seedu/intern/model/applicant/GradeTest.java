@@ -40,8 +40,9 @@ public class GradeTest {
         assertFalse(Grade.isValidGrade("5.02")); // out of range
         assertFalse(Grade.isValidGrade("5")); // no 2 d.p
         assertFalse(Grade.isValidGrade("0")); // no 2 d.p
+        assertFalse(Grade.isValidGrade("4.9")); // no 2 d.p
         // valid grade
-        assertTrue(Grade.isValidGrade("3.0")); //Decimal number within 0.00 - 5.00
+        assertTrue(Grade.isValidGrade("3.00")); //Decimal number within 0.00 - 5.00
         assertTrue(Grade.isValidGrade("4.27")); // period in local part
     }
 }
