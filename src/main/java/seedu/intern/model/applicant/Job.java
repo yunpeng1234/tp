@@ -11,7 +11,7 @@ public class Job {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Job Names should only contain alphabet characters and spaces, and it should not be blank";
-    public static final String VALIDATION_REGEX = "[a-zA-Z ]*";
+    public static final String VALIDATION_REGEX = "[a-zA-Z][a-zA-Z ]*";
 
     public final String jobName;
 

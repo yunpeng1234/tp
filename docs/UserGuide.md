@@ -5,6 +5,9 @@ title: User Guide
 
 Intern Watcher (IW) is a **desktop app for Human Resource Managers to manage internship applicants, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, IW can get your applicant management tasks done faster than traditional GUI apps.
 
+You can use Intern Watcher to add, edit and delete the internship applicants. Intern Watcher also allows you to track applicants' details such as grades and skills, as well as filter applicants by their details.
+
+This user guide covers a quick walk through how to use this application, as well as the full descriptions of the features available.
 * Table of Contents
 {:toc}
 
@@ -12,16 +15,15 @@ Intern Watcher (IW) is a **desktop app for Human Resource Managers to manage int
 
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have Java `11` or above installed in your Computer. You can download it [here](https://www.oracle.com/java/technologies/downloads/#java11).
 
 2. Download the latest `*.jar` from [here](https://github.com/AY2122S1-CS2103T-F12-2/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your InternWatcher.
 
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type any command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
 
 6. Some example commands you can try:
 
@@ -29,21 +31,19 @@ Intern Watcher (IW) is a **desktop app for Human Resource Managers to manage int
 
    * **`add`**`n/John p/123 e/a@a.com g/4.50 i/NTU c/CS y/06/2025 a/INTERVIEWED` : Adds an applicant named `John` to Intern Watcher.
 
-   * **`find john` : Lists all applicants whose name containing john.
+   * **`find`** `john` : Lists all applicants whose name containing john.
 
-   * **`filter`**`g/4.50 c/CS` : Lists all applicants that have a grade not less than 4.50 and study CS course.
+   * **`filter`**`g/4.50 c/CS` : Lists all applicants that have a grade not less than 4.50 studying the CS course.
 
-   * **`delete`**`3` : Deletes the 3rd applicant shown in the current list.
+   * **`delete``3` : Deletes the 3rd applicant shown in the current list.
 
-   * **`view`**`3`**`T` : Shows the 3rd applicant's skills.
+   * **`view`**`3``T` : Shows the 3rd applicant's skills.
 
    * **`undo`** : Undo the last command the user has entered.
 
-   * **`redo`** : Redo the last command the user has undoed.
+   * **`redo`** : Redo the last command the user has undone.
 
    * **`clear`** : Deletes all applicants.
-
-   * **`exit`** : Exits the app.
 
 7. Refer to the [Features](#features) below for details of each command.
 
@@ -63,13 +63,14 @@ Intern Watcher (IW) is a **desktop app for Human Resource Managers to manage int
 * Items in square brackets are optional.<br>
   e.g `n/NAME [s/SKILL]` can be used as `n/John Doe s/friend` or as `n/John Doe`.
 
-* Items with `…`+ after them can be used multiple times including zero times.<br>
+* Items with `…+` after them can be used multiple times including zero times.<br>
   e.g. `[s/SKILL]…+` can be used as ` ` (i.e. 0 times), `s/Java`, `s/Python s/C` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
+* If a command expects only one instance of a parameter, but the parameter has been specified multiple times, only the last occurrence of the parameter will be taken.<br>
+
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
@@ -93,7 +94,7 @@ Adds an applicant to Intern Watcher.
 Format: `add n/NAME p/PHONE e/EMAIL g/GRADE i/INSTITUTION c/COURSE y/GRADUATION_YEAR_MONTH j/JOB [a/APPLICATION_STATUS] [s/SKILL]…+`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-An applicant can have any number of tags (including 0)
+An applicant can have any number of skills (including 0)
 </div>
 
 Examples:
@@ -132,6 +133,43 @@ Examples:
 |---|---|
 |<img src="images/ViewTwoTBefore.png" alt="drawing" />|<img src="images/ViewTwoTAfter.png" alt="drawing" />|
 
+### Filtering by Fields : `filter`
+
+Filters the applicants in Intern Watcher by a given field.
+
+Format: `filter [g/GRADE] [i/INSTITUTION]…+ [c/COURSE]…+ [y/GRADUATION_YEAR_MONTH] [j/JOB] [a/STATUS] [s/SKILL]…+`
+
+
+* `filter` will show applicants that matches all fields specified.
+* If `[g/GRADE]` is specified, it will show all applicants with grades higher or equal to the `g/Grade` specified.
+* Likewise, if `[y/GRADUATION_YEAR_MONTH]` is specified, it will show all applicants with graduation dates that is strictly before the `GRADUATION_YEAR_MONTH` specified.
+* For each of `[s/SKILL]…+`,`[i/INSTITUTION]…+`,`[c/COURSE]…+`, and `[a/Status]…+`, if more than 1 instance of a field, such as `[a/Status]…+` is specified, applicants with fields that match at least one of the `[a/Status]…+` specified will be shown.
+
+Examples:
+* `filter s/Python s/Java` will show applicants with skills in either JAVA or PYTHON or both.
+
+|Command|Effect|
+|---|---|
+|<img src="images/FilterBefore.png" alt="drawing" />|<img src="images/FilterSkillAfter.png" alt="drawing" />|
+
+* `filter g/4.60` will show applicants with a grade more than or equals 4.60.
+
+|Command|Effect|
+|---|---|
+|<img src="images/FilterGradeBefore.png" alt="drawing" />|<img src="images/FilterGradeAfter.png" alt="drawing" />|
+
+* `filter y/06/2022` will show applicants  with graduation date earlier than June 2022.
+
+|Command|Effect|
+|---|---|
+|<img src="images/FilterYearBefore.png" alt="drawing" />|<img src="images/FilterYearAfter.png" alt="drawing" />|
+
+* `filter s/Java y/06/2022 i/NUS` will show applicants that graduate earlier than June 2022, knows JAVA and is from NUS.
+
+|Command|Effect|
+|---|---|
+|<img src="images/FilterBeforeSpecific.png" alt="drawing" />|<img src="images/FilterAfterSpecific.png" alt="drawing" />|
+
 ### Editing applicants : `edit`
 
 Edits an existing applicant, or all currently displayed applicants in Intern Watcher.
@@ -143,7 +181,7 @@ Format:
 * If `ALL` is specified, edits all applicants currently displayed.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing skills, the existing skills of the applicant will be removed i.e adding of tags is not cumulative.
+* When editing skills, the existing skills of the applicant will be removed i.e adding of skills is not cumulative.
 * You can remove all the person’s skills by typing `s/` without
     specifying any skills after it.
 
@@ -165,24 +203,6 @@ Examples:
 |Command|Effect|
 |---|---|
 |<img src="images/EditAllStatusBefore.png" alt="drawing" />|<img src="images/EditAllStatusAfter.png" alt="drawing" />|
-
-### Locating applicants by name: `find`
-
-Finds applicants whose names contain any of the given keywords.
-
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Applicants matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting an applicant : `delete`
 
@@ -215,43 +235,23 @@ Examples:
 |---|---|
 |<img src="images/DeleteFindAli.png" alt="drawing" />|<img src="images/DeleteFindAliAfter.png" alt="drawing" />|
 
-### Filtering by Fields : `filter`
+### Locating applicants by name: `find`
 
-Filters the applicants in Intern Watcher by a given field.
+Finds applicants whose names contain any of the given keywords.
 
-Format: `filter [g/GRADE] [i/INSTITUTION]…+ [c/COURSE]…+ [y/GRADUATION_YEAR_MONTH] [j/JOB] [a/STATUS] [s/SKILL]…+`
+Format: `find KEYWORD [MORE_KEYWORDS]`
 
-
-* `filter` will show applicants that matches all fields specified.
-* If `[g/GRADE]` is specified, it will show all applicants with grades higher or equal to the `g/Grade` specified.
-* Likewise, if `[y/GRADUATION_YEAR_MONTH]` is specified, it will show all applicants with graduation dates that is strictly before the `GRADUATION_YEAR_MONTH` specified.
-* If more than 1 of `[s/SKILL]…+` is specified, applicants that matches at least one of the `s/SKILL` specified will be shown.
-* This is the same of both of `[i/INSTITUTION]…+` `[c/COURSE]…+` `[a/Status]…+` as well.
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Applicants matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `filter s/Python s/Java` will show applicants with skills in either JAVA or PYTHON or both.
-
-|Command|Effect|
-|---|---|
-|<img src="images/FilterBefore.png" alt="drawing" />|<img src="images/FilterSkillAfter.png" alt="drawing" />|  
-
-* `filter g/4.60` will show applicants with a grade more than or equals 4.60.
-
-|Command|Effect|
-|---|---|
-|<img src="images/FilterGradeBefore.png" alt="drawing" />|<img src="images/FilterGradeAfter.png" alt="drawing" />|
-  
-* `filter y/06/2022` will show applicants  with graduation date earlier than June 2022.
-
-|Command|Effect|
-|---|---|
-|<img src="images/FilterYearBefore.png" alt="drawing" />|<img src="images/FilterYearAfter.png" alt="drawing" />|
-
-* `filter s/Java y/06/2022 i/NUS` will show applicants that graduate earlier than June 2022, knows JAVA and is from NUS.
-
-|Command|Effect|
-|---|---|
-|<img src="images/FilterBeforeSpecific.png" alt="drawing" />|<img src="images/FilterAfterSpecific.png" alt="drawing" />|
+* `find John` returns `john` and `John Doe`
+* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+  ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Clearing all entries : `clear`
 
@@ -266,7 +266,7 @@ Undoes the last undoable action.
 Format: `undo`
 
 * Restores Intern Watcher to a state before the last undoable action.
-* If the current state of Intern Watcher is the oldest state, the undo command will not be invoked.
+* If the current state of Intern Watcher is the oldest state, the `undo` command will not be invoked.
 * Undoable actions include: `add`, `edit`, `delete`, `clear`, `redo`.
 
 Examples:
@@ -312,7 +312,8 @@ InternWatcher data are saved in the hard disk automatically after any command th
 
 ### Editing the data file
 
-InternWatcher data are saved as a JSON file `[JAR file location]/data/internwatcher.json`. Advanced users are welcome to update data directly by editing that data file.
+InternWatcher saves data as a JSON file `[JAR file location]/data/internwatcher.json`. Advanced users are welcome to update data directly by editing that data file.
+
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, InternWatcher will discard all data and start with an empty data file at the next run.
@@ -320,24 +321,25 @@ If your changes to the data file makes its format invalid, InternWatcher will di
 
 --------------------------------------------------------------------------------------------------------------------
 ### Specification of Fields
-`Grade` : Number with 2 d.p from 0.00 - 5.00.
 
-`Name` : Alphanumeric characters and space only. Should not be blank.
+`Name` : The applicant's name. Should only include alphanumeric characters and spaces only. Should not be blank.
 
-`Phone` : Only contains digits from 0 - 9, with a minimum of 3 digits.
+`Phone` : The applicant's phone number. Should only contain digits from 0 to 9, with a minimum length of 3 digits.
 
-`Institution` : Alphanumeric characters and space only. Should not be blank.
+`Email` : The applicant's email address. Should be in the form of *Local-part*@**Domain**. *Local-part* should contain only alphanumeric characters with only these special characters `+_.-`.
+**Domain** can be separated into ***label*** with `.` if necessary. Each ***label*** should only contain alphanumeric characters and separated and is separated by `-` if necessary. domain is at least 2 characters long and needs to start and end with alphanumeric characters.
 
-`Job` : Alphabet character and space only. Should not be blank.
+`Grade` : The applicant's Grade Point Average (GPA). Should be a number in 2 decimal places from 0.00 - 5.00.
 
-`Status` : Should only be one of these 7 statuses, `ACCEPTED` , `REJECTED`, `ACCEPTED`, `INTERVIEWED`, `APPLIED` , `SCHEDULED`, `RECEIVED` and `OFFERED`.
+`Institution` : The applicant's school. Should only include alphanumeric characters and space only. Should not be blank.
 
-`Course` : Alphabet characters and space only. Should not be blank.
+`Course` : The applicant's course of study in their school. Should only include alphabet characters and space only. Should not be blank.
 
-`Email` : Should be in the form of *Local-part*@**Domain**. *Local-part* should contain only alphanumeric characters with only these special characters `+_.-`. 
-**Domain** can be separated into ***label*** with `.` if necessary. Each ***label*** should only contain alphanumeric characters and seperated and is separated by `-` if necessary. domain is at least 2 characters long and needs to start and end with alphanumeric characters.
+`Job` : The job/position that the applicant applied for. Should only include alphabet characters and space only. Should not be blank.
 
-`Skill`: Alphanumeri characters, spaces and `+#` symbols only.
+`Status` : The status of the applicant's application. Should only be one of these 7 statuses, `ACCEPTED` , `REJECTED`, `INTERVIEWED`, `APPLIED` , `SCHEDULED`, `RECEIVED` and `OFFERED`.
+
+`Skill`: The applicant's skillset. Should only include alphanumeric characters, spaces and `+#` symbols only.
 
 --------------------------------------------------------------------------------------------------------------------
 
