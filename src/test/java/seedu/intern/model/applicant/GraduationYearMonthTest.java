@@ -32,8 +32,10 @@ public class GraduationYearMonthTest {
         assertFalse(GraduationYearMonth.isValidGraduationYearMonth("09/")); // missing year
         assertFalse(GraduationYearMonth.isValidGraduationYearMonth("/2022")); // missing year
         assertFalse(GraduationYearMonth.isValidGraduationYearMonth("09-2024")); // hyphen between numbers
+        assertFalse(GraduationYearMonth.isValidGraduationYearMonth("00/2024")); // invalid month
+        assertFalse(GraduationYearMonth.isValidGraduationYearMonth("01/1500")); // year is below lower boundary
 
-        // valid phone numbers
+        // valid graduation year and month
         assertTrue(GraduationYearMonth.isValidGraduationYearMonth("05/2021")); // exactly 3 numbers
         assertTrue(GraduationYearMonth.isValidGraduationYearMonth("12/2024"));
         assertTrue(GraduationYearMonth.isValidGraduationYearMonth("10/2025")); // long phone numbers
