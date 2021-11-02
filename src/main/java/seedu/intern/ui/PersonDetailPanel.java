@@ -27,7 +27,6 @@ public class PersonDetailPanel extends UiPart<Region> {
     @FXML
     private Tab academic;
 
-
     @FXML
     private Label institution;
 
@@ -88,7 +87,6 @@ public class PersonDetailPanel extends UiPart<Region> {
      *             Fourth Index: Grade
      */
     private void setAcademicTab(String[] text) {
-
         //TODO: Might be better to get the Person and populate dynamically instead of having a string array produced.
         institution.setText(text[0]);
         course.setText(text[1]);
