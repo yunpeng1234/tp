@@ -17,7 +17,7 @@ public class GraduationYearMonth {
 
     public static final String VALIDATION_REGEX = "[0-9]{2}/[0-9]{4}";
 
-    public static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MM/yyyy");
+    public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("MM/yyyy");
 
     public final YearMonth yearMonth;
 
@@ -29,7 +29,7 @@ public class GraduationYearMonth {
     public GraduationYearMonth(String graduationYearMonth) {
         requireNonNull(graduationYearMonth);
         checkArgument(isValidGraduationYearMonth(graduationYearMonth), MESSAGE_CONSTRAINTS);
-        yearMonth = YearMonth.parse(graduationYearMonth, dateTimeFormatter);
+        yearMonth = YearMonth.parse(graduationYearMonth, DATE_TIME_FORMATTER);
     }
 
     /**
@@ -49,7 +49,7 @@ public class GraduationYearMonth {
 
     @Override
     public String toString() {
-        return yearMonth.format(dateTimeFormatter);
+        return yearMonth.format(DATE_TIME_FORMATTER);
     }
 
     @Override
