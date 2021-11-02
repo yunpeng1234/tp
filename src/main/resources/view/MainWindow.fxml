@@ -15,7 +15,7 @@
 
 <fx:root minHeight="600.0" minWidth="600.0" onCloseRequest="#handleExit" title="Intern Watcher App" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
-    <Image url="@/images/intern_watcher_32.png" />
+    <Image url="@/images/intern_watcher.png" />
   </icons>
   <scene>
     <Scene>
