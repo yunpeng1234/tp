@@ -11,7 +11,6 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
-import seedu.intern.model.Model;
 import seedu.intern.model.applicant.Applicant;
 import seedu.intern.model.skills.Skill;
 
@@ -79,9 +78,14 @@ public class PersonDetailPanel extends UiPart<Region> {
         }
     }
 
+    /**
+     * Resets person detail window to have the first person academic details or default if the list is empty
+     *
+     * @param list the current List of Applicants from model
+     */
     public void resetView(ObservableList<Applicant> list) {
         if (list.size() == 0) {
-            showApplicant(null,false);
+            showApplicant(null, false);
         } else {
             showApplicant(list.get(0), false);
         }
