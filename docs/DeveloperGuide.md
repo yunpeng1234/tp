@@ -194,6 +194,8 @@ has been modified, such that whenever `Selection#hasAllFlag` returns `true`, `De
 - **Alternative 2**: Create a special `Index` of -1 when ALL tag is attached, as such, only when the index is -1, will we execute 'delete All' 
     - Pros: Easy to implement
     - Cons: Bypasses the intention of the Index Class. Having a negative `Index` might throw unexpected errors.
+
+![DeleteAllSequenceDiagram](images/DeleteAllSequenceDiagram.png)
     
 ### Filter feature
 
