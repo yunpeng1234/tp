@@ -10,9 +10,9 @@ import static seedu.intern.commons.util.AppUtil.checkArgument;
 public class Grade {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Grade Names be 2dp, from 0.00 to 5.00 inclusive";
+            "Grade should be 2dp, from 0.00 to 5.00 inclusive";
 
-    public static final String VALIDATION_REGEX = "[0-5]+(\\.[0-9][0-9]?)?";
+    public static final String VALIDATION_REGEX = "[0-5]+(\\.[0-9][0-9]?)";
 
     public final String value;
 
@@ -31,7 +31,11 @@ public class Grade {
      * Returns true if a given string is a valid grade name.
      */
     public static boolean isValidGrade(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) && isValidGradeRange(test);
+    }
+
+    public static boolean isValidGradeRange(String test) {
+        return Float.parseFloat(test) <= 5.00 && Float.parseFloat(test) >= 0;
     }
 
     @Override
