@@ -3,6 +3,7 @@ package seedu.intern.ui;
 import java.util.Comparator;
 import java.util.Set;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.SingleSelectionModel;
@@ -10,6 +11,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
+import seedu.intern.model.Model;
 import seedu.intern.model.applicant.Applicant;
 import seedu.intern.model.skills.Skill;
 
@@ -74,6 +76,14 @@ public class PersonDetailPanel extends UiPart<Region> {
         } else {
             setAcademicTab(Applicant.getDefaultAcademics());
             setSkillTab(null);
+        }
+    }
+
+    public void resetView(ObservableList<Applicant> list) {
+        if (list.size() == 0) {
+            showApplicant(null,false);
+        } else {
+            showApplicant(list.get(0), false);
         }
     }
 

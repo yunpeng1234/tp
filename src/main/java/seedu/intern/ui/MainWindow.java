@@ -199,6 +199,8 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isView()) {
                 handleView(logic.getApplicant(), logic.getIsToggle());
+            } else {
+                personDetail.resetView(logic.getFilteredPersonList());
             }
             return commandResult;
         } catch (CommandException | ParseException e) {
