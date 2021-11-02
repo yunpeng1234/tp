@@ -2,6 +2,7 @@
 layout: page
 title: User Guide
 ---
+![App Logo](images/intern_watcher.png)
 
 Intern Watcher (IW) is a **desktop app for Human Resource Managers to manage internship applicants, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, IW can get your applicant management tasks done faster than traditional GUI apps.
 
@@ -19,7 +20,7 @@ This user guide covers a quick walk through how to use this application, as well
 
 2. Download the latest `*.jar` from [here](https://github.com/AY2122S1-CS2103T-F12-2/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your InterWatcher.
+3. Copy the file to the folder you want to use as the _home folder_ for your InternWatcher.
 
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
 
@@ -44,7 +45,6 @@ This user guide covers a quick walk through how to use this application, as well
    * **`redo`** : Redo the last command the user has undone.
 
    * **`clear`** : Deletes all applicants.
-   
 
 7. Refer to the [Features](#features) below for details of each command.
 
@@ -151,14 +151,14 @@ Examples:
 
 |Command|Effect|
 |---|---|
-|<img src="images/FilterBefore.png" alt="drawing" />|<img src="images/FilterSkillAfter.png" alt="drawing" />|  
+|<img src="images/FilterBefore.png" alt="drawing" />|<img src="images/FilterSkillAfter.png" alt="drawing" />|
 
 * `filter g/4.60` will show applicants with a grade more than or equals 4.60.
 
 |Command|Effect|
 |---|---|
 |<img src="images/FilterGradeBefore.png" alt="drawing" />|<img src="images/FilterGradeAfter.png" alt="drawing" />|
-  
+
 * `filter y/06/2022` will show applicants  with graduation date earlier than June 2022.
 
 |Command|Effect|
@@ -208,6 +208,7 @@ Examples:
 ### Deleting an applicant : `delete`
 
 Deletes the specified applicant from Inter Watcher.
+
 
 Format: `delete INDEX [ALL]`
 
@@ -322,24 +323,27 @@ If your changes to the data file makes its format invalid, InternWatcher will di
 
 --------------------------------------------------------------------------------------------------------------------
 ### Specification of Fields
-`Grade` : Number with 2 d.p from 0.00 - 5.00.
 
-`Name` : Alphanumeric characters and space only. Should not be blank.
+`Name` : The applicant's name. Should only include alphanumeric characters and spaces only. Should not be blank.
 
-`Phone` : Only contains digits from 0 to 9, with a minimum of 3 digits.
+`Phone` : The applicant's phone number. Should only contain digits from 0 to 9, with a minimum length of 3 digits.
 
-`Institution` : Alphanumeric characters and space only. Should not be blank.
-
-`Job` : Alphabet character and space only. Should not be blank.
-
-`Status` : Should only be one of these 7 statuses, `ACCEPTED` , `REJECTED`, `INTERVIEWED`, `APPLIED` , `SCHEDULED`, `RECEIVED` and `OFFERED`.
-
-`Course` : Alphabet characters and space only. Should not be blank.
-
-`Email` : Should be in the form of *Local-part*@**Domain**. *Local-part* should contain only alphanumeric characters with only these special characters `+_.-`. 
+`Email` : The applicant's email address. Should be in the form of *Local-part*@**Domain**. *Local-part* should contain only alphanumeric characters with only these special characters `+_.-`.
 **Domain** can be separated into ***label*** with `.` if necessary. Each ***label*** should only contain alphanumeric characters and separated and is separated by `-` if necessary. domain is at least 2 characters long and needs to start and end with alphanumeric characters.
 
-`Skill`: Alphanumeric characters, spaces and `+#` symbols only.
+`Grade` : The applicant's Grade Point Average (GPA). Should be a number in 2 decimal places from 0.00 - 5.00.
+
+`Institution` : The applicant's school. Should only include alphanumeric characters and space only. Should not be blank.
+
+`Course` : The applicant's course of study in their school. Should only include alphabet characters and space only. Should not be blank.
+
+`Graduation_Year_Month` : The applicant's estimated date of graduation from their school. Should be of format MM/yyyy and be after the date 01/2020. 
+
+`Job` : The job/position that the applicant applied for. Should only include alphabet characters and space only. Should not be blank.
+
+`Status` : The status of the applicant's application. Should only be one of these 7 statuses, `ACCEPTED` , `REJECTED`, `INTERVIEWED`, `APPLIED` , `SCHEDULED`, `RECEIVED` and `OFFERED`.
+
+`Skill`: The applicant's skillset. Should only include alphanumeric characters, spaces and `+#` symbols only.
 
 --------------------------------------------------------------------------------------------------------------------
 

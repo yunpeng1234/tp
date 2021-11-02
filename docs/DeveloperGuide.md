@@ -157,7 +157,7 @@ This section describes some noteworthy details on how certain features are imple
 ###  Edit ALL feature
 
 #### Implementation
-The edit ALL mechanism is facilitated by the new `Selection` class. A new parser `ParserUtil#parseSelection` 
+The edit ALL mechanism is facilitated by the new `Selection` class. A new parser `ParserUtil#parseSelection`
 has been added to parse `Selection` values, which accepts either integers or the `ALL` string. The `Selection` class supports
 operations `Selection#hasAllFlag` and `Selection#hasIndex`, which is used by `EditCommand#execute`. `EditCommand#execute`
 has been modified, such that whenever `Selection#hasAllFlag` returns `true`, `EditCommand#execute` edits all applicants with
@@ -191,7 +191,7 @@ has been modified, such that whenever `Selection#hasAllFlag` returns `true`, `De
     - Pros: Easy to implement
     - Cons: `DeleteCommand` and its related parsers may become harder to test since its behaviour is now different depending
       on the user input.
-- **Alternative 2**: Create a special `Index` of -1 when ALL tag is attached, as such, only when the index is -1, will we execute 'delete All' 
+- **Alternative 2**: Create a special `Index` of -1 when ALL tag is attached, as such, only when the index is -1, will we execute 'delete All'
     - Pros: Easy to implement
     - Cons: Bypasses the intention of the Index Class. Having a negative `Index` might throw unexpected errors.
 
@@ -207,6 +207,7 @@ It produces a `FilterApplicantDescriptor`, which in turn feeds in to create a `F
 The `FilterCommand` will make use of the `FilterApplicantDescriptor` to create a `CombineFiltersPredicate` that will be supplied to `ModelManager#updateFilteredApplicantList(Predicate<Applicant>)` in its `execute` method.
 <br/>
 `ModelManager` helps filter through the applicant list with specified filter criteria contained and interpreted by the `CombineFiltersPredicate#test()`.
+![FilterSequenceDiagram](images/filter/FilterSequenceDiagram.png)
 
 ### Undo/redo feature
 
@@ -514,12 +515,12 @@ testers are expected to do more *exploratory* testing.
 2. _{ more test cases …​ }_
 
 ### Viewing an applicant's details
-1. Viewing an applicant's details while all applicants are being shown 
+1. Viewing an applicant's details while all applicants are being shown
    1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list.
-   2. Test case: `view 1`<br> 
+   2. Test case: `view 1`<br>
       Expected: First applicant's details are displayed. Details of the applicant is shown in the status message. Timestamp in the status bar is updated.
    3. Test case: `view 0`<br>
-      Expected: No applicant detail displayed. Error details shown in the status message. Status bar remains the same. 
+      Expected: No applicant detail displayed. Error details shown in the status message. Status bar remains the same.
    4. Other incorrect view commands to try: `view`, `view x`. `...`(where x is larger than the list or a non-positive number)<br>
       Expected: Similar to previous.
 2. _{ more test cases …​ }_
