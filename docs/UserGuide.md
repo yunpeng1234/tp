@@ -2,6 +2,7 @@
 layout: page
 title: User Guide
 ---
+![App Logo](images/intern_watcher.png)
 
 Intern Watcher (IW) is a **desktop app for Human Resource Managers to manage internship applicants, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, IW can get your applicant management tasks done faster than traditional GUI apps.
 
