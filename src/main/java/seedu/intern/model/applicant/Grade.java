@@ -12,7 +12,7 @@ public class Grade {
     public static final String MESSAGE_CONSTRAINTS =
             "Grade should be 2dp, from 0.00 to 5.00 inclusive";
 
-    public static final String VALIDATION_REGEX = "[0-5]+(\\.[0-9][0-9]?)";
+    public static final String VALIDATION_REGEX = "[0-5]+(\\.[0-9][0-9])";
 
     public final String value;
 
