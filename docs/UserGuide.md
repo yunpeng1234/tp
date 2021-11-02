@@ -44,7 +44,6 @@ This user guide covers a quick walk through how to use this application, as well
    * **`redo`** : Redo the last command the user has undone.
 
    * **`clear`** : Deletes all applicants.
-   
 
 7. Refer to the [Features](#features) below for details of each command.
 
@@ -151,14 +150,14 @@ Examples:
 
 |Command|Effect|
 |---|---|
-|<img src="images/FilterBefore.png" alt="drawing" />|<img src="images/FilterSkillAfter.png" alt="drawing" />|  
+|<img src="images/FilterBefore.png" alt="drawing" />|<img src="images/FilterSkillAfter.png" alt="drawing" />|
 
 * `filter g/4.60` will show applicants with a grade more than or equals 4.60.
 
 |Command|Effect|
 |---|---|
 |<img src="images/FilterGradeBefore.png" alt="drawing" />|<img src="images/FilterGradeAfter.png" alt="drawing" />|
-  
+
 * `filter y/06/2022` will show applicants  with graduation date earlier than June 2022.
 
 |Command|Effect|
