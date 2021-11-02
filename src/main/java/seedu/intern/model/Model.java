@@ -130,5 +130,8 @@ public interface Model {
      */
     boolean isRedoAvailable();
 
+    /**
+     * Returns the toggle flag
+     */
     boolean getIsToggle();
 }
