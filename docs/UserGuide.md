@@ -335,6 +335,8 @@ If your changes to the data file makes its format invalid, InternWatcher will di
 
 `Course` : The applicant's course of study in their school. Should only include alphabet characters and space only. Should not be blank.
 
+`Graduation_Year_Month` : The applicant's estimated date of graduation from their school. Should be of format MM/yyyy and be after the date 01/2020. 
+
 `Job` : The job/position that the applicant applied for. Should only include alphabet characters and space only. Should not be blank.
 
 `Status` : The status of the applicant's application. Should only be one of these 7 statuses, `ACCEPTED` , `REJECTED`, `INTERVIEWED`, `APPLIED` , `SCHEDULED`, `RECEIVED` and `OFFERED`.
