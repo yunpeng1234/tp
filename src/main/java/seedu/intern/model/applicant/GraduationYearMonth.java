@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter;
 public class GraduationYearMonth {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Expected Graduation Year Month should be valid and be of format MM/yyyy";
+            "Expected Graduation Year Month should be valid, eg. after 01/2020, and be of format MM/yyyy";
 
     public static final String VALIDATION_REGEX = "[0-9]{2}/[0-9]{4}";
 
@@ -46,7 +46,7 @@ public class GraduationYearMonth {
         }
 
         // month in between 1-12 inclusive and year lower bound of 2020
-        return test.matches(VALIDATION_REGEX) && monthHolder >= 1 && monthHolder <= 12 && yearHolder >= 1980;
+        return test.matches(VALIDATION_REGEX) && monthHolder >= 1 && monthHolder <= 12 && yearHolder >= 2020;
     }
 
     @Override
