@@ -209,9 +209,8 @@ Examples:
 
 Deletes the specified applicant from Inter Watcher.
 
-Format: 
-1. `delete INDEX` 
-2. `delete ALL`
+
+Format: `delete INDEX [ALL]`
 
 * If `INDEX` is specified, Deletes the applicant at the specified `INDEX` or all currently displayed applicants in the Intern Watcher.
 * The index refers to the index number shown in the displayed applicant list.
