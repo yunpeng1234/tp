@@ -100,7 +100,7 @@ An applicant can have any number of skills (including 0)
 
 Examples:
 
-* `add n/Alex Yeoh p/98765432 e/johnd@example.com g/4.50 i/NTU c/CS y/06/2025 j/Software Engineer a/SCHEDULED s/Python s/Java` adds
+* `add n/Jonathan Tan p/86565432 e/jonathan_tan@example.com g/4.50 i/NTU c/Computer Science y/06/2025 j/Software Engineer a/SCHEDULED s/Python s/Java s/C` adds
  an applicant with the specified information.
   ![Add result](images/AddResult.png)
 
@@ -153,19 +153,7 @@ Examples:
 |---|---|
 |<img src="images/FilterBefore.png" alt="drawing" />|<img src="images/FilterSkillAfter.png" alt="drawing" />|
 
-* `filter g/4.60` will show applicants with a grade more than or equals 4.60.
-
-|Command|Effect|
-|---|---|
-|<img src="images/FilterGradeBefore.png" alt="drawing" />|<img src="images/FilterGradeAfter.png" alt="drawing" />|
-
-* `filter y/06/2022` will show applicants  with graduation date earlier than June 2022.
-
-|Command|Effect|
-|---|---|
-|<img src="images/FilterYearBefore.png" alt="drawing" />|<img src="images/FilterYearAfter.png" alt="drawing" />|
-
-* `filter s/Java y/06/2022 i/NUS` will show applicants that graduate earlier than June 2022, knows JAVA and is from NUS.
+* `filter s/HTML g/4.50 i/NTU` will show applicants that graduate earlier than June 2022, knows JAVA and is from NUS.
 
 |Command|Effect|
 |---|---|
@@ -187,7 +175,7 @@ Format:
     specifying any skills after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st applicant to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 1 p/91234567 e/yeoh_alex@example.com` Edits the phone number and email address of the 1st applicant to be `91234567` and `yeoh_alex@example.com` respectively.
 
 |Command|Effect|
 |---|---|
@@ -223,19 +211,19 @@ Examples:
 
 |Command|Effect|
 |---|---|
-|<img src="images/DeleteBefore.png" alt="drawing" />|<img src="images/DeleteTwoAfter.png" alt="drawing" />|
+|<img src="images/DeleteTwoBefore.png" alt="drawing" />|<img src="images/DeleteTwoAfter.png" alt="drawing" />|
 
 * `list` followed by `delete ALL` deletes the all applicants in Intern Watcher. Effect is similar to `clear` when used in conjunction with `list`.
 
 |Command|Effect|
 |---|---|
-|<img src="images/DeleteBefore.png" alt="drawing" />|<img src="images/DeleteALLAfter.png" alt="drawing" />|
+|<img src="images/DeleteALLBefore.png" alt="drawing" />|<img src="images/DeleteALLAfter.png" alt="drawing" />|
 
-* `find Ali` followed by `delete 1` deletes the 1st applicant in the results of the `find` command.
+* `find David` followed by `delete 1` deletes the 1st applicant in the results of the `find` command.
 
 |Command|Effect|
 |---|---|
-|<img src="images/DeleteFindAli.png" alt="drawing" />|<img src="images/DeleteFindAliAfter.png" alt="drawing" />|
+|<img src="images/DeleteFindDavidBefore.png" alt="drawing" />|<img src="images/DeleteFindDavidAfter.png" alt="drawing" />|
 
 ### Locating applicants by name: `find`
 
@@ -299,7 +287,7 @@ Examples:
 |---|---|
 |<img src="images/RedoClearBefore.png" alt="drawing" />|<img src="images/RedoClearAfter.png" alt="drawing" />|
 
-* `undo` followed by `delete 2`. As the state after `delete` becomes the newest state, there are no undoable actions to be redone.
+* `redo` followed by `delete 2`. As the state after `delete` becomes the newest state, there are no undoable actions to be redone.
   ![ No action to redo](images/NoRedo.png)
 
 ### Exiting the program : `exit`
