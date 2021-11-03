@@ -152,7 +152,7 @@ Examples:
 |---|---|
 |<img src="images/FilterBefore.png" alt="drawing" />|<img src="images/FilterAfter.png" alt="drawing" />|
 
-* `filter s/HTML g/4.50 i/NTU` will show applicants that graduate earlier than June 2022, knows JAVA and is from NUS.
+* `filter s/HTML g/4.50 i/NTU` will show applicants that graduate earlier than June 2022, knows HTML and is from NUS.
 
 |Command|Effect|
 |---|---|
