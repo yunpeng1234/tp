@@ -20,7 +20,7 @@ This user guide covers a quick walk through how to use this application, as well
 
 2. Download the latest `*.jar` from [here](https://github.com/AY2122S1-CS2103T-F12-2/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your InternWatcher.
+3. Copy the file to the folder you want to use as the _home folder_ for your Intern Watcher.
 
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
 
@@ -46,7 +46,8 @@ This user guide covers a quick walk through how to use this application, as well
 
    * `clear` : Deletes all applicants from the application.
 
-7. Refer to the [Features](#features) below for details of each command.
+7. To see more detailed information abuot each command, refer to [Features](#features).
+8. To see restrictions and specifications of each field, refer to [Specification of Fields.](#specification-of-fields).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -74,14 +75,14 @@ This user guide covers a quick walk through how to use this application, as well
 
   * e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  * e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+* Extra parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+  * e.g. if the command is specified as `help 123`, it will be interpreted as `help`.
 
 </div>
 
 ### Viewing help : `help`
 
-Shows a message explaining how to access the help page.
+Displays a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -90,7 +91,7 @@ Format: `help`
 
 ### Adding an applicant: `add`
 
-Adds an applicant to Intern Watcher.
+Adds a new applicant to Intern Watcher.
 
 Format: `add n/NAME p/PHONE e/EMAIL g/GRADE i/INSTITUTION c/COURSE y/GRADUATION_YEAR_MONTH j/JOB [a/APPLICATION_STATUS] [s/SKILL]…+`
 
@@ -100,8 +101,8 @@ An applicant can have any number of skills (including 0)
 
 Examples:
 
-* `add n/Alex Yeoh p/98765432 e/johnd@example.com g/4.50 i/NTU c/CS y/06/2025 j/Software Engineer a/SCHEDULED s/Python s/Java` adds
- an applicant with the specified information.
+* `add n/Alex Yeoh p/98765432 e/johnd@example.com g/4.50 i/NTU c/CS y/06/2025 j/Software Engineer a/SCHEDULED s/Python s/Java`<br> 
+  adds a new applicant with the specified information.
   ![Add result](images/AddResult.png)
 
 ### Listing all applicants : `list`
@@ -117,18 +118,18 @@ Displays the specified applicant's academic records, or skills.
 Format: `view INDEX [T]`
 
 * If only `INDEX` is specified, it will show the specified applicant's academic records by default.
-  * The index refers to the index number shown in the displayed applicant list.
-  * The index must be a positive integer 1, 2, 3, …+
-* If `T` is also specified along with `INDEX`, it will toggle to the next tab applicant detail window.
+  * `INDEX` refers to the index number of the applicant, shown in the applicant list.
+  * `INDEX` must be a positive integer, e.g. 1, 2, 3, …
+* Specifying `T` together with `INDEX` switches between the academic records tab and the skills tab.
 
 Examples:
-* `list` followed by `view 1` Shows the 1st applicant's academic records on the displayed applicants list.
+* `list` followed by `view 1`. Shows the 1st applicant's academic records.
 
 |Command|Effect|
 |---|---|
 |<img src="images/ViewOneBefore.png" alt="drawing" />|<img src="images/ViewOneAfter.png" alt="drawing" />|
 
-* `view 2 T` Shows the 2nd applicant's skills on the displayed applicant's list, if academic records was previously selected.
+* `view 2 T` Shows the 2nd applicant's skills, if academic records was previously selected.
 
 |Command|Effect|
 |---|---|
@@ -136,13 +137,11 @@ Examples:
 
 ### Filtering by Fields : `filter`
 
-Filters the applicants in Intern Watcher by a given field.
+Displays applicants in Intern Watcher that match one or more given fields.
 
 Format: `filter [g/GRADE] [i/INSTITUTION]…+ [c/COURSE]…+ [y/GRADUATION_YEAR_MONTH] [j/JOB] [a/STATUS] [s/SKILL]…+`
 
-
-* `filter` will show applicants that matches all fields specified.
-* If `[g/GRADE]` is specified, it will show all applicants with grades higher or equal to the `g/Grade` specified.
+* If `[g/GRADE]` is specified, it will show all applicants with grades higher or equal to the `GRADE` specified.
 * Likewise, if `[y/GRADUATION_YEAR_MONTH]` is specified, it will show all applicants with graduation dates that is strictly before the `GRADUATION_YEAR_MONTH` specified.
 * For each of `[s/SKILL]…+`,`[i/INSTITUTION]…+`,`[c/COURSE]…+`, and `[a/Status]…+`, if more than 1 instance of a field, such as `[a/Status]…+` is specified, applicants with fields that match at least one of the `[a/Status]…+` specified will be shown.
 
@@ -173,18 +172,21 @@ Examples:
 
 ### Editing applicants : `edit`
 
-Edits an existing applicant, or all currently displayed applicants in Intern Watcher.
+Edits the information of an existing applicant, or the application status of all currently displayed applicants in the applicant list.
 
-Format:
-1. `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [g/GRADE] [i/INSTITUTION] [c/COURSE] [y/GRADUATION_YEAR_MONTH] [j/JOB] [a/APPLICATION_STATUS] [s/SKILL]…`
-2. `edit ALL [a/APPLICATION_STATUS]`
-* If `INDEX` is specified, Edits the applicant at the specified `INDEX`. The index refers to the index number shown in the displayed applicant list. The index **must be a positive integer** 1, 2, 3, …+
-* If `ALL` is specified, edits all applicants currently displayed.
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing skills, the existing skills of the applicant will be removed i.e adding of skills is not cumulative.
+Format 1: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [g/GRADE] [i/INSTITUTION] [c/COURSE] [y/GRADUATION_YEAR_MONTH] [j/JOB] [a/APPLICATION_STATUS] [s/SKILL]…`
+* If only `INDEX` is specified, the applicant at the specified `INDEX` will be edited.
+    * `INDEX` refers to the index number shown in the displayed applicant list. The index **must be a positive integer** e.g. 1, 2, 3, …
+* When editing skills, all existing skills of the applicant will be replaced i.e adding of skills is not cumulative.
 * You can remove all the person’s skills by typing `s/` without
-    specifying any skills after it.
+  specifying any skills after it.
+  
+Format 2: `edit ALL a/APPLICATION_STATUS`
+
+* If `ALL` is specified, all applicants currently displayed in the applicant list will be edited.
+* Only the `APPLICATION_STATUS` of applicants can be edited. 
+* The `APPLICATION_STATUS` can only be one of these 7 statuses: `ACCEPTED`, `REJECTED`, `INTERVIEWED`, `APPLIED`, `SCHEDULED`, `RECEIVED` and `OFFERED`.
+
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st applicant to be `91234567` and `johndoe@example.com` respectively.
@@ -207,15 +209,16 @@ Examples:
 
 ### Deleting an applicant : `delete`
 
-Deletes the specified applicant from Inter Watcher.
+Deletes the specified applicant, or all applicants currently displayed in the applicant list.
 
+Format 1: `delete INDEX`
 
-Format: `delete INDEX [ALL]`
+* If `INDEX` is specified, the applicant at the specified `INDEX` will be deleted.
+    * `INDEX` refers to the index number shown in the displayed applicant list. The index **must be a positive integer** e.g. 1, 2, 3, …
 
-* If `INDEX` is specified, Deletes the applicant at the specified `INDEX` or all currently displayed applicants in the Intern Watcher.
-* The index refers to the index number shown in the displayed applicant list.
-* The index **must be a positive integer** 1, 2, 3, …+
-* If `ALL` is specified, Deletes all applicants currently displayed.
+Format 2: `delete ALL`
+
+* If `ALL` is specified, all applicants currently displayed in the applicant list will be deleted.
 
 
 Examples:
@@ -239,16 +242,16 @@ Examples:
 
 ### Locating applicants by name: `find`
 
-Finds applicants whose names contain any of the given keywords.
+Displays applicants whose names contain at least one of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Applicants matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* The search is case-insensitive. e.g `hans` will match `Hans`.
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
+* Only the NAME field of the applicants are searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`.
+* Applicants matching at least one keyword will be returned.
+  * e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
 * `find John` returns `john` and `John Doe`
@@ -263,13 +266,15 @@ Format: `clear`
 
 ### Undoing an action : `undo`
 
-Undoes the last undoable action.
+Undo a previous command action.
 
 Format: `undo`
 
-* Restores Intern Watcher to a state before the last undoable action.
-* If the current state of Intern Watcher is the oldest state, the `undo` command will not be invoked.
-* Undoable actions include: `add`, `edit`, `delete`, `clear`, `redo`.
+* Only undoable command actions can be undone.
+    * Undoable command actions include: `add`, `edit`, `delete`, `clear`, `redo`.
+* Consecutive `undo` commands are available until the applicant list returns to its **initial state at launch** of the application. 
+* If the current state of the applicant list is the initial state, the `undo` command will not be available.
+
 
 Examples:
 * `undo` (after `delete 2`). The applicant that was removed will be restored in Intern Watcher.
@@ -283,14 +288,17 @@ Examples:
 
 ### Redoing an action: `redo`
 
-Redoes the last undoable action.
+Reverses a previous undo command action.
 
 Format: `redo`
 
-* `redo` is the reverse of `undo`. The command restores the state of Intern Watcher to the last undoable action that was undone.
-* If the current state of Intern Watcher is the newest state, the redo command will not be invoked.
-* If a new undoable action is performed after the last undo command, the current state becomes the newest state.
-* Undoable actions include: `add`, `edit`, `delete`, `clear`, `redo`.
+* `redo` is the reverse of `undo`. Only undoable command actions can be redone.
+  * Undoable actions include: `add`, `edit`, `delete`, `clear`, `redo`.
+* Consecutive `redo` commands are available until the applicant list reaches the **newest state**. 
+  *  The newest state is the most recent change in history.
+* If the current state of the applicant list is the newest state, the redo command will not be available.
+* If a new undoable action is performed when the applicant list is **not** in its newest state, the current state becomes the newest state.
+
 
 Examples:
 * `clear` followed by `undo` followed by `redo`. The clear command will be redone.
@@ -310,15 +318,15 @@ Format: `exit`
 
 ### Saving the data
 
-InternWatcher data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+Intern Watcher data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-InternWatcher saves data as a JSON file `[JAR file location]/data/internwatcher.json`. Advanced users are welcome to update data directly by editing that data file.
+Intern Watcher saves data as a JSON file `[JAR file location]/data/internwatcher.json`. Advanced users are welcome to update data directly by editing that data file.
 
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, InternWatcher will discard all data and start with an empty data file at the next run.
+If your changes to the data file makes its format invalid, Intern Watcher will discard all data and start with an empty data file at the next run.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -341,7 +349,7 @@ If your changes to the data file makes its format invalid, InternWatcher will di
 
 `Job` : The job/position that the applicant applied for. Should only include alphabet characters and space only. Should not be blank.
 
-`Status` : The status of the applicant's application. Should only be one of these 7 statuses, `ACCEPTED` , `REJECTED`, `INTERVIEWED`, `APPLIED` , `SCHEDULED`, `RECEIVED` and `OFFERED`.
+`Status` : The status of the applicant's application. Should only be one of these 7 statuses, `ACCEPTED`, `REJECTED`, `INTERVIEWED`, `APPLIED`, `SCHEDULED`, `RECEIVED` and `OFFERED`.
 
 `Skill`: The applicant's skillset. Should only include alphanumeric characters, spaces and `+#` symbols only.
 
@@ -358,15 +366,15 @@ If your changes to the data file makes its format invalid, InternWatcher will di
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE e/EMAIL g/GRADE i/INSTITUTION c/COURSE y/GRADUATION_YEAR_MONTH j/JOB [a/APPLICATION_STATUS] [s/SKILL]…++` <br> e.g., `add n/John p/999 e/a@a.com g/4.00 i/NTU c/CS y/06/2025 j/Software Engineer a/INTERVIEWED s/Python`
-**Clear** | `clear`
-**Delete** | `delete INDEX/ALL`<br> e.g., `delete 3`, `delete ALL`
-**Edit** | `edit INDEX/ALL [n/NAME] [p/PHONE] [e/EMAIL] [g/GRADE] [i/INSTITUTION] [c/COURSE] [y/GRADUATION_YEAR_MONTH] [j/JOB] [a/APPLICATION_STATUS] [s/SKILL]…`<br>e.g.,`edit 2 n/James Lee e/jameslee@example.com`, `edit ALL a/REJECTED`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
 **Help** | `help`
-**Filter** | `filter [g/GRADE] [i/INSTITUTION]…+ [c/COURSE]…+ [y/GRADUATION_YEAR_MONTH] [j/JOB] [a/STATUS] [s/SKILL]…+` <br> e.g. , `filter s/JAVA y/06/2022 i/NUS a/REJECTED`
+**Add** | `add n/NAME p/PHONE e/EMAIL g/GRADE i/INSTITUTION c/COURSE y/GRADUATION_YEAR_MONTH j/JOB [a/APPLICATION_STATUS] [s/SKILL]…++` <br> e.g. `add n/John p/999 e/a@a.com g/4.00 i/NTU c/CS y/06/2025 j/Software Engineer a/INTERVIEWED s/Python`
+**List** | `list`
+**View** | `view INDEX [T]` <br> e.g. `view 2 T`
+**Filter** | `filter [g/GRADE] [i/INSTITUTION]…+ [c/COURSE]…+ [y/GRADUATION_YEAR_MONTH] [j/JOB] [a/STATUS] [s/SKILL]…+` <br> e.g. `filter s/JAVA y/06/2022 i/NUS a/REJECTED`
+**Edit** | `edit ALL a/APPLICATION_STATUS`/`edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [g/GRADE] [i/INSTITUTION] [c/COURSE] [y/GRADUATION_YEAR_MONTH] [j/JOB] [a/APPLICATION_STATUS] [s/SKILL]…`<br>e.g.`edit 2 n/James Lee e/jameslee@example.com`, `edit ALL a/REJECTED`
+**Delete** | `delete INDEX`/ `delete ALL`<br> e.g. `delete 3`, `delete ALL`
+**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g. `find James Jake`
 **Undo** | `undo`
 **Redo** | `redo`
-**View** | `view INDEX [T]` <br> e.g. , `view 2 T`
+**Clear** | `clear`
 **Exit** | `exit`
