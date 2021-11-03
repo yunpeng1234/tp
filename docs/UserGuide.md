@@ -68,7 +68,7 @@ This user guide covers a quick walk through how to use this application, as well
 * Fields with `…+` notation behind them can be specified zero or more times.<br>
   * e.g. `[s/SKILL]…+` can be specified as ` ` (i.e. 0 times), `s/Java`, `s/Python s/C` etc.
 
-* Fields can be entered in any order.<br>
+* Fields can be specified in any order.<br>
   * e.g. if the command format specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also valid.
 
 * If a command expects only one instance of a field parameter, but the parameter has been specified multiple times, only the last occurrence of the parameter will be taken.<br>
