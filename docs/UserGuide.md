@@ -157,7 +157,7 @@ Examples:
 
 |Command|Effect|
 |---|---|
-|<img src="images/FilterBeforeSpecific.png" alt="drawing" />|<img src="images/FilterAfterSpecific.png" alt="drawing" />|
+|<img src="images/FilterSpecificBefore.png" alt="drawing" />|<img src="images/FilterSpecificAfter.png" alt="drawing" />|
 
 ### Editing applicants : `edit`
 
