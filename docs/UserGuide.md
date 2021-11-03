@@ -28,23 +28,23 @@ This user guide covers a quick walk through how to use this application, as well
 
 6. Some example commands you can try:
 
-   * **`list`** : Lists all applicants.
+   * `list` : Lists all applicants.
 
-   * **`add`**`n/John p/123 e/a@a.com g/4.50 i/NTU c/CS y/06/2025 a/INTERVIEWED` : Adds an applicant named `John` to Intern Watcher.
+   * `add n/John p/123 e/a@a.com g/4.50 i/NTU c/Computer Science y/06/2025 a/INTERVIEWED` : Adds an applicant named `John` to Intern Watcher.
 
-   * **`find`** `john` : Lists all applicants whose name containing john.
+   * `find john` : Lists all applicants whose name contains john.
 
-   * **`filter`**`g/4.50 c/CS` : Lists all applicants that have a grade not less than 4.50 studying the CS course.
+   * `filter g/4.50 c/Computer Science` : Lists all applicants who have a grade greater or equal to 4.50 and who are studying the Computer Science course.
 
-   * **`delete``3` : Deletes the 3rd applicant shown in the current list.
+   * `delete 3` : Deletes the 3rd applicant shown in the current list.
 
-   * **`view`**`3``T` : Shows the 3rd applicant's skills.
+   * `view 3 T` : Displays the skills of the 3rd applicant shown in the current list.
 
-   * **`undo`** : Undo the last command the user has entered.
+   * `undo` : Undo the last command that you entered.
 
-   * **`redo`** : Redo the last command the user has undone.
+   * `redo` : Reverse the last undo command.
 
-   * **`clear`** : Deletes all applicants.
+   * `clear` : Deletes all applicants from the application.
 
 7. Refer to the [Features](#features) below for details of each command.
 
@@ -56,26 +56,26 @@ This user guide covers a quick walk through how to use this application, as well
 
 **:information_source: Notes about the command formats:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  This excludes special tags for **`edit`** **`view`** **`delete`** commands. <br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.<br>
-  e.g. in `delete ALL`, `ALL` is to be typed verbatim in full capital letters by the user.
+* Words in `UPPER_CASE` are the field parameters to be supplied by you.<br>
+  This excludes special tags for [**edit**](#editing-applicants--edit), [**view**](#viewing-an-applicants-details--view), [**delete**](#deleting-an-applicant--delete) commands. <br>
+  * e.g. in `add n/NAME`, `NAME` is a field parameter to be replaced. You can enter `add n/John Doe`.<br>
+  * e.g. in `delete ALL`, `ALL` is to be typed the same in full capital letters.
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [s/SKILL]` can be used as `n/John Doe s/friend` or as `n/John Doe`.
+* Fields in square brackets are optional.<br>
+  * e.g in `n/NAME [s/SKILL]`, the `SKILL` parameter is optional. You can enter `n/John Doe s/friend` or `n/John Doe`.
 
-* Items with `…+` after them can be used multiple times including zero times.<br>
-  e.g. `[s/SKILL]…+` can be used as ` ` (i.e. 0 times), `s/Java`, `s/Python s/C` etc.
+* Fields with `…+` notation behind them can be specified zero or more times.<br>
+  * e.g. `[s/SKILL]…+` can be specified as ` ` (i.e. 0 times), `s/Java`, `s/Python s/C` etc.
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* Fields can be entered in any order.<br>
+  * e.g. if the command format specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also valid.
 
-* If a command expects only one instance of a parameter, but the parameter has been specified multiple times, only the last occurrence of the parameter will be taken.<br>
+* If a command expects only one instance of a field parameter, but the parameter has been specified multiple times, only the last occurrence of the parameter will be taken.<br>
 
-  e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
+  * e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+  * e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
 
