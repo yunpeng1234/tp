@@ -94,6 +94,9 @@ Adds an applicant to Intern Watcher.
 
 Format: `add n/NAME p/PHONE e/EMAIL g/GRADE i/INSTITUTION c/COURSE y/GRADUATION_YEAR_MONTH j/JOB [a/APPLICATION_STATUS] [s/SKILL]…+`
 
+* Entries with same `NAME` (case-insensitive) will not be allowed. For example, `John Doe` and `john doe` are considered the same person and the second entry will not be allowed.
+* `APPLICATION_STATUS` and `SKILL` are case-sensitive.
+
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 An applicant can have any number of skills (including 0)
 </div>
@@ -138,32 +141,23 @@ Examples:
 
 Filters the applicants in Intern Watcher by a given field.
 
-Format: `filter [g/GRADE] [i/INSTITUTION]…+ [c/COURSE]…+ [y/GRADUATION_YEAR_MONTH] [j/JOB] [a/STATUS] [s/SKILL]…+`
+Format: `filter [g/GRADE] [i/INSTITUTION]…+ [c/COURSE]…+ [y/GRADUATION_YEAR_MONTH] [j/JOB]…+ [a/STATUS]…+ [s/SKILL]…+`
 
 
 * `filter` will show applicants that matches all fields specified.
+* `[i/INSTITUTION]…+`, `[c/COURSE]…+` and `[j/JOB]…+` are case-insensitive and `[a/STATUS]…+` and `[s/SKILL]…+` are case-sensitive.
 * If `[g/GRADE]` is specified, it will show all applicants with grades higher or equal to the `g/Grade` specified.
 * Likewise, if `[y/GRADUATION_YEAR_MONTH]` is specified, it will show all applicants with graduation dates that is strictly before the `GRADUATION_YEAR_MONTH` specified.
-* For each of `[s/SKILL]…+`,`[i/INSTITUTION]…+`,`[c/COURSE]…+`, and `[a/Status]…+`, if more than 1 instance of a field, such as `[a/Status]…+` is specified, applicants with fields that match at least one of the `[a/Status]…+` specified will be shown.
+* If `[s/SKILL]…+` is specified, only applicants with all specified `[s/SKILL]…+` will be shown.
+* For either of `[c/COURSE]…+` or `[j/JOB]…+`, if more than 1 instance of a single field, such as `[j/JOB]…+` is specified, applicants with their field **containing** at least one of the `[j/JOB]…+` specified will be shown.
+* For either of `[i/INSTITUTION]…+` or `[a/STATUS]…+`, if more than 1 instance of a single field, such as `[i/INSTITUTION]…+` is specified, applicants with their field **matching** at least one of the `[i/INSTITUTION]…+` specified will be shown.
 
 Examples:
-* `filter s/Python s/Java` will show applicants with skills in either JAVA or PYTHON or both.
+* `filter s/Python s/Java` will show only applicants with skills in both JAVA and PYTHON.
 
 |Command|Effect|
 |---|---|
 |<img src="images/FilterBefore.png" alt="drawing" />|<img src="images/FilterSkillAfter.png" alt="drawing" />|
-
-* `filter g/4.60` will show applicants with a grade more than or equals 4.60.
-
-|Command|Effect|
-|---|---|
-|<img src="images/FilterGradeBefore.png" alt="drawing" />|<img src="images/FilterGradeAfter.png" alt="drawing" />|
-
-* `filter y/06/2022` will show applicants  with graduation date earlier than June 2022.
-
-|Command|Effect|
-|---|---|
-|<img src="images/FilterYearBefore.png" alt="drawing" />|<img src="images/FilterYearAfter.png" alt="drawing" />|
 
 * `filter s/Java y/06/2022 i/NUS` will show applicants that graduate earlier than June 2022, knows JAVA and is from NUS.
 
