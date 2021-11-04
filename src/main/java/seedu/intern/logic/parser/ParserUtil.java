@@ -72,7 +72,7 @@ public class ParserUtil {
 
     //@@author nicolej2122
     /**
-     * Parses {@code selection} into a {@code Selection} with a
+     * Parses {@code selection} into a {@code Pair} with a
      * {@code Index} and {@code isExtraCondition} flag and returns it.
      * Leading and trailing whitespaces will be
      * trimmed.
