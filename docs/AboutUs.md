@@ -14,7 +14,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/chang-ch.png" width="200px">
 
 [[github](https://github.com/Chang-CH)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/chang-ch.md)]
 
 * Role: Developer
 * Responsibilities: TBD
@@ -24,7 +24,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/jackgugz.png" width="200px">
 
 [[github](https://github.com/jackgugz)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/jackgugz.md)]
 
 * Role: Developer
 * Responsibilities: TBC
