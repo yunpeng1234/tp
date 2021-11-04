@@ -261,7 +261,7 @@ The `FilterCommand` will make use of the `FilterApplicantDescriptor` to create a
 **Aspect: How filter for different attributes work**
 - **Name, Phone, Email**: These attributes are excluded from filter criteria as `filter` is supposed to serve the purpose of selecting potential candidates based on practical considerations other than these three attributes.
 - **Grade**: HRs should be more interested in finding candidates whose grades meet a certain threshold. Therefore, only applicants that have grades not smaller than the input `Grade` will be displayed.
-- **GraduationYearMonth**: HRs should be more interested in finding candidates who graduate before a certain period and who are readily available for deployment before internship starts. Therefore, only applicants that graduate strictly earlier than the input `GraduationYearMonth` will be displayed. 
+- **GraduationYearMonth**: HRs should be more interested in finding candidates who graduate before a certain period and who are readily available for deployment before internship starts. Therefore, only applicants that graduate strictly earlier than the input `GraduationYearMonth` will be displayed.
 - **Institutions**: HRs should be more open to accept applicants from a collection of institutions. For example, HRs may be interested in finding applicants that are from either NUS or NTU as the company has affiliation programme with the said two institutions. Also, such filters should be case-insensitive as the capitalisation is not meaningful when considering the said attributes.
 - **Jobs**: HRs should be more interested in filtering applicants for a range of related jobs. For example, HRs may be interested in choosing appropriate applicants for both software engineer and software tester as the requirements for both jobs are similar, and it is easier to look at both at once. Also, such filters should be case-insensitive as the capitalisation is not meaningful when considering the said attributes.
 - **Skills**: HRs should be more interested to use multiple `Skill` filters to exclusively find applicants that have all skills required in order to perform the applied job. And the filters shall be case-sensitive as capitalisation may differentiate two seemingly same skills.
@@ -351,11 +351,11 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How to store saved states:**
 
 * **Alternative 1:** Use two stack data structures, one for Command history and one for Undo history.
-    * Pros: Using a stack is intuitive for undo/redo as the current state is simply the top of the Command History stack. When undo is executed, the top of the stack can be popped and added into the Undo History stack. 
+    * Pros: Using a stack is intuitive for undo/redo as the current state is simply the top of the Command History stack. When undo is executed, the top of the stack can be popped and added into the Undo History stack.
     * Cons: We must implement and manage two stacks for the functionality.
-    
+
 * **Alternative 2 (current choice):** Use array list data structure with a pointer.
-    * Pros: Easy to implement. Only requires one data structure for both undo and redo. 
+    * Pros: Easy to implement. Only requires one data structure for both undo and redo.
     * Cons: No cons.
 
 
@@ -495,7 +495,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-    
+
 **Use case: Undo the last command**
 
 **MSS**
@@ -507,11 +507,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. There are no previous states to revert to. 
+* 1a. There are no previous states to revert to.
     * 1a1. InternWatcher shows an error message.
-    
-      Use case resumes at step 1. 
-    
+
+      Use case resumes at step 1.
+
 
 
 ### Non-Functional Requirements
