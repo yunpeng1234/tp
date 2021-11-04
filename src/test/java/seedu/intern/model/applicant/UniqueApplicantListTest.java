@@ -39,7 +39,7 @@ public class UniqueApplicantListTest {
     }
 
     @Test
-    public void contains_ApplicantWithSameIdentityFieldsInList_returnsTrue() {
+    public void contains_applicantWithSameIdentityFieldsInList_returnsTrue() {
         uniqueApplicantList.add(ALICE);
         Applicant editedAlice = new ApplicantBuilder(ALICE).withSkills(VALID_SKILL_JAVA)
                 .build();

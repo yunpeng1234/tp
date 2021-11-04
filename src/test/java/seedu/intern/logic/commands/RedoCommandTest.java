@@ -41,8 +41,11 @@ public class RedoCommandTest {
 
     @Test
     public void execute_redoDelete_success() throws CommandException {
-        Applicant applicantToDelete = model.getFilteredApplicantList().get(SELECTION_FIRST_APPLICANT.getIndexZeroBased());
+        Applicant applicantToDelete = model.getFilteredApplicantList()
+                .get(SELECTION_FIRST_APPLICANT.getIndexZeroBased());
+
         String commitText = String.format(DeleteCommand.MESSAGE_COMMIT_DELETE, applicantToDelete);
+
         model.deleteApplicant(applicantToDelete);
         model.commitInternWatcher(commitText);
         model.undoInternWatcher();

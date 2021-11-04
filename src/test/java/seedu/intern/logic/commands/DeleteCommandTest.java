@@ -30,7 +30,9 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Applicant applicantToDelete = model.getFilteredApplicantList().get(SELECTION_FIRST_APPLICANT.getIndexZeroBased());
+        Applicant applicantToDelete = model.getFilteredApplicantList()
+                .get(SELECTION_FIRST_APPLICANT.getIndexZeroBased());
+
         DeleteCommand deleteCommand = new DeleteCommand(SELECTION_FIRST_APPLICANT);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_APPLICANT_SUCCESS, applicantToDelete);
@@ -57,7 +59,9 @@ public class DeleteCommandTest {
     public void execute_validAllFilteredList_success() {
         showApplicantAtIndex(model, SELECTION_FIRST_APPLICANT.getIndex());
 
-        Applicant applicantToDelete = model.getFilteredApplicantList().get(SELECTION_FIRST_APPLICANT.getIndexZeroBased());
+        Applicant applicantToDelete = model.getFilteredApplicantList()
+                .get(SELECTION_FIRST_APPLICANT.getIndexZeroBased());
+
         DeleteCommand deleteCommand = new DeleteCommand(SELECTION_ALL);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_ALL_SUCCESS,
@@ -82,7 +86,8 @@ public class DeleteCommandTest {
     public void execute_validIndexFilteredList_success() {
         showApplicantAtIndex(model, SELECTION_FIRST_APPLICANT.getIndex());
 
-        Applicant applicantToDelete = model.getFilteredApplicantList().get(SELECTION_FIRST_APPLICANT.getIndexZeroBased());
+        Applicant applicantToDelete = model.getFilteredApplicantList()
+                .get(SELECTION_FIRST_APPLICANT.getIndexZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(SELECTION_FIRST_APPLICANT);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_APPLICANT_SUCCESS, applicantToDelete);

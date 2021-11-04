@@ -78,12 +78,12 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasApplicant_ApplicantNotInInternWatcher_returnsFalse() {
+    public void hasApplicant_applicantNotInInternWatcher_returnsFalse() {
         assertFalse(modelManager.hasApplicant(ALICE));
     }
 
     @Test
-    public void hasApplicant_ApplicantInInternWatcher_returnsTrue() {
+    public void hasApplicant_applicantInInternWatcher_returnsTrue() {
         modelManager.addApplicant(ALICE);
         assertTrue(modelManager.hasApplicant(ALICE));
     }

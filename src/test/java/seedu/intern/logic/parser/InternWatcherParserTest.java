@@ -59,7 +59,8 @@ public class InternWatcherParserTest {
         Applicant applicant = new ApplicantBuilder().build();
         EditApplicantDescriptor descriptor = new EditApplicantDescriptorBuilder(applicant).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_APPLICANT.getOneBased() + " " + ApplicantUtil.getEditApplicantDescriptorDetails(descriptor));
+                + INDEX_FIRST_APPLICANT.getOneBased() + " "
+                + ApplicantUtil.getEditApplicantDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_APPLICANT, descriptor), command);
     }
 

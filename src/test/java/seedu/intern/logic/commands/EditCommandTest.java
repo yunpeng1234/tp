@@ -121,8 +121,8 @@ public class EditCommandTest {
         Selection indexLastApplicant = Selection.fromIndex(Index.fromOneBased(model.getFilteredApplicantList().size()));
         Applicant lastApplicant = model.getFilteredApplicantList().get(indexLastApplicant.getIndexZeroBased());
 
-        ApplicantBuilder ApplicantInList = new ApplicantBuilder(lastApplicant);
-        Applicant editedApplicant = ApplicantInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+        ApplicantBuilder applicantInList = new ApplicantBuilder(lastApplicant);
+        Applicant editedApplicant = applicantInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
                 .withSkills(VALID_SKILL_JAVA).build();
 
         EditApplicantDescriptor descriptor = new EditApplicantDescriptorBuilder().withName(VALID_NAME_BOB)
