@@ -22,7 +22,7 @@ import seedu.intern.model.skills.Skill;
  */
 public class SampleDataUtil {
 
-    public static Applicant[] getSamplePersons() {
+    public static Applicant[] getSampleApplicants() {
         return new Applicant[] {
             new Applicant(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                     new Grade("4.50"), new Institution("NTU"), new Course("Computer Science"),
@@ -51,8 +51,8 @@ public class SampleDataUtil {
 
     public static ReadOnlyInternWatcher getSampleInternWatcher() {
         InternWatcher sampleAb = new InternWatcher();
-        for (Applicant sampleApplicant : getSamplePersons()) {
-            sampleAb.addPerson(sampleApplicant);
+        for (Applicant sampleApplicant : getSampleApplicants()) {
+            sampleAb.addApplicant(sampleApplicant);
         }
         return sampleAb;
     }

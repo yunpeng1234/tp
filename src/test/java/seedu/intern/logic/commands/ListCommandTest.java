@@ -1,9 +1,9 @@
 package seedu.intern.logic.commands;
 
 import static seedu.intern.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.intern.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.intern.logic.commands.CommandTestUtil.showApplicantAtIndex;
 import static seedu.intern.testutil.TypicalApplicants.getTypicalInternWatcher;
-import static seedu.intern.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.intern.testutil.TypicalIndexes.INDEX_FIRST_APPLICANT;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,7 +33,7 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showApplicantAtIndex(model, INDEX_FIRST_APPLICANT);
         assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }

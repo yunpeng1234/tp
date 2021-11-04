@@ -26,7 +26,7 @@ public class ApplicantTest {
     }
 
     @Test
-    public void isSamePerson() {
+    public void isSameApplicant() {
         // same object -> returns true
         assertTrue(ALICE.isSameApplicant(ALICE));
 

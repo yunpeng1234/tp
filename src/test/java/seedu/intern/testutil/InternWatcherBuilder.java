@@ -6,7 +6,7 @@ import seedu.intern.model.applicant.Applicant;
 /**
  * A utility class to help with building InternWatcher objects.
  * Example usage: <br>
- *     {@code InternWatcher ab = new InternWatcherBuilder().withPerson("John", "Doe").build();}
+ *     {@code InternWatcher ab = new InternWatcherBuilder().withApplicant("John", "Doe").build();}
  */
 public class InternWatcherBuilder {
 
@@ -21,10 +21,10 @@ public class InternWatcherBuilder {
     }
 
     /**
-     * Adds a new {@code Person} to the {@code InternWatcher} that we are building.
+     * Adds a new {@code Applicant} to the {@code InternWatcher} that we are building.
      */
     public InternWatcherBuilder withApplicant(Applicant applicant) {
-        internWatcher.addPerson(applicant);
+        internWatcher.addApplicant(applicant);
         return this;
     }
 

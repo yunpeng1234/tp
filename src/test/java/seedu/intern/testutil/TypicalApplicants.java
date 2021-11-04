@@ -25,7 +25,7 @@ import seedu.intern.model.InternWatcher;
 import seedu.intern.model.applicant.Applicant;
 
 /**
- * A utility class containing a list of {@code Person} objects to be used in tests.
+ * A utility class containing a list of {@code Applicant} objects to be used in tests.
  */
 public class TypicalApplicants {
 
@@ -66,7 +66,7 @@ public class TypicalApplicants {
             .withGraduationYearMonth("12/2020").withJob("Software Engineer").build();
 
 
-    // Manually added - Person's details found in {@code CommandTestUtil}
+    // Manually added - Applicant's details found in {@code CommandTestUtil}
     public static final Applicant AMY = new ApplicantBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withEmail(VALID_EMAIL_AMY).withSkills(VALID_SKILL_JAVA)
             .withGrade(VALID_GRADE_AMY).withInstitution(VALID_INSTITUTION_AMY).withJob(VALID_JOB_AMY)
@@ -81,12 +81,12 @@ public class TypicalApplicants {
     private TypicalApplicants() {} // prevents instantiation
 
     /**
-     * Returns an {@code InternWatcher} with all the typical persons.
+     * Returns an {@code InternWatcher} with all the typical applicants.
      */
     public static InternWatcher getTypicalInternWatcher() {
         InternWatcher ab = new InternWatcher();
         for (Applicant applicant : getTypicalApplicants()) {
-            ab.addPerson(applicant);
+            ab.addApplicant(applicant);
         }
         return ab;
     }
