@@ -6,7 +6,6 @@ participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":InternWatcherParser" as InternWatcherParser LOGIC_COLOR
 participant ":EditCommandParser" as EditCommandParser LOGIC_COLOR
 participant ":EditCommand" as EditCommand LOGIC_COLOR
-participant ":Selection" as Selection LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -30,13 +29,6 @@ deactivate EditCommandParser
 InternWatcherParser -> EditCommandParser : parse("ALL")
 activate EditCommandParser
 
-create Selection
-EditCommandParser -> Selection
-activate Selection
-
-Selection --> EditCommandParser : d
-deactivate Selection
-
 create EditCommand
 EditCommandParser -> EditCommand
 activate EditCommand
@@ -56,16 +48,9 @@ deactivate InternWatcherParser
 LogicManager -> EditCommand : execute()
 activate EditCommand
 
-EditCommand -> Selection : hasIndex()
-activate Selection
-
-Selection -> EditCommand : d
-deactivate Selection
-
 loop for all applicants displayed
 EditCommand -> EditCommand : createEditedApplicant(applicant)
 activate EditCommand
-
 
 EditCommand --> EditCommand : d
 deactivate EditCommand

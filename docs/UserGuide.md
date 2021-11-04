@@ -177,9 +177,8 @@ Format 1: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [g/GRADE] [i/INSTITUTION] [c/
   specifying any skills after it.
   
 Format 2: `edit ALL a/APPLICATION_STATUS`
-
 * If `ALL` is specified, all applicants currently displayed in the applicant list will be edited.
-* Only the `APPLICATION_STATUS` of applicants can be edited. 
+* Currently only the `APPLICATION_STATUS` of applicants can be edited. It is unlikely that the other fields would need multi editing.
 * The `APPLICATION_STATUS` can only be one of these 7 statuses: `ACCEPTED`, `REJECTED`, `INTERVIEWED`, `APPLIED`, `SCHEDULED`, `RECEIVED` and `OFFERED`.
 
 
@@ -338,13 +337,13 @@ If your changes to the data file makes its format invalid, Intern Watcher will d
 
 `Institution` : The applicant's school. Should only include alphanumeric characters and space only. Should not be blank.
 
+`Status` : The applicant's application status. Case sensitive. Should only be one of these 7 statuses, `ACCEPTED` , `REJECTED`, `INTERVIEWED`, `APPLIED` , `SCHEDULED`, `RECEIVED` and `OFFERED`.
+
 `Course` : The applicant's course of study in their school. Should only include alphabet characters and space only. Should not be blank.
 
 `Graduation_Year_Month` : The applicant's estimated date of graduation from their school. Should be of format MM/yyyy and be after the date 01/2020. 
 
 `Job` : The job/position that the applicant applied for. Should only include alphabet characters and space only. Should not be blank.
-
-`Status` : The status of the applicant's application. Should only be one of these 7 statuses, `ACCEPTED`, `REJECTED`, `INTERVIEWED`, `APPLIED`, `SCHEDULED`, `RECEIVED` and `OFFERED`.
 
 `Skill`: The applicant's skillset. Should only include alphanumeric characters, spaces and `+#` symbols only.
 
