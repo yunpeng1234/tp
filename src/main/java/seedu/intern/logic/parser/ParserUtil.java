@@ -70,6 +70,7 @@ public class ParserUtil {
         }
     }
 
+    //@@author nicolej2122
     /**
      * Parses {@code selection} into a {@code Selection} with a
      * {@code Index} and {@code isExtraCondition} flag and returns it.
@@ -103,6 +104,7 @@ public class ParserUtil {
         }
     }
 
+    //@@author
     /**
      * @deprecated Use parseSelection instead.
      * Parses {@code oneBasedIndex/ ALL keyword} into an {@code Index} and

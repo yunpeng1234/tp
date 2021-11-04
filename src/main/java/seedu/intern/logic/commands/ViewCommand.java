@@ -1,3 +1,4 @@
+// @@author nicolej2122
 package seedu.intern.logic.commands;
 
 import static java.util.Objects.requireNonNull;
@@ -9,7 +10,6 @@ import seedu.intern.commons.core.selection.Index;
 import seedu.intern.logic.commands.exceptions.CommandException;
 import seedu.intern.model.Model;
 import seedu.intern.model.applicant.Applicant;
-
 
 /**
  * User can view applicant details in Intern Watcher.
