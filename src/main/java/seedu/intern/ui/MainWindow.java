@@ -209,6 +209,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void handleView(Applicant applicant, boolean isToggle) {
+        personListPanel.selectApplicant(applicant);
         personDetail.showApplicant(applicant, isToggle);
     }
 }
