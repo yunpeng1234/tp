@@ -44,3 +44,4 @@ Given below are my contributions to the project.
 
 * **Contributions to Project Management and Organisation:**:
     *  Facilitated discussions/meetings and helped others with their features when needed
+    
