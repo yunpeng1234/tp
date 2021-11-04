@@ -16,7 +16,7 @@ import seedu.intern.model.skills.Skill;
 /**
  * Panel containing the details of a Person
  */
-public class PersonDetailPanel extends UiPart<Region> {
+public class ApplicantDetailPanel extends UiPart<Region> {
 
     private static final String FXML = "PersonDetail.fxml";
     @FXML
@@ -45,7 +45,7 @@ public class PersonDetailPanel extends UiPart<Region> {
     /**
      * Creates a {@code PersonDetailPanel}.
      */
-    public PersonDetailPanel() {
+    public ApplicantDetailPanel() {
         super(FXML);
         setAcademicTab(Applicant.getDefaultAcademics());
         setSkillTab(null);
