@@ -46,7 +46,7 @@ This user guide covers a quick walk through how to use this application, as well
 
    * `clear` : Deletes all applicants from the application.
 
-7. To see more detailed information abuot each command, refer to [Features](#features).
+7. To see more detailed information about each command, refer to [Features](#features).
 8. To see restrictions and specifications of each field, refer to [Specification of Fields.](#specification-of-fields).
 
 --------------------------------------------------------------------------------------------------------------------
