@@ -203,7 +203,6 @@ should be edited.
 - **Alternative 2**: Create a separate `EditAllCommand` with its own parser.
     - Pros: Easier to test, the behaviour of `EditAllCommand` should not affect `EditCommand`.
     - Cons: Harder to implement. Users might also find editing multiple applicants having a separate command unintuitive.
-
 **Aspect: How edit arguments are stored**
 - **Alternative 1 (current choice)**: Create a `Selection` class with private constructor and static factory methods to store either the
   `ALL` flag or the `Index`.
@@ -243,6 +242,8 @@ has been modified, such that whenever `Selection#hasAllSelectFlag` returns `true
     - Pros: Easy to implement
     - Cons: Bypasses the intention of the Index Class. Having a negative `Index` might throw unexpected errors.
 
+![DeleteAllSequenceDiagram](images/DeleteAllSequenceDiagram.png)
+    
 ### Filter feature
 
 #### Implementation

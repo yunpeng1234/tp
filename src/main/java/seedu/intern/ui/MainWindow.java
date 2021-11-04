@@ -33,10 +33,10 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private ApplicantListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
-    private PersonDetailPanel personDetail;
+    private ApplicantDetailPanel personDetail;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -116,7 +116,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanel = new ApplicantListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -125,7 +125,7 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getInternWatcherFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        personDetail = new PersonDetailPanel();
+        personDetail = new ApplicantDetailPanel();
         personDetailPlaceholder.getChildren().add(personDetail.getRoot());
         personListPanel.addSelectedListener((observable, oldValue, newValue) -> {
             personDetail.showApplicant(newValue, false);
@@ -175,7 +175,7 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
+    public ApplicantListPanel getPersonListPanel() {
         return personListPanel;
     }
 
