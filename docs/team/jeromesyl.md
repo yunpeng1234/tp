@@ -12,8 +12,8 @@ Given below are my contributions to the project.
 * **New Feature**: Added the ability to undo commands and redo previous undo commands.
   * What it does: Allows the user to undo a previously executed command, reverting the application to the previous state. Undo commands can be reversed by the Redo command.
   * Justification: It is common for users to make mistakes when entering commands. Hence, a redo/undo feature will be really helpful for users who need to rectify those mistakes, and redo them in case they change their mind.
-  * Highlights: This enhancement affects existing commands and commands to be added in the future. It was challenging as it required existing commands to be modified and a new class that extends the existing InternWatcher class in order to support the undo/redo functionality. Some analysis was needed for design alternatives, such as the data structure to store a history of commands. 
-  
+  * Highlights: This enhancement affects existing commands and commands to be added in the future. It was challenging as it required existing commands to be modified and a new class that extends the existing InternWatcher class in order to support the undo/redo functionality. Some analysis was needed for design alternatives, such as the data structure to store a history of commands.
+
 * **New Feature**: Added `Course` field to applicants. It represents the applicant's course of study.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&zFR=false&tabAuthor=Jeromesyl&tabRepo=AY2122S1-CS2103T-F12-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
@@ -26,7 +26,7 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features `undo` and `redo` ([\#124](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/124)) 
+    * Added documentation for the features `undo` and `redo` ([\#124](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/124))
     * Did cosmetic tweaks to existing documentation of features `help`, `add`, `view`, `edit`, `delete`, `undo`, `redo`, and Command Summary section. Also updated user stories and use cases section. ([\#223](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/223/files))
     * Updated descriptions of new and existing fields ([\#208](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/208))
   * Developer Guide:
@@ -35,7 +35,7 @@ Given below are my contributions to the project.
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#137](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/137))
   * Reported bugs and suggestions for other teams in the class ([ped](https://github.com/Jeromesyl/ped/issues))
-  
+
 * **Contributions to Project Management and Organisation**:
   * Organized and facilitated team meetings and discussions
-  * Managed team tasks and deliverables 
+  * Managed team tasks and deliverables

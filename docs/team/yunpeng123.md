@@ -11,7 +11,7 @@ Given below are my contributions to the project.
 
 * **New Feature**: Added the ability to do mass deleting of applicants from the displayed list.
     * What it does: Allows the user to delete all applicants from the displayed list, be it from `list` or `filter`.
-    * Justification: This feature allows HRs to delete a lot of applicants in one go. eg. Deleting all applicants with `REJECTED` statuses. 
+    * Justification: This feature allows HRs to delete a lot of applicants in one go. eg. Deleting all applicants with `REJECTED` statuses.
 
 * **New Feature**: Added Grade field to applicants.
 
@@ -44,4 +44,3 @@ Given below are my contributions to the project.
 
 * **Contributions to Project Management and Organisation:**:
     *  Facilitated discussions/meetings and helped others with their features when needed
-    
