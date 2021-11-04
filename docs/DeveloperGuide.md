@@ -361,18 +361,19 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
+| Priority | As a …​                                 | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | -------------------------------------- | ---------------------------------------------------------------------- |
 | `* * *`  | new user                                   | see usage instructions                 | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new applicant                       |                                                                        |
-| `* * *`  | user                                       | delete an applicant                        | remove entries that I no longer need                                   |
+| `* * *`  | user                                       | add a new applicant                    |                                                                        |
+| `* * *`  | user                                       | delete an applicant                    | remove entries that I no longer need                                   |
 | `* * *`  | user                                       | update applicant details               | change entries accordingly                                             |
 | `* * *`  | user                                       | update all filtered applicants' details| change all entries accordingly                                         |
 | `* * *`  | user                                       | view an organised list of applicants   | see suitable applicants at a glance                                    |
+| `* * *`  | user                                       | undo or redo my last action            | rectify a mistake I made                                               |
 | `* * *`  | user                                       | save applicant profiles to a file      | refer to them later                                                    |
 | `* * *`  | user                                       | read applicant profiles from a file    | refer to them                                                          |
 
-*{More to be added}*
+
 
 ### Use cases
 
@@ -464,7 +465,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-*{More to be added}*
+    
+**Use case: Undo the last command**
+
+**MSS**
+
+1.  User requests to undo their last command to the applicant.
+2.  InternWatcher reverts to the previous state before the last command.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. There are no previous states to revert to. 
+    * 1a1. InternWatcher shows an error message.
+    
+      Use case resumes at step 1. 
+    
+
 
 ### Non-Functional Requirements
 
