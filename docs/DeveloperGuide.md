@@ -177,10 +177,21 @@ As internship has timeliness as its nature and our application development only 
 #### Implementation
 The edit ALL mechanism is facilitated by the new `Selection` class. A new parser `ParserUtil#parseSelection`
 has been added to parse `Selection` values, which accepts either integers or the `ALL` string. The `Selection` class supports
-operations `Selection#hasAllFlag` and `Selection#hasIndex`, which is used by `EditCommand#execute`. `EditCommand#execute`
-has been modified, such that whenever `Selection#hasAllFlag` returns `true`, `EditCommand#execute` edits all applicants with
+operations `Selection#hasAllSelectFlag` and `Selection#hasIndex`, which is used by `EditCommand#execute`. `EditCommand#execute`
+has been modified, such that whenever `Selection#hasAllSelectFlag` returns `true`, `EditCommand#execute` edits all applicants with
 the fields specified. `Selection` has been given a private constructor with static factory methods `Selection#fromIndex` and
 `Selection#fromAllFlag` to ensure `Selection` should not contain both index and all flag.
+
+The following activity diagrams summarizes what happens when a user enters an `edit` command.
+
+<img src="images/EditActivityDiagram.png" width="250" />
+
+Edit ALL updates the details of all currently displayed applicants by obtaining the list of currently displayed applicants via `Model#getFilteredPersonList`.
+The list is then copied, after which each individual applicant is modified via `Model#setApplicant` in a for loop.
+
+The following sequence diagram summaries what happens when a user enters an `edit``ALL` command.
+
+<img src="images/EditAllSequence.png"/>
 
 #### Design considerations:
 **Aspect: How edit ALL is parsed**
@@ -192,16 +203,32 @@ should be edited.
 - **Alternative 2**: Create a separate `EditAllCommand` with its own parser.
     - Pros: Easier to test, the behaviour of `EditAllCommand` should not affect `EditCommand`.
     - Cons: Harder to implement. Users might also find editing multiple applicants having a separate command unintuitive.
-      
-![EditAllSequenceDiagram](images/EditAllSequenceDiagram.png)
-      
+**Aspect: How edit arguments are stored**
+- **Alternative 1 (current choice)**: Create a `Selection` class with private constructor and static factory methods to store either the
+  `ALL` flag or the `Index`.
+    - Pros: Disallows `ALL` flag to exist together with `Index`, making debugging easier. Keeps modifications to existing classes minimal.
+    - Cons: Most `EditCommand` tests would have to be changed to accommodate the new constructor. `Selection`
+- **Alternative 2**: Overload `EditCommand` constructor to accept an additional boolean flag.
+    - Pros: Easy to implement, existing classes/methods need not be changed.
+    - Cons: Additional parser method must be created. Users may unintentionally pass both `ALL` and `Index` to parser.
+
+**Aspect: What attributes can edit ALL accept**
+- **Alternative 1 (current choice)**: Only allow mass modifications to `ApplicationStatus`.
+    - Pros: Users cannot unintentionally modify all applicants' personal details, such as `Name`, `Email`, `Grade`.
+      There should not be a reason to mass modify these fields. If a user created a number of applicants with the wrong details
+      `UndoCommand` can be used instead.
+    - Cons: Usage of `edit ALL` would be limited.
+- **Alternative 2**: Allow mass modifications of all applicants
+    - Pros: `edit ALL` behaviour can be kept similar to `edit INDEX`, increasing usability.
+    - Cons: Allows users to unintentionally modify applicant fields that should normally not require mass edits.
+
 ###  Delete ALL feature
 
 #### Implementation
 The delete ALL mechanism is facilitated by the new `Selection` class shared with edit ALL. A new parser `ParserUtil#parseSelection`
 has been added to parse `Selection` values, which accepts either integers or the `ALL` string. The `Selection` class supports
-operations `Selection#hasAllFlag` and `Selection#hasIndex`, which is used by `DeleteCommand#execute`. `DeleteCommand#execute`
-has been modified, such that whenever `Selection#hasAllFlag` returns `true`, `DeleteCommand#execute` delete all applicants on the displayed list. `Selection` has been given a private constructor with static factory methods `Selection#fromIndex` and
+operations `Selection#hasAllSelectFlag` and `Selection#hasIndex`, which is used by `DeleteCommand#execute`. `DeleteCommand#execute`
+has been modified, such that whenever `Selection#hasAllSelectFlag` returns `true`, `DeleteCommand#execute` delete all applicants on the displayed list. `Selection` has been given a private constructor with static factory methods `Selection#fromIndex` and
 `Selection#fromAllFlag` to ensure `Selection` should not contain both index and all flag.
 
 #### Design considerations:
@@ -235,7 +262,7 @@ The `FilterCommand` will make use of the `FilterApplicantDescriptor` to create a
 **Aspect: How filter for different attributes work**
 - **Name, Phone, Email**: These attributes are excluded from filter criteria as `filter` is supposed to serve the purpose of selecting potential candidates based on practical considerations other than these three attributes.
 - **Grade**: HRs should be more interested in finding candidates whose grades meet a certain threshold. Therefore, only applicants that have grades not smaller than the input `Grade` will be displayed.
-- **GraduationYearMonth**: HRs should be more interested in finding candidates who graduate before a certain period and who are readily available for deployment before internship starts. Therefore, only applicants that graduate strictly earlier than the input `GraduationYearMonth` will be displayed. 
+- **GraduationYearMonth**: HRs should be more interested in finding candidates who graduate before a certain period and who are readily available for deployment before internship starts. Therefore, only applicants that graduate strictly earlier than the input `GraduationYearMonth` will be displayed.
 - **Institutions**: HRs should be more open to accept applicants from a collection of institutions. For example, HRs may be interested in finding applicants that are from either NUS or NTU as the company has affiliation programme with the said two institutions. Also, such filters should be case-insensitive as the capitalisation is not meaningful when considering the said attributes.
 - **Jobs**: HRs should be more interested in filtering applicants for a range of related jobs. For example, HRs may be interested in choosing appropriate applicants for both software engineer and software tester as the requirements for both jobs are similar, and it is easier to look at both at once. Also, such filters should be case-insensitive as the capitalisation is not meaningful when considering the said attributes.
 - **Skills**: HRs should be more interested to use multiple `Skill` filters to exclusively find applicants that have all skills required in order to perform the applied job. And the filters shall be case-sensitive as capitalisation may differentiate two seemingly same skills.
@@ -291,11 +318,13 @@ The following sequence diagram shows how the undo operation works:
 
 The `redo` command does the opposite — it calls `Model#redoInternWatcher()`, which shifts the `currStatePointer` once to the right, pointing to the previously undone state, and restores the applicant list to that state.
 
+![UndoRedoState6](images/undo-redo/UndoRedoState6.png)
+
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currStatePointer` is at index `watcherStateList.size() - 1`, pointing to the latest Intern Watcher state, then there are no undone Intern Watcher states to restore. The `redo` command uses `Model#canRedoInternWatcher()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the applicant list, such as `list`, will usually not call `Model#commitInternWatcher()`, `Model#undoInternWatcher()` or `Model#redoInternWatcher()`. Thus, the `watcherStateList` remains unchanged.
+Step 5. Let's say that the user goes through with the Undo command and the `currStatePointer` points to the previous state. The user then decides to execute the command `list`. Commands that do not modify the applicant list, such as `list`, will usually not call `Model#commitInternWatcher()`, `Model#undoInternWatcher()` or `Model#redoInternWatcher()`. Thus, the `watcherStateList` remains unchanged.
 
 ![UndoRedoState4](images/undo-redo/UndoRedoState4.png)
 
@@ -305,7 +334,7 @@ Step 6. The user executes `clear`, which calls `Model#commitInternWatcher()`. Si
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<img src="images/CommitActivityDiagram.png" width="250" />
+<img src="images/undo-redo/CommitActivityDiagram.png" width="250" />
 
 #### Design considerations:
 
@@ -320,9 +349,15 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the applicant being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-### \[Proposed\] Data archiving
+**Aspect: How to store saved states:**
 
-_{Explain here how the data archiving feature will be implemented}_
+* **Alternative 1:** Use two stack data structures, one for Command history and one for Undo history.
+    * Pros: Using a stack is intuitive for undo/redo as the current state is simply the top of the Command History stack. When undo is executed, the top of the stack can be popped and added into the Undo History stack.
+    * Cons: We must implement and manage two stacks for the functionality.
+
+* **Alternative 2 (current choice):** Use array list data structure with a pointer.
+    * Pros: Easy to implement. Only requires one data structure for both undo and redo.
+    * Cons: No cons.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -357,18 +392,19 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
+| Priority | As a …​                                 | I want to …​                        | So that I can…​                                                        |
 | -------- | ------------------------------------------ | -------------------------------------- | ---------------------------------------------------------------------- |
 | `* * *`  | new user                                   | see usage instructions                 | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new applicant                       |                                                                        |
-| `* * *`  | user                                       | delete an applicant                        | remove entries that I no longer need                                   |
+| `* * *`  | user                                       | add a new applicant                    |                                                                        |
+| `* * *`  | user                                       | delete an applicant                    | remove entries that I no longer need                                   |
 | `* * *`  | user                                       | update applicant details               | change entries accordingly                                             |
 | `* * *`  | user                                       | update all filtered applicants' details| change all entries accordingly                                         |
 | `* * *`  | user                                       | view an organised list of applicants   | see suitable applicants at a glance                                    |
+| `* * *`  | user                                       | undo or redo my last action            | rectify a mistake I made                                               |
 | `* * *`  | user                                       | save applicant profiles to a file      | refer to them later                                                    |
 | `* * *`  | user                                       | read applicant profiles from a file    | refer to them                                                          |
 
-*{More to be added}*
+
 
 ### Use cases
 
@@ -460,7 +496,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-*{More to be added}*
+
+**Use case: Undo the last command**
+
+**MSS**
+
+1.  User requests to undo their last command to the applicant.
+2.  InternWatcher reverts to the previous state before the last command.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. There are no previous states to revert to.
+    * 1a1. InternWatcher shows an error message.
+
+      Use case resumes at step 1.
+
+
 
 ### Non-Functional Requirements
 
