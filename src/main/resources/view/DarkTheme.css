@@ -60,6 +60,7 @@
 }
 
 .tab .tab-label {
+    -fx-font-family: "Open Sans Semibold";
     -fx-alignment: CENTER;
     -fx-text-fill: #22223b;
     -fx-font-size: 12px;
