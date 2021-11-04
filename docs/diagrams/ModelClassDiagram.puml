@@ -14,7 +14,7 @@ Class Model
 Class ModelManager
 Class UserPrefs
 Class ReadOnlyUserPrefs
-Class UniquePersonList
+Class UniqueApplicantList
 Class Applicant
 Class Email
 Class Name
@@ -40,8 +40,8 @@ ModelManager -left-> "1" InternWatcher
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-InternWatcher *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Applicant
+InternWatcher *--> "1" UniqueApplicantList
+UniqueApplicantList --> "~* all" Applicant
 Applicant *--> Name
 Applicant *--> Phone
 Applicant *--> Email
@@ -61,6 +61,7 @@ Grade -[hidden]right-> GraduationYearMonth
 GraduationYearMonth -[hidden]right-> Institution
 Institution -[hidden]right-> Job
 Job -[hidden]right-> Skill
+
 
 ModelManager -->"~* filtered" Applicant
 @enduml

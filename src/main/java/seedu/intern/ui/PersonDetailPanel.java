@@ -27,7 +27,6 @@ public class PersonDetailPanel extends UiPart<Region> {
     @FXML
     private Tab academic;
 
-
     @FXML
     private Label institution;
 
@@ -56,6 +55,7 @@ public class PersonDetailPanel extends UiPart<Region> {
      * Sets the detail panel to display the {@code Applicant} specified.
      *
      * @param applicant Applicant to be displayed
+     * @param isToggle flag to indicate whether tab should be toggled
      */
     public void showApplicant(Applicant applicant, boolean isToggle) {
         SingleSelectionModel<Tab> selectionModel = tabPane.getSelectionModel();
@@ -88,7 +88,6 @@ public class PersonDetailPanel extends UiPart<Region> {
      *             Fourth Index: Grade
      */
     private void setAcademicTab(String[] text) {
-
         //TODO: Might be better to get the Person and populate dynamically instead of having a string array produced.
         institution.setText(text[0]);
         course.setText(text[1]);
@@ -110,7 +109,7 @@ public class PersonDetailPanel extends UiPart<Region> {
 
         skillSet.stream()
                 .sorted(Comparator.comparing(skill -> skill.skillName))
-                .forEach(skill -> skills.getChildren().add(new Label( skill.skillName)));
+                .forEach(skill -> skills.getChildren().add(new Label(skill.skillName)));
 
     }
 }

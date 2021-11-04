@@ -47,9 +47,18 @@ public class PersonListPanel extends UiPart<Region> {
     }
 
     /**
+     * Selects the provided applicant.
+     *
+     * @param applicant applicant to select.
+     */
+    public void selectApplicant(Applicant applicant) {
+        personListView.getSelectionModel().select(applicant);
+    }
+
+    /**
      * Adds a listener that will be called when a different {@code PersonCard} is selected.
      *
-     * @param listener
+     * @param listener listener to be added to the ListView
      */
     public void addSelectedListener(ChangeListener<Applicant> listener) {
         personListView.getSelectionModel().selectedItemProperty().addListener(listener);

@@ -152,12 +152,30 @@ Classes used by multiple components are in the `seedu.InternWatcher.commons` pac
 
 ## **Implementation**
 
-This section describes some noteworthy details on how certain features are implemented.
+This section describes some noteworthy details and design considerations on how certain features are implemented.
+
+###  Add feature
+
+#### Design considerations:
+**Aspect: Prevent duplicate entries**
+- **Alternative 1 (current choice)**: Disallow entries with duplicate names in a case-insensitive manner.
+    - Pros: Easy to implement
+    - Cons: Disallow different people of same name to be added to the app at the same time.
+- **Alternative 2**: Create and use another unique attribute for the applicants and use that for identification.
+    - Pros: Allow for multiple entries with the same name.
+    - Cons: Harder to implement. Users may abuse the `add` command intentionally and unintentionally.<br>
+
+Therefore, with the above consideration and the fact that different applicants sharing same name is relatively rare case. We decided to proceed with alternative 1.
+<br>
+<br>
+**Aspect: Restriction over graduation year month**
+As internship has timeliness as its nature and our application development only started in 2021, it would be more reasonable for us to set January 2020 to be the lower bound of accepted graduation year month to give HRs some allowance to keep some previous data. However, anyone who graduated before such said time will not likely be looking for an internship anymore, and therefore should be disallowed in our system.
+
 
 ###  Edit ALL feature
 
 #### Implementation
-The edit ALL mechanism is facilitated by the new `Selection` class. A new parser `ParserUtil#parseSelection` 
+The edit ALL mechanism is facilitated by the new `Selection` class. A new parser `ParserUtil#parseSelection`
 has been added to parse `Selection` values, which accepts either integers or the `ALL` string. The `Selection` class supports
 operations `Selection#hasAllFlag` and `Selection#hasIndex`, which is used by `EditCommand#execute`. `EditCommand#execute`
 has been modified, such that whenever `Selection#hasAllFlag` returns `true`, `EditCommand#execute` edits all applicants with
@@ -191,7 +209,7 @@ has been modified, such that whenever `Selection#hasAllFlag` returns `true`, `De
     - Pros: Easy to implement
     - Cons: `DeleteCommand` and its related parsers may become harder to test since its behaviour is now different depending
       on the user input.
-- **Alternative 2**: Create a special `Index` of -1 when ALL tag is attached, as such, only when the index is -1, will we execute 'delete All' 
+- **Alternative 2**: Create a special `Index` of -1 when ALL tag is attached, as such, only when the index is -1, will we execute 'delete All'
     - Pros: Easy to implement
     - Cons: Bypasses the intention of the Index Class. Having a negative `Index` might throw unexpected errors.
 
@@ -209,6 +227,18 @@ It produces a `FilterApplicantDescriptor`, which in turn feeds in to create a `F
 The `FilterCommand` will make use of the `FilterApplicantDescriptor` to create a `CombineFiltersPredicate` that will be supplied to `ModelManager#updateFilteredApplicantList(Predicate<Applicant>)` in its `execute` method.
 <br/>
 `ModelManager` helps filter through the applicant list with specified filter criteria contained and interpreted by the `CombineFiltersPredicate#test()`.
+![FilterSequenceDiagram](images/filter/FilterSequenceDiagram.png)
+
+#### Design considerations:
+**Aspect: How filter for different attributes work**
+- **Name, Phone, Email**: These attributes are excluded from filter criteria as `filter` is supposed to serve the purpose of selecting potential candidates based on practical considerations other than these three attributes.
+- **Grade**: HRs should be more interested in finding candidates whose grades meet a certain threshold. Therefore, only applicants that have grades not smaller than the input `Grade` will be displayed.
+- **GraduationYearMonth**: HRs should be more interested in finding candidates who graduate before a certain period and who are readily available for deployment before internship starts. Therefore, only applicants that graduate strictly earlier than the input `GraduationYearMonth` will be displayed. 
+- **Institutions**: HRs should be more open to accept applicants from a collection of institutions. For example, HRs may be interested in finding applicants that are from either NUS or NTU as the company has affiliation programme with the said two institutions. Also, such filters should be case-insensitive as the capitalisation is not meaningful when considering the said attributes.
+- **Jobs**: HRs should be more interested in filtering applicants for a range of related jobs. For example, HRs may be interested in choosing appropriate applicants for both software engineer and software tester as the requirements for both jobs are similar, and it is easier to look at both at once. Also, such filters should be case-insensitive as the capitalisation is not meaningful when considering the said attributes.
+- **Skills**: HRs should be more interested to use multiple `Skill` filters to exclusively find applicants that have all skills required in order to perform the applied job. And the filters shall be case-sensitive as capitalisation may differentiate two seemingly same skills.
+- **Statues**: HRs should be more interested to only look at certain groups of applicants filtered by a selection of `Status` filters. For example, a HR wishes to delete all applicants to a job except for those "accepted" after the job is filled up. This filter shall be case-sensitive as it is a special tag that has pre-defined elements.
+- **Courses**: HRs should be more interested to find applicants from a collection of courses as one same job can be assigned to applicants from similar but different courses. Also, the filter shall be case-insensitive.
 
 ### Undo/redo feature
 
@@ -516,12 +546,12 @@ testers are expected to do more *exploratory* testing.
 2. _{ more test cases …​ }_
 
 ### Viewing an applicant's details
-1. Viewing an applicant's details while all applicants are being shown 
+1. Viewing an applicant's details while all applicants are being shown
    1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list.
-   2. Test case: `view 1`<br> 
+   2. Test case: `view 1`<br>
       Expected: First applicant's details are displayed. Details of the applicant is shown in the status message. Timestamp in the status bar is updated.
    3. Test case: `view 0`<br>
-      Expected: No applicant detail displayed. Error details shown in the status message. Status bar remains the same. 
+      Expected: No applicant detail displayed. Error details shown in the status message. Status bar remains the same.
    4. Other incorrect view commands to try: `view`, `view x`. `...`(where x is larger than the list or a non-positive number)<br>
       Expected: Similar to previous.
 2. _{ more test cases …​ }_

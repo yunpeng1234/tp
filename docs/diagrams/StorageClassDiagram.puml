@@ -39,5 +39,4 @@ JsonInternWatcherStorage .up.|> InternWatcherStorage
 JsonInternWatcherStorage ..> JsonSerializableInternWatcher
 JsonSerializableInternWatcher --> "*" JsonAdaptedApplicant
 JsonAdaptedApplicant --> "*" JsonAdaptedTag
-
 @enduml
