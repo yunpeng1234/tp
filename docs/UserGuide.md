@@ -185,7 +185,7 @@ Format: `edit ALL a/APPLICATION_STATUS`
 
 
 Examples:
-*  `edit 1 p/91234567 e/yeoh_alex@example.com` Edits the phone number and email address of the 1st applicant to be `91234567` and `yeoh_alex@example.com` respectively.
+*  `edit 1 p/89274567 e/alex_yeoh@example.com` Edits the phone number and email address of the 1st applicant to be `89274567` and `alex_yeoh@example.com` respectively.
 
 |Command|Effect|
 |---|---|
@@ -197,7 +197,7 @@ Examples:
 |---|---|
 |<img src="images/EditSkillBefore.png" alt="drawing" />|<img src="images/EditSkillAfter.png" alt="drawing" />|
 
-*  `filter a/INTERVIEWED` followed by `edit ALL a/ACCEPTED` Updates all applicants with `INTERVIEWED` application status to have the `ACCEPTED` APPLICATION_STATUS.
+*  `filter a/APPLIED` followed by `edit ALL a/INTERVIEWED` Updates all applicants with `INTERVIEWED` application status to have the `ACCEPTED` APPLICATION_STATUS.
 
 |Command|Effect|
 |---|---|
@@ -303,7 +303,7 @@ Examples:
 |---|---|
 |<img src="images/RedoClearBefore.png" alt="drawing" />|<img src="images/RedoClearAfter.png" alt="drawing" />|
 
-* `redo` followed by `delete 2`. As the state after `delete` becomes the newest state, there are no undoable actions to be redone.
+* `delete 2` followed by `redo`. As the state after `delete` becomes the newest state, there are no undoable actions to be redone.
   ![ No action to redo](images/NoRedo.png)
 
 ### Exiting the program : `exit`
