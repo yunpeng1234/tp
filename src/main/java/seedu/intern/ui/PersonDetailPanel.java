@@ -55,6 +55,7 @@ public class PersonDetailPanel extends UiPart<Region> {
      * Sets the detail panel to display the {@code Applicant} specified.
      *
      * @param applicant Applicant to be displayed
+     * @param isToggle flag to indicate whether tab should be toggled
      */
     public void showApplicant(Applicant applicant, boolean isToggle) {
         SingleSelectionModel<Tab> selectionModel = tabPane.getSelectionModel();
