@@ -13,6 +13,7 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
+
 [-> LogicManager : execute("edit ALL a/ ACCEPTED")
 activate LogicManager
 
@@ -59,8 +60,19 @@ EditCommand -> Model : setApplicant(applicant, editedApplicant)
 activate Model
 
 Model --> EditCommand : d
-deactivate Model
+
 end
+
+EditCommand -> Model : commitInternWatcher(commitMessage)
+
+Model -> Model : commitState(commitMessage)
+
+activate Model
+Model --> Model
+deactivate Model
+
+Model --> EditCommand
+deactivate Model
 
 create CommandResult
 EditCommand -> CommandResult

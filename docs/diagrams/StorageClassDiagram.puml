@@ -18,7 +18,7 @@ package "InternWatcher Storage" #F4F6F6{
 Interface InternWatcherStorage <<Interface>>
 Class JsonInternWatcherStorage
 Class JsonSerializableInternWatcher
-Class JsonAdaptedPerson
+Class JsonAdaptedApplicant
 Class JsonAdaptedTag
 }
 
@@ -37,7 +37,6 @@ Storage -right-|> InternWatcherStorage
 JsonUserPrefsStorage .up.|> UserPrefsStorage
 JsonInternWatcherStorage .up.|> InternWatcherStorage
 JsonInternWatcherStorage ..> JsonSerializableInternWatcher
-JsonSerializableInternWatcher --> "*" JsonAdaptedPerson
-JsonAdaptedPerson --> "*" JsonAdaptedTag
-
+JsonSerializableInternWatcher --> "*" JsonAdaptedApplicant
+JsonAdaptedApplicant --> "*" JsonAdaptedTag
 @enduml
