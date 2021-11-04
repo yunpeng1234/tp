@@ -192,7 +192,9 @@ should be edited.
 - **Alternative 2**: Create a separate `EditAllCommand` with its own parser.
     - Pros: Easier to test, the behaviour of `EditAllCommand` should not affect `EditCommand`.
     - Cons: Harder to implement. Users might also find editing multiple applicants having a separate command unintuitive.
-
+      
+![EditAllSequenceDiagram](images/EditAllSequenceDiagram.png)
+      
 ###  Delete ALL feature
 
 #### Implementation
