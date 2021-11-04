@@ -8,47 +8,65 @@ Package Model <<Rectangle>>{
 Interface ReadOnlyInternWatcher <<Interface>>
 Interface ReadOnlyUserPrefs <<Interface>>
 Interface Model <<Interface>>
+Class VersionedInternWatcher
 Class InternWatcher
 Class ReadOnlyInternWatcher
 Class Model
 Class ModelManager
 Class UserPrefs
 Class ReadOnlyUserPrefs
-
-
 Class UniqueApplicantList
 Class Applicant
-Class Phone
+Class Email
 Class Name
-Class Grade
-Class Institution
+Class Phone
+Class Skill
 Class Job
+Class Grade
+Class GraduationYearMonth
 Class ApplicationStatus
 Class Course
-Class Email
+Class Institution
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
 InternWatcher .up.|> ReadOnlyInternWatcher
+VersionedInternWatcher .up.|> InternWatcher
+
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyInternWatcher
-ModelManager -left-> "1" InternWatcher
+ModelManager -left-> "1" VersionedInternWatcher
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-InternWatcher *--> "1" UniqueApplicantList
+VersionedInternWatcher *--> "1" UniqueApplicantList
 UniqueApplicantList --> "~* all" Applicant
 Applicant *--> Name
+Applicant *--> Phone
+Applicant *--> Email
+Applicant *--> Course
+Applicant *--> "*" Skill
+Applicant *--> ApplicationStatus
+Applicant *--> Job
+Applicant *--> GraduationYearMonth
 Applicant *--> Grade
 Applicant *--> Institution
-Applicant *--> Job
-Applicant *--> ApplicationStatus
-Applicant *--> Course
-Applicant *--> Email
+
+Name -[hidden]right-> Phone
+Phone -[hidden]right-> Course
+Course -[hidden]right-> Email
+Email -[hidden]right-> Grade
+Grade -[hidden]right-> GraduationYearMonth
+GraduationYearMonth -[hidden]right-> Institution
+Institution -[hidden]right-> Job
+Job -[hidden]right-> Skill
+ReadOnlyInternWatcher -[hidden]right-> Model
+Model -[hidden]right-> ReadOnlyUserPrefs
+
 
 ModelManager -->"~* filtered" Applicant
 @enduml

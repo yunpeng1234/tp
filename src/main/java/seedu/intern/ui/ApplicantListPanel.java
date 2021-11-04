@@ -14,9 +14,9 @@ import seedu.intern.model.applicant.Applicant;
 /**
  * Panel containing the list of persons.
  */
-public class PersonListPanel extends UiPart<Region> {
+public class ApplicantListPanel extends UiPart<Region> {
     private static final String FXML = "PersonListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+    private final Logger logger = LogsCenter.getLogger(ApplicantListPanel.class);
 
     @FXML
     private ListView<Applicant> personListView;
@@ -24,16 +24,16 @@ public class PersonListPanel extends UiPart<Region> {
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public PersonListPanel(ObservableList<Applicant> applicantList) {
+    public ApplicantListPanel(ObservableList<Applicant> applicantList) {
         super(FXML);
         personListView.setItems(applicantList);
-        personListView.setCellFactory((listView) -> new PersonListViewCell());
+        personListView.setCellFactory((listView) -> new ApplicantListViewCell());
     }
 
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Applicant} using a {@code PersonCard}.
      */
-    class PersonListViewCell extends ListCell<Applicant> {
+    class ApplicantListViewCell extends ListCell<Applicant> {
         @Override
         protected void updateItem(Applicant applicant, boolean empty) {
             super.updateItem(applicant, empty);
@@ -41,7 +41,7 @@ public class PersonListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new PersonCard(applicant, getIndex() + 1).getRoot());
+                setGraphic(new ApplicantCard(applicant, getIndex() + 1).getRoot());
             }
         }
     }
