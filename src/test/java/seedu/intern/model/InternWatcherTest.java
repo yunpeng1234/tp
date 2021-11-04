@@ -36,7 +36,7 @@ public class InternWatcherTest {
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
+    public void resetData_withValidReadOnlyInternWatcher_replacesData() {
         InternWatcher newData = getTypicalInternWatcher();
         internWatcher.resetData(newData);
         assertEquals(newData, internWatcher);
@@ -59,18 +59,18 @@ public class InternWatcherTest {
     }
 
     @Test
-    public void hasApplicant_applicantNotInAddressBook_returnsFalse() {
+    public void hasApplicant_applicantNotInInternWatcher_returnsFalse() {
         assertFalse(internWatcher.hasApplicant(ALICE));
     }
 
     @Test
-    public void hasApplicant_applicantInAddressBook_returnsTrue() {
+    public void hasApplicant_applicantInInternWatcher_returnsTrue() {
         internWatcher.addApplicant(ALICE);
         assertTrue(internWatcher.hasApplicant(ALICE));
     }
 
     @Test
-    public void hasApplicant_applicantWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    public void hasApplicant_applicantWithSameIdentityFieldsInInternWatcher_returnsTrue() {
         internWatcher.addApplicant(ALICE);
         Applicant editedAlice = new ApplicantBuilder(ALICE).withSkills(VALID_SKILL_JAVA)
                 .build();
@@ -83,7 +83,7 @@ public class InternWatcherTest {
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose applicants list can violate interface constraints.
+     * A stub ReadOnlyInternWatcher whose applicants list can violate interface constraints.
      */
     private static class InternWatcherStub implements ReadOnlyInternWatcher {
         private final ObservableList<Applicant> applicants = FXCollections.observableArrayList();

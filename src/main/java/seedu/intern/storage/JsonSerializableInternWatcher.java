@@ -37,7 +37,8 @@ class JsonSerializableInternWatcher {
      * @param source future changes to this will not affect the created {@code JsonSerializableInternWatcher}.
      */
     public JsonSerializableInternWatcher(ReadOnlyInternWatcher source) {
-        applicants.addAll(source.getApplicantList().stream().map(JsonAdaptedApplicant::new).collect(Collectors.toList()));
+        applicants.addAll(source.getApplicantList().stream().map(JsonAdaptedApplicant::new)
+                .collect(Collectors.toList()));
     }
 
     /**

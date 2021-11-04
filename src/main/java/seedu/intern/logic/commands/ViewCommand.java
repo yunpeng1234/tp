@@ -49,11 +49,13 @@ public class ViewCommand extends Command {
         if (toggle) {
             Applicant applicantToView = lastShownList.get(targetIndex.getZeroBased());
             model.displayApplicant(applicantToView, true);
-            return new CommandResult(String.format(MESSAGE_VIEW_APPLICANT_SUCCESS, applicantToView), false, false, true);
+            return new CommandResult(String.format(MESSAGE_VIEW_APPLICANT_SUCCESS,
+                    applicantToView), false, false, true);
         } else {
             Applicant applicantToView = lastShownList.get(targetIndex.getZeroBased());
             model.displayApplicant(applicantToView, false);
-            return new CommandResult(String.format(MESSAGE_VIEW_APPLICANT_SUCCESS, applicantToView), false, false, true);
+            return new CommandResult(String.format(MESSAGE_VIEW_APPLICANT_SUCCESS,
+                    applicantToView), false, false, true);
         }
     }
 

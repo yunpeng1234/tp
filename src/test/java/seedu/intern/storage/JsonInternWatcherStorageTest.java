@@ -74,7 +74,7 @@ public class JsonInternWatcherStorageTest {
     }
 
     @Test
-    public void saveAddressBook_nullFilePath_throwsNullPointerException() {
+    public void saveInternWatcher_nullFilePath_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> saveInternWatcher(new InternWatcher(), null));
     }
 }
