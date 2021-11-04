@@ -48,4 +48,4 @@ Given below are my contributions to the project.
       * update Glossary
 
 * **Contributions to Project Management and Organisation:**:
-  *  Managed and organised project resources/minutes and faciliated discussions/meetings ([Google Drive](https://drive.google.com/drive/u/0/folders/1jFDuJ2T-VEtskOZSgQ4Ce28nM-mkgGDa))
+  *  Managed and organised project resources/minutes and facilitated discussions/meetings ([Google Drive](https://drive.google.com/drive/u/0/folders/1jFDuJ2T-VEtskOZSgQ4Ce28nM-mkgGDa))
