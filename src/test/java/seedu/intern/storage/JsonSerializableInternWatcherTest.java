@@ -19,7 +19,8 @@ public class JsonSerializableInternWatcherTest {
             "data", "JsonSerializableInternWatcherTest");
     private static final Path TYPICAL_APPLICANTS_FILE = TEST_DATA_FOLDER.resolve("typicalApplicantsInternWatcher.json");
     private static final Path INVALID_APPLICANT_FILE = TEST_DATA_FOLDER.resolve("invalidApplicantInternWatcher.json");
-    private static final Path DUPLICATE_APPLICANT_FILE = TEST_DATA_FOLDER.resolve("duplicateApplicantInternWatcher.json");
+    private static final Path DUPLICATE_APPLICANT_FILE = TEST_DATA_FOLDER
+            .resolve("duplicateApplicantInternWatcher.json");
 
     @Test
     public void toModelType_typicalApplicantsFile_success() throws Exception {

@@ -48,14 +48,14 @@ public class JsonInternWatcherStorageTest {
 
     @Test
     public void readInternWatcher_invalidApplicantInternWatcher_throwDataConversionException() {
-        assertThrows(DataConversionException.class,
-                () -> readInternWatcher("invalidApplicantInternWatcher.json"));
+        assertThrows(DataConversionException.class, () ->
+                readInternWatcher("invalidApplicantInternWatcher.json"));
     }
 
     @Test
     public void readInternWatcher_invalidAndValidApplicantInternWatcher_throwDataConversionException() {
-        assertThrows(DataConversionException.class,
-                () -> readInternWatcher("invalidAndValidApplicantInternWatcher.json"));
+        assertThrows(DataConversionException.class, () ->
+                readInternWatcher("invalidAndValidApplicantInternWatcher.json"));
     }
 
     @Test
