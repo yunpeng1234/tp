@@ -177,10 +177,21 @@ As internship has timeliness as its nature and our application development only 
 #### Implementation
 The edit ALL mechanism is facilitated by the new `Selection` class. A new parser `ParserUtil#parseSelection`
 has been added to parse `Selection` values, which accepts either integers or the `ALL` string. The `Selection` class supports
-operations `Selection#hasAllFlag` and `Selection#hasIndex`, which is used by `EditCommand#execute`. `EditCommand#execute`
-has been modified, such that whenever `Selection#hasAllFlag` returns `true`, `EditCommand#execute` edits all applicants with
+operations `Selection#hasAllSelectFlag` and `Selection#hasIndex`, which is used by `EditCommand#execute`. `EditCommand#execute`
+has been modified, such that whenever `Selection#hasAllSelectFlag` returns `true`, `EditCommand#execute` edits all applicants with
 the fields specified. `Selection` has been given a private constructor with static factory methods `Selection#fromIndex` and
 `Selection#fromAllFlag` to ensure `Selection` should not contain both index and all flag.
+
+The following activity diagrams summarizes what happens when a user enters an `edit` command.
+
+<img src="images/EditActivityDiagram.png" width="250" />
+
+Edit ALL updates the details of all currently displayed applicants by obtaining the list of currently displayed applicants via `Model#getFilteredPersonList`.
+The list is then copied, after which each individual applicant is modified via `Model#setApplicant` in a for loop.
+
+The following sequence diagram summaries what happens when a user enters an `edit``ALL` command.
+
+<img src="images/EditAllSequence.png"/>
 
 #### Design considerations:
 **Aspect: How edit ALL is parsed**
@@ -193,13 +204,32 @@ should be edited.
     - Pros: Easier to test, the behaviour of `EditAllCommand` should not affect `EditCommand`.
     - Cons: Harder to implement. Users might also find editing multiple applicants having a separate command unintuitive.
 
+**Aspect: How edit arguments are stored**
+- **Alternative 1 (current choice)**: Create a `Selection` class with private constructor and static factory methods to store either the 
+`ALL` flag or the `Index`.
+    - Pros: Disallows `ALL` flag to exist together with `Index`, making debugging easier. Keeps modifications to existing classes minimal.
+    - Cons: Most `EditCommand` tests would have to be changed to accommodate the new constructor. `Selection`
+- **Alternative 2**: Overload `EditCommand` constructor to accept an additional boolean flag.
+    - Pros: Easy to implement, existing classes/methods need not be changed.
+    - Cons: Additional parser method must be created. Users may unintentionally pass both `ALL` and `Index` to parser.
+
+**Aspect: What attributes can edit ALL accept**
+- **Alternative 1 (current choice)**: Only allow mass modifications to `ApplicationStatus`.
+    - Pros: Users cannot unintentionally modify all applicants' personal details, such as `Name`, `Email`, `Grade`. 
+    There should not be a reason to mass modify these fields. If a user created a number of applicants with the wrong details 
+    `UndoCommand` can be used instead.
+    - Cons: Usage of `edit ALL` would be limited.
+- **Alternative 2**: Allow mass modifications of all applicants
+    - Pros: `edit ALL` behaviour can be kept similar to `edit INDEX`, increasing usability.
+    - Cons: Allows users to unintentionally modify applicant fields that should normally not require mass edits.
+
 ###  Delete ALL feature
 
 #### Implementation
 The delete ALL mechanism is facilitated by the new `Selection` class shared with edit ALL. A new parser `ParserUtil#parseSelection`
 has been added to parse `Selection` values, which accepts either integers or the `ALL` string. The `Selection` class supports
-operations `Selection#hasAllFlag` and `Selection#hasIndex`, which is used by `DeleteCommand#execute`. `DeleteCommand#execute`
-has been modified, such that whenever `Selection#hasAllFlag` returns `true`, `DeleteCommand#execute` delete all applicants on the displayed list. `Selection` has been given a private constructor with static factory methods `Selection#fromIndex` and
+operations `Selection#hasAllSelectFlag` and `Selection#hasIndex`, which is used by `DeleteCommand#execute`. `DeleteCommand#execute`
+has been modified, such that whenever `Selection#hasAllSelectFlag` returns `true`, `DeleteCommand#execute` delete all applicants on the displayed list. `Selection` has been given a private constructor with static factory methods `Selection#fromIndex` and
 `Selection#fromAllFlag` to ensure `Selection` should not contain both index and all flag.
 
 #### Design considerations:
@@ -353,11 +383,11 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
+| Priority | As a …​                                 | I want to …​                        | So that I can…​                                                        |
 | -------- | ------------------------------------------ | -------------------------------------- | ---------------------------------------------------------------------- |
 | `* * *`  | new user                                   | see usage instructions                 | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new applicant                       |                                                                        |
-| `* * *`  | user                                       | delete an applicant                        | remove entries that I no longer need                                   |
+| `* * *`  | user                                       | add a new applicant                    |                                                                        |
+| `* * *`  | user                                       | delete an applicant                    | remove entries that I no longer need                                   |
 | `* * *`  | user                                       | update applicant details               | change entries accordingly                                             |
 | `* * *`  | user                                       | update all filtered applicants' details| change all entries accordingly                                         |
 | `* * *`  | user                                       | view an organised list of applicants   | see suitable applicants at a glance                                    |
