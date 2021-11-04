@@ -287,11 +287,13 @@ The following sequence diagram shows how the undo operation works:
 
 The `redo` command does the opposite — it calls `Model#redoInternWatcher()`, which shifts the `currStatePointer` once to the right, pointing to the previously undone state, and restores the applicant list to that state.
 
+![UndoRedoState6](images/undo-redo/UndoRedoState6.png)
+
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currStatePointer` is at index `watcherStateList.size() - 1`, pointing to the latest Intern Watcher state, then there are no undone Intern Watcher states to restore. The `redo` command uses `Model#canRedoInternWatcher()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the applicant list, such as `list`, will usually not call `Model#commitInternWatcher()`, `Model#undoInternWatcher()` or `Model#redoInternWatcher()`. Thus, the `watcherStateList` remains unchanged.
+Step 5. Let's say that the user goes through with the Undo command and the `currStatePointer` points to the previous state. The user then decides to execute the command `list`. Commands that do not modify the applicant list, such as `list`, will usually not call `Model#commitInternWatcher()`, `Model#undoInternWatcher()` or `Model#redoInternWatcher()`. Thus, the `watcherStateList` remains unchanged.
 
 ![UndoRedoState4](images/undo-redo/UndoRedoState4.png)
 
@@ -301,7 +303,7 @@ Step 6. The user executes `clear`, which calls `Model#commitInternWatcher()`. Si
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<img src="images/CommitActivityDiagram.png" width="250" />
+<img src="images/undo-redo/CommitActivityDiagram.png" width="250" />
 
 #### Design considerations:
 
@@ -316,9 +318,15 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the applicant being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-### \[Proposed\] Data archiving
+**Aspect: How to store saved states:**
 
-_{Explain here how the data archiving feature will be implemented}_
+* **Alternative 1:** Use two stack data structures, one for Command history and one for Undo history.
+    * Pros: Using a stack is intuitive for undo/redo as the current state is simply the top of the Command History stack. When undo is executed, the top of the stack can be popped and added into the Undo History stack. 
+    * Cons: We must implement and manage two stacks for the functionality.
+    
+* **Alternative 2 (current choice):** Use array list data structure with a pointer.
+    * Pros: Easy to implement. Only requires one data structure for both undo and redo. 
+    * Cons: No cons.
 
 
 --------------------------------------------------------------------------------------------------------------------
