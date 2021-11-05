@@ -26,27 +26,32 @@ This user guide covers a quick walk through how to use this application, as well
 
 5. Type any command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
 
-6. Some example commands you can try:
+6. Here's an example usage of Intern Watcher:
+    
+   * Let's start by adding a few applicants to Intern Watcher. `add n/John p/123 e/a@a.com g/4.50 i/NTU c/Computer Science y/06/2025 a/APPLIED` : Adds an applicant named `John` to Intern Watcher.
 
-   * `list` : Lists all applicants.
+   * Add another applicant to the list: `add n/Jane p/999 e/b@b.com g/4.80 i/NTU c/Computer Science y/06/2025 a/APPLIED`.
 
-   * `add n/John p/123 e/a@a.com g/4.50 i/NTU c/Computer Science y/06/2025 a/INTERVIEWED` : Adds an applicant named `John` to Intern Watcher.
+   * Say you only want to interview applicants studying computer science with a GPA greater than or equal to 4.80. 
+   `filter g/4.80 c/Computer Science` : Lists all applicants satisfying the criteria. Namely, applicant `Jane`.
 
-   * `find john` : Lists all applicants whose name contains john.
+   * Let's give the filtered applicants the `SCHEDULED` application status to indicate our plans to interview them.
+   `edit ALL a/SCHEDULED` : Edits all currently displayed applicants(`Jane`) to have the `SCHEDULED` application status.
+   
+   * Say we do not wish to keep `John` in our records, since we have no plans to interview him. `find John`: Finds all applicants 
+   with name containing `John`.
+   
+   * `delete 1`: Deletes the first applicant in our `find` results.
 
-   * `filter g/4.50 c/Computer Science` : Lists all applicants who have a grade greater or equal to 4.50 and who are studying the Computer Science course.
+   * Perhaps we wish to reconsider `John`. `undo` : Undo the last command that you entered, namely `delete`.
+   
+   * View the skills `John` indicated. `view 1 T` : Displays the skills of the 1st applicant.
 
-   * `delete 3` : Deletes the 3rd applicant shown in the current list.
+   * Perhaps we decide once again that `John` is not a good fit. `redo` : Reverse the last undo command, deletes `John`.
 
-   * `view 3 T` : Displays the skills of the 3rd applicant shown in the current list.
+   * `exit` : Saves the data we have and exits the application.
 
-   * `undo` : Undo the last command that you entered.
-
-   * `redo` : Reverse the last undo command.
-
-   * `clear` : Deletes all applicants from the application.
-
-7. To see more detailed information abuot each command, refer to [Features](#features).
+7. To see more detailed information about each command, refer to [Features](#features).
 8. To see restrictions and specifications of each field, refer to [Specification of Fields.](#specification-of-fields).
 
 --------------------------------------------------------------------------------------------------------------------
@@ -95,11 +100,11 @@ Adds a new applicant to Intern Watcher.
 
 Format: `add n/NAME p/PHONE e/EMAIL g/GRADE i/INSTITUTION c/COURSE y/GRADUATION_YEAR_MONTH j/JOB [a/APPLICATION_STATUS] [s/SKILL]…+`
 
-* Entries with same `NAME` (case-insensitive) will not be allowed. For example, `John Doe` and `john doe` are considered the same applicant and the second entry will not be allowed.
-* `APPLICATION_STATUS` and `SKILL` are case-sensitive.
+* Entries with same `NAME` will not be allowed. For example, `John Doe` and `john doe` are considered the same person.
+* `NAME`, `APPLICATION_STATUS` and `SKILL` are case-sensitive.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-An applicant can have any number of skills (including 0)
+An applicant can have any number of skills
 </div>
 
 Examples:
@@ -122,7 +127,6 @@ Format: `view INDEX [T]`
 
 * If only `INDEX` is specified, it will show the specified applicant's academic records by default.
   * `INDEX` refers to the index number of the applicant, shown in the applicant list.
-  * `INDEX` must be a positive integer, e.g. 1, 2, 3, …
 * Specifying `T` together with `INDEX` switches between the academic records tab and the skills tab.
 
 Examples:
@@ -145,7 +149,8 @@ Displays applicants in Intern Watcher that match one or more given fields.
 Format: `filter [g/GRADE] [i/INSTITUTION]…+ [c/COURSE]…+ [y/GRADUATION_YEAR_MONTH] [j/JOB]…+ [a/STATUS]…+ [s/SKILL]…+`
 
 * `filter` will show applicants that matches all fields specified.
-* `[i/INSTITUTION]…+`, `[c/COURSE]…+` and `[j/JOB]…+` are case-insensitive and `[a/STATUS]…+` and `[s/SKILL]…+` are case-sensitive.
+* `[i/INSTITUTION]…+`, `[c/COURSE]…+` and `[j/JOB]…+` are case-insensitive.
+* `[a/STATUS]…+` and `[s/SKILL]…+` are case-sensitive.
 * If `[g/GRADE]` is specified, it will show all applicants with grades higher or equal to the `g/Grade` specified.
 * Likewise, if `[y/GRADUATION_YEAR_MONTH]` is specified, it will show all applicants with graduation dates that is strictly before the `GRADUATION_YEAR_MONTH` specified.
 * If `[s/SKILL]…+` is specified, only applicants with all specified `[s/SKILL]…+` will be shown.
@@ -172,7 +177,6 @@ Edits the information of an existing applicant, or the application status of all
 #### Edit a specific applicant:
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [g/GRADE] [i/INSTITUTION] [c/COURSE] [y/GRADUATION_YEAR_MONTH] [j/JOB] [a/APPLICATION_STATUS] [s/SKILL]…`
 * If only `INDEX` is specified, the applicant at the specified `INDEX` will be edited.
-    * `INDEX` refers to the index number shown in the displayed applicant list. The index **must be a positive integer** e.g. 1, 2, 3, …
 * When editing skills, all existing skills of the applicant will be replaced i.e adding of skills is not cumulative.
 * You can remove all the applicant’s skills by typing `s/` without
   specifying any skills after it.
@@ -180,9 +184,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [g/GRADE] [i/INSTITUTION] [c/CO
 #### Edit all currently displayed applicants:
 Format: `edit ALL a/APPLICATION_STATUS`
 * If `ALL` is specified, all applicants currently displayed in the applicant list will be edited.
+* Designed to be used together with [filter](#filtering-by-fields--filter).
 * Currently only the `APPLICATION_STATUS` of applicants can be edited. It is unlikely that the other fields would need multi editing.
-* The `APPLICATION_STATUS` can only be one of these 7 statuses: `ACCEPTED`, `REJECTED`, `INTERVIEWED`, `APPLIED`, `SCHEDULED`, `RECEIVED` and `OFFERED`.
-
 
 Examples:
 *  `edit 1 p/91234567 e/yeoh_alex@example.com` Edits the phone number and email address of the 1st applicant to be `91234567` and `yeoh_alex@example.com` respectively.
@@ -207,13 +210,13 @@ Examples:
 
 Deletes the specified applicant, or all applicants currently displayed in the applicant list.
 
-Format 1: `delete INDEX`
-
+#### Delete a specific applicant:
+Format: `delete INDEX`
 * If `INDEX` is specified, the applicant at the specified `INDEX` will be deleted.
-    * `INDEX` refers to the index number shown in the displayed applicant list. The index **must be a positive integer** e.g. 1, 2, 3, …
 
-Format 2: `delete ALL`
-
+#### Delete all currently displayed applicants:
+Format: `delete ALL`
+* Designed to be used together with [filter](#filtering-by-fields--filter).
 * If `ALL` is specified, all applicants currently displayed in the applicant list will be deleted.
 
 
