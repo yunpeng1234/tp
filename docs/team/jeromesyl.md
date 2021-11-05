@@ -25,7 +25,6 @@ Given below are my contributions to the project.
 * **Enhancements to existing features**:
   * Enhanced `undo` and `redo` features to display the previous command that was changed by undo or redo. ([\#127](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/127))
   * Added a lower bound value of `01/2020` for `GraduationYearMonth` field so that only recent or future applicants are valid. ([\#205](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/205))
-  * Updated logo of InternWatcher [\#213](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/213)
   * Wrote additional tests for features and fields (`GraduationMonthYear` field, `Course` field, `undo` and `redo` features) ([\#205](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/205), [\#204](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/204), [\#142](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/142))
 
 
@@ -35,12 +34,17 @@ Given below are my contributions to the project.
     * Did cosmetic tweaks to existing documentation of features `help`, `add`, `view`, `edit`, `delete`, `undo`, `redo`, and Command Summary section. Also updated user stories and use cases section. ([\#223](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/223/files))
     * Updated descriptions of new and existing fields ([\#208](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/208))
   * Developer Guide:
-    * Added implementation details of the `undo` and `redo` features, including Sequence and Activity diagrams (Pull requests [\#228](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/228), [\#118](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/118))
+    * Added implementation details of the `undo` and `redo` features, including Sequence and Activity diagrams ([\#228](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/228), [\#118](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/118))
 
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#137](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/137))
   * Reported bugs and suggestions for other teams in the class ([ped](https://github.com/Jeromesyl/ped/issues))
+
+
+* **Contributions to team-based tasks**:
+  * Updated logo of InternWatcher [\#213](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/213)
+  * Maintained issue trackers
 
 
 * **Contributions to Project Management and Organisation**:
