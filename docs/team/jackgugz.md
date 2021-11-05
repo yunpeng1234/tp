@@ -41,11 +41,11 @@ Given below are my contributions to the project.
 * **Contributions to team-based tasks**:
     * Morphing the product into a different product by adding the distinguished `filter` feature ([\#97](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/97))
     * Maintain Issue Trackers
-    * Updating user/developer docs that are not specific to a feature ([\#42](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/42)): 
-      * update product scope 
+    * Updating user/developer docs that are not specific to a feature ([\#42](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/42)):
+      * update product scope
       * update user stories
       * update NFRs
       * update Glossary
 
 * **Contributions to Project Management and Organisation:**:
-  *  Managed and organised project resources/minutes and faciliated discussions/meetings ([Google Drive](https://drive.google.com/drive/u/0/folders/1jFDuJ2T-VEtskOZSgQ4Ce28nM-mkgGDa))
+  *  Managed and organised project resources/minutes and facilitated discussions/meetings ([Google Drive](https://drive.google.com/drive/u/0/folders/1jFDuJ2T-VEtskOZSgQ4Ce28nM-mkgGDa))

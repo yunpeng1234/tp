@@ -52,6 +52,15 @@ DeleteCommand -> Model : deleteApplicant(1)
 activate Model
 
 Model --> DeleteCommand
+DeleteCommand -> Model : commitInternWatcher(commitMessage)
+activate Model
+
+Model -> Model : commitState(commitMessage)
+Model --> Model
+
+deactivate Model
+Model --> DeleteCommand
+
 deactivate Model
 
 create CommandResult

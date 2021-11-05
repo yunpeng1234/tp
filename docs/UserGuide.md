@@ -185,7 +185,7 @@ Format: `edit ALL a/APPLICATION_STATUS`
 
 
 Examples:
-*  `edit 1 p/91234567 e/yeoh_alex@example.com` Edits the phone number and email address of the 1st applicant to be `91234567` and `yeoh_alex@example.com` respectively.
+*  `edit 1 p/89274567 e/alex_yeoh@example.com` Edits the phone number and email address of the 1st applicant to be `89274567` and `alex_yeoh@example.com` respectively.
 
 |Command|Effect|
 |---|---|
@@ -197,7 +197,7 @@ Examples:
 |---|---|
 |<img src="images/EditSkillBefore.png" alt="drawing" />|<img src="images/EditSkillAfter.png" alt="drawing" />|
 
-*  `filter a/INTERVIEWED` followed by `edit ALL a/ACCEPTED` Updates all applicants with `INTERVIEWED` application status to have the `ACCEPTED` APPLICATION_STATUS.
+*  `filter a/APPLIED` followed by `edit ALL a/INTERVIEWED` Updates all applicants with `INTERVIEWED` application status to have the `ACCEPTED` APPLICATION_STATUS.
 
 |Command|Effect|
 |---|---|
@@ -268,7 +268,7 @@ Format: `undo`
 
 * Only undoable command actions can be undone.
     * Undoable command actions include: `add`, `edit`, `delete`, `clear`, `redo`.
-* Consecutive `undo` commands are available until the applicant list returns to its **initial state at launch** of the application. 
+* Consecutive `undo` commands are available until the applicant list returns to its **initial state at launch** of the application.
 * If the current state of the applicant list is the initial state, the `undo` command will not be available.
 
 
@@ -290,7 +290,7 @@ Format: `redo`
 
 * `redo` is the reverse of `undo`. Only undoable command actions can be redone.
   * Undoable actions include: `add`, `edit`, `delete`, `clear`, `redo`.
-* Consecutive `redo` commands are available until the applicant list reaches the **newest state**. 
+* Consecutive `redo` commands are available until the applicant list reaches the **newest state**.
   *  The newest state is the most recent change in history.
 * If the current state of the applicant list is the newest state, the redo command will not be available.
 * If a new undoable action is performed when the applicant list is **not** in its newest state, the current state becomes the newest state.
@@ -303,7 +303,7 @@ Examples:
 |---|---|
 |<img src="images/RedoClearBefore.png" alt="drawing" />|<img src="images/RedoClearAfter.png" alt="drawing" />|
 
-* `redo` followed by `delete 2`. As the state after `delete` becomes the newest state, there are no undoable actions to be redone.
+* `delete 2` followed by `redo`. As the state after `delete` becomes the newest state, there are no undoable actions to be redone.
   ![ No action to redo](images/NoRedo.png)
 
 ### Exiting the program : `exit`
@@ -343,7 +343,7 @@ If your changes to the data file makes its format invalid, Intern Watcher will d
 
 `Course` : The applicant's course of study in their school. Should only include alphabet characters and space only. Should not be blank.
 
-`Graduation_Year_Month` : The applicant's estimated date of graduation from their school. Should be of format MM/yyyy and be after the date 01/2020. 
+`Graduation_Year_Month` : The applicant's estimated date of graduation from their school. Should be of format MM/yyyy and be after the date 01/2020.
 
 `Job` : The job/position that the applicant applied for. Should only include alphabet characters and space only. Should not be blank.
 

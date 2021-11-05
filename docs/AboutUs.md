@@ -34,10 +34,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/jeromesyl.png" width="200px">
 
 [[github](http://github.com/Jeromesyl)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/jeromesyl.md)]
 
 * Role: Developer
-* Responsibilities: TBD
+* Responsibilities: Documentation
 
 ### Nicole Joseph
 
@@ -54,7 +54,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/yunpeng1234.png" width="200px">
 
 [[github](http://github.com/yunpeng1234)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/yunpeng1234.md)]
 
 * Role: Developer
 * Responsibilities: UI
