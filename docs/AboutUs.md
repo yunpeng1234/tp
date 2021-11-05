@@ -36,8 +36,9 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/Jeromesyl)]
 [[portfolio](team/jeromesyl.md)]
 
-* Role: Developer
-* Responsibilities: Documentation
+* Role: Scheduling and tracking
+* Responsibilities: : In charge of defining, assigning, and tracking project tasks.
+* Features: Undo/Redo feature
 
 ### Nicole Joseph
 
