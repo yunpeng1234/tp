@@ -186,7 +186,7 @@ The following activity diagrams summarizes what happens when a user enters an `e
 
 <img src="images/EditActivityDiagram.png" width="250" />
 
-Edit ALL updates the details of all currently displayed applicants by obtaining the list of currently displayed applicants via `Model#getFilteredPersonList`.
+Edit ALL updates the details of all currently displayed applicants by obtaining the list of currently displayed applicants via `Model#getFilteredApplicantList`.
 The list is then copied, after which each individual applicant is modified via `Model#setApplicant` in a for loop.
 
 The following sequence diagram summaries what happens when a user enters an `edit``ALL` command.

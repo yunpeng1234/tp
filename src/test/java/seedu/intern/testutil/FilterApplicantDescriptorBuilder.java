@@ -17,7 +17,7 @@ import seedu.intern.model.applicant.Job;
 import seedu.intern.model.skills.Skill;
 
 /**
- * A utility class to help with building EditPersonDescriptor objects.
+ * A utility class to help with building EditApplicantDescriptor objects.
  */
 
 public class FilterApplicantDescriptorBuilder {
@@ -32,7 +32,7 @@ public class FilterApplicantDescriptorBuilder {
     }
 
     /**
-     * Returns an {@code EditPersonDescriptor} with fields containing {@code applicant}'s details
+     * Returns an {@code EditApplicantDescriptor} with fields containing {@code applicant}'s details
      */
     public FilterApplicantDescriptorBuilder(Applicant applicant) {
         List<String> keywords = Arrays.asList(applicant.getCourse().toString().split(" "));
@@ -54,7 +54,7 @@ public class FilterApplicantDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Grade} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Grade} of the {@code EditApplicantDescriptor} that we are building.
      */
     public FilterApplicantDescriptorBuilder withGrade(String grade) {
         descriptor.setGrade(new Grade(grade));
@@ -62,7 +62,7 @@ public class FilterApplicantDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Institution} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Institution} of the {@code EditApplicantDescriptor} that we are building.
      */
     public FilterApplicantDescriptorBuilder withInstitution(String... institutions) {
         Set<Institution> institutionSet = Stream.of(institutions).map(Institution::new).collect(Collectors.toSet());
@@ -71,7 +71,7 @@ public class FilterApplicantDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code ApplicationStatus} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code ApplicationStatus} of the {@code EditApplicantDescriptor} that we are building.
      */
     public FilterApplicantDescriptorBuilder withApplicationStatus(String... statuses) {
         Set<ApplicationStatus> statusSet = Stream.of(statuses).map(ApplicationStatus::new).collect(Collectors.toSet());
@@ -80,14 +80,14 @@ public class FilterApplicantDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code GraduationYearMonth} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code GraduationYearMonth} of the {@code EditApplicantDescriptor} that we are building.
      */
     public FilterApplicantDescriptorBuilder withGraduationYearMonth(String graduationYearMonth) {
         descriptor.setGraduationYearMonth(new GraduationYearMonth(graduationYearMonth));
         return this;
     }
     /**
-     * Sets the {@code Course} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Course} of the {@code EditApplicantDescriptor} that we are building.
      */
     public FilterApplicantDescriptorBuilder withCourses(String... courses) {
         Set<List<String>> courseSet = Stream.of(courses).map((x) -> Arrays.asList(x.split(" ")))
@@ -97,7 +97,7 @@ public class FilterApplicantDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditApplicantDescriptor}
      * that we are building.
      */
     public FilterApplicantDescriptorBuilder withSkills(String... skills) {
@@ -107,7 +107,7 @@ public class FilterApplicantDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code jobs} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
+     * Parses the {@code jobs} into a {@code Set<Tag>} and set it to the {@code EditApplicantDescriptor}
      * that we are building.
      */
     public FilterApplicantDescriptorBuilder withJobs(String... jobs) {

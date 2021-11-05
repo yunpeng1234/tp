@@ -15,11 +15,11 @@ import seedu.intern.model.applicant.Applicant;
 import seedu.intern.model.skills.Skill;
 
 /**
- * Panel containing the details of a Person
+ * Panel containing the details of a Applicant
  */
 public class ApplicantDetailPanel extends UiPart<Region> {
 
-    private static final String FXML = "PersonDetail.fxml";
+    private static final String FXML = "ApplicantDetail.fxml";
     @FXML
     private TabPane tabPane;
     @FXML
@@ -44,7 +44,7 @@ public class ApplicantDetailPanel extends UiPart<Region> {
     private FlowPane skills;
 
     /**
-     * Creates a {@code PersonDetailPanel}.
+     * Creates a {@code ApplicantDetailPanel}.
      */
     public ApplicantDetailPanel() {
         super(FXML);
@@ -89,7 +89,7 @@ public class ApplicantDetailPanel extends UiPart<Region> {
      *             Fourth Index: Grade
      */
     private void setAcademicTab(String[] text) {
-        //TODO: Might be better to get the Person and populate dynamically instead of having a string array produced.
+        //TODO: Might be better to get the Applicant and populate dynamically instead of having a string array produced.
         institution.setText(text[0]);
         course.setText(text[1]);
         yearOfGrad.setText(text[2]);

@@ -95,7 +95,7 @@ Adds a new applicant to Intern Watcher.
 
 Format: `add n/NAME p/PHONE e/EMAIL g/GRADE i/INSTITUTION c/COURSE y/GRADUATION_YEAR_MONTH j/JOB [a/APPLICATION_STATUS] [s/SKILL]…+`
 
-* Entries with same `NAME` (case-insensitive) will not be allowed. For example, `John Doe` and `john doe` are considered the same person and the second entry will not be allowed.
+* Entries with same `NAME` (case-insensitive) will not be allowed. For example, `John Doe` and `john doe` are considered the same applicant and the second entry will not be allowed.
 * `APPLICATION_STATUS` and `SKILL` are case-sensitive.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -174,7 +174,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [g/GRADE] [i/INSTITUTION] [c/CO
 * If only `INDEX` is specified, the applicant at the specified `INDEX` will be edited.
     * `INDEX` refers to the index number shown in the displayed applicant list. The index **must be a positive integer** e.g. 1, 2, 3, …
 * When editing skills, all existing skills of the applicant will be replaced i.e adding of skills is not cumulative.
-* You can remove all the person’s skills by typing `s/` without
+* You can remove all the applicant’s skills by typing `s/` without
   specifying any skills after it.
 
 #### Edit all currently displayed applicants:

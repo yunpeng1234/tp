@@ -3,7 +3,7 @@ package seedu.intern.logic.commands;
 import static seedu.intern.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.intern.testutil.Assert.assertThrows;
 import static seedu.intern.testutil.TypicalApplicants.getTypicalInternWatcher;
-import static seedu.intern.testutil.TypicalSelections.SELECTION_FIRST_PERSON;
+import static seedu.intern.testutil.TypicalSelections.SELECTION_FIRST_APPLICANT;
 
 import java.util.List;
 
@@ -41,8 +41,11 @@ public class RedoCommandTest {
 
     @Test
     public void execute_redoDelete_success() throws CommandException {
-        Applicant applicantToDelete = model.getFilteredPersonList().get(SELECTION_FIRST_PERSON.getIndexZeroBased());
+        Applicant applicantToDelete = model.getFilteredApplicantList()
+                .get(SELECTION_FIRST_APPLICANT.getIndexZeroBased());
+
         String commitText = String.format(DeleteCommand.MESSAGE_COMMIT_DELETE, applicantToDelete);
+
         model.deleteApplicant(applicantToDelete);
         model.commitInternWatcher(commitText);
         model.undoInternWatcher();
@@ -56,7 +59,7 @@ public class RedoCommandTest {
 
     @Test
     public void execute_redoDeleteAll_success() throws CommandException {
-        List<Applicant> lastShownList = model.getFilteredPersonList();
+        List<Applicant> lastShownList = model.getFilteredApplicantList();
         int length = lastShownList.size();
         for (int i = 0; i < length; i++) {
             Applicant applicantToDelete = lastShownList.get(0);
@@ -76,11 +79,11 @@ public class RedoCommandTest {
     public void execute_redoEdit_success() throws CommandException {
         Applicant editedApplicant = new ApplicantBuilder().build();
         String commitText = String.format(EditCommand.MESSAGE_COMMIT_EDIT, editedApplicant);
-        model.setApplicant(model.getFilteredPersonList().get(0), editedApplicant);
+        model.setApplicant(model.getFilteredApplicantList().get(0), editedApplicant);
         model.commitInternWatcher(commitText);
         model.undoInternWatcher();
 
-        expectedModel.setApplicant(model.getFilteredPersonList().get(0), editedApplicant);
+        expectedModel.setApplicant(model.getFilteredApplicantList().get(0), editedApplicant);
 
         String expectedMessage = String.format(RedoCommand.MESSAGE_SUCCESS, commitText);
 

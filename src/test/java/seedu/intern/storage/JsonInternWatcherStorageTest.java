@@ -47,13 +47,15 @@ public class JsonInternWatcherStorageTest {
     }
 
     @Test
-    public void readInternWatcher_invalidPersonInternWatcher_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readInternWatcher("invalidPersonInternWatcher.json"));
+    public void readInternWatcher_invalidApplicantInternWatcher_throwDataConversionException() {
+        assertThrows(DataConversionException.class, () ->
+                readInternWatcher("invalidApplicantInternWatcher.json"));
     }
 
     @Test
-    public void readInternWatcher_invalidAndValidPersonInternWatcher_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readInternWatcher("invalidAndValidPersonInternWatcher.json"));
+    public void readInternWatcher_invalidAndValidApplicantInternWatcher_throwDataConversionException() {
+        assertThrows(DataConversionException.class, () ->
+                readInternWatcher("invalidAndValidApplicantInternWatcher.json"));
     }
 
     @Test
@@ -74,7 +76,7 @@ public class JsonInternWatcherStorageTest {
     }
 
     @Test
-    public void saveAddressBook_nullFilePath_throwsNullPointerException() {
+    public void saveInternWatcher_nullFilePath_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> saveInternWatcher(new InternWatcher(), null));
     }
 }

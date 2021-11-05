@@ -11,7 +11,7 @@ import static seedu.intern.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_SKILL;
 import static seedu.intern.logic.parser.CliSyntax.PREFIX_STATUS;
-import static seedu.intern.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.intern.model.Model.PREDICATE_SHOW_ALL_APPLICANTS;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -67,9 +67,9 @@ public class EditCommand extends Command {
             + "Example all: " + COMMAND_WORD + " ALL "
             + PREFIX_STATUS + "APPLIED\n";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Applicant: %1$s";
+    public static final String MESSAGE_EDIT_APPLICANT_SUCCESS = "Edited Applicant: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This applicant already exists in Intern Watcher.";
+    public static final String MESSAGE_DUPLICATE_APPLICANT = "This applicant already exists in Intern Watcher.";
     public static final String MESSAGE_EDIT_ALL_SUCCESS = "Successfully edited %d of %d applicants.";
     public static final String MESSAGE_COMMIT_EDIT = "Edit Applicant: %1$s";
     public static final String MESSAGE_COMMIT_EDIT_ALL = "Edit %d applicants.";
@@ -115,24 +115,24 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Applicant> lastShownList = model.getFilteredPersonList();
+        List<Applicant> lastShownList = model.getFilteredApplicantList();
 
         if (selection.hasIndex()) {
             if (selection.getIndexZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                throw new CommandException(Messages.MESSAGE_INVALID_APPLICANT_DISPLAYED_INDEX);
             }
 
             Applicant applicantToEdit = lastShownList.get(selection.getIndexZeroBased());
             Applicant editedApplicant = createEditedApplicant(applicantToEdit, editApplicantDescriptor);
 
             if (!applicantToEdit.isSameApplicant(editedApplicant) && model.hasApplicant(editedApplicant)) {
-                throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+                throw new CommandException(MESSAGE_DUPLICATE_APPLICANT);
             }
 
             model.setApplicant(applicantToEdit, editedApplicant);
-            model.updateFilteredApplicantList(PREDICATE_SHOW_ALL_PERSONS);
+            model.updateFilteredApplicantList(PREDICATE_SHOW_ALL_APPLICANTS);
             model.commitInternWatcher(String.format(MESSAGE_COMMIT_EDIT, editedApplicant));
-            return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedApplicant));
+            return new CommandResult(String.format(MESSAGE_EDIT_APPLICANT_SUCCESS, editedApplicant));
         } else {
             if (!selection.checkAllSelected()) {
                 throw new CommandException(Messages.MESSAGE_UNEXPECTED_FLAG);
@@ -160,8 +160,8 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Applicant} with the details of {@code applicantToEdit}
+     * edited with {@code editApplicantDescriptor}.
      */
     private static Applicant createEditedApplicant(Applicant applicantToEdit,
                                                    EditApplicantDescriptor editApplicantDescriptor) {
@@ -370,7 +370,7 @@ public class EditCommand extends Command {
 
         @Override
         public String toString() {
-            return "EditPersonDescriptor{"
+            return "EditApplicantDescriptor{"
                     + "name=" + name
                     + ", phone=" + phone
                     + ", email=" + email

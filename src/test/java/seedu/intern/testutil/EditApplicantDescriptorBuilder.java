@@ -18,7 +18,7 @@ import seedu.intern.model.applicant.Phone;
 import seedu.intern.model.skills.Skill;
 
 /**
- * A utility class to help with building EditPersonDescriptor objects.
+ * A utility class to help with building EditApplicantDescriptor objects.
  */
 public class EditApplicantDescriptorBuilder {
 
@@ -33,7 +33,7 @@ public class EditApplicantDescriptorBuilder {
     }
 
     /**
-     * Returns an {@code EditPersonDescriptor} with fields containing {@code applicant}'s details
+     * Returns an {@code EditApplicantDescriptor} with fields containing {@code applicant}'s details
      */
     public EditApplicantDescriptorBuilder(Applicant applicant) {
         descriptor = new EditApplicantDescriptor();
@@ -49,7 +49,7 @@ public class EditApplicantDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Name} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Name} of the {@code EditApplicantDescriptor} that we are building.
      */
     public EditApplicantDescriptorBuilder withName(String name) {
         descriptor.setName(new Name(name));
@@ -57,7 +57,7 @@ public class EditApplicantDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Phone} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Phone} of the {@code EditApplicantDescriptor} that we are building.
      */
     public EditApplicantDescriptorBuilder withPhone(String phone) {
         descriptor.setPhone(new Phone(phone));
@@ -65,7 +65,7 @@ public class EditApplicantDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Email} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Email} of the {@code EditApplicantDescriptor} that we are building.
      */
     public EditApplicantDescriptorBuilder withEmail(String email) {
         descriptor.setEmail(new Email(email));
@@ -73,7 +73,7 @@ public class EditApplicantDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Grade} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Grade} of the {@code EditApplicantDescriptor} that we are building.
      */
     public EditApplicantDescriptorBuilder withGrade(String grade) {
         descriptor.setGrade(new Grade(grade));
@@ -81,7 +81,7 @@ public class EditApplicantDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Institution} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Institution} of the {@code EditApplicantDescriptor} that we are building.
      */
     public EditApplicantDescriptorBuilder withInstitution(String institution) {
         descriptor.setInstitution(new Institution(institution));
@@ -89,7 +89,7 @@ public class EditApplicantDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code ApplicationStatus} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code ApplicationStatus} of the {@code EditApplicantDescriptor} that we are building.
      */
     public EditApplicantDescriptorBuilder withApplicationStatus(String status) {
         descriptor.setApplicationStatus(new ApplicationStatus(status));
@@ -97,21 +97,21 @@ public class EditApplicantDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code GraduationYearMonth} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code GraduationYearMonth} of the {@code EditApplicantDescriptor} that we are building.
      */
     public EditApplicantDescriptorBuilder withGraduationYearMonth(String graduationYearMonth) {
         descriptor.setGraduationYearMonth(new GraduationYearMonth(graduationYearMonth));
         return this;
     }
     /**
-     * Sets the {@code Course} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Course} of the {@code EditApplicantDescriptor} that we are building.
      */
     public EditApplicantDescriptorBuilder withCourse(String course) {
         descriptor.setCourse(new Course(course));
         return this;
     }
     /**
-     * Sets the {@code Job} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Job} of the {@code EditApplicantDescriptor} that we are building.
      */
     public EditApplicantDescriptorBuilder withJob(String job) {
         descriptor.setJob(new Job(job));
@@ -119,7 +119,7 @@ public class EditApplicantDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditApplicantDescriptor}
      * that we are building.
      */
     public EditApplicantDescriptorBuilder withSkills(String... skills) {

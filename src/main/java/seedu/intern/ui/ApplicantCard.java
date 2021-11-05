@@ -8,11 +8,11 @@ import javafx.scene.layout.Region;
 import seedu.intern.model.applicant.Applicant;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays information of a {@code Applicant}.
  */
 public class ApplicantCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "ApplicantListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -41,7 +41,7 @@ public class ApplicantCard extends UiPart<Region> {
 
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code ApplicantCode} with the given {@code Applicant} and index to display.
      */
     public ApplicantCard(Applicant applicant, int displayedIndex) {
         super(FXML);

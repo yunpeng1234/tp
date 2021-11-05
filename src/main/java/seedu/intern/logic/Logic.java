@@ -30,8 +30,8 @@ public interface Logic {
      */
     ReadOnlyInternWatcher getInternWatcher();
 
-    /** Returns an unmodifiable view of the filtered list of persons */
-    ObservableList<Applicant> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered list of applicants */
+    ObservableList<Applicant> getFilteredApplicantList();
 
     /** Returns an unmodifiable view of the applicant to view*/
     Applicant getApplicant();

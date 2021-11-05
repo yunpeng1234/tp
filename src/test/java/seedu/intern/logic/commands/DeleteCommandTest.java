@@ -4,11 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.intern.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.intern.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.intern.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.intern.logic.commands.CommandTestUtil.showApplicantAtIndex;
 import static seedu.intern.testutil.TypicalApplicants.getTypicalInternWatcher;
 import static seedu.intern.testutil.TypicalSelections.SELECTION_ALL;
-import static seedu.intern.testutil.TypicalSelections.SELECTION_FIRST_PERSON;
-import static seedu.intern.testutil.TypicalSelections.SELECTION_SECOND_PERSON;
+import static seedu.intern.testutil.TypicalSelections.SELECTION_FIRST_APPLICANT;
+import static seedu.intern.testutil.TypicalSelections.SELECTION_SECOND_APPLICANT;
 
 import org.junit.jupiter.api.Test;
 
@@ -30,10 +30,12 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Applicant applicantToDelete = model.getFilteredPersonList().get(SELECTION_FIRST_PERSON.getIndexZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(SELECTION_FIRST_PERSON);
+        Applicant applicantToDelete = model.getFilteredApplicantList()
+                .get(SELECTION_FIRST_APPLICANT.getIndexZeroBased());
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, applicantToDelete);
+        DeleteCommand deleteCommand = new DeleteCommand(SELECTION_FIRST_APPLICANT);
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_APPLICANT_SUCCESS, applicantToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getInternWatcher(), new UserPrefs());
         expectedModel.deleteApplicant(applicantToDelete);
@@ -46,7 +48,7 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(SELECTION_ALL);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_ALL_SUCCESS,
-                model.getFilteredPersonList().size());
+                model.getFilteredApplicantList().size());
 
         ModelManager expectedModel = new ModelManager();
 
@@ -55,68 +57,71 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validAllFilteredList_success() {
-        showPersonAtIndex(model, SELECTION_FIRST_PERSON.getIndex());
+        showApplicantAtIndex(model, SELECTION_FIRST_APPLICANT.getIndex());
 
-        Applicant applicantToDelete = model.getFilteredPersonList().get(SELECTION_FIRST_PERSON.getIndexZeroBased());
+        Applicant applicantToDelete = model.getFilteredApplicantList()
+                .get(SELECTION_FIRST_APPLICANT.getIndexZeroBased());
+
         DeleteCommand deleteCommand = new DeleteCommand(SELECTION_ALL);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_ALL_SUCCESS,
-                model.getFilteredPersonList().size());
+                model.getFilteredApplicantList().size());
 
         Model expectedModel = new ModelManager(model.getInternWatcher(), new UserPrefs());
         expectedModel.deleteApplicant(applicantToDelete);
-        showNoPerson(expectedModel);
+        showNoApplicant(expectedModel);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredApplicantList().size() + 1);
         DeleteCommand deleteCommand = new DeleteCommand(Selection.fromIndex(outOfBoundIndex));
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_APPLICANT_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showPersonAtIndex(model, SELECTION_FIRST_PERSON.getIndex());
+        showApplicantAtIndex(model, SELECTION_FIRST_APPLICANT.getIndex());
 
-        Applicant applicantToDelete = model.getFilteredPersonList().get(SELECTION_FIRST_PERSON.getIndexZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(SELECTION_FIRST_PERSON);
+        Applicant applicantToDelete = model.getFilteredApplicantList()
+                .get(SELECTION_FIRST_APPLICANT.getIndexZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(SELECTION_FIRST_APPLICANT);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, applicantToDelete);
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_APPLICANT_SUCCESS, applicantToDelete);
 
         Model expectedModel = new ModelManager(model.getInternWatcher(), new UserPrefs());
         expectedModel.deleteApplicant(applicantToDelete);
-        showNoPerson(expectedModel);
+        showNoApplicant(expectedModel);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showPersonAtIndex(model, SELECTION_FIRST_PERSON.getIndex());
+        showApplicantAtIndex(model, SELECTION_FIRST_APPLICANT.getIndex());
 
-        Selection outOfBoundIndex = SELECTION_SECOND_PERSON;
+        Selection outOfBoundIndex = SELECTION_SECOND_APPLICANT;
         // ensures that outOfBoundIndex is still in bounds of intern book list
-        assertTrue(outOfBoundIndex.getIndexZeroBased() < model.getInternWatcher().getPersonList().size());
+        assertTrue(outOfBoundIndex.getIndexZeroBased() < model.getInternWatcher().getApplicantList().size());
 
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_APPLICANT_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteCommand(SELECTION_FIRST_PERSON);
-        DeleteCommand deleteSecondCommand = new DeleteCommand(SELECTION_SECOND_PERSON);
+        DeleteCommand deleteFirstCommand = new DeleteCommand(SELECTION_FIRST_APPLICANT);
+        DeleteCommand deleteSecondCommand = new DeleteCommand(SELECTION_SECOND_APPLICANT);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(SELECTION_FIRST_PERSON);
+        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(SELECTION_FIRST_APPLICANT);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
@@ -132,9 +137,9 @@ public class DeleteCommandTest {
     /**
      * Updates {@code model}'s filtered list to show no one.
      */
-    private void showNoPerson(Model model) {
+    private void showNoApplicant(Model model) {
         model.updateFilteredApplicantList(p -> false);
 
-        assertTrue(model.getFilteredPersonList().isEmpty());
+        assertTrue(model.getFilteredApplicantList().isEmpty());
     }
 }

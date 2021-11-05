@@ -12,26 +12,26 @@ import seedu.intern.commons.core.LogsCenter;
 import seedu.intern.model.applicant.Applicant;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of applicants.
  */
 public class ApplicantListPanel extends UiPart<Region> {
-    private static final String FXML = "PersonListPanel.fxml";
+    private static final String FXML = "ApplicantListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(ApplicantListPanel.class);
 
     @FXML
-    private ListView<Applicant> personListView;
+    private ListView<Applicant> applicantListView;
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code ApplicantListPanel} with the given {@code ObservableList}.
      */
     public ApplicantListPanel(ObservableList<Applicant> applicantList) {
         super(FXML);
-        personListView.setItems(applicantList);
-        personListView.setCellFactory((listView) -> new ApplicantListViewCell());
+        applicantListView.setItems(applicantList);
+        applicantListView.setCellFactory((listView) -> new ApplicantListViewCell());
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Applicant} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Applicant} using a {@code ApplicantCard}.
      */
     class ApplicantListViewCell extends ListCell<Applicant> {
         @Override
@@ -52,15 +52,15 @@ public class ApplicantListPanel extends UiPart<Region> {
      * @param applicant applicant to select.
      */
     public void selectApplicant(Applicant applicant) {
-        personListView.getSelectionModel().select(applicant);
+        applicantListView.getSelectionModel().select(applicant);
     }
 
     /**
-     * Adds a listener that will be called when a different {@code PersonCard} is selected.
+     * Adds a listener that will be called when a different {@code ApplicantCard} is selected.
      *
      * @param listener listener to be added to the ListView
      */
     public void addSelectedListener(ChangeListener<Applicant> listener) {
-        personListView.getSelectionModel().selectedItemProperty().addListener(listener);
+        applicantListView.getSelectionModel().selectedItemProperty().addListener(listener);
     }
 }
