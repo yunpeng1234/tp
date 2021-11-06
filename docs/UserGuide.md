@@ -122,7 +122,8 @@ Format: `view INDEX [T]`
 
 * If only `INDEX` is specified, it will show the specified applicant's academic records by default.
   * `INDEX` refers to the index number of the applicant, shown in the applicant list.
-  * `INDEX` must be a positive integer, e.g. 1, 2, 3, …
+  * `INDEX` **must be a positive integer**, e.g. 1, 2, 3, …
+  * `INDEX` of 0 or less, or indexes greater than `2147483647` will be treated as invalid commands.
 * Specifying `T` together with `INDEX` switches between the academic records tab and the skills tab.
 
 Examples:
@@ -172,7 +173,9 @@ Edits the information of an existing applicant, or the application status of all
 #### Edit a specific applicant:
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [g/GRADE] [i/INSTITUTION] [c/COURSE] [y/GRADUATION_YEAR_MONTH] [j/JOB] [a/APPLICATION_STATUS] [s/SKILL]…`
 * If only `INDEX` is specified, the applicant at the specified `INDEX` will be edited.
-    * `INDEX` refers to the index number shown in the displayed applicant list. The index **must be a positive integer** e.g. 1, 2, 3, …
+    * `INDEX` refers to the index number shown in the displayed applicant list. 
+    * `INDEX` **must be a positive integer** e.g. 1, 2, 3, …
+    * `INDEX` of 0 or less, or indexes greater than `2147483647` will be treated as invalid commands.
 * When editing skills, all existing skills of the applicant will be replaced i.e adding of skills is not cumulative.
 * You can remove all the applicant’s skills by typing `s/` without
   specifying any skills after it.
@@ -197,7 +200,7 @@ Examples:
 |---|---|
 |<img src="images/EditSkillBefore.png" alt="drawing" />|<img src="images/EditSkillAfter.png" alt="drawing" />|
 
-*  `filter a/APPLIED` followed by `edit ALL a/INTERVIEWED` Updates all applicants with `INTERVIEWED` application status to have the `ACCEPTED` APPLICATION_STATUS.
+*  `filter a/APPLIED` followed by `edit ALL a/INTERVIEWED` Updates all applicants with `APPLIED` application status to have the `INTERVIEWED` APPLICATION_STATUS.
 
 |Command|Effect|
 |---|---|
@@ -207,12 +210,16 @@ Examples:
 
 Deletes the specified applicant, or all applicants currently displayed in the applicant list.
 
-Format 1: `delete INDEX`
+#### Delete a specific applicant:
+Format: `delete INDEX`
 
 * If `INDEX` is specified, the applicant at the specified `INDEX` will be deleted.
-    * `INDEX` refers to the index number shown in the displayed applicant list. The index **must be a positive integer** e.g. 1, 2, 3, …
+    * `INDEX` refers to the index number shown in the displayed applicant list. 
+    * `INDEX` **must be a positive integer** e.g. 1, 2, 3, …
+    * `INDEX` of 0 or less, or indexes greater than `2147483647` will be treated as invalid commands.
 
-Format 2: `delete ALL`
+#### Delete all currently displayed applicants:
+Format: `delete ALL`
 
 * If `ALL` is specified, all applicants currently displayed in the applicant list will be deleted.
 
