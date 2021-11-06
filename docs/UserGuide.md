@@ -46,7 +46,7 @@ This user guide covers a quick walk through how to use this application, as well
 
    * `clear` : Deletes all applicants from the application.
 
-7. To see more detailed information abuot each command, refer to [Features](#features).
+7. To see more detailed information about each command, refer to [Features](#features).
 8. To see restrictions and specifications of each field, refer to [Specification of Fields.](#specification-of-fields).
 
 --------------------------------------------------------------------------------------------------------------------
@@ -95,7 +95,7 @@ Adds a new applicant to Intern Watcher.
 
 Format: `add n/NAME p/PHONE e/EMAIL g/GRADE i/INSTITUTION c/COURSE y/GRADUATION_YEAR_MONTH j/JOB [a/APPLICATION_STATUS] [s/SKILL]…+`
 
-* Entries with same `NAME` (case-insensitive) will not be allowed. For example, `John Doe` and `john doe` are considered the same person and the second entry will not be allowed.
+* Entries with same `NAME` (case-insensitive) will not be allowed. For example, `John Doe` and `john doe` are considered the same applicant and the second entry will not be allowed.
 * `APPLICATION_STATUS` and `SKILL` are case-sensitive.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -177,7 +177,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [g/GRADE] [i/INSTITUTION] [c/CO
     * `INDEX` **must be a positive integer** e.g. 1, 2, 3, …
     * `INDEX` of 0 or less, or indexes greater than `2147483647` will be treated as invalid commands.
 * When editing skills, all existing skills of the applicant will be replaced i.e adding of skills is not cumulative.
-* You can remove all the person’s skills by typing `s/` without
+* You can remove all the applicant’s skills by typing `s/` without
   specifying any skills after it.
 
 #### Edit all currently displayed applicants:
@@ -275,7 +275,7 @@ Format: `undo`
 
 * Only undoable command actions can be undone.
     * Undoable command actions include: `add`, `edit`, `delete`, `clear`, `redo`.
-* Consecutive `undo` commands are available until the applicant list returns to its **initial state at launch** of the application. 
+* Consecutive `undo` commands are available until the applicant list returns to its **initial state at launch** of the application.
 * If the current state of the applicant list is the initial state, the `undo` command will not be available.
 
 
@@ -297,7 +297,7 @@ Format: `redo`
 
 * `redo` is the reverse of `undo`. Only undoable command actions can be redone.
   * Undoable actions include: `add`, `edit`, `delete`, `clear`, `redo`.
-* Consecutive `redo` commands are available until the applicant list reaches the **newest state**. 
+* Consecutive `redo` commands are available until the applicant list reaches the **newest state**.
   *  The newest state is the most recent change in history.
 * If the current state of the applicant list is the newest state, the redo command will not be available.
 * If a new undoable action is performed when the applicant list is **not** in its newest state, the current state becomes the newest state.
@@ -350,7 +350,7 @@ If your changes to the data file makes its format invalid, Intern Watcher will d
 
 `Course` : The applicant's course of study in their school. Should only include alphabet characters and space only. Should not be blank.
 
-`Graduation_Year_Month` : The applicant's estimated date of graduation from their school. Should be of format MM/yyyy and be after the date 01/2020. 
+`Graduation_Year_Month` : The applicant's estimated date of graduation from their school. Should be of format MM/yyyy and be after the date 01/2020.
 
 `Job` : The job/position that the applicant applied for. Should only include alphabet characters and space only. Should not be blank.
 

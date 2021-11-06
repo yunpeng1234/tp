@@ -2,13 +2,11 @@
 
 ![Ui](docs/images/Ui.png)
 
+# Intern Watcher
+Intern Watcher (IW) is a **desktop app for Human Resource Managers to track and manage internship applicants**.
 
-# Introduction
-`Intern Watcher` is a program to help company's HRs to manage internship applications from applications
+* Ideal for HR Managers of small to medium organizations who receive large volumes of applications. 
+* Use Intern Watcher to track applicants' details, as well as filter applicants by their details.
+* Manage the application status of applicants (eg. Received, Interviewed, Accepted, Applied, etc.)
 
-**Target audience:** HRs in-charge of selecting interns from campus recruitment, whom receive large volume of applications.
-
-**Value proposition:** Applications from university students share similar profile outlooks
-1. App assists in analysing the profiles based on a set of given priority foci
-2. Keeps track of application progress/state(eg. received/pending interview/interviewed/accepted/declined)
-
+Check out [User Guide](https://ay2122s1-cs2103t-f12-2.github.io/tp/UserGuide.html) and download the latest JAR file [here](https://github.com/AY2122S1-CS2103T-F12-2/tp/releases) to get started!

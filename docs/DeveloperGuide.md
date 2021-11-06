@@ -186,7 +186,7 @@ The following activity diagrams summarizes what happens when a user enters an `e
 
 <img src="images/EditActivityDiagram.png" width="250" />
 
-Edit ALL updates the details of all currently displayed applicants by obtaining the list of currently displayed applicants via `Model#getFilteredPersonList`.
+Edit ALL updates the details of all currently displayed applicants by obtaining the list of currently displayed applicants via `Model#getFilteredApplicantList`.
 The list is then copied, after which each individual applicant is modified via `Model#setApplicant` in a for loop.
 
 The following sequence diagram summaries what happens when a user enters an `edit``ALL` command.
@@ -357,7 +357,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2 (current choice):** Use array list data structure with a pointer.
     * Pros: Easy to implement. Only requires one data structure for both undo and redo.
-    * Cons: No cons.
+    * Cons: The array list must be constantly updated and purged when a new undoable command is executed.
 
 
 --------------------------------------------------------------------------------------------------------------------

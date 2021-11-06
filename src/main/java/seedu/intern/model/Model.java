@@ -13,7 +13,7 @@ import seedu.intern.model.applicant.Applicant;
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Applicant> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Applicant> PREDICATE_SHOW_ALL_APPLICANTS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -77,15 +77,15 @@ public interface Model {
     void addApplicant(Applicant applicant);
 
     /**
-     * Replaces the given applicant {@code target} with {@code editedPerson}.
+     * Replaces the given applicant {@code target} with {@code editedApplicant}.
      * {@code target} must exist in the intern watcher.
-     * The applicant identity of {@code editedPerson} must not be the same as another existing applicant in the
+     * The applicant identity of {@code editedApplicant} must not be the same as another existing applicant in the
      * intern watcher.
      */
     void setApplicant(Applicant target, Applicant editedApplicant);
 
     /** Returns an unmodifiable view of the filtered applicant list */
-    ObservableList<Applicant> getFilteredPersonList();
+    ObservableList<Applicant> getFilteredApplicantList();
 
     /** Returns an unmodifiable view of the applicant to display */
     Applicant getApplicant();

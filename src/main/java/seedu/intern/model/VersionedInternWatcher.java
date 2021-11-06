@@ -8,8 +8,12 @@ import java.util.List;
 
 import seedu.intern.logic.commands.exceptions.CommandException;
 
+//Solution adapted from
+//https://github.com/AY2021S1-CS2103T-W11-4/tp/blob/master/src/main/java/seedu/address/model/VersionedCliniCal.java
+//Reused code by @eugene3231 with minor modifications.
 /**
  * {@code InternWatcher} that keeps track of a list of its previous states.
+ *
  */
 public class VersionedInternWatcher extends InternWatcher {
     private List<ReadOnlyInternWatcher> watcherStateList;

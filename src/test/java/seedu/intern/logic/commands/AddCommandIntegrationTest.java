@@ -26,7 +26,7 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
-    public void execute_newPerson_success() {
+    public void execute_newApplicant_success() {
         Applicant validApplicant = new ApplicantBuilder().build();
 
         Model expectedModel = new ModelManager(model.getInternWatcher(), new UserPrefs());
@@ -37,9 +37,9 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Applicant applicantInList = model.getInternWatcher().getPersonList().get(0);
-        assertCommandFailure(new AddCommand(applicantInList), model, AddCommand.MESSAGE_DUPLICATE_PERSON);
+    public void execute_duplicateApplicant_throwsCommandException() {
+        Applicant applicantInList = model.getInternWatcher().getApplicantList().get(0);
+        assertCommandFailure(new AddCommand(applicantInList), model, AddCommand.MESSAGE_DUPLICATE_APPLICANT);
     }
 
 }

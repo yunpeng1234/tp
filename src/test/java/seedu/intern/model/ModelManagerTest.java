@@ -3,7 +3,7 @@ package seedu.intern.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.intern.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.intern.model.Model.PREDICATE_SHOW_ALL_APPLICANTS;
 import static seedu.intern.testutil.Assert.assertThrows;
 import static seedu.intern.testutil.TypicalApplicants.ALICE;
 import static seedu.intern.testutil.TypicalApplicants.BENSON;
@@ -73,24 +73,24 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
+    public void hasApplicant_nullApplicant_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.hasApplicant(null));
     }
 
     @Test
-    public void hasPerson_personNotInInternWatcher_returnsFalse() {
+    public void hasApplicant_applicantNotInInternWatcher_returnsFalse() {
         assertFalse(modelManager.hasApplicant(ALICE));
     }
 
     @Test
-    public void hasPerson_personInInternWatcher_returnsTrue() {
+    public void hasApplicant_applicantInInternWatcher_returnsTrue() {
         modelManager.addApplicant(ALICE);
         assertTrue(modelManager.hasApplicant(ALICE));
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    public void getFilteredApplicantList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredApplicantList().remove(0));
     }
 
     @Test
@@ -122,7 +122,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(internWatcher, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredApplicantList(PREDICATE_SHOW_ALL_PERSONS);
+        modelManager.updateFilteredApplicantList(PREDICATE_SHOW_ALL_APPLICANTS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();

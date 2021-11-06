@@ -1,5 +1,5 @@
 {
-  "_comment": "InternWatcher save file which contains the same Person values as in TypicalPersons#getTypicalInternWatcher()",
+  "_comment": "InternWatcher save file which contains the same Applicant values as in TypicalApplicants#getTypicalInternWatcher()",
   "applicants" : [ {
     "name" : "Alice Pauline",
     "phone" : "94351253",

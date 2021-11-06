@@ -36,7 +36,7 @@ public class ModelManager implements Model {
 
         this.internWatcher = new VersionedInternWatcher(internWatcher);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredApplicants = new FilteredList<>(this.internWatcher.getPersonList());
+        filteredApplicants = new FilteredList<>(this.internWatcher.getApplicantList());
     }
 
     public ModelManager() {
@@ -93,35 +93,35 @@ public class ModelManager implements Model {
     @Override
     public boolean hasApplicant(Applicant applicant) {
         requireNonNull(applicant);
-        return internWatcher.hasPerson(applicant);
+        return internWatcher.hasApplicant(applicant);
     }
 
     @Override
     public void deleteApplicant(Applicant target) {
-        internWatcher.removePerson(target);
+        internWatcher.removeApplicant(target);
     }
 
     @Override
     public void addApplicant(Applicant applicant) {
-        internWatcher.addPerson(applicant);
-        updateFilteredApplicantList(PREDICATE_SHOW_ALL_PERSONS);
+        internWatcher.addApplicant(applicant);
+        updateFilteredApplicantList(PREDICATE_SHOW_ALL_APPLICANTS);
     }
 
     @Override
     public void setApplicant(Applicant target, Applicant editedApplicant) {
         requireAllNonNull(target, editedApplicant);
 
-        internWatcher.setPerson(target, editedApplicant);
+        internWatcher.setApplicant(target, editedApplicant);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Applicant List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Applicant} backed by the internal list of
      * {@code versionedInternWatcher}
      */
     @Override
-    public ObservableList<Applicant> getFilteredPersonList() {
+    public ObservableList<Applicant> getFilteredApplicantList() {
         return filteredApplicants;
     }
 

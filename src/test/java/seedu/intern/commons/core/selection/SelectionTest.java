@@ -61,24 +61,24 @@ public class SelectionTest {
 
     @Test
     public void equals() {
-        final Selection fifthPersonSelection = Selection.fromIndex(Index.fromOneBased(5));
+        final Selection fifthApplicantSelection = Selection.fromIndex(Index.fromOneBased(5));
         final Selection allApplicantSelection = Selection.fromAllFlag();
 
         // same values -> returns true
-        assertEquals(Selection.fromIndex(Index.fromOneBased(5)), fifthPersonSelection);
-        assertEquals(Selection.fromIndex(Index.fromZeroBased(4)), fifthPersonSelection);
+        assertEquals(Selection.fromIndex(Index.fromOneBased(5)), fifthApplicantSelection);
+        assertEquals(Selection.fromIndex(Index.fromZeroBased(4)), fifthApplicantSelection);
 
         // same object -> returns true
-        assertEquals(fifthPersonSelection, fifthPersonSelection);
+        assertEquals(fifthApplicantSelection, fifthApplicantSelection);
 
         // null -> returns false
-        assertNotEquals(fifthPersonSelection, null);
+        assertNotEquals(fifthApplicantSelection, null);
 
         // different types -> returns false
-        assertFalse(fifthPersonSelection.equals(5.0f));
+        assertFalse(fifthApplicantSelection.equals(5.0f));
 
         // different selection -> returns false
-        assertNotEquals(Selection.fromIndex(Index.fromZeroBased(1)), fifthPersonSelection);
+        assertNotEquals(Selection.fromIndex(Index.fromZeroBased(1)), fifthApplicantSelection);
 
         // same values -> returns true
         assertEquals(Selection.fromAllFlag(), allApplicantSelection);
