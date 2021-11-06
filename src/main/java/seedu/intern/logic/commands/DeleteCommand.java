@@ -21,8 +21,8 @@ public class DeleteCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Applicant: %1$s";
-    public static final String MESSAGE_DELETE_ALL_SUCCESS = " %1$s Applicants deleted!";
+    public static final String MESSAGE_DELETE_APPLICANT_SUCCESS = "Deleted applicant: %1$s";
+    public static final String MESSAGE_DELETE_ALL_SUCCESS = " %1$s applicants deleted!";
     public static final String MESSAGE_COMMIT_DELETE = "Delete applicant: %1$s";
     public static final String MESSAGE_COMMIT_DELETE_ALL = "Delete %1$s applicants";
     private final Selection targetSelection;
@@ -34,11 +34,11 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Applicant> lastShownList = model.getFilteredPersonList();
+        List<Applicant> lastShownList = model.getFilteredApplicantList();
 
         if (targetSelection.hasIndex()) {
             if (targetSelection.getIndexZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                throw new CommandException(Messages.MESSAGE_INVALID_APPLICANT_DISPLAYED_INDEX);
             }
         }
         if (targetSelection.hasAllSelectFlag() && targetSelection.checkAllSelected()) {
@@ -53,7 +53,7 @@ public class DeleteCommand extends Command {
             Applicant applicantToDelete = lastShownList.get(targetSelection.getIndexZeroBased());
             model.deleteApplicant(applicantToDelete);
             model.commitInternWatcher(String.format(MESSAGE_COMMIT_DELETE, applicantToDelete));
-            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, applicantToDelete));
+            return new CommandResult(String.format(MESSAGE_DELETE_APPLICANT_SUCCESS, applicantToDelete));
         }
     }
 

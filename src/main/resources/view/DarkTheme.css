@@ -60,6 +60,7 @@
 }
 
 .tab .tab-label {
+    -fx-font-family: "Open Sans Semibold";
     -fx-alignment: CENTER;
     -fx-text-fill: #22223b;
     -fx-font-size: 12px;
@@ -372,7 +373,7 @@
     -fx-prompt-text-fill: #4a4e69;
 }
 
-#filterField, #personListPanel, #personWebpage {
+#filterField, #applicantListPanel, #applicantWebpage {
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 

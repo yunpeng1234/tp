@@ -14,7 +14,7 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("Delete ALL a/ ACCEPTED")
+[-> LogicManager : execute("delete ALL")
 activate LogicManager
 
 LogicManager -> InternWatcherParser : parseCommand("delete ALL")
@@ -74,8 +74,19 @@ DeleteCommand -> Model : deleteApplicant(applicantToDelete)
 activate Model
 
 Model --> DeleteCommand : d
-deactivate Model
+
 end
+
+DeleteCommand -> Model : commitInternWatcher(commitMessage)
+
+Model -> Model : commitState(commitMessage)
+
+activate Model
+Model --> Model
+deactivate Model
+
+Model --> DeleteCommand
+deactivate Model
 
 create CommandResult
 DeleteCommand -> CommandResult

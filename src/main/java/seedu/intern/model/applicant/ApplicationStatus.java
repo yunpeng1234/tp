@@ -9,8 +9,8 @@ import static seedu.intern.commons.util.AppUtil.checkArgument;
  */
 public class ApplicationStatus {
     public enum Status {
-        APPLIED("#c4c4c4"), RECEIVED("#c4c4c4"), SCHEDULED("#e6b26c"),
-        INTERVIEWED("#ffedbd"), OFFERED("497d3d"), ACCEPTED("#b0ff9e"), REJECTED("#ff5c5c");
+        APPLIED("#980000"), RECEIVED("#984200"), SCHEDULED("#986900"),
+        INTERVIEWED("#a77f03"), OFFERED("#0c8900"), ACCEPTED("#004b83"), REJECTED("#c4c4c4");
 
         private final String colour;
 
@@ -19,7 +19,7 @@ public class ApplicationStatus {
         }
 
         private Status() {
-            this.colour = "#3e7b91";
+            this.colour = "#000000";
         }
     }
 

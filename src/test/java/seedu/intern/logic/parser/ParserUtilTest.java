@@ -4,9 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.intern.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.intern.testutil.Assert.assertThrows;
-import static seedu.intern.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.intern.testutil.TypicalIndexes.INDEX_FIRST_APPLICANT;
 import static seedu.intern.testutil.TypicalSelections.SELECTION_ALL;
-import static seedu.intern.testutil.TypicalSelections.SELECTION_FIRST_PERSON;
+import static seedu.intern.testutil.TypicalSelections.SELECTION_FIRST_APPLICANT;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -49,10 +49,10 @@ public class ParserUtilTest {
     @Test
     public void parseIndex_validInput_success() throws Exception {
         // No whitespaces
-        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("1"));
+        assertEquals(INDEX_FIRST_APPLICANT, ParserUtil.parseIndex("1"));
 
         // Leading and trailing whitespaces
-        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
+        assertEquals(INDEX_FIRST_APPLICANT, ParserUtil.parseIndex("  1  "));
     }
 
     @Test
@@ -69,10 +69,10 @@ public class ParserUtilTest {
     @Test
     public void parseDelete_validInput_success() throws Exception {
         // No whitespaces
-        assertEquals(SELECTION_FIRST_PERSON, ParserUtil.parseSelection("1"));
+        assertEquals(SELECTION_FIRST_APPLICANT, ParserUtil.parseSelection("1"));
 
         // Leading and trailing whitespaces
-        assertEquals(SELECTION_FIRST_PERSON, ParserUtil.parseSelection("  1  "));
+        assertEquals(SELECTION_FIRST_APPLICANT, ParserUtil.parseSelection("  1  "));
 
         // All keyword
         assertEquals(SELECTION_ALL, ParserUtil.parseSelection("ALL"));

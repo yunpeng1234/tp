@@ -14,7 +14,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/chang-ch.png" width="200px">
 
 [[github](https://github.com/Chang-CH)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/chang-ch.md)]
 
 * Role: Developer
 * Responsibilities: TBD
@@ -24,7 +24,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/jackgugz.png" width="200px">
 
 [[github](https://github.com/jackgugz)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/jackgugz.md)]
 
 * Role: Developer
 * Responsibilities: TBC
@@ -34,10 +34,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/jeromesyl.png" width="200px">
 
 [[github](http://github.com/Jeromesyl)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/jeromesyl.md)]
 
-* Role: Developer
-* Responsibilities: TBD
+* Role: Scheduling and tracking
+* Responsibilities: : In charge of defining, assigning, and tracking project tasks.
+* Features: Undo/Redo feature
 
 ### Nicole Joseph
 
@@ -54,7 +55,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/yunpeng1234.png" width="200px">
 
 [[github](http://github.com/yunpeng1234)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/yunpeng1234.md)]
 
 * Role: Developer
 * Responsibilities: UI

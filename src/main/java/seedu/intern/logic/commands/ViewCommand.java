@@ -1,3 +1,4 @@
+// @@author nicolej2122
 package seedu.intern.logic.commands;
 
 import static java.util.Objects.requireNonNull;
@@ -9,7 +10,6 @@ import seedu.intern.commons.core.selection.Index;
 import seedu.intern.logic.commands.exceptions.CommandException;
 import seedu.intern.model.Model;
 import seedu.intern.model.applicant.Applicant;
-
 
 /**
  * User can view applicant details in Intern Watcher.
@@ -23,7 +23,7 @@ public class ViewCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
 
-    public static final String MESSAGE_VIEW_PERSON_SUCCESS = "Displayed Applicant details: %1$s";
+    public static final String MESSAGE_VIEW_APPLICANT_SUCCESS = "Displayed Applicant details: %1$s";
 
     private final Index targetIndex;
     private final Boolean toggle;
@@ -39,21 +39,23 @@ public class ViewCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Applicant> lastShownList = model.getFilteredPersonList();
+        List<Applicant> lastShownList = model.getFilteredApplicantList();
 
         if (targetIndex != null) {
             if (targetIndex.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                throw new CommandException(Messages.MESSAGE_INVALID_APPLICANT_DISPLAYED_INDEX);
             }
         }
         if (toggle) {
             Applicant applicantToView = lastShownList.get(targetIndex.getZeroBased());
             model.displayApplicant(applicantToView, true);
-            return new CommandResult(String.format(MESSAGE_VIEW_PERSON_SUCCESS, applicantToView), false, false, true);
+            return new CommandResult(String.format(MESSAGE_VIEW_APPLICANT_SUCCESS,
+                    applicantToView), false, false, true);
         } else {
             Applicant applicantToView = lastShownList.get(targetIndex.getZeroBased());
             model.displayApplicant(applicantToView, false);
-            return new CommandResult(String.format(MESSAGE_VIEW_PERSON_SUCCESS, applicantToView), false, false, true);
+            return new CommandResult(String.format(MESSAGE_VIEW_APPLICANT_SUCCESS,
+                    applicantToView), false, false, true);
         }
     }
 

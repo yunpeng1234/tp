@@ -13,7 +13,7 @@ import seedu.intern.model.UserPrefs;
 public class ClearCommandTest {
 
     @Test
-    public void execute_emptyAddressBook_success() {
+    public void execute_emptyInternWatcher_success() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
 
@@ -21,7 +21,7 @@ public class ClearCommandTest {
     }
 
     @Test
-    public void execute_nonEmptyAddressBook_success() {
+    public void execute_nonEmptyInternWatcher_success() {
         Model model = new ModelManager(getTypicalInternWatcher(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalInternWatcher(), new UserPrefs());
         expectedModel.setInternWatcher(new InternWatcher());

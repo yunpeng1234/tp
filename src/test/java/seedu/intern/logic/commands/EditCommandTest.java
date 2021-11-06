@@ -11,13 +11,13 @@ import static seedu.intern.logic.commands.CommandTestUtil.VALID_STATUS_AMY;
 import static seedu.intern.logic.commands.CommandTestUtil.VALID_STATUS_BOB;
 import static seedu.intern.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.intern.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.intern.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.intern.logic.commands.CommandTestUtil.showApplicantAtIndex;
 import static seedu.intern.logic.commands.CommandTestUtil.showSelectedApplicant;
 import static seedu.intern.testutil.Assert.assertThrows;
 import static seedu.intern.testutil.TypicalApplicants.getTypicalInternWatcher;
 import static seedu.intern.testutil.TypicalSelections.SELECTION_ALL;
-import static seedu.intern.testutil.TypicalSelections.SELECTION_FIRST_PERSON;
-import static seedu.intern.testutil.TypicalSelections.SELECTION_SECOND_PERSON;
+import static seedu.intern.testutil.TypicalSelections.SELECTION_FIRST_APPLICANT;
+import static seedu.intern.testutil.TypicalSelections.SELECTION_SECOND_APPLICANT;
 
 import org.junit.jupiter.api.Test;
 
@@ -53,12 +53,12 @@ public class EditCommandTest {
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Applicant editedApplicant = new ApplicantBuilder().build();
         EditApplicantDescriptor descriptor = new EditApplicantDescriptorBuilder(editedApplicant).build();
-        EditCommand editCommand = new EditCommand(SELECTION_FIRST_PERSON, descriptor);
+        EditCommand editCommand = new EditCommand(SELECTION_FIRST_APPLICANT, descriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedApplicant);
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_APPLICANT_SUCCESS, editedApplicant);
 
         Model expectedModel = new ModelManager(new InternWatcher(model.getInternWatcher()), new UserPrefs());
-        expectedModel.setApplicant(model.getFilteredPersonList().get(0), editedApplicant);
+        expectedModel.setApplicant(model.getFilteredApplicantList().get(0), editedApplicant);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -70,7 +70,7 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(SELECTION_ALL, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_ALL_SUCCESS,
-                model.getFilteredPersonList().size(), model.getFilteredPersonList().size());
+                model.getFilteredApplicantList().size(), model.getFilteredApplicantList().size());
 
         ModelManager expectedModel = new ModelManager();
         for (Applicant applicant : TypicalApplicants.getTypicalApplicants()) {
@@ -97,16 +97,16 @@ public class EditCommandTest {
     @Test
     public void execute_validAllSelectSingleFilteredList_success() {
         Model expectedModel = new ModelManager(new InternWatcher(model.getInternWatcher()), new UserPrefs());
-        showPersonAtIndex(model, SELECTION_FIRST_PERSON.getIndex());
-        showPersonAtIndex(expectedModel, SELECTION_FIRST_PERSON.getIndex());
+        showApplicantAtIndex(model, SELECTION_FIRST_APPLICANT.getIndex());
+        showApplicantAtIndex(expectedModel, SELECTION_FIRST_APPLICANT.getIndex());
 
-        Applicant applicantToEdit = model.getFilteredPersonList().get(SELECTION_FIRST_PERSON.getIndexZeroBased());
+        Applicant applicantToEdit = model.getFilteredApplicantList().get(SELECTION_FIRST_APPLICANT.getIndexZeroBased());
         EditApplicantDescriptor descriptor = new EditApplicantDescriptorBuilder()
                 .withApplicationStatus(VALID_STATUS_AMY).build();
         EditCommand editCommand = new EditCommand(SELECTION_ALL, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_ALL_SUCCESS,
-                model.getFilteredPersonList().size(), model.getFilteredPersonList().size());
+                model.getFilteredApplicantList().size(), model.getFilteredApplicantList().size());
 
         Applicant editedApplicant = new ApplicantBuilder(applicantToEdit)
                 .withApplicationStatus(VALID_STATUS_AMY).build();
@@ -118,18 +118,18 @@ public class EditCommandTest {
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
-        Selection indexLastPerson = Selection.fromIndex(Index.fromOneBased(model.getFilteredPersonList().size()));
-        Applicant lastApplicant = model.getFilteredPersonList().get(indexLastPerson.getIndexZeroBased());
+        Selection indexLastApplicant = Selection.fromIndex(Index.fromOneBased(model.getFilteredApplicantList().size()));
+        Applicant lastApplicant = model.getFilteredApplicantList().get(indexLastApplicant.getIndexZeroBased());
 
-        ApplicantBuilder personInList = new ApplicantBuilder(lastApplicant);
-        Applicant editedApplicant = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+        ApplicantBuilder applicantInList = new ApplicantBuilder(lastApplicant);
+        Applicant editedApplicant = applicantInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
                 .withSkills(VALID_SKILL_JAVA).build();
 
         EditApplicantDescriptor descriptor = new EditApplicantDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withSkills(VALID_SKILL_JAVA).build();
-        EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
+        EditCommand editCommand = new EditCommand(indexLastApplicant, descriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedApplicant);
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_APPLICANT_SUCCESS, editedApplicant);
 
         Model expectedModel = new ModelManager(new InternWatcher(model.getInternWatcher()), new UserPrefs());
         expectedModel.setApplicant(lastApplicant, editedApplicant);
@@ -139,10 +139,10 @@ public class EditCommandTest {
 
     @Test
     public void execute_noFieldSpecifiedIndexUnfilteredList_success() {
-        EditCommand editCommand = new EditCommand(SELECTION_FIRST_PERSON, new EditApplicantDescriptor());
-        Applicant editedApplicant = model.getFilteredPersonList().get(SELECTION_FIRST_PERSON.getIndexZeroBased());
+        EditCommand editCommand = new EditCommand(SELECTION_FIRST_APPLICANT, new EditApplicantDescriptor());
+        Applicant editedApplicant = model.getFilteredApplicantList().get(SELECTION_FIRST_APPLICANT.getIndexZeroBased());
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedApplicant);
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_APPLICANT_SUCCESS, editedApplicant);
 
         Model expectedModel = new ModelManager(new InternWatcher(model.getInternWatcher()), new UserPrefs());
 
@@ -154,8 +154,8 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(SELECTION_ALL, new EditApplicantDescriptor());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_ALL_SUCCESS,
-                model.getFilteredPersonList().size(),
-                model.getFilteredPersonList().size());
+                model.getFilteredApplicantList().size(),
+                model.getFilteredApplicantList().size());
 
         Model expectedModel = new ModelManager(new InternWatcher(model.getInternWatcher()), new UserPrefs());
 
@@ -164,52 +164,52 @@ public class EditCommandTest {
 
     @Test
     public void execute_filteredList_success() {
-        showSelectedApplicant(model, SELECTION_FIRST_PERSON);
+        showSelectedApplicant(model, SELECTION_FIRST_APPLICANT);
 
-        Applicant applicantInFilteredList = model.getFilteredPersonList()
-                .get(SELECTION_FIRST_PERSON.getIndexZeroBased());
+        Applicant applicantInFilteredList = model.getFilteredApplicantList()
+                .get(SELECTION_FIRST_APPLICANT.getIndexZeroBased());
         Applicant editedApplicant = new ApplicantBuilder(applicantInFilteredList).withName(VALID_NAME_BOB).build();
-        EditCommand editCommand = new EditCommand(SELECTION_FIRST_PERSON,
+        EditCommand editCommand = new EditCommand(SELECTION_FIRST_APPLICANT,
                 new EditApplicantDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedApplicant);
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_APPLICANT_SUCCESS, editedApplicant);
 
         Model expectedModel = new ModelManager(new InternWatcher(model.getInternWatcher()), new UserPrefs());
-        expectedModel.setApplicant(model.getFilteredPersonList().get(0), editedApplicant);
+        expectedModel.setApplicant(model.getFilteredApplicantList().get(0), editedApplicant);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_duplicatePersonUnfilteredList_failure() {
-        Applicant firstApplicant = model.getFilteredPersonList().get(SELECTION_FIRST_PERSON.getIndexZeroBased());
+    public void execute_duplicateApplicantUnfilteredList_failure() {
+        Applicant firstApplicant = model.getFilteredApplicantList().get(SELECTION_FIRST_APPLICANT.getIndexZeroBased());
         EditApplicantDescriptor descriptor = new EditApplicantDescriptorBuilder(firstApplicant).build();
-        EditCommand editCommand = new EditCommand(SELECTION_SECOND_PERSON, descriptor);
+        EditCommand editCommand = new EditCommand(SELECTION_SECOND_APPLICANT, descriptor);
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_APPLICANT);
     }
 
     @Test
-    public void execute_duplicatePersonFilteredList_failure() {
-        showSelectedApplicant(model, SELECTION_FIRST_PERSON);
+    public void execute_duplicateApplicantFilteredList_failure() {
+        showSelectedApplicant(model, SELECTION_FIRST_APPLICANT);
 
         // edit applicant in filtered list into a duplicate in intern book
-        Applicant applicantInList = model.getInternWatcher().getPersonList()
-                .get(SELECTION_SECOND_PERSON.getIndexZeroBased());
-        EditCommand editCommand = new EditCommand(SELECTION_FIRST_PERSON,
+        Applicant applicantInList = model.getInternWatcher().getApplicantList()
+                .get(SELECTION_SECOND_APPLICANT.getIndexZeroBased());
+        EditCommand editCommand = new EditCommand(SELECTION_FIRST_APPLICANT,
                 new EditApplicantDescriptorBuilder(applicantInList).build());
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_APPLICANT);
     }
 
     @Test
-    public void execute_invalidPersonSelectionUnfilteredList_failure() {
+    public void execute_invalidApplicantSelectionUnfilteredList_failure() {
         Selection outOfBoundSelection = Selection
-                .fromIndex(Index.fromOneBased(model.getFilteredPersonList().size() + 1));
+                .fromIndex(Index.fromOneBased(model.getFilteredApplicantList().size() + 1));
         EditApplicantDescriptor descriptor = new EditApplicantDescriptorBuilder().withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(outOfBoundSelection, descriptor);
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_APPLICANT_DISPLAYED_INDEX);
     }
 
     /**
@@ -217,25 +217,25 @@ public class EditCommandTest {
      * but smaller than size of intern book
      */
     @Test
-    public void execute_invalidPersonSelectionFilteredList_failure() {
-        showSelectedApplicant(model, SELECTION_FIRST_PERSON);
-        Selection outOfBoundSelection = SELECTION_SECOND_PERSON;
+    public void execute_invalidApplicantSelectionFilteredList_failure() {
+        showSelectedApplicant(model, SELECTION_FIRST_APPLICANT);
+        Selection outOfBoundSelection = SELECTION_SECOND_APPLICANT;
         // ensures that outOfBoundSelection is still in bounds of intern book list
-        assertTrue(outOfBoundSelection.getIndexZeroBased() < model.getInternWatcher().getPersonList().size());
+        assertTrue(outOfBoundSelection.getIndexZeroBased() < model.getInternWatcher().getApplicantList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundSelection,
                 new EditApplicantDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_APPLICANT_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        final EditCommand standardCommand = new EditCommand(SELECTION_FIRST_PERSON, DESC_AMY);
+        final EditCommand standardCommand = new EditCommand(SELECTION_FIRST_APPLICANT, DESC_AMY);
 
         // same values -> returns true
         EditApplicantDescriptor copyDescriptor = new EditApplicantDescriptor(DESC_AMY);
-        EditCommand commandWithSameValues = new EditCommand(SELECTION_FIRST_PERSON, copyDescriptor);
+        EditCommand commandWithSameValues = new EditCommand(SELECTION_FIRST_APPLICANT, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -248,10 +248,10 @@ public class EditCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(SELECTION_SECOND_PERSON, DESC_AMY)));
+        assertFalse(standardCommand.equals(new EditCommand(SELECTION_SECOND_APPLICANT, DESC_AMY)));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(SELECTION_FIRST_PERSON, DESC_BOB)));
+        assertFalse(standardCommand.equals(new EditCommand(SELECTION_FIRST_APPLICANT, DESC_BOB)));
     }
 
 }

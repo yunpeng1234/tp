@@ -19,7 +19,7 @@ import seedu.intern.model.applicant.Applicant;
 import seedu.intern.model.skills.Skill;
 
 /**
- * A utility class for Person.
+ * A utility class for Applicant.
  */
 public class ApplicantUtil {
 
@@ -50,7 +50,7 @@ public class ApplicantUtil {
     }
 
     /**
-     * Returns the part of command string for the given {@code EditPersonDescriptor}'s details.
+     * Returns the part of command string for the given {@code EditApplicantDescriptor}'s details.
      */
     public static String getEditApplicantDescriptorDetails(EditApplicantDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
