@@ -109,7 +109,7 @@ public class Applicant {
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable skill set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Skill> getSkills() {
@@ -186,7 +186,7 @@ public class Applicant {
 
         Set<Skill> skills = getSkills();
         if (!skills.isEmpty()) {
-            builder.append("; Tags: ");
+            builder.append("; Skills: ");
             skills.forEach(builder::append);
         }
         return builder.toString();

@@ -119,7 +119,7 @@ public class EditApplicantDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditApplicantDescriptor}
+     * Parses the {@code skills} into a {@code Set<Skill>} and set it to the {@code EditApplicantDescriptor}
      * that we are building.
      */
     public EditApplicantDescriptorBuilder withSkills(String... skills) {
