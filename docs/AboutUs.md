@@ -16,8 +16,9 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/Chang-CH)]
 [[portfolio](team/chang-ch.md)]
 
-* Role: Developer
-* Responsibilities: TBD
+* Role: Team lead
+* Responsibilities: Responsible for overall project coordination.
+* Features: Edit ALL/Delete All features
 
 ### Gu Geng
 
@@ -26,8 +27,9 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/jackgugz)]
 [[portfolio](team/jackgugz.md)]
 
-* Role: Developer
-* Responsibilities: TBC
+* Role: Code quality
+* Responsibilities: Looks after code quality, ensures adherence to coding standards, etc.
+* Features: Filter feature
 
 ### Jerome Soh
 
@@ -38,7 +40,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Scheduling and tracking
 * Responsibilities: : In charge of defining, assigning, and tracking project tasks.
-* Features: Undo/Redo feature
+* Features: Undo/Redo features
 
 ### Nicole Joseph
 
@@ -47,8 +49,9 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/nicolej2122)]
 [[portfolio](team/nicolej2122.md)]
 
-* Role: Developer
-* Responsibilities: TBD
+* Role: Testing
+* Responsibilities: Ensures the testing of the project is done properly and on time.
+* Features: View feature
 
 ### Xiao Yunpeng
 
@@ -57,5 +60,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/yunpeng1234)]
 [[portfolio](team/yunpeng1234.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Integration
+* Responsibilities: In charge of versioning of the code, maintaining the code repository, integrating various parts of the software to create a whole.
+* Features: UI
