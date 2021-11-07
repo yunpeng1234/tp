@@ -184,7 +184,7 @@ the fields specified.
 
 The following activity diagrams summarizes what happens when a user enters an `edit` command.
 
-<img src="images/EditActivityDiagram.png" />
+<img src="images/EditActivityDiagram.png" width="500"/>
 
 Edit ALL updates the details of all currently displayed applicants by obtaining the list of currently displayed applicants via `Model#getFilteredApplicantList`.
 The list is then copied, after which each individual applicant is modified via `Model#setApplicant` in a for loop.
