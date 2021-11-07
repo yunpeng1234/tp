@@ -51,7 +51,6 @@ public class EditCommandParser implements Parser<EditCommand> {
                 PREFIX_JOB,
                 PREFIX_STATUS);
 
-
         Selection selection;
 
         try {

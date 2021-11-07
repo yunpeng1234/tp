@@ -45,16 +45,16 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 
 VersionedInternWatcher *--> "1" UniqueApplicantList
 UniqueApplicantList --> "~* all" Applicant
-Applicant *--> Name
+Applicant *-> Name
 Applicant *--> Phone
-Applicant *--> Email
-Applicant *--> Course
+Applicant *-> Email
+Applicant *---> Course
 Applicant *--> "*" Skill
 Applicant *--> ApplicationStatus
-Applicant *--> Job
+Applicant *---> Job
 Applicant *--> GraduationYearMonth
-Applicant *--> Grade
-Applicant *--> Institution
+Applicant *---> Grade
+Applicant *---> Institution
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Course

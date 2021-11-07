@@ -16,11 +16,11 @@ Applicant -up-> "*" Skill
 
 Applicant *--> Name
 Applicant *--> Phone
-Applicant *--> Email
-Applicant *--> Course
-Applicant *--> ApplicationStatus
-Applicant *--> Job
-Applicant *--> GraduationYearMonth
+Applicant *---> Email
+Applicant *---> Course
+Applicant *---> ApplicationStatus
+Applicant *---> Job
+Applicant *---> GraduationYearMonth
 Applicant *--> Grade
 Applicant *--> Institution
 
