@@ -278,7 +278,7 @@ Format: `undo`
     * Undoable command actions include: `add`, `edit`, `delete`, `clear`, `redo`.
 * Consecutive `undo` commands are available until the applicant list returns to its **initial state at launch** of the application.
 * If the current state of the applicant list is the initial state, the `undo` command will not be available.
-* The applicant detail panel state will not be preserved. For instance, after `view 1`and `delete 1`, `undo` will restore the deleted applicant, but applicant detail panel will not be reverted to show the deleted applicant.
+* The applicant detail panel state will not be preserved. For instance, after `view 1` and `delete 1`, `undo` will restore the deleted applicant to the applicant list, but the applicant detail panel will not be reverted to show the details of the deleted applicant.
 
 Examples:
 * `undo` (after `delete 2`). The applicant that was removed will be restored in Intern Watcher.
