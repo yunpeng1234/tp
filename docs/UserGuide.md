@@ -23,7 +23,8 @@ This user guide covers a quick walk through how to use this application, as well
 3. Copy the file to the folder you want to use as the _home folder_ for your Intern Watcher.
 
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-
+   <br>
+   ![Ui](images/Ui.png)
 5. Type any command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
 
 6. Some example commands you can try:
@@ -63,7 +64,7 @@ This user guide covers a quick walk through how to use this application, as well
   * e.g. in `delete ALL`, `ALL` is to be typed the same in full capital letters.
 
 * Fields in square brackets are optional.<br>
-  * e.g in `n/NAME [s/SKILL]`, the `SKILL` parameter is optional. You can enter `n/John Doe s/friend` or `n/John Doe`.
+  * e.g in `n/NAME [s/SKILL]`, the `SKILL` parameter is optional. You can enter `n/John Doe s/Python` or `n/John Doe`.
 
 * Fields with `…+` notation behind them can be specified zero or more times.<br>
   * e.g. `[s/SKILL]…+` can be specified as ` ` (i.e. 0 times), `s/Java`, `s/Python s/C` etc.
@@ -145,12 +146,12 @@ Displays applicants in Intern Watcher that match one or more given fields.
 
 Format: `filter [g/GRADE] [i/INSTITUTION]…+ [c/COURSE]…+ [y/GRADUATION_YEAR_MONTH] [j/JOB]…+ [a/STATUS]…+ [s/SKILL]…+`
 
-* `filter` will show applicants that matches all fields specified.
+* `filter` will show applicants that match all fields specified.
 * `[i/INSTITUTION]…+`, `[c/COURSE]…+` and `[j/JOB]…+` are case-insensitive and `[a/STATUS]…+` and `[s/SKILL]…+` are case-sensitive.
 * If `[g/GRADE]` is specified, it will show all applicants with grades higher or equal to the `g/Grade` specified.
 * Likewise, if `[y/GRADUATION_YEAR_MONTH]` is specified, it will show all applicants with graduation dates that is strictly before the `GRADUATION_YEAR_MONTH` specified.
 * If `[s/SKILL]…+` is specified, only applicants with all specified `[s/SKILL]…+` will be shown.
-* For either of `[c/COURSE]…+` or `[j/JOB]…+`, if more than 1 instance of a single field, such as `[j/JOB]…+` is specified, applicants with their field **containing** at least one of the `[j/JOB]…+` specified will be shown.
+* For either of `[c/COURSE]…+` or `[j/JOB]…+`, if more than 1 instance of a single field, such as `[j/JOB]…+` is specified, applicants with their job field **containing** at least one of the `[j/JOB]…+` specified will be shown.
 * For either of `[i/INSTITUTION]…+` or `[a/STATUS]…+`, if more than 1 instance of a single field, such as `[i/INSTITUTION]…+` is specified, applicants with their field **matching** at least one of the `[i/INSTITUTION]…+` specified will be shown.
 
 Examples:
@@ -188,7 +189,7 @@ Format: `edit ALL a/APPLICATION_STATUS`
 
 
 Examples:
-*  `edit 1 p/89274567 e/alex_yeoh@example.com` Edits the phone number and email address of the 1st applicant to be `89274567` and `alex_yeoh@example.com` respectively.
+*  `edit 1 p/89274567 e/alex_yeoh@example.com` edits the phone number and email address of the 1st applicant to be `89274567` and `alex_yeoh@example.com` respectively.
 
 |Command|Effect|
 |---|---|
@@ -200,7 +201,7 @@ Examples:
 |---|---|
 |<img src="images/EditSkillBefore.png" alt="drawing" />|<img src="images/EditSkillAfter.png" alt="drawing" />|
 
-*  `filter a/APPLIED` followed by `edit ALL a/INTERVIEWED` Updates all applicants with `APPLIED` application status to have the `INTERVIEWED` APPLICATION_STATUS.
+*  `filter a/APPLIED` followed by `edit ALL a/INTERVIEWED` Updates all applicants with `APPLIED` application status to have the `INTERVIEWED` application status.
 
 |Command|Effect|
 |---|---|
@@ -370,12 +371,12 @@ If your changes to the data file makes its format invalid, Intern Watcher will d
 Action | Format, Examples
 --------|------------------
 **Help** | `help`
-**Add** | `add n/NAME p/PHONE e/EMAIL g/GRADE i/INSTITUTION c/COURSE y/GRADUATION_YEAR_MONTH j/JOB [a/APPLICATION_STATUS] [s/SKILL]…++` <br> e.g. `add n/John p/999 e/a@a.com g/4.00 i/NTU c/CS y/06/2025 j/Software Engineer a/INTERVIEWED s/Python`
+**Add** | `add n/NAME p/PHONE e/EMAIL g/GRADE i/INSTITUTION c/COURSE y/GRADUATION_YEAR_MONTH j/JOB [a/APPLICATION_STATUS] [s/SKILL]…+` <br> e.g. `add n/John p/999 e/a@a.com g/4.00 i/NTU c/CS y/06/2025 j/Software Engineer a/INTERVIEWED s/Python`
 **List** | `list`
 **View** | `view INDEX [T]` <br> e.g. `view 2 T`
-**Filter** | `filter [g/GRADE] [i/INSTITUTION]…+ [c/COURSE]…+ [y/GRADUATION_YEAR_MONTH] [j/JOB] [a/STATUS] [s/SKILL]…+` <br> e.g. `filter s/JAVA y/06/2022 i/NUS a/REJECTED`
-**Edit** | `edit ALL a/APPLICATION_STATUS`/`edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [g/GRADE] [i/INSTITUTION] [c/COURSE] [y/GRADUATION_YEAR_MONTH] [j/JOB] [a/APPLICATION_STATUS] [s/SKILL]…`<br>e.g.`edit 2 n/James Lee e/jameslee@example.com`, `edit ALL a/REJECTED`
-**Delete** | `delete INDEX`/ `delete ALL`<br> e.g. `delete 3`, `delete ALL`
+**Filter** | `filter [g/GRADE] [i/INSTITUTION]…+ [c/COURSE]…+ [y/GRADUATION_YEAR_MONTH] [j/JOB]..+ [a/STATUS]..+ [s/SKILL]…+` <br> e.g. `filter s/JAVA y/06/2022 i/NUS a/REJECTED`
+**Edit** | `edit ALL a/APPLICATION_STATUS` , <br>`edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [g/GRADE] [i/INSTITUTION] [c/COURSE] [y/GRADUATION_YEAR_MONTH] [j/JOB] [a/APPLICATION_STATUS] [s/SKILL]…`<br>e.g. `edit ALL a/REJECTED` , <br> `edit 2 n/James Lee e/jameslee@example.com`
+**Delete** | `delete INDEX`, <br> `delete ALL`<br> e.g. `delete 3`, <br> `delete ALL`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g. `find James Jake`
 **Undo** | `undo`
 **Redo** | `redo`
