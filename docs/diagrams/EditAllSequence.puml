@@ -17,7 +17,7 @@ end box
 [-> LogicManager : execute("edit ALL a/ ACCEPTED")
 activate LogicManager
 
-LogicManager -> InternWatcherParser : parseCommand("edit ALL a/ ACCEPTED")
+LogicManager -> InternWatcherParser : parseCommand
 activate InternWatcherParser
 
 create EditCommandParser
@@ -27,7 +27,7 @@ activate EditCommandParser
 EditCommandParser --> InternWatcherParser
 deactivate EditCommandParser
 
-InternWatcherParser -> EditCommandParser : parse("ALL")
+InternWatcherParser -> EditCommandParser : parse
 activate EditCommandParser
 
 create EditCommand
@@ -65,7 +65,7 @@ end
 
 EditCommand -> Model : commitInternWatcher(commitMessage)
 
-Model -> Model : commitState(commitMessage)
+Model -> Model : commitState
 
 activate Model
 Model --> Model
@@ -83,6 +83,9 @@ deactivate CommandResult
 
 EditCommand --> LogicManager : result
 deactivate EditCommand
+
+EditCommand -[hidden]-> LogicManager : result
+destroy EditCommand
 
 [<--LogicManager
 deactivate LogicManager
