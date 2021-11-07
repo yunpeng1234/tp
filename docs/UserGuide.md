@@ -171,7 +171,7 @@ Examples:
 
 Edits the information of an existing applicant, or the application status of all currently displayed applicants in the applicant list.
 
-#### Edit a specific applicant:
+#### Editing a specific applicant:
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [g/GRADE] [i/INSTITUTION] [c/COURSE] [y/GRADUATION_YEAR_MONTH] [j/JOB] [a/APPLICATION_STATUS] [s/SKILL]…`
 * If only `INDEX` is specified, the applicant at the specified `INDEX` will be edited.
     * `INDEX` refers to the index number shown in the displayed applicant list. 
@@ -181,7 +181,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [g/GRADE] [i/INSTITUTION] [c/CO
 * You can remove all the applicant’s skills by typing `s/` without
   specifying any skills after it.
 
-#### Edit all currently displayed applicants:
+#### Editing all currently displayed applicants:
 Format: `edit ALL a/APPLICATION_STATUS`
 * If `ALL` is specified, all applicants currently displayed in the applicant list will be edited.
 * Currently only the `APPLICATION_STATUS` of applicants can be edited. It is unlikely that the other fields would need multi editing.
@@ -211,7 +211,7 @@ Examples:
 
 Deletes the specified applicant, or all applicants currently displayed in the applicant list.
 
-#### Delete a specific applicant:
+#### Deleting a specific applicant:
 Format: `delete INDEX`
 
 * If `INDEX` is specified, the applicant at the specified `INDEX` will be deleted.
@@ -219,7 +219,7 @@ Format: `delete INDEX`
     * `INDEX` **must be a positive integer** e.g. 1, 2, 3, …
     * `INDEX` of 0 or less, or indexes greater than `2147483647` will be treated as invalid commands.
 
-#### Delete all currently displayed applicants:
+#### Deleting all currently displayed applicants:
 Format: `delete ALL`
 
 * If `ALL` is specified, all applicants currently displayed in the applicant list will be deleted.
