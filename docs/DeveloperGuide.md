@@ -21,11 +21,6 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## **Design**
 
-<div markdown="span" class="alert alert-primary">
-
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/InternWatcher-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
-</div>
-
 ### Architecture
 
 <img src="images/ArchitectureDiagram.png" width="280" />
@@ -486,7 +481,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User filters applicants to update
 2.  InternWatcher shows a list of applicants
 3.  User requests to update all applicants in the list
-4.  InternWatcher updates all applicants
+4.  InternWatcher updates all displayed applicants
 
     Use case ends.
 
@@ -558,8 +553,6 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 
 ### Editing an applicant
 
@@ -573,13 +566,16 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `edit 0 a/ INTERVIEWED`<br>
       Expected: No applicant is edited. Error details shown in the status message. Status bar remains the same.
 
+   1. Other incorrect edit commands to try: `edit`, `edit x`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+
    1. Test case: `edit ALL a/ INTERVIEWED`<br>
       Expected: All currently displayed applicants modified with the `INTERVIEWED` application status. Number of applicants successfully edited shown in the status message. Timestamp in the status bar is updated.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+   1. Test case: `edit ALL p/ 123`<br>
+      Expected: No applicant is edited. Error details shown in the status message. Status bar remains the same.
 
-2. _{ more test cases …​ }_
+   
 
 ### Deleting an applicant
 
@@ -595,8 +591,10 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+   
+   1. Test case: `delete ALL`<br>
+      Expected: All currently displayed applicants are deleted. Number of applicants successfully deleted shown in the status message. Timestamp in the status bar is updated.
 
-2. _{ more test cases …​ }_
 
 ### Viewing an applicant's details
 1. Viewing an applicant's details while all applicants are being shown
@@ -607,12 +605,14 @@ testers are expected to do more *exploratory* testing.
       Expected: No applicant detail displayed. Error details shown in the status message. Status bar remains the same.
    4. Other incorrect view commands to try: `view`, `view x`. `...`(where x is larger than the list or a non-positive number)<br>
       Expected: Similar to previous.
-2. _{ more test cases …​ }_
+
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+   1. Save file is missing: A new save file `internwatcher.json` will be created on `exit` the next time Intern Watcher is used.
+   2. Save file is corrupted: If invalid data is present, such as a person with phone number `abcd`, Intern Watcher will start with
+   an empty applicant list instead.
+   3. Save file applicant has duplicate fields: If an applicant has duplicate fields, such as two `phone` key value pairs, Intern Watcher
+   will parse the applicant with the last `phone` value.
