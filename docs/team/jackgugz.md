@@ -5,14 +5,15 @@ title: Gu Geng's Project Portfolio Page
 
 ### Project: Intern Watcher
 
-Intern Watcher (IW) is a desktop app for Human Resource Managers (HRs) to manage internship applicantsThe user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 17 kLoC. Given below are my contributions to the project.
+Intern Watcher (IW) is a desktop app for Human Resource Managers (HRs) to manage internship applicants. The user interacts with it using a Command Line Interface (CLI), and it has a Graphical User Interface (GUI) created with JavaFX. It is written in Java, and has about 17 kLoC. Given below are my contributions to the project.
 
 Given below are my contributions to the project.
 
 * **New Feature**: Added the ability to do mass filtering against a combined collection of criteria at once.
     * What it does: Allows the user to filter the applicant list with various and multiple criteria specified against different factors: Grade, GraduationYearMonth, Skill, Status, Institution, Course and Job.
-    * Justification: This feature improves the product significantly because a user can select potential applicants with great flexibility and efficiency.
+    * Justification: This feature improves the product significantly because a HR can select potential applicants based on different requirements with great flexibility and efficiency.
     * Highlights: This enhancement required an in-depth analysis of design alternatives via careful and thorough consideration of the target users' demands and the most probable use cases. For example, for filter on Grade, only one instead of multiple filters will be accepted and only applicants with grades not less than the specified threshold will be displayed as HRs should be more interested in finding applicants that at least meet the requirement specified in regard to grade. The implementation too was challenging as it required to combine filters of different factors and deal with their respective behaviours and specifications.
+
 
 * **New Feature**: Added GraduationYearMonth field to applicants.
 
@@ -29,11 +30,11 @@ Given below are my contributions to the project.
 * **Documentation**:
     * User Guide:
         * Refined documentation for the features `filter` and `add` [\#144](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/144), [\#222](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/222)
-        * Report bugs for User Guide [\#252](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/252)
+        * Report bugs for User Guide [\#242](https://github.com/AY2122S1-CS2103T-F12-2/tp/issues/242)
     * Developer Guide:
         * Added implementation details of the `filter` feature including the sequence diagram for a `filter` command. [\#109](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/109)
         * Refined documentation for the features `filter` and `add` [\#222](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/222)
-        * Report and fix bugs for Developer Guide [\#253](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/253), [\#262](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/262)
+        * Report and fix bugs for Developer Guide [\#243](https://github.com/AY2122S1-CS2103T-F12-2/tp/issues/243), [\#262](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/262)
     * AboutUs:
       * Update and refine details for roles, responsibilities and features [\#257](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/257)
 
