@@ -69,7 +69,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                 || argMultimap.getValue(PREFIX_SKILL).isPresent()
                 )) {
             throw new ParseException("ALL FLAG CAN ONLY BE USED WITH:\n"
-                    + "[" + PREFIX_STATUS + "APPLICATION STATUS]\n");
+                    + "[" + PREFIX_STATUS + "APPLICATION_STATUS]\n");
         }
 
         EditApplicantDescriptor editApplicantDescriptor = new EditApplicantDescriptor();

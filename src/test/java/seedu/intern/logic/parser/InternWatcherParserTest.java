@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.intern.commons.core.selection.Selection;
 import seedu.intern.logic.commands.AddCommand;
 import seedu.intern.logic.commands.ClearCommand;
 import seedu.intern.logic.commands.DeleteCommand;
@@ -61,7 +62,7 @@ public class InternWatcherParserTest {
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_APPLICANT.getOneBased() + " "
                 + ApplicantUtil.getEditApplicantDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_APPLICANT, descriptor), command);
+        assertEquals(new EditCommand(Selection.fromIndex(INDEX_FIRST_APPLICANT), descriptor), command);
     }
 
     @Test
