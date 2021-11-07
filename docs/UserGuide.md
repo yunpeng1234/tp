@@ -26,13 +26,13 @@ This user guide covers a quick walk-through on how to use this application, as w
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    <br>
    ![Ui](images/Ui.png)
-5. Type any command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type any command in the command box and press the "Enter" key to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
 
 6. Some example commands you can try:
 
    * `list` : Lists all applicants.
 
-   * `add n/John p/123 e/a@a.com g/4.50 i/NTU c/Computer Science y/06/2025 a/INTERVIEWED` : Adds an applicant named `John` to Intern Watcher.
+   * `add n/John p/123 e/a@a.com g/4.50 i/NTU c/Computer Science y/06/2025 a/INTERVIEWED` : Adds an applicant named `John` with the above details to Intern Watcher.
 
    * `find john` : Lists all applicants whose name contains john.
 
@@ -49,6 +49,7 @@ This user guide covers a quick walk-through on how to use this application, as w
    * `clear` : Deletes all applicants from the application.
 
 7. To see more detailed information about each command, refer to [Features](#features).
+
 8. To see restrictions and specifications of each field, refer to [Specification of Fields.](#specification-of-fields).
 
 --------------------------------------------------------------------------------------------------------------------
@@ -60,7 +61,7 @@ This user guide covers a quick walk-through on how to use this application, as w
 **:information_source: Notes about the command formats:**<br>
 
 * Words in `UPPER_CASE` are the field parameters to be supplied by you.<br>
-  This excludes special tags for [**edit**](#editing-applicants--edit), [**view**](#viewing-an-applicants-details--view), [**delete**](#deleting-an-applicant--delete) commands. <br>
+  This excludes special tags for [**Edit**](#editing-applicants--edit), [**View**](#viewing-an-applicants-details--view), [**Delete**](#deleting-an-applicant--delete) commands. <br>
   * e.g. in `add n/NAME`, `NAME` is a field parameter to be replaced. You can enter `add n/John Doe`.<br>
   * e.g. in `delete ALL`, `ALL` is to be typed the same in full capital letters.
 
@@ -98,6 +99,7 @@ Adds a new applicant to Intern Watcher.
 Format: `add n/NAME p/PHONE e/EMAIL g/GRADE i/INSTITUTION c/COURSE y/GRADUATION_YEAR_MONTH j/JOB [a/APPLICATION_STATUS] [s/SKILL]…+`
 
 * Entries with same `NAME` (case-insensitive) will not be allowed. For example, `John Doe` and `john doe` are considered the same applicant and the second entry will not be allowed.
+* If you made a mistake when adding an applicant and would like to rectify it, please use the [**Edit**](#editing-applicants--edit) or [**Undo**](#undoing-an-action--undo) commands.
 * `APPLICATION_STATUS` and `SKILL` are case-sensitive.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -145,15 +147,15 @@ Examples:
 
 Displays applicants in Intern Watcher that match one or more given fields.
 
-Format: `filter [g/GRADE] [i/INSTITUTION]…+ [c/COURSE]…+ [y/GRADUATION_YEAR_MONTH] [j/JOB]…+ [a/STATUS]…+ [s/SKILL]…+`
+Format: `filter [g/GRADE] [i/INSTITUTION]…+ [c/COURSE]…+ [y/GRADUATION_YEAR_MONTH] [j/JOB]…+ [a/APPLICATION_STATUS]…+ [s/SKILL]…+`
 
 * `filter` will show applicants that match all fields specified.
-* `[i/INSTITUTION]…+`, `[c/COURSE]…+` and `[j/JOB]…+` are case-insensitive and `[a/STATUS]…+` and `[s/SKILL]…+` are case-sensitive.
+* `[i/INSTITUTION]…+`, `[c/COURSE]…+` and `[j/JOB]…+` are case-insensitive and `[a/APPLICATION_STATUS]…+` and `[s/SKILL]…+` are case-sensitive.
 * If `[g/GRADE]` is specified, it will show all applicants with grades higher or equal to the `g/Grade` specified.
 * Likewise, if `[y/GRADUATION_YEAR_MONTH]` is specified, it will show all applicants with graduation dates that is strictly before the `GRADUATION_YEAR_MONTH` specified.
 * If `[s/SKILL]…+` is specified, only applicants with all specified `[s/SKILL]…+` will be shown.
 * For either of `[c/COURSE]…+` or `[j/JOB]…+`, if more than 1 instance of a single field, such as `[j/JOB]…+` is specified, applicants with their job field **containing** at least one of the `[j/JOB]…+` specified will be shown.
-* For either of `[i/INSTITUTION]…+` or `[a/STATUS]…+`, if more than 1 instance of a single field, such as `[i/INSTITUTION]…+` is specified, applicants with their field **matching** at least one of the `[i/INSTITUTION]…+` specified will be shown.
+* For either of `[i/INSTITUTION]…+` or `[a/APPLICATION_STATUS]…+`, if more than 1 instance of a single field, such as `[i/INSTITUTION]…+` is specified, applicants with their field **matching** at least one of the `[i/INSTITUTION]…+` specified will be shown.
 
 Examples:
 * `filter s/Python s/Java` will show only applicants with skills in both JAVA and PYTHON.
@@ -181,6 +183,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [g/GRADE] [i/INSTITUTION] [c/CO
 * When editing skills, all existing skills of the applicant will be replaced i.e adding of skills is not cumulative.
 * You can remove all the applicant’s skills by typing `s/` without
   specifying any skills after it.
+* If you made a mistake when editing an applicant and would like to rectify it, please edit it again or use the [**Undo**](#undoing-an-action--undo) command.
+
 
 #### Edit all currently displayed applicants:
 Format: `edit ALL a/APPLICATION_STATUS`
@@ -196,13 +200,13 @@ Examples:
 |---|---|
 |<img src="images/EditIndexBefore.png" alt="drawing" />|<img src="images/EditIndexAfter.png" alt="drawing" />|
 
-*  `edit 1 s/` Clears all existing skills of the 1st applicant.
+*  `edit 1 s/` clears all existing skills of the 1st applicant.
 
 |Command|Effect|
 |---|---|
 |<img src="images/EditSkillBefore.png" alt="drawing" />|<img src="images/EditSkillAfter.png" alt="drawing" />|
 
-*  `filter a/APPLIED` followed by `edit ALL a/INTERVIEWED` Updates all applicants with `APPLIED` application status to have the `INTERVIEWED` application status.
+*  `filter a/APPLIED` followed by `edit ALL a/INTERVIEWED` updates all applicants with `APPLIED` application status to have the `INTERVIEWED` application status.
 
 |Command|Effect|
 |---|---|
@@ -219,6 +223,8 @@ Format: `delete INDEX`
     * `INDEX` refers to the index number shown in the displayed applicant list. 
     * `INDEX` **must be a positive integer** e.g. 1, 2, 3, …
     * `INDEX` of 0 or less, or indexes greater than `2147483647` will be treated as invalid commands.
+* If you made a mistake deleting an applicant and would like to rectify it, please use the [**Undo**](#undoing-an-action--undo) command.
+
 
 #### Delete all currently displayed applicants:
 Format: `delete ALL`
@@ -233,7 +239,7 @@ Examples:
 |---|---|
 |<img src="images/DeleteTwoBefore.png" alt="drawing" />|<img src="images/DeleteTwoAfter.png" alt="drawing" />|
 
-* `list` followed by `delete ALL` deletes the all applicants in Intern Watcher. Effect is similar to `clear` when used in conjunction with `list`.
+* `list` followed by `delete ALL` deletes all applicants in Intern Watcher. Effect is similar to `clear` when used in conjunction with `list`.
 
 |Command|Effect|
 |---|---|
@@ -266,6 +272,9 @@ Examples:
 ### Clearing all entries : `clear`
 
 Clears all applicant entries from Intern Watcher.
+
+* If you made a mistake when clearing all applicants and would like to rectify it, please use the [**Undo**](#undoing-an-action--undo) command.
+
 
 Format: `clear`
 
@@ -348,7 +357,7 @@ If your changes to the data file makes its format invalid, Intern Watcher will d
 
 `Institution` : The applicant's school. Should only include alphanumeric characters and space only. Should not be blank.
 
-`Status` : The applicant's application status. Case sensitive. Should only be one of these 7 statuses, `ACCEPTED` , `REJECTED`, `INTERVIEWED`, `APPLIED` , `SCHEDULED`, `RECEIVED` and `OFFERED`.
+`Application_Status` : The applicant's application status. Case sensitive. Should only be one of these 7 statuses, `ACCEPTED` , `REJECTED`, `INTERVIEWED`, `APPLIED` , `SCHEDULED`, `RECEIVED` and `OFFERED`.
 
 `Course` : The applicant's course of study in their school. Should only include alphabet characters and space only. Should not be blank.
 
@@ -375,7 +384,7 @@ Action | Format, Examples
 **Add** | `add n/NAME p/PHONE e/EMAIL g/GRADE i/INSTITUTION c/COURSE y/GRADUATION_YEAR_MONTH j/JOB [a/APPLICATION_STATUS] [s/SKILL]…+` <br> e.g. `add n/John p/999 e/a@a.com g/4.00 i/NTU c/CS y/06/2025 j/Software Engineer a/INTERVIEWED s/Python`
 **List** | `list`
 **View** | `view INDEX [T]` <br> e.g. `view 2 T`
-**Filter** | `filter [g/GRADE] [i/INSTITUTION]…+ [c/COURSE]…+ [y/GRADUATION_YEAR_MONTH] [j/JOB]..+ [a/STATUS]..+ [s/SKILL]…+` <br> e.g. `filter s/JAVA y/06/2022 i/NUS a/REJECTED`
+**Filter** | `filter [g/GRADE] [i/INSTITUTION]…+ [c/COURSE]…+ [y/GRADUATION_YEAR_MONTH] [j/JOB]..+ [a/APPLICATION_STATUS]..+ [s/SKILL]…+` <br> e.g. `filter s/JAVA y/06/2022 i/NUS a/REJECTED`
 **Edit** | `edit ALL a/APPLICATION_STATUS` , <br>`edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [g/GRADE] [i/INSTITUTION] [c/COURSE] [y/GRADUATION_YEAR_MONTH] [j/JOB] [a/APPLICATION_STATUS] [s/SKILL]…`<br>e.g. `edit ALL a/REJECTED` , <br> `edit 2 n/James Lee e/jameslee@example.com`
 **Delete** | `delete INDEX`, <br> `delete ALL`<br> e.g. `delete 3`, <br> `delete ALL`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g. `find James Jake`
