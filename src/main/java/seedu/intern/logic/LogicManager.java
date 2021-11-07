@@ -23,7 +23,8 @@ import seedu.intern.storage.Storage;
  */
 public class LogicManager implements Logic {
     public static final String FILE_OPS_ERROR_MESSAGE = "Could not save data to file: ";
-    public static final String FILE_ACCESS_DENIED_ERROR_MESSAGE = "File access denied, ensure save file is not set to read only.";
+    public static final String FILE_ACCESS_DENIED_ERROR_MESSAGE = "File access denied, ensure save " +
+            "file is not set to read only.";
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     private final Model model;
@@ -50,7 +51,8 @@ public class LogicManager implements Logic {
         try {
             storage.saveInternWatcher(model.getInternWatcher());
         } catch (AccessDeniedException ioe) {
-            throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe.getFile() + ". " + FILE_ACCESS_DENIED_ERROR_MESSAGE, ioe);
+            throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe.getFile() + ". " +
+                    FILE_ACCESS_DENIED_ERROR_MESSAGE, ioe);
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
