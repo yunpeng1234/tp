@@ -29,7 +29,7 @@ Intern Watcher (IW) is a desktop app for Human Resource Managers (HRs) to manage
     * Developer Guide:
         * Added implementation details of the `delete ALL` feature including the sequence diagram for a `delete` command. [\#109](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/109)
         * Refined documentation for the features `delete ALL` (Pull request [\#154](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/154))
-        * Refactored AB3 diagrams into InternWatcher ones (Pull request [\#216](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/216),)
+        * Refactored AB3 diagrams into InternWatcher ones (Pull request [\#216](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/216), [\#259](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/259))
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments): [\#13](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/13), [\#205](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/205), [\#97](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/97),
@@ -42,3 +42,4 @@ Intern Watcher (IW) is a desktop app for Human Resource Managers (HRs) to manage
 
 * **Contributions to Project Management and Organisation:**:
     *  Facilitated discussions/meetings and helped others with their features when needed
+    *  Created team repo + organisation
