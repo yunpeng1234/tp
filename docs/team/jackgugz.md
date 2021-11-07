@@ -29,12 +29,16 @@ Given below are my contributions to the project.
 * **Documentation**:
     * User Guide:
         * Refined documentation for the features `filter` and `add` [\#144](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/144), [\#222](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/222)
+        * Report bugs for User Guide [\#252](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/252)
     * Developer Guide:
         * Added implementation details of the `filter` feature including the sequence diagram for a `filter` command. [\#109](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/109)
         * Refined documentation for the features `filter` and `add` [\#222](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/222)
+        * Report bugs for Developer Guide [\#253](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/253)
+    * AboutUs:
+      * Update and refine details for roles, responsibilities and features [\#257](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/257)
 
 * **Community**:
-    * PRs reviewed (with non-trivial review comments): [\#85](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/85), [\#97](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/97), [\#115](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/115), [\#129](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/129), [\#137](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/137), [\#205](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/205)
+    * PRs reviewed (with non-trivial review comments): [\#85](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/85), [\#97](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/97), [\#115](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/115), [\#129](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/129), [\#137](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/137), [\#205](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/205), [\#252](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/252), [\#253](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/253)
     * Contributed to forum discussions (examples: [1](https://github.com/nus-cs2103-AY2122S1/forum/issues/54), [2](https://github.com/nus-cs2103-AY2122S1/forum/issues/308), [3](https://github.com/nus-cs2103-AY2122S1/forum/issues/310), [4](https://github.com/nus-cs2103-AY2122S1/forum/issues/141#issuecomment-960573021))
     * Reported bugs and suggestions for other teams in the class (examples: [ped](https://github.com/jackgugz/ped/issues))
 
