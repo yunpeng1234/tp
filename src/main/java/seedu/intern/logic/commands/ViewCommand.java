@@ -19,8 +19,8 @@ public class ViewCommand extends Command {
     public static final String COMMAND_WORD = "view";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Displays the applicant details identified by the index number used in the displayed applicant list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Parameters: INDEX (must be a positive integer) [T] (case sensitive)\n"
+            + "Example: " + COMMAND_WORD + " 1 T";
 
 
     public static final String MESSAGE_VIEW_APPLICANT_SUCCESS = "Displayed Applicant details: %1$s";

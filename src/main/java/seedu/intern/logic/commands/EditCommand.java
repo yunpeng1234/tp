@@ -62,10 +62,10 @@ public class EditCommand extends Command {
             + "Example index: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com\n"
-            + "ALL Parameters: ALL (must be uppercase)"
-            + "[" + PREFIX_STATUS + "APPLICATION STATUS] "
+            + "ALL Parameters: ALL (must be uppercase) "
+            + "" + PREFIX_STATUS + "APPLICATION STATUS \n"
             + "Example all: " + COMMAND_WORD + " ALL "
-            + PREFIX_STATUS + "APPLIED\n";
+            + PREFIX_STATUS + "APPLIED";
 
     public static final String MESSAGE_EDIT_APPLICANT_SUCCESS = "Edited Applicant: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
