@@ -171,7 +171,7 @@ Examples:
 
 Edits the information of an existing applicant, or the application status of all currently displayed applicants in the applicant list.
 
-#### Edit a specific applicant:
+#### Editing a specific applicant:
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [g/GRADE] [i/INSTITUTION] [c/COURSE] [y/GRADUATION_YEAR_MONTH] [j/JOB] [a/APPLICATION_STATUS] [s/SKILL]…`
 * If only `INDEX` is specified, the applicant at the specified `INDEX` will be edited.
     * `INDEX` refers to the index number shown in the displayed applicant list. 
@@ -181,7 +181,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [g/GRADE] [i/INSTITUTION] [c/CO
 * You can remove all the applicant’s skills by typing `s/` without
   specifying any skills after it.
 
-#### Edit all currently displayed applicants:
+#### Editing all currently displayed applicants:
 Format: `edit ALL a/APPLICATION_STATUS`
 * If `ALL` is specified, all applicants currently displayed in the applicant list will be edited.
 * Currently only the `APPLICATION_STATUS` of applicants can be edited. It is unlikely that the other fields would need multi editing.
@@ -211,7 +211,7 @@ Examples:
 
 Deletes the specified applicant, or all applicants currently displayed in the applicant list.
 
-#### Delete a specific applicant:
+#### Deleting a specific applicant:
 Format: `delete INDEX`
 
 * If `INDEX` is specified, the applicant at the specified `INDEX` will be deleted.
@@ -219,7 +219,7 @@ Format: `delete INDEX`
     * `INDEX` **must be a positive integer** e.g. 1, 2, 3, …
     * `INDEX` of 0 or less, or indexes greater than `2147483647` will be treated as invalid commands.
 
-#### Delete all currently displayed applicants:
+#### Deleting all currently displayed applicants:
 Format: `delete ALL`
 
 * If `ALL` is specified, all applicants currently displayed in the applicant list will be deleted.
@@ -278,7 +278,7 @@ Format: `undo`
     * Undoable command actions include: `add`, `edit`, `delete`, `clear`, `redo`.
 * Consecutive `undo` commands are available until the applicant list returns to its **initial state at launch** of the application.
 * If the current state of the applicant list is the initial state, the `undo` command will not be available.
-
+* The applicant detail panel state will not be preserved. For instance, after `view 1` and `delete 1`, `undo` will restore the deleted applicant to the applicant list, but the applicant detail panel will not be reverted to show the details of the deleted applicant.
 
 Examples:
 * `undo` (after `delete 2`). The applicant that was removed will be restored in Intern Watcher.
@@ -363,6 +363,9 @@ If your changes to the data file makes its format invalid, Intern Watcher will d
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous InternWatcher home folder.
+
+**Q**: The command result shows `Could not save data to file: data\internwatcher.json. File access denied, ensure save file is not set to read only.`, how do I fix this?
+**A**: The `internwatcher.json` save file in your `\data` directory has been set to read only. Open the `data` file, right click on `internwatcher.json`, click properties, and make sure read-only is unchecked. Apply changes if necessary.
 
 --------------------------------------------------------------------------------------------------------------------
 
