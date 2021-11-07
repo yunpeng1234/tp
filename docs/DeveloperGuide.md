@@ -160,10 +160,11 @@ This section describes some noteworthy details and design considerations on how 
     - Pros: Allow for multiple entries with the same name.
     - Cons: Harder to implement. Users may abuse the `add` command intentionally and unintentionally.<br>
 
-Therefore, with the above consideration and the fact that different applicants sharing same name is relatively rare case. We decided to proceed with alternative 1.
+Therefore, with the above consideration and the fact that different applicants sharing same name is relatively rare case, we decided to proceed with alternative 1.
 <br>
 <br>
 **Aspect: Restriction over graduation year month**
+<br>
 As internship has timeliness as its nature and our application development only started in 2021, it would be more reasonable for us to set January 2020 to be the lower bound of accepted graduation year month to give HRs some allowance to keep some previous data. However, anyone who graduated before such said time will not likely be looking for an internship anymore, and therefore should be disallowed in our system.
 
 
@@ -172,9 +173,13 @@ As internship has timeliness as its nature and our application development only 
 #### Implementation
 The edit ALL mechanism is facilitated by the new `Selection` class. A new parser `ParserUtil#parseSelection`
 has been added to parse `Selection` values, which accepts either integers or the `ALL` string. The `Selection` class supports
-operations `Selection#hasAllSelectFlag` and `Selection#hasIndex`, which is used by `EditCommand#execute`. `EditCommand#execute`
+operations `Selection#hasAllSelectFlag` and `Selection#hasIndex`, which is used by `EditCommand#execute`. 
+<br>
+`EditCommand#execute`
 has been modified, such that whenever `Selection#hasAllSelectFlag` returns `true`, `EditCommand#execute` edits all applicants with
-the fields specified. `Selection` has been given a private constructor with static factory methods `Selection#fromIndex` and
+the fields specified. 
+<br>
+`Selection` has been given a private constructor with static factory methods `Selection#fromIndex` and
 `Selection#fromAllFlag` to ensure `Selection` should not contain both index and all flag.
 
 The following activity diagrams summarizes what happens when a user enters an `edit` command.
@@ -223,8 +228,12 @@ should be edited.
 #### Implementation
 The delete ALL mechanism is facilitated by the new `Selection` class shared with edit ALL. A new parser `ParserUtil#parseSelection`
 has been added to parse `Selection` values, which accepts either integers or the `ALL` string. The `Selection` class supports
-operations `Selection#hasAllSelectFlag` and `Selection#hasIndex`, which is used by `DeleteCommand#execute`. `DeleteCommand#execute`
-has been modified, such that whenever `Selection#hasAllSelectFlag` returns `true`, `DeleteCommand#execute` delete all applicants on the displayed list. `Selection` has been given a private constructor with static factory methods `Selection#fromIndex` and
+operations `Selection#hasAllSelectFlag` and `Selection#hasIndex`, which is used by `DeleteCommand#execute`. 
+<br>
+`DeleteCommand#execute`
+has been modified, such that whenever `Selection#hasAllSelectFlag` returns `true`, `DeleteCommand#execute` delete all applicants on the displayed list. 
+<br>
+`Selection` has been given a private constructor with static factory methods `Selection#fromIndex` and
 `Selection#fromAllFlag` to ensure `Selection` should not contain both index and all flag.
 
 #### Design considerations:
@@ -245,9 +254,9 @@ has been modified, such that whenever `Selection#hasAllSelectFlag` returns `true
 #### Implementation
 
 The filter mechanism is facilitated by `FilterCommandParser`.
-It produces a `FilterApplicantDescriptor`, which in turn feeds in to create a `FilterCommand`.
+`FilterCommandParser` produces a `FilterApplicantDescriptor`, which in turn helps to create a `FilterCommand`.
 <br/>
-`Optional` and `set` data structures have been used to contain optional set of filters for different attributes within `FilterApplicantDescriptor`.
+`Optional` and `Set` data structures have been used to contain optional set of filters for different attributes within `FilterApplicantDescriptor`.
 <br/>
 The `FilterCommand` will make use of the `FilterApplicantDescriptor` to create a `CombineFiltersPredicate` that will be supplied to `ModelManager#updateFilteredApplicantList(Predicate<Applicant>)` in its `execute` method.
 <br/>
@@ -388,18 +397,20 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                 | I want to …​                        | So that I can…​                                                        |
-| -------- | ------------------------------------------ | -------------------------------------- | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions                 | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new applicant                    |                                                                        |
-| `* * *`  | user                                       | delete an applicant                    | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | update applicant details               | change entries accordingly                                             |
-| `* * *`  | user                                       | update all filtered applicants' details| change all entries accordingly                                         |
-| `* * *`  | user                                       | view an organised list of applicants   | see suitable applicants at a glance                                    |
-| `* * *`  | user                                       | undo or redo my last action            | rectify a mistake I made                                               |
-| `* * *`  | user                                       | save applicant profiles to a file      | refer to them later                                                    |
-| `* * *`  | user                                       | read applicant profiles from a file    | refer to them                                                          |
-
+| Priority | As a …​    | I want to …​                                     | So that I can…​                                                        |
+| -------- | ------------- | --------------------------------------------------- | ---------------------------------------------------------------------- |
+| `* * `   | new user      | see usage instructions                              | refer to instructions when I forget how to use the App                 |
+| `* * *`  | user          | add a new applicant                                 |                                                                        |
+| `* * *`  | user          | delete an applicant                                 | remove entries that I no longer need                                   |
+| `* * `   | user          | delete all shown applicants                         | delete all entries that I no longer need                               |
+| `* * *`  | user          | update applicant details                            | change entries accordingly                                             |
+| `* * `   | user          | update all filtered applicants' details             | change all entries accordingly                                         |
+| `* * *`  | user          | view an organised list of applicants                | see suitable applicants at a glance                                    |
+| `* * `   | user          | undo or redo my last action                         | rectify a mistake I made                                               |
+| `* * *`  | user          | save applicant profiles to a file                   | refer to them later                                                    |
+| `* * *`  | user          | read applicant profiles from a file                 | refer to them                                                          |
+| `* * *`  | user          | mass filter applicants against certain criteria     | find suitable applicants fitted for the job                            |
+| `* * `   | user          | find applicants by their names                      | review and edit them accordingly                                       |
 
 
 ### Use cases
@@ -508,6 +519,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. InternWatcher shows an error message.
 
       Use case resumes at step 1.
+
+**Use case: Filter all applicant applications**
+
+
+**MSS**
+
+1.  User requests to list applicants
+2.  InternWatcher shows a list of applicants
+3.  User requests to filter the list based on specifications entered
+4.  InternWatcher shows a list of applicants that fit the specifications
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. Any given filters are invalid.
+
+    * 3a1. InternWatcher shows an error message.
+
+      Use case resumes at step 2.
 
 
 
