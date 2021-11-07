@@ -33,7 +33,7 @@ Given below are my contributions to the project.
     * Developer Guide:
         * Added implementation details of the `filter` feature including the sequence diagram for a `filter` command. [\#109](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/109)
         * Refined documentation for the features `filter` and `add` [\#222](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/222)
-        * Report bugs for Developer Guide [\#253](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/253)
+        * Report and fix bugs for Developer Guide [\#253](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/253), [\#262](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/262)
     * AboutUs:
       * Update and refine details for roles, responsibilities and features [\#257](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/257)
 
