@@ -7,6 +7,7 @@ public class Selection {
     private final Boolean isAllSelected;
 
     private Selection(Index index, Boolean isAllSelected) {
+        assert (index == null || isAllSelected == null);
         this.index = index;
         this.isAllSelected = isAllSelected;
     }
