@@ -99,7 +99,6 @@ Adds a new applicant to Intern Watcher.
 Format: `add n/NAME p/PHONE e/EMAIL g/GRADE i/INSTITUTION c/COURSE y/GRADUATION_YEAR_MONTH j/JOB [a/APPLICATION_STATUS] [s/SKILL]…+`
 
 * Entries with same `NAME` (case-insensitive) will not be allowed. For example, `John Doe` and `john doe` are considered the same applicant and the second entry will not be allowed.
-* If you made a mistake when adding an applicant and would like to rectify it, please use the [**Edit**](#editing-applicants--edit) or [**Undo**](#undoing-an-action--undo) commands.
 * `APPLICATION_STATUS` and `SKILL` are case-sensitive.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -183,8 +182,6 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [g/GRADE] [i/INSTITUTION] [c/CO
 * When editing skills, all existing skills of the applicant will be replaced i.e adding of skills is not cumulative.
 * You can remove all the applicant’s skills by typing `s/` without
   specifying any skills after it.
-* If you made a mistake when editing an applicant and would like to rectify it, please edit it again or use the [**Undo**](#undoing-an-action--undo) command.
-
 
 #### Editing all currently displayed applicants:
 Format: `edit ALL a/APPLICATION_STATUS`
@@ -223,8 +220,6 @@ Format: `delete INDEX`
     * `INDEX` refers to the index number shown in the displayed applicant list. 
     * `INDEX` **must be a positive integer** e.g. 1, 2, 3, …
     * `INDEX` of 0 or less, or indexes greater than `2147483647` will be treated as invalid commands.
-* If you made a mistake deleting an applicant and would like to rectify it, please use the [**Undo**](#undoing-an-action--undo) command.
-
 
 #### Deleting all currently displayed applicants:
 Format: `delete ALL`
@@ -272,9 +267,6 @@ Examples:
 ### Clearing all entries : `clear`
 
 Clears all applicant entries from Intern Watcher.
-
-* If you made a mistake when clearing all applicants and would like to rectify it, please use the [**Undo**](#undoing-an-action--undo) command.
-
 
 Format: `clear`
 
