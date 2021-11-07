@@ -21,11 +21,6 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## **Design**
 
-<div markdown="span" class="alert alert-primary">
-
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/InternWatcher-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
-</div>
-
 ### Architecture
 
 <img src="images/ArchitectureDiagram.png" width="280" />
@@ -36,7 +31,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/InternWatcher-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/InternWatcher-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S1-CS2103T-F12-2/tp/blob/master/src/main/java/seedu/intern/Main.java) and [`MainApp`](https://github.com/AY2122S1-CS2103T-F12-2/tp/blob/master/src/main/java/seedu/intern/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -69,13 +64,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/InternWatcher-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103T-F12-2/tp/blob/master/src/main/java/seedu/intern/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ApplicantListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/InternWatcher-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/InternWatcher-level3/tree/master/src/main/resources/view/MainWindow.fxml).
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103T-F12-2/tp/blob/master/src/main/java/seedu/intern/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/InternWatcher-level3/tree/master/src/main/resources/view/MainWindow.fxml).
 
 The `UI` component,
 
@@ -86,7 +81,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/InternWatcher-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-F12-2/tp/blob/master/src/main/java/seedu/intern/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -114,9 +109,9 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/InternWatcher-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-F12-2/tp/blob/master/src/main/java/seedu/intern/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" />
 
 
 The `Model` component,
@@ -128,14 +123,14 @@ The `Model` component,
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Skill` list in the `InternWatcher`, which `Applicant` references. This allows `InternWatcher` to only require one `Skill` object per unique skill, instead of each `Applicant` needing their own `Skill` objects.<br>
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+<img src="images/BetterModelClassDiagram.png" />
 
 </div>
 
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/InternWatcher-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-F12-2/tp/blob/master/src/main/java/seedu/intern/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -184,14 +179,14 @@ the fields specified. `Selection` has been given a private constructor with stat
 
 The following activity diagrams summarizes what happens when a user enters an `edit` command.
 
-<img src="images/EditActivityDiagram.png" width="250" />
+<img src="images/EditActivityDiagram.png" />
 
 Edit ALL updates the details of all currently displayed applicants by obtaining the list of currently displayed applicants via `Model#getFilteredApplicantList`.
 The list is then copied, after which each individual applicant is modified via `Model#setApplicant` in a for loop.
 
 The following sequence diagram summaries what happens when a user enters an `edit``ALL` command.
 
-<img src="images/EditAllSequence.png"/>
+<img src="images/EditAllSequenceDiagram.png"/>
 
 #### Design considerations:
 **Aspect: How edit ALL is parsed**
@@ -203,6 +198,7 @@ should be edited.
 - **Alternative 2**: Create a separate `EditAllCommand` with its own parser.
     - Pros: Easier to test, the behaviour of `EditAllCommand` should not affect `EditCommand`.
     - Cons: Harder to implement. Users might also find editing multiple applicants having a separate command unintuitive.
+
 **Aspect: How edit arguments are stored**
 - **Alternative 1 (current choice)**: Create a `Selection` class with private constructor and static factory methods to store either the
   `ALL` flag or the `Index`.
@@ -218,7 +214,7 @@ should be edited.
       There should not be a reason to mass modify these fields. If a user created a number of applicants with the wrong details
       `UndoCommand` can be used instead.
     - Cons: Usage of `edit ALL` would be limited.
-- **Alternative 2**: Allow mass modifications of all applicants
+- **Alternative 2**: Allow mass modifications of all fields
     - Pros: `edit ALL` behaviour can be kept similar to `edit INDEX`, increasing usability.
     - Cons: Allows users to unintentionally modify applicant fields that should normally not require mass edits.
 
@@ -485,7 +481,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User filters applicants to update
 2.  InternWatcher shows a list of applicants
 3.  User requests to update all applicants in the list
-4.  InternWatcher updates all applicants
+4.  InternWatcher updates all displayed applicants
 
     Use case ends.
 
@@ -527,12 +523,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 8.  The final product should be contained in a single window
 9.  The system should provide sufficient hints to be usable by a novice.
 
-*{More to be added}*
-
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -560,8 +553,6 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 
 ### Editing an applicant
 
@@ -575,13 +566,16 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `edit 0 a/ INTERVIEWED`<br>
       Expected: No applicant is edited. Error details shown in the status message. Status bar remains the same.
 
+   1. Other incorrect edit commands to try: `edit`, `edit x`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+
    1. Test case: `edit ALL a/ INTERVIEWED`<br>
       Expected: All currently displayed applicants modified with the `INTERVIEWED` application status. Number of applicants successfully edited shown in the status message. Timestamp in the status bar is updated.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+   1. Test case: `edit ALL p/ 123`<br>
+      Expected: No applicant is edited. Error details shown in the status message. Status bar remains the same.
 
-2. _{ more test cases …​ }_
+   
 
 ### Deleting an applicant
 
@@ -597,8 +591,10 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+   
+   1. Test case: `delete ALL`<br>
+      Expected: All currently displayed applicants are deleted. Number of applicants successfully deleted shown in the status message. Timestamp in the status bar is updated.
 
-2. _{ more test cases …​ }_
 
 ### Viewing an applicant's details
 1. Viewing an applicant's details while all applicants are being shown
@@ -609,12 +605,14 @@ testers are expected to do more *exploratory* testing.
       Expected: No applicant detail displayed. Error details shown in the status message. Status bar remains the same.
    4. Other incorrect view commands to try: `view`, `view x`. `...`(where x is larger than the list or a non-positive number)<br>
       Expected: Similar to previous.
-2. _{ more test cases …​ }_
+
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+   1. Save file is missing: A new save file `internwatcher.json` will be created on `exit` the next time Intern Watcher is used.
+   2. Save file is corrupted: If invalid data is present, such as a person with phone number `abcd`, Intern Watcher will start with
+   an empty applicant list instead.
+   3. Save file applicant has duplicate fields: If an applicant has duplicate fields, such as two `phone` key value pairs, Intern Watcher
+   will parse the applicant with the last `phone` value.
