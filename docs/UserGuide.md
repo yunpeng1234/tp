@@ -8,7 +8,7 @@ Intern Watcher (IW) is a **desktop app for Human Resource Managers to manage int
 
 You can use Intern Watcher to add, edit and delete the internship applicants. Intern Watcher also allows you to track applicants' details such as grades and skills, as well as filter applicants by their details.
 
-This user guide covers a quick walk through how to use this application, as well as the full descriptions of the features available.
+This user guide covers a quick walk-through on how to use this application, as well as the full descriptions of the features available.
 * Table of Contents
 {:toc}
 
@@ -16,9 +16,10 @@ This user guide covers a quick walk through how to use this application, as well
 
 ## Quick start
 
+
 1. Ensure you have Java `11` or above installed in your Computer. You can download it [here](https://www.oracle.com/java/technologies/downloads/#java11).
 
-2. Download the latest `*.jar` from [here](https://github.com/AY2122S1-CS2103T-F12-2/tp/releases).
+2. Download the latest `internwatcher.jar` from [here](https://github.com/AY2122S1-CS2103T-F12-2/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your Intern Watcher.
 
