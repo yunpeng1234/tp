@@ -351,7 +351,7 @@ If your changes to the data file makes its format invalid, Intern Watcher will d
 `Phone` : The applicant's phone number. Should only contain digits from 0 to 9, with a minimum length of 3 digits.
 
 `Email` : The applicant's email address. Should be in the form of *Local-part*@**Domain**. *Local-part* should contain only alphanumeric characters with only these special characters `+_.-`.
-**Domain** can be separated into ***label*** with `.` if necessary. Each ***label*** should only contain alphanumeric characters and separated and is separated by `-` if necessary. domain is at least 2 characters long and needs to start and end with alphanumeric characters.
+**Domain** can be separated into ***label*** with `.` if necessary. Each ***label*** should only contain alphanumeric characters and separated and is separated by `-` if necessary. Domain is at least 2 characters long and needs to start and end with alphanumeric characters.
 
 `Grade` : The applicant's Grade Point Average (GPA). Should be a number in 2 decimal places from 0.00 - 5.00.
 
@@ -374,7 +374,7 @@ If your changes to the data file makes its format invalid, Intern Watcher will d
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous InternWatcher home folder.
 
-**Q**: The command result shows `Could not save data to file: data\internwatcher.json. File access denied, ensure save file is not set to read only.`, how do I fix this?
+**Q**: The command result shows `Could not save data to file: data\internwatcher.json. File access denied, ensure save file is not set to read only.`, how do I fix this?<br>
 **A**: The `internwatcher.json` save file in your `\data` directory has been set to read only. Open the `data` file, right click on `internwatcher.json`, click properties, and make sure read-only is unchecked. Apply changes if necessary.
 
 --------------------------------------------------------------------------------------------------------------------
