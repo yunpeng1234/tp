@@ -27,7 +27,7 @@ public class InternWatcherTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), internWatcher.getPersonList());
+        assertEquals(Collections.emptyList(), internWatcher.getApplicantList());
     }
 
     @Test
@@ -36,15 +36,15 @@ public class InternWatcherTest {
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
+    public void resetData_withValidReadOnlyInternWatcher_replacesData() {
         InternWatcher newData = getTypicalInternWatcher();
         internWatcher.resetData(newData);
         assertEquals(newData, internWatcher);
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
-        // Two persons with the same identity fields
+    public void resetData_withDuplicateApplicants_throwsDuplicateApplicantException() {
+        // Two applicants with the same identity fields
         Applicant editedAlice = new ApplicantBuilder(ALICE).withSkills(VALID_SKILL_JAVA)
                 .build();
         List<Applicant> newApplicants = Arrays.asList(ALICE, editedAlice);
@@ -54,36 +54,36 @@ public class InternWatcherTest {
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> internWatcher.hasPerson(null));
+    public void hasApplicant_nullApplicant_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> internWatcher.hasApplicant(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(internWatcher.hasPerson(ALICE));
+    public void hasApplicant_applicantNotInInternWatcher_returnsFalse() {
+        assertFalse(internWatcher.hasApplicant(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        internWatcher.addPerson(ALICE);
-        assertTrue(internWatcher.hasPerson(ALICE));
+    public void hasApplicant_applicantInInternWatcher_returnsTrue() {
+        internWatcher.addApplicant(ALICE);
+        assertTrue(internWatcher.hasApplicant(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        internWatcher.addPerson(ALICE);
+    public void hasApplicant_applicantWithSameIdentityFieldsInInternWatcher_returnsTrue() {
+        internWatcher.addApplicant(ALICE);
         Applicant editedAlice = new ApplicantBuilder(ALICE).withSkills(VALID_SKILL_JAVA)
                 .build();
-        assertTrue(internWatcher.hasPerson(editedAlice));
+        assertTrue(internWatcher.hasApplicant(editedAlice));
     }
 
     @Test
-    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> internWatcher.getPersonList().remove(0));
+    public void getApplicantList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> internWatcher.getApplicantList().remove(0));
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
+     * A stub ReadOnlyInternWatcher whose applicants list can violate interface constraints.
      */
     private static class InternWatcherStub implements ReadOnlyInternWatcher {
         private final ObservableList<Applicant> applicants = FXCollections.observableArrayList();
@@ -93,7 +93,7 @@ public class InternWatcherTest {
         }
 
         @Override
-        public ObservableList<Applicant> getPersonList() {
+        public ObservableList<Applicant> getApplicantList() {
             return applicants;
         }
     }

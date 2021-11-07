@@ -44,8 +44,8 @@ public class FilterCommand extends Command {
             + "display list with applicants with all skills specified in the filters. \n"
             + "For valid status/institution filters, "
             + "display list with applicants matching at least one of statues/institutions specified in the filters. \n"
-            + "For valid course/job filters, display list with applicants with "
-            + "one of the courses/jobs specified among the course/job filters. \n"
+            + "For valid course/job filters, display list with applicants containing "
+            + "at least one of the courses/jobs specified among the course/job filters. \n"
             + "Parameters: "
             + "[" + PREFIX_GRADE + "GRADE] "
             + "[" + PREFIX_INSTITUTION + "INSTITUTION]... "
@@ -74,7 +74,7 @@ public class FilterCommand extends Command {
         requireNonNull(model);
         model.updateFilteredApplicantList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(Messages.MESSAGE_APPLICANTS_LISTED_OVERVIEW, model.getFilteredApplicantList().size()));
     }
 
     @Override

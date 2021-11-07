@@ -14,7 +14,7 @@ import seedu.intern.model.applicant.UniqueApplicantList;
  */
 public class InternWatcher implements ReadOnlyInternWatcher {
 
-    private final UniqueApplicantList persons;
+    private final UniqueApplicantList applicants;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -24,13 +24,13 @@ public class InternWatcher implements ReadOnlyInternWatcher {
      *   among constructors.
      */
     {
-        persons = new UniqueApplicantList();
+        applicants = new UniqueApplicantList();
     }
 
     public InternWatcher() {}
 
     /**
-     * Creates an InternWatcher using the Persons in the {@code toBeCopied}
+     * Creates an InternWatcher using the Applicants in the {@code toBeCopied}
      */
     public InternWatcher(ReadOnlyInternWatcher toBeCopied) {
         this();
@@ -40,11 +40,11 @@ public class InternWatcher implements ReadOnlyInternWatcher {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the applicant list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of the applicant list with {@code Applicants}.
+     * {@code Applicants} must not contain duplicate applicants.
      */
-    public void setPersons(List<Applicant> applicants) {
-        this.persons.setApplicants(applicants);
+    public void setApplicants(List<Applicant> applicants) {
+        this.applicants.setApplicants(applicants);
     }
 
     /**
@@ -53,7 +53,7 @@ public class InternWatcher implements ReadOnlyInternWatcher {
     public void resetData(ReadOnlyInternWatcher newData) {
         requireNonNull(newData);
 
-        setPersons(newData.getPersonList());
+        setApplicants(newData.getApplicantList());
     }
 
     //// applicant-level operations
@@ -61,61 +61,61 @@ public class InternWatcher implements ReadOnlyInternWatcher {
     /**
      * Returns true if a applicant with the same identity as {@code applicant} exists in the intern watcher.
      */
-    public boolean hasPerson(Applicant applicant) {
+    public boolean hasApplicant(Applicant applicant) {
         requireNonNull(applicant);
-        return persons.contains(applicant);
+        return applicants.contains(applicant);
     }
 
     /**
      * Adds a applicant to the intern watcher.
      * The applicant must not already exist in the intern watcher.
      */
-    public void addPerson(Applicant p) {
-        persons.add(p);
+    public void addApplicant(Applicant p) {
+        applicants.add(p);
     }
 
     /**
-     * Replaces the given applicant {@code target} in the list with {@code editedPerson}.
+     * Replaces the given applicant {@code target} in the list with {@code editedApplicant}.
      * {@code target} must exist in the intern watcher.
-     * The applicant identity of {@code editedPerson} must not be the same as another existing applicant in the
+     * The applicant identity of {@code editedApplicant} must not be the same as another existing applicant in the
      * intern watcher.
      */
-    public void setPerson(Applicant target, Applicant editedApplicant) {
+    public void setApplicant(Applicant target, Applicant editedApplicant) {
         requireNonNull(editedApplicant);
 
-        persons.setApplicant(target, editedApplicant);
+        applicants.setApplicant(target, editedApplicant);
     }
 
     /**
      * Removes {@code key} from this {@code InternWatcher}.
      * {@code key} must exist in the intern watcher.
      */
-    public void removePerson(Applicant key) {
-        persons.remove(key);
+    public void removeApplicant(Applicant key) {
+        applicants.remove(key);
     }
 
     //// util methods
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons";
+        return applicants.asUnmodifiableObservableList().size() + " applicants";
         // TODO: refine later
     }
 
     @Override
-    public ObservableList<Applicant> getPersonList() {
-        return persons.asUnmodifiableObservableList();
+    public ObservableList<Applicant> getApplicantList() {
+        return applicants.asUnmodifiableObservableList();
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof InternWatcher // instanceof handles nulls
-                && persons.equals(((InternWatcher) other).persons));
+                && applicants.equals(((InternWatcher) other).applicants));
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return applicants.hashCode();
     }
 }

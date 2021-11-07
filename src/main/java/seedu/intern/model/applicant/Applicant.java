@@ -109,7 +109,7 @@ public class Applicant {
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable skill set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Skill> getSkills() {
@@ -118,7 +118,7 @@ public class Applicant {
 
     /**
      * Returns true if both applicants have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * This defines a weaker notion of equality between two applicants.
      */
     public boolean isSameApplicant(Applicant otherApplicant) {
         if (otherApplicant == this) {
@@ -131,7 +131,7 @@ public class Applicant {
 
     /**
      * Returns true if both applicants have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * This defines a stronger notion of equality between two applicants.
      */
     @Override
     public boolean equals(Object other) {
@@ -186,7 +186,7 @@ public class Applicant {
 
         Set<Skill> skills = getSkills();
         if (!skills.isEmpty()) {
-            builder.append("; Tags: ");
+            builder.append("; Skills: ");
             skills.forEach(builder::append);
         }
         return builder.toString();

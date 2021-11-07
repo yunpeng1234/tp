@@ -47,7 +47,7 @@ public class EditApplicantDescriptorTest {
         editedAmy = new EditApplicantDescriptorBuilder(DESC_AMY).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
-        // different tags -> returns false
+        // different skills -> returns false
         editedAmy = new EditApplicantDescriptorBuilder(DESC_AMY).withSkills(VALID_SKILL_JAVA).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }

@@ -26,7 +26,7 @@ public class ApplicantTest {
     }
 
     @Test
-    public void isSamePerson() {
+    public void isSameApplicant() {
         // same object -> returns true
         assertTrue(ALICE.isSameApplicant(ALICE));
 
@@ -94,7 +94,7 @@ public class ApplicantTest {
         editedAlice = new ApplicantBuilder(ALICE).withGraduationYearMonth(VALID_GRADUATION_YEARMONTH_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different tags -> returns false
+        // different skills -> returns false
         editedAlice = new ApplicantBuilder(ALICE).withSkills(VALID_SKILL_JAVA).build();
         assertFalse(ALICE.equals(editedAlice));
     }

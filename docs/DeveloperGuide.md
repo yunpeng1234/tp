@@ -21,11 +21,6 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## **Design**
 
-<div markdown="span" class="alert alert-primary">
-
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/InternWatcher-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
-</div>
-
 ### Architecture
 
 <img src="images/ArchitectureDiagram.png" width="280" />
@@ -36,7 +31,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/InternWatcher-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/InternWatcher-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S1-CS2103T-F12-2/tp/blob/master/src/main/java/seedu/intern/Main.java) and [`MainApp`](https://github.com/AY2122S1-CS2103T-F12-2/tp/blob/master/src/main/java/seedu/intern/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -69,13 +64,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/InternWatcher-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103T-F12-2/tp/blob/master/src/main/java/seedu/intern/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ApplicantListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/InternWatcher-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/InternWatcher-level3/tree/master/src/main/resources/view/MainWindow.fxml).
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103T-F12-2/tp/blob/master/src/main/java/seedu/intern/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/InternWatcher-level3/tree/master/src/main/resources/view/MainWindow.fxml).
 
 The `UI` component,
 
@@ -86,7 +81,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/InternWatcher-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-F12-2/tp/blob/master/src/main/java/seedu/intern/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -114,9 +109,9 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/InternWatcher-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-F12-2/tp/blob/master/src/main/java/seedu/intern/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" />
 
 
 The `Model` component,
@@ -128,14 +123,14 @@ The `Model` component,
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Skill` list in the `InternWatcher`, which `Applicant` references. This allows `InternWatcher` to only require one `Skill` object per unique skill, instead of each `Applicant` needing their own `Skill` objects.<br>
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+<img src="images/BetterModelClassDiagram.png" />
 
 </div>
 
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/InternWatcher-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-F12-2/tp/blob/master/src/main/java/seedu/intern/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -165,22 +160,38 @@ This section describes some noteworthy details and design considerations on how 
     - Pros: Allow for multiple entries with the same name.
     - Cons: Harder to implement. Users may abuse the `add` command intentionally and unintentionally.<br>
 
-Therefore, with the above consideration and the fact that different applicants sharing same name is relatively rare case. We decided to proceed with alternative 1.
+Therefore, with the above consideration and the fact that different applicants sharing same name is relatively rare case, we decided to proceed with alternative 1.
 <br>
 <br>
 **Aspect: Restriction over graduation year month**
+<br>
 As internship has timeliness as its nature and our application development only started in 2021, it would be more reasonable for us to set January 2020 to be the lower bound of accepted graduation year month to give HRs some allowance to keep some previous data. However, anyone who graduated before such said time will not likely be looking for an internship anymore, and therefore should be disallowed in our system.
 
 
 ###  Edit ALL feature
 
 #### Implementation
-The edit ALL mechanism is facilitated by the new `Selection` class. A new parser `ParserUtil#parseSelection`
+* The edit ALL mechanism is facilitated by the new `Selection` class. A new parser `ParserUtil#parseSelection`
 has been added to parse `Selection` values, which accepts either integers or the `ALL` string. The `Selection` class supports
-operations `Selection#hasAllFlag` and `Selection#hasIndex`, which is used by `EditCommand#execute`. `EditCommand#execute`
-has been modified, such that whenever `Selection#hasAllFlag` returns `true`, `EditCommand#execute` edits all applicants with
-the fields specified. `Selection` has been given a private constructor with static factory methods `Selection#fromIndex` and
+operations `Selection#hasAllSelectFlag` and `Selection#hasIndex`, which is used by `EditCommand#execute`. 
+<br>
+* `EditCommand#execute`
+has been modified, such that whenever `Selection#hasAllSelectFlag` returns `true`, `EditCommand#execute` edits all applicants with
+the fields specified. 
+<br>
+* `Selection` has been given a private constructor with static factory methods `Selection#fromIndex` and
 `Selection#fromAllFlag` to ensure `Selection` should not contain both index and all flag.
+
+The following activity diagrams summarizes what happens when a user enters an `edit` command.
+
+<img src="images/EditActivityDiagram.png" />
+
+Edit ALL updates the details of all currently displayed applicants by obtaining the list of currently displayed applicants via `Model#getFilteredApplicantList`.
+The list is then copied, after which each individual applicant is modified via `Model#setApplicant` in a for loop.
+
+The following sequence diagram summaries what happens when a user enters an `edit``ALL` command.
+
+<img src="images/EditAllSequenceDiagram.png"/>
 
 #### Design considerations:
 **Aspect: How edit ALL is parsed**
@@ -193,13 +204,36 @@ should be edited.
     - Pros: Easier to test, the behaviour of `EditAllCommand` should not affect `EditCommand`.
     - Cons: Harder to implement. Users might also find editing multiple applicants having a separate command unintuitive.
 
+**Aspect: How edit arguments are stored**
+- **Alternative 1 (current choice)**: Create a `Selection` class with private constructor and static factory methods to store either the
+  `ALL` flag or the `Index`.
+    - Pros: Disallows `ALL` flag to exist together with `Index`, making debugging easier. Keeps modifications to existing classes minimal.
+    - Cons: Most `EditCommand` tests would have to be changed to accommodate the new constructor. `Selection`
+- **Alternative 2**: Overload `EditCommand` constructor to accept an additional boolean flag.
+    - Pros: Easy to implement, existing classes/methods need not be changed.
+    - Cons: Additional parser method must be created. Users may unintentionally pass both `ALL` and `Index` to parser.
+
+**Aspect: What attributes can edit ALL accept**
+- **Alternative 1 (current choice)**: Only allow mass modifications to `ApplicationStatus`.
+    - Pros: Users cannot unintentionally modify all applicants' personal details, such as `Name`, `Email`, `Grade`.
+      There should not be a reason to mass modify these fields. If a user created a number of applicants with the wrong details
+      `UndoCommand` can be used instead.
+    - Cons: Usage of `edit ALL` would be limited.
+- **Alternative 2**: Allow mass modifications of all fields
+    - Pros: `edit ALL` behaviour can be kept similar to `edit INDEX`, increasing usability.
+    - Cons: Allows users to unintentionally modify applicant fields that should normally not require mass edits.
+
 ###  Delete ALL feature
 
 #### Implementation
-The delete ALL mechanism is facilitated by the new `Selection` class shared with edit ALL. A new parser `ParserUtil#parseSelection`
+* The delete ALL mechanism is facilitated by the new `Selection` class shared with edit ALL. A new parser `ParserUtil#parseSelection`
 has been added to parse `Selection` values, which accepts either integers or the `ALL` string. The `Selection` class supports
-operations `Selection#hasAllFlag` and `Selection#hasIndex`, which is used by `DeleteCommand#execute`. `DeleteCommand#execute`
-has been modified, such that whenever `Selection#hasAllFlag` returns `true`, `DeleteCommand#execute` delete all applicants on the displayed list. `Selection` has been given a private constructor with static factory methods `Selection#fromIndex` and
+operations `Selection#hasAllSelectFlag` and `Selection#hasIndex`, which is used by `DeleteCommand#execute`. 
+<br>
+* `DeleteCommand#execute`
+has been modified, such that whenever `Selection#hasAllSelectFlag` returns `true`, `DeleteCommand#execute` delete all applicants on the displayed list. 
+<br>
+* `Selection` has been given a private constructor with static factory methods `Selection#fromIndex` and
 `Selection#fromAllFlag` to ensure `Selection` should not contain both index and all flag.
 
 #### Design considerations:
@@ -213,14 +247,16 @@ has been modified, such that whenever `Selection#hasAllFlag` returns `true`, `De
     - Pros: Easy to implement
     - Cons: Bypasses the intention of the Index Class. Having a negative `Index` might throw unexpected errors.
 
+![DeleteAllSequenceDiagram](images/DeleteAllSequenceDiagram.png)
+    
 ### Filter feature
 
 #### Implementation
 
 The filter mechanism is facilitated by `FilterCommandParser`.
-It produces a `FilterApplicantDescriptor`, which in turn feeds in to create a `FilterCommand`.
+`FilterCommandParser` produces a `FilterApplicantDescriptor`, which in turn helps to create a `FilterCommand`.
 <br/>
-`Optional` and `set` data structures have been used to contain optional set of filters for different attributes within `FilterApplicantDescriptor`.
+`Optional` and `Set` data structures have been used to contain optional set of filters for different attributes within `FilterApplicantDescriptor`.
 <br/>
 The `FilterCommand` will make use of the `FilterApplicantDescriptor` to create a `CombineFiltersPredicate` that will be supplied to `ModelManager#updateFilteredApplicantList(Predicate<Applicant>)` in its `execute` method.
 <br/>
@@ -231,7 +267,7 @@ The `FilterCommand` will make use of the `FilterApplicantDescriptor` to create a
 **Aspect: How filter for different attributes work**
 - **Name, Phone, Email**: These attributes are excluded from filter criteria as `filter` is supposed to serve the purpose of selecting potential candidates based on practical considerations other than these three attributes.
 - **Grade**: HRs should be more interested in finding candidates whose grades meet a certain threshold. Therefore, only applicants that have grades not smaller than the input `Grade` will be displayed.
-- **GraduationYearMonth**: HRs should be more interested in finding candidates who graduate before a certain period and who are readily available for deployment before internship starts. Therefore, only applicants that graduate strictly earlier than the input `GraduationYearMonth` will be displayed. 
+- **GraduationYearMonth**: HRs should be more interested in finding candidates who graduate before a certain period and who are readily available for deployment before internship starts. Therefore, only applicants that graduate strictly earlier than the input `GraduationYearMonth` will be displayed.
 - **Institutions**: HRs should be more open to accept applicants from a collection of institutions. For example, HRs may be interested in finding applicants that are from either NUS or NTU as the company has affiliation programme with the said two institutions. Also, such filters should be case-insensitive as the capitalisation is not meaningful when considering the said attributes.
 - **Jobs**: HRs should be more interested in filtering applicants for a range of related jobs. For example, HRs may be interested in choosing appropriate applicants for both software engineer and software tester as the requirements for both jobs are similar, and it is easier to look at both at once. Also, such filters should be case-insensitive as the capitalisation is not meaningful when considering the said attributes.
 - **Skills**: HRs should be more interested to use multiple `Skill` filters to exclusively find applicants that have all skills required in order to perform the applied job. And the filters shall be case-sensitive as capitalisation may differentiate two seemingly same skills.
@@ -287,11 +323,13 @@ The following sequence diagram shows how the undo operation works:
 
 The `redo` command does the opposite — it calls `Model#redoInternWatcher()`, which shifts the `currStatePointer` once to the right, pointing to the previously undone state, and restores the applicant list to that state.
 
+![UndoRedoState6](images/undo-redo/UndoRedoState6.png)
+
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currStatePointer` is at index `watcherStateList.size() - 1`, pointing to the latest Intern Watcher state, then there are no undone Intern Watcher states to restore. The `redo` command uses `Model#canRedoInternWatcher()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the applicant list, such as `list`, will usually not call `Model#commitInternWatcher()`, `Model#undoInternWatcher()` or `Model#redoInternWatcher()`. Thus, the `watcherStateList` remains unchanged.
+Step 5. Let's say that the user goes through with the Undo command and the `currStatePointer` points to the previous state. The user then decides to execute the command `list`. Commands that do not modify the applicant list, such as `list`, will usually not call `Model#commitInternWatcher()`, `Model#undoInternWatcher()` or `Model#redoInternWatcher()`. Thus, the `watcherStateList` remains unchanged.
 
 ![UndoRedoState4](images/undo-redo/UndoRedoState4.png)
 
@@ -301,7 +339,7 @@ Step 6. The user executes `clear`, which calls `Model#commitInternWatcher()`. Si
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<img src="images/CommitActivityDiagram.png" width="250" />
+<img src="images/undo-redo/CommitActivityDiagram.png" width="250" />
 
 #### Design considerations:
 
@@ -316,9 +354,15 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the applicant being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-### \[Proposed\] Data archiving
+**Aspect: How to store saved states:**
 
-_{Explain here how the data archiving feature will be implemented}_
+* **Alternative 1:** Use two stack data structures, one for Command history and one for Undo history.
+    * Pros: Using a stack is intuitive for undo/redo as the current state is simply the top of the Command History stack. When undo is executed, the top of the stack can be popped and added into the Undo History stack.
+    * Cons: We must implement and manage two stacks for the functionality.
+
+* **Alternative 2 (current choice):** Use array list data structure with a pointer.
+    * Pros: Easy to implement. Only requires one data structure for both undo and redo.
+    * Cons: The array list must be constantly updated and purged when a new undoable command is executed.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -353,18 +397,21 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | -------------------------------------- | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions                 | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new applicant                       |                                                                        |
-| `* * *`  | user                                       | delete an applicant                        | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | update applicant details               | change entries accordingly                                             |
-| `* * *`  | user                                       | update all filtered applicants' details| change all entries accordingly                                         |
-| `* * *`  | user                                       | view an organised list of applicants   | see suitable applicants at a glance                                    |
-| `* * *`  | user                                       | save applicant profiles to a file      | refer to them later                                                    |
-| `* * *`  | user                                       | read applicant profiles from a file    | refer to them                                                          |
+| Priority | As a …​    | I want to …​                                     | So that I can…​                                                        |
+| -------- | ------------- | --------------------------------------------------- | ---------------------------------------------------------------------- |
+| `* * `   | new user      | see usage instructions                              | refer to instructions when I forget how to use the App                 |
+| `* * *`  | user          | add a new applicant                                 |                                                                        |
+| `* * *`  | user          | delete an applicant                                 | remove entries that I no longer need                                   |
+| `* * `   | user          | delete all shown applicants                         | delete all entries that I no longer need                               |
+| `* * *`  | user          | update applicant details                            | change entries accordingly                                             |
+| `* * `   | user          | update all filtered applicants' details             | change all entries accordingly                                         |
+| `* * *`  | user          | view an organised list of applicants                | see suitable applicants at a glance                                    |
+| `* * `   | user          | undo or redo my last action                         | rectify a mistake I made                                               |
+| `* * *`  | user          | save applicant profiles to a file                   | refer to them later                                                    |
+| `* * *`  | user          | read applicant profiles from a file                 | refer to them                                                          |
+| `* * *`  | user          | mass filter applicants against certain criteria     | find suitable applicants fitted for the job                            |
+| `* * `   | user          | find applicants by their names                      | review and edit them accordingly                                       |
 
-*{More to be added}*
 
 ### Use cases
 
@@ -445,7 +492,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User filters applicants to update
 2.  InternWatcher shows a list of applicants
 3.  User requests to update all applicants in the list
-4.  InternWatcher updates all applicants
+4.  InternWatcher updates all displayed applicants
 
     Use case ends.
 
@@ -456,7 +503,44 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-*{More to be added}*
+
+**Use case: Undo the last command**
+
+**MSS**
+
+1.  User requests to undo their last command to the applicant.
+2.  InternWatcher reverts to the previous state before the last command.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. There are no previous states to revert to.
+    * 1a1. InternWatcher shows an error message.
+
+      Use case resumes at step 1.
+
+**Use case: Filter all applicant applications**
+
+
+**MSS**
+
+1.  User requests to list applicants
+2.  InternWatcher shows a list of applicants
+3.  User requests to filter the list based on specifications entered
+4.  InternWatcher shows a list of applicants that fit the specifications
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. Any given filters are invalid.
+
+    * 3a1. InternWatcher shows an error message.
+
+      Use case resumes at step 2.
+
+
 
 ### Non-Functional Requirements
 
@@ -470,12 +554,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 8.  The final product should be contained in a single window
 9.  The system should provide sufficient hints to be usable by a novice.
 
-*{More to be added}*
-
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -503,8 +584,6 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 
 ### Editing an applicant
 
@@ -518,13 +597,16 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `edit 0 a/ INTERVIEWED`<br>
       Expected: No applicant is edited. Error details shown in the status message. Status bar remains the same.
 
+   1. Other incorrect edit commands to try: `edit`, `edit x`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+
    1. Test case: `edit ALL a/ INTERVIEWED`<br>
       Expected: All currently displayed applicants modified with the `INTERVIEWED` application status. Number of applicants successfully edited shown in the status message. Timestamp in the status bar is updated.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+   1. Test case: `edit ALL p/ 123`<br>
+      Expected: No applicant is edited. Error details shown in the status message. Status bar remains the same.
 
-2. _{ more test cases …​ }_
+   
 
 ### Deleting an applicant
 
@@ -540,8 +622,10 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+   
+   1. Test case: `delete ALL`<br>
+      Expected: All currently displayed applicants are deleted. Number of applicants successfully deleted shown in the status message. Timestamp in the status bar is updated.
 
-2. _{ more test cases …​ }_
 
 ### Viewing an applicant's details
 1. Viewing an applicant's details while all applicants are being shown
@@ -552,12 +636,14 @@ testers are expected to do more *exploratory* testing.
       Expected: No applicant detail displayed. Error details shown in the status message. Status bar remains the same.
    4. Other incorrect view commands to try: `view`, `view x`. `...`(where x is larger than the list or a non-positive number)<br>
       Expected: Similar to previous.
-2. _{ more test cases …​ }_
+
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+   1. Save file is missing: A new save file `internwatcher.json` will be created on `exit` the next time Intern Watcher is used.
+   2. Save file is corrupted: If invalid data is present, such as a person with phone number `abcd`, Intern Watcher will start with
+   an empty applicant list instead.
+   3. Save file applicant has duplicate fields: If an applicant has duplicate fields, such as two `phone` key value pairs, Intern Watcher
+   will parse the applicant with the last `phone` value.

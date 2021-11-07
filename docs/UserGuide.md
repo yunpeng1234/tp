@@ -24,7 +24,8 @@ This user guide covers a quick walk-through on how to use this application, as w
 3. Copy the file to the folder you want to use as the _home folder_ for your Intern Watcher.
 
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-
+   <br>
+   ![Ui](images/Ui.png)
 5. Type any command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
 
 6. Some example commands you can try:
@@ -47,7 +48,7 @@ This user guide covers a quick walk-through on how to use this application, as w
 
    * `clear` : Deletes all applicants from the application.
 
-7. To see more detailed information abuot each command, refer to [Features](#features).
+7. To see more detailed information about each command, refer to [Features](#features).
 8. To see restrictions and specifications of each field, refer to [Specification of Fields.](#specification-of-fields).
 
 --------------------------------------------------------------------------------------------------------------------
@@ -64,7 +65,7 @@ This user guide covers a quick walk-through on how to use this application, as w
   * e.g. in `delete ALL`, `ALL` is to be typed the same in full capital letters.
 
 * Fields in square brackets are optional.<br>
-  * e.g in `n/NAME [s/SKILL]`, the `SKILL` parameter is optional. You can enter `n/John Doe s/friend` or `n/John Doe`.
+  * e.g in `n/NAME [s/SKILL]`, the `SKILL` parameter is optional. You can enter `n/John Doe s/Python` or `n/John Doe`.
 
 * Fields with `…+` notation behind them can be specified zero or more times.<br>
   * e.g. `[s/SKILL]…+` can be specified as ` ` (i.e. 0 times), `s/Java`, `s/Python s/C` etc.
@@ -72,9 +73,9 @@ This user guide covers a quick walk-through on how to use this application, as w
 * Fields can be specified in any order.<br>
   * e.g. if the command format specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also valid.
 
-* If a command expects only one instance of a field parameter, but the parameter has been specified multiple times, only the last occurrence of the parameter will be taken.<br>
+* If a command expects only one instance of a field parameter, but the parameter has been specified multiple times, only the last occurrence of the parameter will be taken regardless if the previous specified parameter is valid or not.<br>
 
-  * e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
+  * e.g. if you specify `p/abcdefg p/56785678`, only `p/56785678` will be taken.
 
 * Extra parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   * e.g. if the command is specified as `help 123`, it will be interpreted as `help`.
@@ -96,7 +97,7 @@ Adds a new applicant to Intern Watcher.
 
 Format: `add n/NAME p/PHONE e/EMAIL g/GRADE i/INSTITUTION c/COURSE y/GRADUATION_YEAR_MONTH j/JOB [a/APPLICATION_STATUS] [s/SKILL]…+`
 
-* Entries with same `NAME` (case-insensitive) will not be allowed. For example, `John Doe` and `john doe` are considered the same person and the second entry will not be allowed.
+* Entries with same `NAME` (case-insensitive) will not be allowed. For example, `John Doe` and `john doe` are considered the same applicant and the second entry will not be allowed.
 * `APPLICATION_STATUS` and `SKILL` are case-sensitive.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -123,7 +124,8 @@ Format: `view INDEX [T]`
 
 * If only `INDEX` is specified, it will show the specified applicant's academic records by default.
   * `INDEX` refers to the index number of the applicant, shown in the applicant list.
-  * `INDEX` must be a positive integer, e.g. 1, 2, 3, …
+  * `INDEX` **must be a positive integer**, e.g. 1, 2, 3, …
+  * `INDEX` of 0 or less, or indexes greater than `2147483647` will be treated as invalid commands.
 * Specifying `T` together with `INDEX` switches between the academic records tab and the skills tab.
 
 Examples:
@@ -145,12 +147,12 @@ Displays applicants in Intern Watcher that match one or more given fields.
 
 Format: `filter [g/GRADE] [i/INSTITUTION]…+ [c/COURSE]…+ [y/GRADUATION_YEAR_MONTH] [j/JOB]…+ [a/STATUS]…+ [s/SKILL]…+`
 
-* `filter` will show applicants that matches all fields specified.
+* `filter` will show applicants that match all fields specified.
 * `[i/INSTITUTION]…+`, `[c/COURSE]…+` and `[j/JOB]…+` are case-insensitive and `[a/STATUS]…+` and `[s/SKILL]…+` are case-sensitive.
 * If `[g/GRADE]` is specified, it will show all applicants with grades higher or equal to the `g/Grade` specified.
 * Likewise, if `[y/GRADUATION_YEAR_MONTH]` is specified, it will show all applicants with graduation dates that is strictly before the `GRADUATION_YEAR_MONTH` specified.
 * If `[s/SKILL]…+` is specified, only applicants with all specified `[s/SKILL]…+` will be shown.
-* For either of `[c/COURSE]…+` or `[j/JOB]…+`, if more than 1 instance of a single field, such as `[j/JOB]…+` is specified, applicants with their field **containing** at least one of the `[j/JOB]…+` specified will be shown.
+* For either of `[c/COURSE]…+` or `[j/JOB]…+`, if more than 1 instance of a single field, such as `[j/JOB]…+` is specified, applicants with their job field **containing** at least one of the `[j/JOB]…+` specified will be shown.
 * For either of `[i/INSTITUTION]…+` or `[a/STATUS]…+`, if more than 1 instance of a single field, such as `[i/INSTITUTION]…+` is specified, applicants with their field **matching** at least one of the `[i/INSTITUTION]…+` specified will be shown.
 
 Examples:
@@ -170,22 +172,25 @@ Examples:
 
 Edits the information of an existing applicant, or the application status of all currently displayed applicants in the applicant list.
 
-Format 1: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [g/GRADE] [i/INSTITUTION] [c/COURSE] [y/GRADUATION_YEAR_MONTH] [j/JOB] [a/APPLICATION_STATUS] [s/SKILL]…`
+#### Edit a specific applicant:
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [g/GRADE] [i/INSTITUTION] [c/COURSE] [y/GRADUATION_YEAR_MONTH] [j/JOB] [a/APPLICATION_STATUS] [s/SKILL]…`
 * If only `INDEX` is specified, the applicant at the specified `INDEX` will be edited.
-    * `INDEX` refers to the index number shown in the displayed applicant list. The index **must be a positive integer** e.g. 1, 2, 3, …
+    * `INDEX` refers to the index number shown in the displayed applicant list. 
+    * `INDEX` **must be a positive integer** e.g. 1, 2, 3, …
+    * `INDEX` of 0 or less, or indexes greater than `2147483647` will be treated as invalid commands.
 * When editing skills, all existing skills of the applicant will be replaced i.e adding of skills is not cumulative.
-* You can remove all the person’s skills by typing `s/` without
+* You can remove all the applicant’s skills by typing `s/` without
   specifying any skills after it.
-  
-Format 2: `edit ALL a/APPLICATION_STATUS`
 
+#### Edit all currently displayed applicants:
+Format: `edit ALL a/APPLICATION_STATUS`
 * If `ALL` is specified, all applicants currently displayed in the applicant list will be edited.
-* Only the `APPLICATION_STATUS` of applicants can be edited. 
+* Currently only the `APPLICATION_STATUS` of applicants can be edited. It is unlikely that the other fields would need multi editing.
 * The `APPLICATION_STATUS` can only be one of these 7 statuses: `ACCEPTED`, `REJECTED`, `INTERVIEWED`, `APPLIED`, `SCHEDULED`, `RECEIVED` and `OFFERED`.
 
 
 Examples:
-*  `edit 1 p/91234567 e/yeoh_alex@example.com` Edits the phone number and email address of the 1st applicant to be `91234567` and `yeoh_alex@example.com` respectively.
+*  `edit 1 p/89274567 e/alex_yeoh@example.com` edits the phone number and email address of the 1st applicant to be `89274567` and `alex_yeoh@example.com` respectively.
 
 |Command|Effect|
 |---|---|
@@ -197,7 +202,7 @@ Examples:
 |---|---|
 |<img src="images/EditSkillBefore.png" alt="drawing" />|<img src="images/EditSkillAfter.png" alt="drawing" />|
 
-*  `filter a/INTERVIEWED` followed by `edit ALL a/ACCEPTED` Updates all applicants with `INTERVIEWED` application status to have the `ACCEPTED` APPLICATION_STATUS.
+*  `filter a/APPLIED` followed by `edit ALL a/INTERVIEWED` Updates all applicants with `APPLIED` application status to have the `INTERVIEWED` application status.
 
 |Command|Effect|
 |---|---|
@@ -207,12 +212,16 @@ Examples:
 
 Deletes the specified applicant, or all applicants currently displayed in the applicant list.
 
-Format 1: `delete INDEX`
+#### Delete a specific applicant:
+Format: `delete INDEX`
 
 * If `INDEX` is specified, the applicant at the specified `INDEX` will be deleted.
-    * `INDEX` refers to the index number shown in the displayed applicant list. The index **must be a positive integer** e.g. 1, 2, 3, …
+    * `INDEX` refers to the index number shown in the displayed applicant list. 
+    * `INDEX` **must be a positive integer** e.g. 1, 2, 3, …
+    * `INDEX` of 0 or less, or indexes greater than `2147483647` will be treated as invalid commands.
 
-Format 2: `delete ALL`
+#### Delete all currently displayed applicants:
+Format: `delete ALL`
 
 * If `ALL` is specified, all applicants currently displayed in the applicant list will be deleted.
 
@@ -268,7 +277,7 @@ Format: `undo`
 
 * Only undoable command actions can be undone.
     * Undoable command actions include: `add`, `edit`, `delete`, `clear`, `redo`.
-* Consecutive `undo` commands are available until the applicant list returns to its **initial state at launch** of the application. 
+* Consecutive `undo` commands are available until the applicant list returns to its **initial state at launch** of the application.
 * If the current state of the applicant list is the initial state, the `undo` command will not be available.
 
 
@@ -290,7 +299,7 @@ Format: `redo`
 
 * `redo` is the reverse of `undo`. Only undoable command actions can be redone.
   * Undoable actions include: `add`, `edit`, `delete`, `clear`, `redo`.
-* Consecutive `redo` commands are available until the applicant list reaches the **newest state**. 
+* Consecutive `redo` commands are available until the applicant list reaches the **newest state**.
   *  The newest state is the most recent change in history.
 * If the current state of the applicant list is the newest state, the redo command will not be available.
 * If a new undoable action is performed when the applicant list is **not** in its newest state, the current state becomes the newest state.
@@ -303,7 +312,7 @@ Examples:
 |---|---|
 |<img src="images/RedoClearBefore.png" alt="drawing" />|<img src="images/RedoClearAfter.png" alt="drawing" />|
 
-* `redo` followed by `delete 2`. As the state after `delete` becomes the newest state, there are no undoable actions to be redone.
+* `delete 2` followed by `redo`. As the state after `delete` becomes the newest state, there are no undoable actions to be redone.
   ![ No action to redo](images/NoRedo.png)
 
 ### Exiting the program : `exit`
@@ -339,13 +348,13 @@ If your changes to the data file makes its format invalid, Intern Watcher will d
 
 `Institution` : The applicant's school. Should only include alphanumeric characters and space only. Should not be blank.
 
+`Status` : The applicant's application status. Case sensitive. Should only be one of these 7 statuses, `ACCEPTED` , `REJECTED`, `INTERVIEWED`, `APPLIED` , `SCHEDULED`, `RECEIVED` and `OFFERED`.
+
 `Course` : The applicant's course of study in their school. Should only include alphabet characters and space only. Should not be blank.
 
-`Graduation_Year_Month` : The applicant's estimated date of graduation from their school. Should be of format MM/yyyy and be after the date 01/2020. 
+`Graduation_Year_Month` : The applicant's estimated date of graduation from their school. Should be of format MM/yyyy and be after the date 01/2020.
 
 `Job` : The job/position that the applicant applied for. Should only include alphabet characters and space only. Should not be blank.
-
-`Status` : The status of the applicant's application. Should only be one of these 7 statuses, `ACCEPTED`, `REJECTED`, `INTERVIEWED`, `APPLIED`, `SCHEDULED`, `RECEIVED` and `OFFERED`.
 
 `Skill`: The applicant's skillset. Should only include alphanumeric characters, spaces and `+#` symbols only.
 
@@ -363,12 +372,12 @@ If your changes to the data file makes its format invalid, Intern Watcher will d
 Action | Format, Examples
 --------|------------------
 **Help** | `help`
-**Add** | `add n/NAME p/PHONE e/EMAIL g/GRADE i/INSTITUTION c/COURSE y/GRADUATION_YEAR_MONTH j/JOB [a/APPLICATION_STATUS] [s/SKILL]…++` <br> e.g. `add n/John p/999 e/a@a.com g/4.00 i/NTU c/CS y/06/2025 j/Software Engineer a/INTERVIEWED s/Python`
+**Add** | `add n/NAME p/PHONE e/EMAIL g/GRADE i/INSTITUTION c/COURSE y/GRADUATION_YEAR_MONTH j/JOB [a/APPLICATION_STATUS] [s/SKILL]…+` <br> e.g. `add n/John p/999 e/a@a.com g/4.00 i/NTU c/CS y/06/2025 j/Software Engineer a/INTERVIEWED s/Python`
 **List** | `list`
 **View** | `view INDEX [T]` <br> e.g. `view 2 T`
-**Filter** | `filter [g/GRADE] [i/INSTITUTION]…+ [c/COURSE]…+ [y/GRADUATION_YEAR_MONTH] [j/JOB] [a/STATUS] [s/SKILL]…+` <br> e.g. `filter s/JAVA y/06/2022 i/NUS a/REJECTED`
-**Edit** | `edit ALL a/APPLICATION_STATUS`/`edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [g/GRADE] [i/INSTITUTION] [c/COURSE] [y/GRADUATION_YEAR_MONTH] [j/JOB] [a/APPLICATION_STATUS] [s/SKILL]…`<br>e.g.`edit 2 n/James Lee e/jameslee@example.com`, `edit ALL a/REJECTED`
-**Delete** | `delete INDEX`/ `delete ALL`<br> e.g. `delete 3`, `delete ALL`
+**Filter** | `filter [g/GRADE] [i/INSTITUTION]…+ [c/COURSE]…+ [y/GRADUATION_YEAR_MONTH] [j/JOB]..+ [a/STATUS]..+ [s/SKILL]…+` <br> e.g. `filter s/JAVA y/06/2022 i/NUS a/REJECTED`
+**Edit** | `edit ALL a/APPLICATION_STATUS` , <br>`edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [g/GRADE] [i/INSTITUTION] [c/COURSE] [y/GRADUATION_YEAR_MONTH] [j/JOB] [a/APPLICATION_STATUS] [s/SKILL]…`<br>e.g. `edit ALL a/REJECTED` , <br> `edit 2 n/James Lee e/jameslee@example.com`
+**Delete** | `delete INDEX`, <br> `delete ALL`<br> e.g. `delete 3`, <br> `delete ALL`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g. `find James Jake`
 **Undo** | `undo`
 **Redo** | `redo`

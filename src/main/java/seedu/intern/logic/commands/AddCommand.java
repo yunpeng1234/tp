@@ -49,13 +49,13 @@ public class AddCommand extends Command {
             + PREFIX_SKILL + "Python";
 
     public static final String MESSAGE_SUCCESS = "New applicant added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This applicant already exists in Intern Watcher";
+    public static final String MESSAGE_DUPLICATE_APPLICANT = "This applicant already exists in Intern Watcher";
     public static final String MESSAGE_COMMIT_ADD = "Add applicant: %1$s";
 
     private final Applicant toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code Applicant}
      */
     public AddCommand(Applicant applicant) {
         requireNonNull(applicant);
@@ -67,7 +67,7 @@ public class AddCommand extends Command {
         requireNonNull(model);
 
         if (model.hasApplicant(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_APPLICANT);
         }
 
         model.addApplicant(toAdd);

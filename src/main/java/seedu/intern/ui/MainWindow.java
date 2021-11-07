@@ -1,3 +1,4 @@
+//@@author
 package seedu.intern.ui;
 
 import java.util.logging.Logger;
@@ -32,10 +33,10 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private ApplicantListPanel applicantListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
-    private PersonDetailPanel personDetail;
+    private ApplicantDetailPanel applicantDetail;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -44,7 +45,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane applicantListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -53,7 +54,7 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane statusbarPlaceholder;
 
     @FXML
-    private StackPane personDetailPlaceholder;
+    private StackPane applicantDetailPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -115,8 +116,8 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        applicantListPanel = new ApplicantListPanel(logic.getFilteredApplicantList());
+        applicantListPanelPlaceholder.getChildren().add(applicantListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -124,10 +125,10 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getInternWatcherFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        personDetail = new PersonDetailPanel();
-        personDetailPlaceholder.getChildren().add(personDetail.getRoot());
-        personListPanel.addSelectedListener((observable, oldValue, newValue) -> {
-            personDetail.showApplicant(newValue, false);
+        applicantDetail = new ApplicantDetailPanel();
+        applicantDetailPlaceholder.getChildren().add(applicantDetail.getRoot());
+        applicantListPanel.addSelectedListener((observable, oldValue, newValue) -> {
+            applicantDetail.showApplicant(newValue, false);
         });
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
@@ -174,8 +175,8 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    public ApplicantListPanel getApplicantListPanel() {
+        return applicantListPanel;
     }
 
     /**
@@ -209,6 +210,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void handleView(Applicant applicant, boolean isToggle) {
-        personDetail.showApplicant(applicant, isToggle);
+        applicantListPanel.selectApplicant(applicant);
+        applicantDetail.showApplicant(applicant, isToggle);
     }
 }

@@ -27,7 +27,7 @@ import seedu.intern.model.skills.Skill;
  */
 class JsonAdaptedApplicant {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Applicant's %s field is missing!";
 
     private final String name;
     private final String phone;
@@ -41,7 +41,7 @@ class JsonAdaptedApplicant {
     private final List<JsonAdaptedSkill> skills = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given applicant details.
+     * Constructs a {@code JsonAdaptedApplicant} with the given applicant details.
      */
     @JsonCreator
     public JsonAdaptedApplicant(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
@@ -67,7 +67,7 @@ class JsonAdaptedApplicant {
     }
 
     /**
-     * Converts a given {@code Person} into this class for Jackson use.
+     * Converts a given {@code Applicant} into this class for Jackson use.
      */
     public JsonAdaptedApplicant(Applicant source) {
         name = source.getName().fullName;
@@ -85,14 +85,14 @@ class JsonAdaptedApplicant {
     }
 
     /**
-     * Converts this Jackson-friendly adapted applicant object into the model's {@code Person} object.
+     * Converts this Jackson-friendly adapted applicant object into the model's {@code Applicant} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted applicant.
      */
     public Applicant toModelType() throws IllegalValueException {
-        final List<Skill> personSkills = new ArrayList<>();
+        final List<Skill> applicantSkills = new ArrayList<>();
         for (JsonAdaptedSkill tag : skills) {
-            personSkills.add(tag.toModelType());
+            applicantSkills.add(tag.toModelType());
         }
 
         if (name == null) {
@@ -172,7 +172,7 @@ class JsonAdaptedApplicant {
             modelStatus = new ApplicationStatus(status);
         }
 
-        final Set<Skill> modelSkills = new HashSet<>(personSkills);
+        final Set<Skill> modelSkills = new HashSet<>(applicantSkills);
 
         return new Applicant(modelName, modelPhone, modelEmail, modelGrade,
                 modelInstitution, modelCourse, modelYearMonth , modelJob, modelStatus, modelSkills);
