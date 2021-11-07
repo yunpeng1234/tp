@@ -5,8 +5,7 @@ title: Xiao Yunpeng's Project Portfolio Page
 
 ### Project: Intern Watcher
 
-Intern Watcher (IW) is a desktop app for Human Resource Managers (HRs) to manage internship applicantsThe user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 17 kLoC. Given below are my contributions to the project.
-
+Intern Watcher (IW) is a desktop app for Human Resource Managers (HRs) to manage internship applicants. The user interacts with it using a Command Line Interface (CLI), and it has a Graphical User Interface (GUI) created with JavaFX. It is written in Java, and has about 17 kLoC. Given below are my contributions to the project.
 Given below are my contributions to the project.
 
 * **New Feature**: Added the ability to do mass deleting of applicants from the displayed list.
