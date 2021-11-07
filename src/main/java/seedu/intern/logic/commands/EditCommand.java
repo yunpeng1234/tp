@@ -21,7 +21,6 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.intern.commons.core.Messages;
-import seedu.intern.commons.core.selection.Index;
 import seedu.intern.commons.core.selection.Selection;
 import seedu.intern.commons.util.CollectionUtil;
 import seedu.intern.logic.commands.exceptions.CommandException;
