@@ -61,7 +61,7 @@ This user guide covers a quick walk-through on how to use this application, as w
 **:information_source: Notes about the command formats:**<br>
 
 * Words in `UPPER_CASE` are the field parameters to be supplied by you.<br>
-  This excludes special tags for [**Edit**](#editing-applicants--edit), [**View**](#viewing-an-applicants-details--view), [**Delete**](#deleting-an-applicant--delete) commands. <br>
+  This excludes special tags for **Edit**, **View**, **Delete** commands. <br>
   * e.g. in `add n/NAME`, `NAME` is a field parameter to be replaced. You can enter `add n/John Doe`.<br>
   * e.g. in `delete ALL`, `ALL` is to be typed the same in full capital letters.
 
