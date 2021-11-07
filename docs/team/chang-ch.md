@@ -6,7 +6,6 @@ title: Chang-CH's Project Portfolio Page
 ### Project: Intern Watcher
 
 Intern Watcher (IW) is a desktop app for Human Resource Managers (HRs) to manage internship applicants. The user interacts with it using a Command Line Interface (CLI), and it has a Graphical User Interface (GUI) created with JavaFX. It is written in Java, and has about 17 kLoC. Given below are my contributions to the project.
-Given below are my contributions to the project.
 
 * **New Feature**: Added the ability to edit fields of multiple applicants at once.
   * What it does: allows the user to edit all currently displayed applicants in one go.
