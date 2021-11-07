@@ -17,7 +17,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 * Role: Team lead
 * Responsibilities: Responsible for overall project coordination.
-* Features: Edit ALL/Delete All features
+* Features: Edit ALL, UI
 
 ### Gu Geng
 
@@ -61,4 +61,4 @@ We are a team based in the [School of Computing, National University of Singapor
 
 * Role: Integration
 * Responsibilities: In charge of versioning of the code, maintaining the code repository, integrating various parts of the software to create a whole.
-* Features: UI
+* Features: UI, Delete ALL

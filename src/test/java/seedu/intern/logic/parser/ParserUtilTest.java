@@ -56,11 +56,6 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseDelete_invalidInput_success() throws Exception {
-        assertThrows(ParseException.class, () -> ParserUtil.parseDelete("10 a"));
-    }
-
-    @Test
     public void parseDelete_outOfRangeInput_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
             -> ParserUtil.parseSelection(Long.toString(Integer.MAX_VALUE + 1)));

@@ -171,15 +171,15 @@ As internship has timeliness as its nature and our application development only 
 ###  Edit ALL feature
 
 #### Implementation
-The edit ALL mechanism is facilitated by the new `Selection` class. A new parser `ParserUtil#parseSelection`
+* The edit ALL mechanism is facilitated by the new `Selection` class. A new parser `ParserUtil#parseSelection`
 has been added to parse `Selection` values, which accepts either integers or the `ALL` string. The `Selection` class supports
 operations `Selection#hasAllSelectFlag` and `Selection#hasIndex`, which is used by `EditCommand#execute`. 
 <br>
-`EditCommand#execute`
+* `EditCommand#execute`
 has been modified, such that whenever `Selection#hasAllSelectFlag` returns `true`, `EditCommand#execute` edits all applicants with
 the fields specified. 
 <br>
-`Selection` has been given a private constructor with static factory methods `Selection#fromIndex` and
+* `Selection` has been given a private constructor with static factory methods `Selection#fromIndex` and
 `Selection#fromAllFlag` to ensure `Selection` should not contain both index and all flag.
 
 The following activity diagrams summarizes what happens when a user enters an `edit` command.
@@ -226,14 +226,14 @@ should be edited.
 ###  Delete ALL feature
 
 #### Implementation
-The delete ALL mechanism is facilitated by the new `Selection` class shared with edit ALL. A new parser `ParserUtil#parseSelection`
+* The delete ALL mechanism is facilitated by the new `Selection` class shared with edit ALL. A new parser `ParserUtil#parseSelection`
 has been added to parse `Selection` values, which accepts either integers or the `ALL` string. The `Selection` class supports
 operations `Selection#hasAllSelectFlag` and `Selection#hasIndex`, which is used by `DeleteCommand#execute`. 
 <br>
-`DeleteCommand#execute`
+* `DeleteCommand#execute`
 has been modified, such that whenever `Selection#hasAllSelectFlag` returns `true`, `DeleteCommand#execute` delete all applicants on the displayed list. 
 <br>
-`Selection` has been given a private constructor with static factory methods `Selection#fromIndex` and
+* `Selection` has been given a private constructor with static factory methods `Selection#fromIndex` and
 `Selection#fromAllFlag` to ensure `Selection` should not contain both index and all flag.
 
 #### Design considerations:

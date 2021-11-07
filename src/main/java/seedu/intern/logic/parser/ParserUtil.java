@@ -106,27 +106,6 @@ public class ParserUtil {
 
     //@@author
     /**
-     * @deprecated Use parseSelection instead.
-     * Parses {@code oneBasedIndex/ ALL keyword} into an {@code Index} and
-     * returns it. Leading and trailing whitespaces will be trimmed.
-     * @throws ParseException if the specified selection is invalid (not non-zero unsigned integer).
-     */
-    @Deprecated
-    public static Index parseDelete(String oneBasedIndex) throws ParseException {
-        String trimmedIndex = oneBasedIndex.trim();
-        if (trimmedIndex.equals("ALL")) {
-            Index specialTag = Index.fromZeroBased(0);
-            specialTag.setSpecialIndex();
-            return specialTag;
-        }
-
-        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
-        }
-        return Index.fromOneBased(Integer.parseInt(trimmedIndex));
-    }
-
-    /**
      * Parses a {@code String name} into a {@code Name}.
      * Leading and trailing whitespaces will be trimmed.
      *
