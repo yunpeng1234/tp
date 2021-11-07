@@ -278,7 +278,7 @@ Format: `undo`
     * Undoable command actions include: `add`, `edit`, `delete`, `clear`, `redo`.
 * Consecutive `undo` commands are available until the applicant list returns to its **initial state at launch** of the application.
 * If the current state of the applicant list is the initial state, the `undo` command will not be available.
-
+* `view` state will not be preserved. For instance, after `view 1`, `delete 1`, `undo` will restore the deleted applicant, but the viewed applicant in the detail panel will not be reverted.
 
 Examples:
 * `undo` (after `delete 2`). The applicant that was removed will be restored in Intern Watcher.
@@ -363,6 +363,9 @@ If your changes to the data file makes its format invalid, Intern Watcher will d
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous InternWatcher home folder.
+
+**Q**: The command result shows `Could not save data to file: data\internwatcher.json. File access denied, ensure save file is not set to read only.`, how do I fix this?
+**A**: The `internwatcher.json` save file in your `\data` directory has been set to read only. Open the `data` file, right click on `internwatcher.json`, click properties, and make sure read-only is unchecked. Apply changes if necessary.
 
 --------------------------------------------------------------------------------------------------------------------
 
