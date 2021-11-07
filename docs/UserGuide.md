@@ -72,9 +72,9 @@ This user guide covers a quick walk through how to use this application, as well
 * Fields can be specified in any order.<br>
   * e.g. if the command format specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also valid.
 
-* If a command expects only one instance of a field parameter, but the parameter has been specified multiple times, only the last occurrence of the parameter will be taken.<br>
+* If a command expects only one instance of a field parameter, but the parameter has been specified multiple times, only the last occurrence of the parameter will be taken regardless if the previous specified parameter is valid or not.<br>
 
-  * e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
+  * e.g. if you specify `p/abcdefg p/56785678`, only `p/56785678` will be taken.
 
 * Extra parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   * e.g. if the command is specified as `help 123`, it will be interpreted as `help`.
