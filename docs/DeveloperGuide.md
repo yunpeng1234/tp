@@ -116,7 +116,7 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Applicant` objects (which are contained in a `UniqueApplicantList` object).
+* stores the Intern Watcher data i.e., all `Applicant` objects (which are contained in a `UniqueApplicantList` object).
 * stores the currently 'selected' `Applicant` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Applicant>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
@@ -135,7 +135,7 @@ The `Model` component,
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
+* can save both Intern Watcher data and user preference data in json format, and read them back into corresponding objects.
 * inherits from both `InternWatcherStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
@@ -156,7 +156,7 @@ This section describes some noteworthy details and design considerations on how 
 - **Alternative 1 (current choice)**: Disallow entries with duplicate names in a case-insensitive manner.
     - Pros: Easy to implement
     - Cons: Disallow different people of same name to be added to the app at the same time.
-- **Alternative 2**: Create and use another unique attribute for the applicants and use that for identification.
+- **Alternative 2**: Create and use another unique field for the applicants and use that for identification.
     - Pros: Allow for multiple entries with the same name.
     - Cons: Harder to implement. Users may abuse the `add` command intentionally and unintentionally.<br>
 
@@ -213,7 +213,7 @@ should be edited.
     - Pros: Easy to implement, existing classes/methods need not be changed.
     - Cons: Additional parser method must be created. Users may unintentionally pass both `ALL` and `Index` to parser.
 
-**Aspect: What attributes can edit ALL accept**
+**Aspect: What fields can edit ALL accept**
 - **Alternative 1 (current choice)**: Only allow mass modifications to `ApplicationStatus`.
     - Pros: Users cannot unintentionally modify all applicants' personal details, such as `Name`, `Email`, `Grade`.
       There should not be a reason to mass modify these fields. If a user created a number of applicants with the wrong details
@@ -257,7 +257,7 @@ The following sequence diagram summarizes what happens when a user enters an `de
 
 * The filter mechanism is facilitated by `FilterCommandParser`. `FilterCommandParser` produces a `FilterApplicantDescriptor`, which in turn helps to create a `FilterCommand`.
 <br/>
-* `Optional` and `Set` data structures have been used to contain optional set of filters for different attributes within `FilterApplicantDescriptor`.
+* `Optional` and `Set` data structures have been used to contain optional set of filters for different fields within `FilterApplicantDescriptor`.
 <br/>
 * The `FilterCommand` will make use of the `FilterApplicantDescriptor` to create a `CombineFiltersPredicate` that will be supplied to `ModelManager#updateFilteredApplicantList(Predicate<Applicant>)` in its `execute` method.
 <br/>
@@ -265,12 +265,12 @@ The following sequence diagram summarizes what happens when a user enters an `de
 ![FilterSequenceDiagram](images/filter/FilterSequenceDiagram.png)
 
 #### Design considerations:
-**Aspect: How filter for different attributes work**
-- **Name, Phone, Email**: These attributes are excluded from filter criteria as `filter` is supposed to serve the purpose of selecting potential candidates based on practical considerations other than these three attributes.
+**Aspect: How filter for different fields work**
+- **Name, Phone, Email**: These fields are excluded from filter criteria as `filter` is supposed to serve the purpose of selecting potential candidates based on practical considerations other than these three fields.
 - **Grade**: HRs should be more interested in finding candidates whose grades meet a certain threshold. Therefore, only applicants that have grades not smaller than the input `Grade` will be displayed.
 - **GraduationYearMonth**: HRs should be more interested in finding candidates who graduate before a certain period and who are readily available for deployment before internship starts. Therefore, only applicants that graduate strictly earlier than the input `GraduationYearMonth` will be displayed.
-- **Institutions**: HRs should be more open to accept applicants from a collection of institutions. For example, HRs may be interested in finding applicants that are from either NUS or NTU as the company has affiliation programme with the said two institutions. Also, such filters should be case-insensitive as the capitalisation is not meaningful when considering the said attributes.
-- **Jobs**: HRs should be more interested in filtering applicants for a range of related jobs. For example, HRs may be interested in choosing appropriate applicants for both software engineer and software tester as the requirements for both jobs are similar, and it is easier to look at both at once. Also, such filters should be case-insensitive as the capitalisation is not meaningful when considering the said attributes.
+- **Institutions**: HRs should be more open to accept applicants from a collection of institutions. For example, HRs may be interested in finding applicants that are from either NUS or NTU as the company has affiliation programme with the said two institutions. Also, such filters should be case-insensitive as the capitalisation is not meaningful when considering the said fields.
+- **Jobs**: HRs should be more interested in filtering applicants for a range of related jobs. For example, HRs may be interested in choosing appropriate applicants for both software engineer and software tester as the requirements for both jobs are similar, and it is easier to look at both at once. Also, such filters should be case-insensitive as the capitalisation is not meaningful when considering the said fields.
 - **Skills**: HRs should be more interested to use multiple `Skill` filters to exclusively find applicants that have all skills required in order to perform the applied job. And the filters shall be case-sensitive as capitalisation may differentiate two seemingly same skills.
 - **Statues**: HRs should be more interested to only look at certain groups of applicants filtered by a selection of `Status` filters. For example, a HR wishes to delete all applicants to a job except for those "accepted" after the job is filled up. This filter shall be case-sensitive as it is a special tag that has pre-defined elements.
 - **Courses**: HRs should be more interested to find applicants from a collection of courses as one same job can be assigned to applicants from similar but different courses. Also, the filter shall be case-insensitive.
