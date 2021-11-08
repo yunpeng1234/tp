@@ -189,7 +189,7 @@ The following activity diagrams summarizes what happens when a user enters an `e
 Edit ALL updates the details of all currently displayed applicants by obtaining the list of currently displayed applicants via `Model#getFilteredApplicantList`.
 The list is then copied, after which each individual applicant is modified via `Model#setApplicant` in a for loop.
 
-The following sequence diagram summaries what happens when a user enters an `edit``ALL` command.
+The following sequence diagram summarizes what happens when a user enters an `edit``ALL` command.
 
 <img src="images/EditAllSequenceDiagram.png"/>
 
@@ -240,12 +240,14 @@ has been modified, such that whenever `Selection#hasAllSelectFlag` returns `true
 **Aspect: How delete ALL is parsed**
 - **Alternative 1 (current choice)**: Modify the parser to parse the `Selection`, accepting a special flag to indicate all applicants
   should be deleted.
-    - Pros: Easy to implement
+    - Pros: Easy to implement, shares the same model with `edit ALL`.
     - Cons: `DeleteCommand` and its related parsers may become harder to test since its behaviour is now different depending
       on the user input.
 - **Alternative 2**: Create a special `Index` of -1 when ALL tag is attached, as such, only when the index is -1, will we execute 'delete All'
     - Pros: Easy to implement
     - Cons: Bypasses the intention of the Index Class. Having a negative `Index` might throw unexpected errors.
+
+The following sequence diagram summarizes what happens when a user enters an `delete ALL` command.
 
 ![DeleteAllSequenceDiagram](images/DeleteAllSequenceDiagram.png)
     
