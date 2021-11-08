@@ -107,7 +107,7 @@ An applicant can have any number of skills (including 0)
 
 Examples:
 
-* `add n/Jonathan Tan p/86565432 e/jonathan_tan@example.com g/4.50 i/NTU c/Computer Science y/06/2025 j/Software Engineer a/SCHEDULED s/Python s/Java s/C` adds
+* `add n/Jonathan Tan p/86565432 e/jonathan_tan@example.com g/4.50 i/NTU c/Computer Science y/06/2025 j/Software Engineer a/SCHEDULED s/Java s/C s/Python` adds
  an applicant with the specified information.
   ![Add result](images/AddResult.png)
 

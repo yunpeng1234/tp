@@ -141,7 +141,7 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.InternWatcher.commons` package.
+Classes used by multiple components are in the `seedu.intern.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
