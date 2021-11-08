@@ -25,7 +25,7 @@ public class ApplicationStatus {
 
     public static final Status DEFAULT_STATUS = Status.APPLIED;
 
-    public static final String MESSAGE_CONSTRAINTS = "Status only supports the current statuses:"
+    public static final String MESSAGE_CONSTRAINTS = "Application Status only supports the current statuses:"
             + Status.APPLIED.name() + ", " + Status.RECEIVED.name() + ", " + Status.SCHEDULED.name() + ", "
             + Status.INTERVIEWED.name() + ", " + Status.OFFERED.name() + ", " + Status.ACCEPTED.name() + ", "
             + Status.REJECTED.name();

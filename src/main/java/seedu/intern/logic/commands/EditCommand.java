@@ -21,7 +21,6 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.intern.commons.core.Messages;
-import seedu.intern.commons.core.selection.Index;
 import seedu.intern.commons.core.selection.Selection;
 import seedu.intern.commons.util.CollectionUtil;
 import seedu.intern.logic.commands.exceptions.CommandException;
@@ -57,13 +56,13 @@ public class EditCommand extends Command {
             + "[" + PREFIX_COURSE + "COURSE] "
             + "[" + PREFIX_GRADUATIONYEARMONTH + "GRADUATION_YEAR_MONTH] "
             + "[" + PREFIX_JOB + "APPLIED JOB] "
-            + "[" + PREFIX_STATUS + "APPLICATION STATUS] "
+            + "[" + PREFIX_STATUS + "APPLICATION_STATUS] "
             + "[" + PREFIX_SKILL + "SKILL]...\n"
             + "Example index: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com\n"
             + "ALL Parameters: ALL (must be uppercase) "
-            + "" + PREFIX_STATUS + "APPLICATION STATUS \n"
+            + "" + PREFIX_STATUS + "APPLICATION_STATUS \n"
             + "Example all: " + COMMAND_WORD + " ALL "
             + PREFIX_STATUS + "APPLIED";
 
@@ -76,16 +75,6 @@ public class EditCommand extends Command {
 
     private final Selection selection;
     private final EditApplicantDescriptor editApplicantDescriptor;
-
-    /**
-     * @deprecated Use selection constructor instead.
-     * @param index of the applicant in the filtered applicant list to edit
-     * @param editApplicantDescriptor details to edit the applicant with
-     */
-    @Deprecated
-    public EditCommand(Index index, EditApplicantDescriptor editApplicantDescriptor) {
-        this(Selection.fromIndex(index), editApplicantDescriptor);
-    }
 
     /**
      * Public constructor for {@code EditCommand}.
@@ -379,7 +368,7 @@ public class EditCommand extends Command {
                     + ", graduation year month=" + graduationYearMonth
                     + ", course=" + course
                     + ", applied job=" + job
-                    + ", status=" + status
+                    + ", application status=" + status
                     + ", skill=" + skills + '}';
         }
     }

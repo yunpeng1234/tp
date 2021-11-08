@@ -19,7 +19,7 @@ Interface InternWatcherStorage <<Interface>>
 Class JsonInternWatcherStorage
 Class JsonSerializableInternWatcher
 Class JsonAdaptedApplicant
-Class JsonAdaptedTag
+Class JsonAdaptedSkill
 }
 
 }
@@ -38,5 +38,5 @@ JsonUserPrefsStorage .up.|> UserPrefsStorage
 JsonInternWatcherStorage .up.|> InternWatcherStorage
 JsonInternWatcherStorage ..> JsonSerializableInternWatcher
 JsonSerializableInternWatcher --> "*" JsonAdaptedApplicant
-JsonAdaptedApplicant --> "*" JsonAdaptedTag
+JsonAdaptedApplicant --> "*" JsonAdaptedSkill
 @enduml

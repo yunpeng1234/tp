@@ -23,7 +23,7 @@ Intern Watcher (IW) is a desktop app for Human Resource Managers (HRs) to manage
   * Managed releases `v1.3` (1 release) on GitHub
 
 * **Enhancements to existing features**:
-  * Updated the GUI color scheme (Pull requests [\#55](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/55),
+  * Updated the GUI CSS (Pull requests [\#55](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/55),
   [\#60](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/60), [\#112](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/112), [\#120](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/120))
   * Wrote additional tests for existing features to increase coverage from 71.33% to 72.36% (Pull requests [\#85](https://github.com/AY2122S1-CS2103T-F12-2/tp/pull/85))
 

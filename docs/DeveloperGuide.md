@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5) 
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -70,7 +70,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ApplicantListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103T-F12-2/tp/blob/master/src/main/java/seedu/intern/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/InternWatcher-level3/tree/master/src/main/resources/view/MainWindow.fxml).
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103T-F12-2/tp/blob/master/src/main/java/seedu/intern/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-F12-2/tp/blob/master/src/main/resources/view/MainWindow.fxml).
 
 The `UI` component,
 
@@ -253,14 +253,13 @@ has been modified, such that whenever `Selection#hasAllSelectFlag` returns `true
 
 #### Implementation
 
-The filter mechanism is facilitated by `FilterCommandParser`.
-`FilterCommandParser` produces a `FilterApplicantDescriptor`, which in turn helps to create a `FilterCommand`.
+* The filter mechanism is facilitated by `FilterCommandParser`. `FilterCommandParser` produces a `FilterApplicantDescriptor`, which in turn helps to create a `FilterCommand`.
 <br/>
-`Optional` and `Set` data structures have been used to contain optional set of filters for different attributes within `FilterApplicantDescriptor`.
+* `Optional` and `Set` data structures have been used to contain optional set of filters for different attributes within `FilterApplicantDescriptor`.
 <br/>
-The `FilterCommand` will make use of the `FilterApplicantDescriptor` to create a `CombineFiltersPredicate` that will be supplied to `ModelManager#updateFilteredApplicantList(Predicate<Applicant>)` in its `execute` method.
+* The `FilterCommand` will make use of the `FilterApplicantDescriptor` to create a `CombineFiltersPredicate` that will be supplied to `ModelManager#updateFilteredApplicantList(Predicate<Applicant>)` in its `execute` method.
 <br/>
-`ModelManager` helps filter through the applicant list with specified filter criteria contained and interpreted by the `CombineFiltersPredicate#test()`.
+* `ModelManager` helps filter through the applicant list with specified filter criteria contained and interpreted by the `CombineFiltersPredicate#test()`.
 ![FilterSequenceDiagram](images/filter/FilterSequenceDiagram.png)
 
 #### Design considerations:
