@@ -334,7 +334,7 @@ Step 5. Let's say that the user goes through with the Undo command and the `curr
 
 ![UndoRedoState4](images/undo-redo/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitInternWatcher()`. Since the `currStatePointer` is not pointing at the end of the `watcherStateList`, all Intern Watcher states after the `currStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitInternWatcher()`. Since the `currStatePointer` is not pointing at the end of the `watcherStateList`, all Intern Watcher states after the `currStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behaviour that most modern desktop applications follow.
 
 ![UndoRedoState5](images/undo-redo/UndoRedoState5.png)
 
