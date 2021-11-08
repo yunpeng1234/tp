@@ -17,7 +17,7 @@ This user guide covers a quick walk-through on how to use this application, as w
 ## Quick start
 
 
-1. Ensure you have Java `11` or above installed in your Computer. You can download it [here](https://www.oracle.com/java/technologies/downloads/#java11).
+1. Ensure you have Java `11` or above installed in your computer. You can download it [here](https://www.oracle.com/java/technologies/downloads/#java11).
 
 2. Download the latest `internwatcher.jar` from [here](https://github.com/AY2122S1-CS2103T-F12-2/tp/releases).
 
@@ -174,7 +174,7 @@ Examples:
 Edits the information of an existing applicant, or the application status of all currently displayed applicants in the applicant list.
 
 #### Editing a specific applicant:
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [g/GRADE] [i/INSTITUTION] [c/COURSE] [y/GRADUATION_YEAR_MONTH] [j/JOB] [a/APPLICATION_STATUS] [s/SKILL]…`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [g/GRADE] [i/INSTITUTION] [c/COURSE] [y/GRADUATION_YEAR_MONTH] [j/JOB] [a/APPLICATION_STATUS] [s/SKILL]…+`
 * If only `INDEX` is specified, the applicant at the specified `INDEX` will be edited.
     * `INDEX` refers to the index number shown in the displayed applicant list. 
     * `INDEX` **must be a positive integer** e.g. 1, 2, 3, …
@@ -289,7 +289,7 @@ Examples:
 |---|---|
 |<img src="images/UndoBefore.png" alt="drawing" />|<img src="images/UndoAfter.png" alt="drawing" />|
 
-* `undo` (after initial startup of Intern Watcher). As there are no previous states to restore, no undo action will be performed.
+* `undo` (after initial start up of Intern Watcher). As there are no previous states to restore, no undo action will be performed.
 
 
 ### Redoing an action: `redo`
@@ -363,7 +363,7 @@ If your changes to the data file makes its format invalid, Intern Watcher will d
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
+**Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous InternWatcher home folder.
 
 **Q**: The command result shows `Could not save data to file: data\internwatcher.json. File access denied, ensure save file is not set to read only.`, how do I fix this?<br>
