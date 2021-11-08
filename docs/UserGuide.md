@@ -379,8 +379,8 @@ Action | Format, Examples
 **Add** | `add n/NAME p/PHONE e/EMAIL g/GRADE i/INSTITUTION c/COURSE y/GRADUATION_YEAR_MONTH j/JOB [a/APPLICATION_STATUS] [s/SKILL]…+` <br> e.g. `add n/John p/999 e/a@a.com g/4.00 i/NTU c/CS y/06/2025 j/Software Engineer a/INTERVIEWED s/Python`
 **List** | `list`
 **View** | `view INDEX [T]` <br> e.g. `view 2 T`
-**Filter** | `filter [g/GRADE] [i/INSTITUTION]…+ [c/COURSE]…+ [y/GRADUATION_YEAR_MONTH] [j/JOB]..+ [a/APPLICATION_STATUS]..+ [s/SKILL]…+` <br> e.g. `filter s/JAVA y/06/2022 i/NUS a/REJECTED`
-**Edit** | `edit ALL a/APPLICATION_STATUS` , <br>`edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [g/GRADE] [i/INSTITUTION] [c/COURSE] [y/GRADUATION_YEAR_MONTH] [j/JOB] [a/APPLICATION_STATUS] [s/SKILL]…`<br>e.g. `edit ALL a/REJECTED` , <br> `edit 2 n/James Lee e/jameslee@example.com`
+**Filter** | `filter [g/GRADE] [i/INSTITUTION]…+ [c/COURSE]…+ [y/GRADUATION_YEAR_MONTH] [j/JOB]…+ [a/APPLICATION_STATUS]…+ [s/SKILL]…+` <br> e.g. `filter s/JAVA y/06/2022 i/NUS a/REJECTED`
+**Edit** | `edit ALL a/APPLICATION_STATUS` , <br>`edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [g/GRADE] [i/INSTITUTION] [c/COURSE] [y/GRADUATION_YEAR_MONTH] [j/JOB] [a/APPLICATION_STATUS] [s/SKILL]…+`<br>e.g. `edit ALL a/REJECTED` , <br> `edit 2 n/James Lee e/jameslee@example.com`
 **Delete** | `delete INDEX`, <br> `delete ALL`<br> e.g. `delete 3`, <br> `delete ALL`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g. `find James Jake`
 **Undo** | `undo`
