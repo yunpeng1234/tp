@@ -167,7 +167,7 @@ public class Applicant {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append("; Status: ")
+                .append("; Application Status: ")
                 .append(getApplicationStatus())
                 .append("; Phone: ")
                 .append(getPhone())
@@ -181,7 +181,7 @@ public class Applicant {
                 .append(getCourse())
                 .append("; Graduation Year Month: ")
                 .append(getGraduationYearMonth())
-                .append("; Applied Job: ")
+                .append("; Job: ")
                 .append(getJob());
 
         Set<Skill> skills = getSkills();
