@@ -32,7 +32,7 @@ This user guide covers a quick walk-through on how to use this application, as w
 
    * `list` : Lists all applicants.
 
-   * `add n/John p/123 e/a@a.com g/4.50 i/NTU c/Computer Science y/06/2025 a/INTERVIEWED` : Adds an applicant named `John` with the above details to Intern Watcher.
+   * `add n/John p/123 e/a@a.com g/4.50 i/NTU c/Computer Science y/06/2025 j/Software Engineer a/INTERVIEWED` : Adds an applicant named `John` with the above details to Intern Watcher.
 
    * `find john` : Lists all applicants whose name contains john.
 
