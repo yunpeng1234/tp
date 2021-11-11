@@ -10,7 +10,7 @@ You can use Intern Watcher to add, edit and delete the internship applicants. In
 
 This user guide covers a quick walk-through on how to use this application, as well as the full descriptions of the features available.
 * Table of Contents
-  {:toc}
+{:toc}
 
 ## Components Of Ui
 
