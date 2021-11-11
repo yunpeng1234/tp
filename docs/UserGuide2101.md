@@ -68,7 +68,7 @@ Insert picture
 
 * Typing `exit` will save the data we have and exit the application.
 
-7. If you encounter any problems, please refer to the FAQ section(link) below.
+* If you encounter any problems, please refer to the FAQ section(link) below.
 --------------------------------------------------------------------------------------------------------------------
 
 
@@ -272,16 +272,6 @@ Format: `exit`
 If you want to exit the program, type `exit`.
 
 
-
-### Saving the data
-
-Intern Watcher data is saved after any command. There is no need for you to save manually.
-
-### Editing the data file
-
-Intern Watcher saves data as a JSON file `[JAR file location]/data/internwatcher.json`. Advanced users are welcome to update data directly by editing that data file.
-
-
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, Intern Watcher will discard all data and start with an empty data file at the next run.
 </div>
@@ -290,7 +280,7 @@ If your changes to the data file makes its format invalid, Intern Watcher will d
 
 
 ## FAQ
-Listed below are frequently asked questions, and their corresponding answers. If you encounter a problem not listed here, feel free to [contact us](link).
+Listed below are frequently asked questions, and their corresponding answers. If you encounter a problem not listed here, feel free to [contact us](##contact-us).
 
 **Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous InternWatcher home folder.
@@ -304,16 +294,16 @@ Listed below are frequently asked questions, and their corresponding answers. If
 **Q**: Why does my command not work?<br>
 **A**: Firstly check if the command is spelled correctly in the specified format. If it is, it could be due to a mismatch in the input fields' specifications. (link)
 
-**Q**: Is my data automatically saved? <br>
+**Q**: Is my data automatically saved?<br>
 **A**: Yes, Intern Watcher saves automatically after every command.There is no need to save manually.
 
-**Q**: Can I manually alter my data outside applications?
+**Q**: Can I manually alter my data outside applications?<br>
 **A**: Yes, Intern Watcher saves data as a JSON file `[JAR file location]/data/internwatcher.json`. Advanced users are welcome to update data directly by editing that data file. Beginner users are advised to do the editing through the application to avoid any incidents.
 
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Specification of Fields
+## Specification of Fields
 
 `Name` : The applicant's name. Should only include alphanumeric characters and spaces only. Should not be blank.
 
